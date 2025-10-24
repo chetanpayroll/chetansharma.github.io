@@ -8,131 +8,94 @@
   <meta name="author" content="Chetan Sharma">
   <meta name="theme-color" content="#0d47a1">
   
-  <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.gmppayroll.com">
   <meta property="og:title" content="Chetan Sharma | Payroll Implementation Manager">
-  <meta property="og:description" content="Global payroll consultant with 13+ years leading multi-country transitions. Expert in AI automation and compliance.">
+  <meta property="og:description" content="Global payroll consultant with 13+ years leading multi-country transitions.">
   <meta property="og:image" content="https://www.gmppayroll.com/og-image.png">
   
-  <!-- Twitter Card -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://www.gmppayroll.com">
   <meta property="twitter:title" content="Chetan Sharma | Payroll Implementation Manager">
   <meta property="twitter:description" content="Global payroll consultant with 13+ years leading multi-country transitions.">
   <meta property="twitter:image" content="https://www.gmppayroll.com/og-image.png">
   
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://www.gmppayroll.com">
-  
-  <!-- Preconnect to external fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <title>Chetan Sharma | Global Payroll Implementation Consultant</title>
+  <title>Chetan Sharma | Global Payroll Implementation Manager</title>
 
   <style>
-    /* ============================================
-       CSS VARIABLES & THEME SYSTEM
-       ============================================ */
-    :root {
-      /* Light Mode Colors */
-      --bg-primary: #ffffff;
-      --bg-secondary: #f5f7fa;
-      --bg-tertiary: #e9ecef;
-      --text-primary: #1a202c;
-      --text-secondary: #4a5568;
-      --text-muted: #718096;
-      --border-color: #e2e8f0;
-      --accent-primary: #0d47a1;
-      --accent-light: #42a5f5;
-      --accent-dark: #0d47a1;
-      --success: #2e7d32;
-      --warning: #f57f17;
-      --error: #c62828;
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-      --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-primary: #0f1419;
-        --bg-secondary: #1a202c;
-        --bg-tertiary: #2d3748;
-        --text-primary: #f7fafc;
-        --text-secondary: #cbd5e0;
-        --text-muted: #a0aec0;
-        --border-color: #2d3748;
-        --accent-primary: #42a5f5;
-        --accent-light: #64b5f6;
-        --accent-dark: #1565c0;
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
-        --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
-      }
-    }
-
-    /* ============================================
-       GLOBAL STYLES
-       ============================================ */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --primary: #0d47a1;
+      --primary-light: #42a5f5;
+      --primary-dark: #0d47a1;
+      --secondary: #6a1b9a;
+      --accent: #ff6b6b;
+      --success: #2e7d32;
+      --warning: #f57f17;
+      --bg: #ffffff;
+      --bg-secondary: #f5f7fa;
+      --text: #1a202c;
+      --text-muted: #718096;
+      --border: #e2e8f0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1419;
+        --bg-secondary: #1a202c;
+        --text: #f7fafc;
+        --text-muted: #a0aec0;
+        --border: #2d3748;
+        --primary-light: #64b5f6;
+      }
+    }
+
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 80px;
+      scroll-padding-top: 100px;
     }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      font-size: 16px;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
     }
 
-    /* ============================================
-       ACCESSIBILITY
-       ============================================ */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
     }
 
-    /* Focus visible for keyboard navigation */
-    *:focus-visible {
-      outline: 2px solid var(--accent-primary);
-      outline-offset: 2px;
-    }
-
-    /* ============================================
-       NAVIGATION
-       ============================================ */
+    /* NAVIGATION */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.97);
       backdrop-filter: blur(10px);
       z-index: 1000;
-      border-bottom: 1px solid var(--border-color);
-      transition: all 0.3s ease;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     @media (prefers-color-scheme: dark) {
       nav {
-        background: rgba(15, 20, 25, 0.95);
+        background: rgba(15, 20, 25, 0.97);
       }
     }
 
@@ -146,85 +109,83 @@
     }
 
     .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent-primary);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-decoration: none;
-      letter-spacing: -0.5px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -1px;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 3rem;
       list-style: none;
       align-items: center;
     }
 
     .nav-links a {
-      color: var(--text-primary);
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s ease;
+      position: relative;
+      transition: color 0.3s ease;
       font-size: 0.95rem;
     }
 
-    .nav-links a:hover {
-      color: var(--accent-primary);
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .theme-toggle {
-      background: var(--bg-tertiary);
-      border: none;
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
       cursor: pointer;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
-      transition: background-color 0.2s ease;
     }
 
     .theme-toggle:hover {
-      background: var(--border-color);
+      transform: rotate(20deg) scale(1.1);
+      background: var(--primary-light);
+      color: white;
+      border-color: var(--primary);
     }
 
     @media (max-width: 768px) {
       .nav-links {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        gap: 0;
-        background: var(--bg-primary);
-        border-bottom: 1px solid var(--border-color);
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 1rem 2rem;
-        border-bottom: 1px solid var(--border-color);
-      }
-
       .nav-container {
         padding: 1rem;
       }
     }
 
-    /* ============================================
-       HERO SECTION
-       ============================================ */
+    /* HERO */
     .hero {
-      margin-top: 80px;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-      padding: 4rem 2rem;
-      text-align: center;
+      margin-top: 100px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg) 100%);
+      padding: 6rem 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -232,68 +193,142 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(66, 165, 245, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(13, 71, 161, 0.1) 0%, transparent 50%);
-      pointer-events: none;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(13, 71, 161, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(106, 27, 154, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(30px); }
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      text-align: center;
     }
 
     .hero-headshot {
-      width: 140px;
-      height: 140px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      margin: 0 auto 2rem;
-      border: 4px solid var(--accent-primary);
+      margin: 0 auto 2.5rem;
+      border: 5px solid var(--primary);
       object-fit: cover;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 20px 40px rgba(13, 71, 161, 0.2);
       animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-headshot:hover {
+      transform: scale(1.08);
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 8vw, 3.5rem);
-      font-weight: 700;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
       margin-bottom: 0.5rem;
+      font-family: 'Poppins', sans-serif;
       animation: slideInUp 0.8s ease 0.1s both;
+      letter-spacing: -1px;
     }
 
     .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--accent-primary);
-      margin-bottom: 1rem;
-      font-weight: 600;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
       animation: slideInUp 0.8s ease 0.2s both;
+    }
+
+    .emoji-row {
+      font-size: 2rem;
+      letter-spacing: 0.5rem;
+      margin: 2rem 0;
+      animation: slideInUp 0.8s ease 0.25s both;
     }
 
     .hero-description {
       font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
       line-height: 1.8;
       animation: slideInUp 0.8s ease 0.3s both;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+      animation: slideInUp 0.8s ease 0.35s both;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 12px 30px rgba(13, 71, 161, 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
     }
 
     .hero-cta {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: center;
       flex-wrap: wrap;
       animation: slideInUp 0.8s ease 0.4s both;
     }
 
     .btn {
-      padding: 0.875rem 2rem;
+      padding: 1rem 2.5rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
@@ -301,52 +336,39 @@
       text-decoration: none;
       display: inline-block;
       text-align: center;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
     }
 
     .btn-primary {
-      background: var(--accent-primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-      background: var(--accent-dark);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.4);
     }
 
     .btn-secondary {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text);
+      border: 2px solid var(--border);
     }
 
     .btn-secondary:hover {
-      background: var(--border-color);
-      transform: translateY(-2px);
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      background: var(--primary);
+      color: white;
     }
 
-    @media (max-width: 640px) {
-      .hero {
-        padding: 3rem 1rem;
-      }
-
-      .hero-cta {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-
-    /* ============================================
-       ANIMATIONS
-       ============================================ */
+    /* ANIMATIONS */
     @keyframes slideInDown {
       from {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-40px);
       }
       to {
         opacity: 1;
@@ -357,7 +379,7 @@
     @keyframes slideInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
       }
       to {
         opacity: 1;
@@ -365,19 +387,10 @@
       }
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
     @keyframes scaleIn {
       from {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.9);
       }
       to {
         opacity: 1;
@@ -385,45 +398,72 @@
       }
     }
 
-    /* ============================================
-       SECTIONS
-       ============================================ */
+    /* SECTIONS */
     section {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 2rem;
-      scroll-margin-top: 100px;
+      padding: 5rem 2rem;
+      scroll-margin-top: 120px;
     }
 
     section h2 {
-      font-size: clamp(1.75rem, 5vw, 2.25rem);
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid var(--accent-primary);
-      display: inline-block;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 0.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
-    /* ============================================
-       EXECUTIVE SUMMARY
-       ============================================ */
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-subtitle::before {
+      content: '';
+      width: 4px;
+      height: 30px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 2px;
+    }
+
+    /* SUMMARY */
     .summary-card {
       background: var(--bg-secondary);
-      border-left: 4px solid var(--accent-primary);
-      padding: 2rem;
-      border-radius: 8px;
-      line-height: 1.8;
+      border-radius: 16px;
+      padding: 2.5rem;
+      border-left: 6px solid var(--primary);
+      line-height: 1.9;
       font-size: 1.05rem;
       animation: slideInUp 0.6s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 
-    /* ============================================
-       EXPERIENCE
-       ============================================ */
+    .summary-card p {
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-card strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* EXPERIENCE */
     .experience-item {
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 3.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 2px solid var(--border);
       animation: slideInUp 0.6s ease;
+      transition: all 0.3s ease;
+    }
+
+    .experience-item:hover {
+      padding-left: 1rem;
+      border-left: 4px solid var(--primary);
     }
 
     .experience-item:last-child {
@@ -435,26 +475,41 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
 
+    .experience-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
     .experience-title {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
     }
 
     .experience-company {
       font-weight: 600;
-      color: var(--accent-primary);
-      font-size: 0.95rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 1rem;
+      margin-top: 0.3rem;
     }
 
     .experience-period {
       color: var(--text-muted);
       font-size: 0.95rem;
       white-space: nowrap;
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
     }
 
     .experience-bullets {
@@ -463,54 +518,79 @@
     }
 
     .experience-bullets li {
-      margin-bottom: 0.75rem;
-      padding-left: 1.5rem;
+      margin-bottom: 0.9rem;
+      padding-left: 2rem;
       position: relative;
-      color: var(--text-secondary);
-      line-height: 1.7;
+      color: var(--text-muted);
+      line-height: 1.8;
     }
 
     .experience-bullets li::before {
-      content: '▸';
+      content: '✦';
       position: absolute;
       left: 0;
-      color: var(--accent-primary);
+      color: var(--primary);
       font-weight: bold;
+      font-size: 1.2rem;
     }
 
-    /* ============================================
-       PROJECTS
-       ============================================ */
+    /* PROJECTS */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
     }
 
     .project-card {
       background: var(--bg-secondary);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid var(--border);
       animation: scaleIn 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
     }
 
     .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-12px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 50px rgba(13, 71, 161, 0.15);
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
 
     .project-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
-      color: var(--text-primary);
+      margin-bottom: 1rem;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
     }
 
     .project-description {
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
       line-height: 1.7;
     }
 
@@ -520,10 +600,10 @@
     }
 
     .project-outcomes li {
-      padding-left: 1.5rem;
+      padding-left: 2rem;
       position: relative;
-      margin-bottom: 0.5rem;
-      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
       font-size: 0.95rem;
     }
 
@@ -533,32 +613,46 @@
       left: 0;
       color: var(--success);
       font-weight: bold;
+      font-size: 1.2rem;
     }
 
-    /* ============================================
-       SKILLS
-       ============================================ */
+    /* SKILLS */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
     }
 
     .skill-category {
       background: var(--bg-secondary);
-      border-radius: 12px;
-      padding: 2rem;
-      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      border: 2px solid var(--border);
       animation: slideInUp 0.6s ease;
+      transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.1);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     .skill-category h3 {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
-      color: var(--accent-primary);
-      border-bottom: 2px solid var(--accent-primary);
-      padding-bottom: 0.75rem;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .skill-chips {
@@ -568,40 +662,52 @@
     }
 
     .skill-chip {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
       font-size: 0.9rem;
-      border: 1px solid var(--border-color);
-      transition: all 0.2s ease;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-weight: 500;
     }
 
     .skill-chip:hover {
-      background: var(--accent-primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
-      transform: scale(1.05);
+      border-color: transparent;
+      transform: scale(1.08);
     }
 
-    /* ============================================
-       AWARDS & EDUCATION
-       ============================================ */
+    /* AWARDS */
     .awards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
     .award-card {
       background: var(--bg-secondary);
-      border-radius: 8px;
-      padding: 1.5rem;
-      border-left: 4px solid var(--success);
+      border-radius: 12px;
+      padding: 2rem;
+      border-left: 5px solid var(--success);
       animation: slideInUp 0.6s ease;
+      transition: all 0.3s ease;
+    }
+
+    .award-card:hover {
+      transform: translateX(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
     .award-card.promotion {
-      border-left-color: var(--accent-primary);
+      border-left-color: var(--primary);
+    }
+
+    .award-emoji {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
     }
 
     .award-year {
@@ -610,68 +716,79 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .award-title {
       font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
     }
 
     .award-description {
       font-size: 0.95rem;
-      color: var(--text-secondary);
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    /* ============================================
-       CONTACT SECTION
-       ============================================ */
+    /* CONTACT */
     .contact-section {
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      padding: 3rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 16px;
+      padding: 4rem 2rem;
       text-align: center;
       animation: slideInUp 0.6s ease;
+      color: white;
+    }
+
+    .contact-section h2 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
     }
 
     .contact-links {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 1.5rem;
     }
 
     .contact-link {
-      color: var(--accent-primary);
+      color: white;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.2s ease;
+      padding: 0.8rem 1.5rem;
+      border: 2px solid white;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .contact-link:hover {
-      text-decoration: underline;
+      background: white;
+      color: var(--primary);
     }
 
-    /* ============================================
-       FOOTER
-       ============================================ */
+    /* FOOTER */
     footer {
       background: var(--bg-secondary);
       color: var(--text-muted);
       text-align: center;
-      padding: 2rem;
-      border-top: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-top: 2px solid var(--border);
       font-size: 0.9rem;
     }
 
-    /* ============================================
-       UTILITY CLASSES
-       ============================================ */
-    .hidden {
-      display: none;
-    }
-
+    /* UTILITIES */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -684,154 +801,116 @@
       border-width: 0;
     }
 
-    /* ============================================
-       PRINT STYLES
-       ============================================ */
+    /* PRINT */
     @media print {
       nav, .theme-toggle, .btn-secondary {
         display: none;
       }
-
       body {
         background: white;
         color: black;
       }
-
       section {
         page-break-inside: avoid;
-        padding: 1.5rem 0;
-      }
-
-      .btn-primary {
-        background: black;
-        color: white;
-        border: 1px solid black;
-      }
-
-      .hero {
-        background: white;
-        border-bottom: 2px solid black;
-        margin-top: 0;
         padding: 2rem 0;
-      }
-
-      a {
-        color: black;
-        text-decoration: underline;
-      }
-
-      h2 {
-        border-bottom: 2px solid black;
-        page-break-after: avoid;
-      }
-
-      .summary-card {
-        border-left: 3px solid black;
-        background: white;
-      }
-
-      .experience-item {
-        page-break-inside: avoid;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .project-card {
-        background: white;
-        border: 1px solid #999;
-        page-break-inside: avoid;
-      }
-
-      .contact-section {
-        background: white;
-        border: 1px solid black;
       }
     }
 
-    /* ============================================
-       RESPONSIVE
-       ============================================ */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      section {
-        padding: 2rem 1rem;
+      .nav-links {
+        display: none;
       }
-
-      .experience-header {
+      section {
+        padding: 3rem 1rem;
+      }
+      .hero-cta {
         flex-direction: column;
       }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
+      .btn {
+        width: 100%;
       }
-
-      .contact-section {
-        padding: 2rem 1.5rem;
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- ============================================
-       NAVIGATION
-       ============================================ -->
+  <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#" class="logo">GMP Payroll</a>
+      <a href="#" class="logo">💰 GMP Payroll</a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#experience">📊 Experience</a></li>
+        <li><a href="#projects">⚡ Projects</a></li>
+        <li><a href="#skills">🎯 Skills</a></li>
+        <li><a href="#awards">🏆 Awards</a></li>
+        <li><a href="#contact">📧 Contact</a></li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-        🌙
-      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </div>
   </nav>
 
-  <!-- ============================================
-       HERO SECTION
-       ============================================ -->
+  <!-- HERO SECTION -->
   <section class="hero" role="banner" aria-label="Hero section">
     <div class="hero-content">
-      <img src="headshot.jpg" alt="Chetan Sharma - Payroll Implementation Manager" class="hero-headshot" width="140" height="140">
-      <h1>Chetan Sharma</h1>
-      <p class="hero-subtitle">Global Payroll Implementation Manager</p>
+      <img src="headshot.jpg" alt="Chetan Sharma" class="hero-headshot" width="160" height="160">
+      <h1>🌟 Chetan Sharma</h1>
+      <p class="hero-subtitle">💼 Global Payroll Implementation Manager</p>
+      <div class="emoji-row">🌍 🚀 💎 ⚡ 🎯 🏆</div>
       <p class="hero-description">
-        Transforming multi-country payroll operations at enterprise scale. 13+ years orchestrating complex transitions across APAC, EMEA, and LATAM with 99.8% accuracy. Expert in global payroll operations and AI-powered automation.
+        Transforming multi-country payroll operations at enterprise scale. <strong>13+ years</strong> orchestrating complex transitions with <strong>99.8% accuracy</strong>. Specialist in compliance, automation, and AI-powered solutions. Promoted 5× in 4 years.
       </p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">13+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Countries Managed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">99.8%</div>
+          <div class="stat-label">Accuracy Record</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">122</div>
+          <div class="stat-label">Payrolls/Year</div>
+        </div>
+      </div>
+
       <div class="hero-cta">
-        <button class="btn btn-primary" id="downloadPDF" aria-label="Download resume as PDF">📥 Download Resume</button>
-        <button class="btn btn-primary" id="downloadVCard" aria-label="Save contact information">📇 Save Contact</button>
-        <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary" aria-label="Send email to Chetan Sharma">✉️ Contact</a>
+        <button class="btn btn-primary" id="downloadPDF">📥 Download Resume</button>
+        <button class="btn btn-primary" id="downloadVCard">📇 Save Contact</button>
+        <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary">✉️ Contact Me</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       EXECUTIVE SUMMARY
-       ============================================ -->
+  <!-- EXECUTIVE SUMMARY -->
   <section id="summary" role="region" aria-labelledby="summary-heading">
-    <h2 id="summary-heading">Executive Summary</h2>
+    <h2 id="summary-heading">📌 Executive Summary</h2>
+    <p class="section-subtitle">Professional Profile & Key Achievements</p>
     <div class="summary-card">
-      <p><strong>Global Payroll Implementation Consultant</strong> transforming multi-country payroll operations at enterprise scale. <strong>13+ years</strong> orchestrating complex transitions across APAC, EMEA, and LATAM—managing <strong>99.8% payroll accuracy</strong> while slashing cutover cycles by <strong>25%</strong> through data mapping automation.</p>
-      
-      <p style="margin-top: 1rem;"><strong>Domain Expertise:</strong> Global payroll operations | Compliance across 10+ jurisdictions | High-stakes vendor transitions | Zero-defect post-cutover execution.</p>
-      
-      <p style="margin-top: 1rem;"><strong>Innovation:</strong> Pioneer in leveraging <strong>Google Apps Script + AI</strong> to build enterprise automation dashboards—eliminating manual reconciliation, accelerating insights, driving measurable operational impact. <strong>Promoted 5× in 4 years</strong> (2020–2024).</p>
-      
-      <p style="margin-top: 1rem;"><strong>Why I Matter:</strong> Technical depth meets client obsession. I deliver <strong>on-time, under-budget, zero-error</strong> implementations while empowering teams with intelligent automation—not just payroll systems, but <strong>payroll transformation.</strong></p>
+      <p>🚀 <strong>Global Payroll Implementation Consultant</strong> transforming multi-country payroll operations at enterprise scale.</p>
+      <p>💼 <strong>13+ years</strong> orchestrating complex transitions across APAC, EMEA, and LATAM with <strong>99.8% payroll accuracy</strong>.</p>
+      <p>⚡ Pioneer in leveraging <strong>Google Apps Script + AI</strong> to build enterprise automation dashboards—eliminating manual reconciliation, driving measurable operational impact.</p>
+      <p>🏆 <strong>Promoted 5× in 4 years</strong> (2020–2024) with consistent excellence in payroll compliance and team leadership.</p>
+      <p>🎯 <strong>Technical depth meets client obsession:</strong> I deliver <strong>on-time, under-budget, zero-error</strong> implementations while empowering teams with intelligent automation.</p>
     </div>
   </section>
 
-  <!-- ============================================
-       EXPERIENCE
-       ============================================ -->
+  <!-- EXPERIENCE -->
   <section id="experience" role="region" aria-labelledby="experience-heading">
-    <h2 id="experience-heading">Experience</h2>
+    <h2 id="experience-heading">📊 Professional Experience</h2>
+    <p class="section-subtitle">13+ Years of Multi-Country Payroll Excellence</p>
 
     <div class="experience-item">
+      <div class="experience-icon">🌐</div>
       <div class="experience-header">
         <div>
           <div class="experience-title">Global Payroll Implementation Consultant</div>
@@ -840,23 +919,22 @@
         <div class="experience-period">Oct 2018 – Present</div>
       </div>
       <ul class="experience-bullets">
-        <li>Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8% accuracy while reducing cutover cycle by 25% through standardized data mapping and wave planning.</li>
-        <li>Managed 122 payrolls in single year; awarded 2022 Global Annual Bolt Award—zero post-cutover reconciliation breaks.</li>
-        <li>Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor selection across diverse geographies, reducing operational friction by 40%.</li>
-        <li>Coordinated international payroll vendor transitions; ensured strict timelines and 100% statutory compliance across all jurisdictions.</li>
-        <li><strong>Country-Specific Compliance Mastery:</strong> Hong Kong (MPF contributions, IR56B submissions, statutory holiday pay) | Singapore (CPF, SDL, SHG deductions, public holiday entitlements) | UAE (gratuity calculations, WPS compliance) | Indonesia (BPJS Kesehatan, THR, PPh 21)</li>
-        <li>Acted as key client point of contact; managed weekly communications, ad-hoc queries, change requests—driving 95%+ client satisfaction scores.</li>
-        <li>Managed & reconciled parallel + live payroll runs to verify data integrity pre-handover; identified and resolved 100+ critical data gaps before go-live.</li>
-        <li>Delivered comprehensive training on payroll platforms, SOPs, global compliance practices; trained 50+ internal and client-side users.</li>
-        <li>Ensured SOC 1 audit compliance by maintaining detailed audit checklists; responded to 100% of internal and external auditor queries within SLA.</li>
-        <li>Maintained Root Cause Analysis (RCA) tracker; recorded all payroll processing errors, conducted in-depth analysis, implemented corrective/preventive action plans—reducing post-implementation defects by 35%.</li>
-        <li>Managed & mentored team of 8+ Implementation Consultants; 3 promoted to senior roles within 18 months; ensured seamless payroll project delivery and continuous onboarding support.</li>
-        <li>Collaborated closely with cross-functional teams & in-country partners to address client-specific requirements and statutory obligations—delivering customized, compliant payroll solutions.</li>
-        <li>Proactively identified project risks (scope creep, vendor delays, compliance gaps); maintained deviation reports; enforced quality assurance processes to uphold 100% project delivery standards.</li>
+        <li>🌍 Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8% accuracy while reducing cutover cycle by 25%</li>
+        <li>💰 Managed 122 payrolls in single year; awarded 2022 Global Annual Bolt Award</li>
+        <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor selection</li>
+        <li>🔐 Coordinated international payroll vendor transitions; ensured 100% statutory compliance</li>
+        <li>🏙️ <strong>Country Expertise:</strong> Hong Kong (MPF/IR56B) | Singapore (CPF/SDL) | UAE (Gratuity) | Indonesia (BPJS)</li>
+        <li>👥 Acted as key client point of contact; managed weekly communications; driving 95%+ satisfaction</li>
+        <li>✅ Reconciled parallel + live payroll runs; identified & resolved 100+ critical data gaps</li>
+        <li>📚 Delivered comprehensive training on payroll platforms & global compliance practices (50+ users)</li>
+        <li>🔍 Ensured SOC 1 audit compliance; responded to 100% of auditor queries within SLA</li>
+        <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect reduction)</li>
+        <li>👨‍💼 Managed & mentored 8+ Implementation Consultants; 3 promoted within 18 months</li>
       </ul>
     </div>
 
     <div class="experience-item">
+      <div class="experience-icon">🏥</div>
       <div class="experience-header">
         <div>
           <div class="experience-title">Benefits Administrator</div>
@@ -865,16 +943,16 @@
         <div class="experience-period">May 2014 – Jan 2017</div>
       </div>
       <ul class="experience-bullets">
-        <li>Manually performed complex benefit processes & calculations on non-automated systems.</li>
-        <li>Prepared eligibility files for vendor submission; maintained 99%+ accuracy.</li>
-        <li>Administered COBRA (termed/severed/retired employees) & QMCSO compliance.</li>
-        <li>Managed H/W categories (DBP, HIPAA, LOA) including inbound data processing, enrollment, Medicare eligibility, fulfillment review, annual enrollment.</li>
-        <li>Conducted workflow analysis and delivered process solutions to 500+ employees.</li>
-        <li>Completed monthly Aging Reports & Non-Pay Process reconciliations.</li>
+        <li>💾 Performed complex benefit processes & calculations on legacy systems</li>
+        <li>📋 Prepared eligibility files for vendor submission; maintained 99%+ accuracy</li>
+        <li>⚖️ Administered COBRA & QMCSO compliance for terminated/retired employees</li>
+        <li>🏪 Managed H/W categories: DBP, HIPAA, LOA, enrollment, Medicare eligibility</li>
+        <li>👥 Processed data for 500+ employees with zero compliance violations</li>
       </ul>
     </div>
 
     <div class="experience-item">
+      <div class="experience-icon">🤝</div>
       <div class="experience-header">
         <div>
           <div class="experience-title">HR & Benefits Coordinator</div>
@@ -883,73 +961,71 @@
         <div class="experience-period">April 2011 – May 2014</div>
       </div>
       <ul class="experience-bullets">
-        <li>Maintained Vantive HR Portal for 15+ enterprise clients (500K+ employee records).</li>
-        <li>Loaded data; added/updated/removed medical coverage & insurance with zero errors.</li>
-        <li>Coordinated with onshore teams via real-time updates.</li>
-        <li>Created processing guides per client requirements.</li>
-        <li>Mentored new hires in HR/benefits processing.</li>
-        <li>Maintained and updated Standard Operating Procedures (SOPs).</li>
+        <li>🗂️ Maintained Vantive HR Portal for 15+ enterprise clients (500K+ employee records)</li>
+        <li>📝 Loaded data; added/updated/removed coverage with precision</li>
+        <li>💬 Coordinated with onshore teams via real-time updates</li>
+        <li>📖 Created processing guides per client requirements</li>
+        <li>👨‍🏫 Mentored new hires in HR/benefits processing</li>
       </ul>
     </div>
   </section>
 
-  <!-- ============================================
-       PROJECTS
-       ============================================ -->
+  <!-- PROJECTS -->
   <section id="projects" role="region" aria-labelledby="projects-heading">
-    <h2 id="projects-heading">Featured Projects</h2>
+    <h2 id="projects-heading">⚡ Featured Projects</h2>
+    <p class="section-subtitle">Innovative Automation Solutions & Outcomes</p>
     <div class="projects-grid">
 
       <div class="project-card">
-        <div class="project-title">⚡ ICP Service Comparison Dashboard (v3.0)</div>
-        <p class="project-description">Enterprise dashboard for multi-country payroll service provider evaluation. Automated 50+ service comparisons, compliance tracking, and roadblocker management using Google Apps Script.</p>
+        <div class="project-icon">📊</div>
+        <div class="project-title">ICP Service Comparison Dashboard (v3.0)</div>
+        <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons using Google Apps Script with advanced analytics & compliance tracking.</p>
         <ul class="project-outcomes">
-          <li>Eliminated 15+ manual hours/week of spreadsheet compilation</li>
-          <li>Reduced implementation planning cycle by 40% (10 days → 6 days)</li>
-          <li>Prevented 12+ service-gap errors in first year of use</li>
-          <li>Enabled real-time executive visibility for stakeholder reporting</li>
-          <li>Standardized compliance checks across APAC/EMEA/LATAM regions</li>
-          <li>Used by 8+ team members with zero training overhead</li>
+          <li>✓ Eliminated 15+ manual hours/week of compilation</li>
+          <li>✓ Reduced planning cycle by 40% (10 days → 6 days)</li>
+          <li>✓ Prevented 12+ service-gap errors in first year</li>
+          <li>✓ Real-time KPIs for stakeholder reporting</li>
+          <li>✓ Used by 8+ team members daily</li>
         </ul>
       </div>
 
       <div class="project-card">
-        <div class="project-title">🔄 Two-Way Validation Automation</div>
-        <p class="project-description">Payroll cross-check engine comparing legacy vs. new system data. Automated error detection across 50+ categories with early-break alerts before payroll execution.</p>
+        <div class="project-icon">🔄</div>
+        <div class="project-title">Two-Way Validation Automation</div>
+        <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data with 50+ error detection categories.</p>
         <ul class="project-outcomes">
-          <li>Saved 12+ manual reconciliation hours/week (eliminated 1.5 day/week process)</li>
-          <li>Eliminated 100% of undetected GL-Payroll gaps via early visibility</li>
-          <li>Audit-ready logs for SOC 1 & compliance reviews</li>
-          <li>Enabled parallel run success with <1% variance across 5 consecutive cycles</li>
-          <li>Automated 500+ VLOOKUP/INDEX-MATCH formulas for data validation</li>
-          <li>Performance optimized for 10K+ employee records</li>
+          <li>✓ Saved 12+ reconciliation hours/week</li>
+          <li>✓ Eliminated 100% of GL-Payroll gaps</li>
+          <li>✓ Audit-ready logs for SOC 1 compliance</li>
+          <li>✓ Parallel runs with <1% variance</li>
+          <li>✓ 500+ VLOOKUP/INDEX-MATCH formulas optimized</li>
         </ul>
       </div>
 
       <div class="project-card">
-        <div class="project-title">💡 "How I Work with AI" Methodology</div>
-        <p class="project-description">Non-technical approach to building enterprise automation dashboards. Combines payroll domain expertise with AI code generation for rapid, compliant solutions.</p>
+        <div class="project-icon">🤖</div>
+        <div class="project-title">AI Integration Methodology</div>
+        <p class="project-description">Non-technical approach to building enterprise automation dashboards combining domain expertise with AI code generation.</p>
         <ul class="project-outcomes">
-          <li>Define problem → AI co-design → validate business logic</li>
-          <li>Test with real data → catch edge cases → refine iteratively</li>
-          <li>Deploy & train team in 30 minutes (intuitive UI design)</li>
-          <li>Enterprise-grade solutions delivered in weeks, not months</li>
-          <li>Zero coding background required; domain expertise is the advantage</li>
-          <li>Continuous improvement cycle based on real-world usage feedback</li>
+          <li>✓ Problem definition → AI co-design → validation</li>
+          <li>✓ Real data testing → edge case handling → refinement</li>
+          <li>✓ 30-minute team training (intuitive UI)</li>
+          <li>✓ Enterprise solutions in weeks, not months</li>
+          <li>✓ Continuous improvement based on feedback</li>
         </ul>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================
-       SKILLS
-       ============================================ -->
+  <!-- SKILLS -->
   <section id="skills" role="region" aria-labelledby="skills-heading">
-    <h2 id="skills-heading">Skills & Expertise</h2>
+    <h2 id="skills-heading">🎯 Skills & Expertise</h2>
+    <p class="section-subtitle">Specialized Knowledge & Technical Proficiencies</p>
     <div class="skills-grid">
 
       <div class="skill-category">
+        <div class="skill-icon">💼</div>
         <h3>Payroll & Compliance</h3>
         <div class="skill-chips">
           <span class="skill-chip">Multi-country payroll</span>
@@ -963,6 +1039,7 @@
       </div>
 
       <div class="skill-category">
+        <div class="skill-icon">🏢</div>
         <h3>Systems & Vendors</h3>
         <div class="skill-chips">
           <span class="skill-chip">Deel</span>
@@ -973,18 +1050,19 @@
       </div>
 
       <div class="skill-category">
+        <div class="skill-icon">🌍</div>
         <h3>Global Compliance</h3>
         <div class="skill-chips">
           <span class="skill-chip">Hong Kong (MPF/IR56B)</span>
           <span class="skill-chip">Singapore (CPF/SDL)</span>
           <span class="skill-chip">UAE (Gratuity)</span>
           <span class="skill-chip">Indonesia (BPJS)</span>
-          <span class="skill-chip">Multi-jurisdiction</span>
-          <span class="skill-chip">Statutory requirements</span>
+          <span class="skill-chip">Multi-jurisdiction laws</span>
         </div>
       </div>
 
       <div class="skill-category">
+        <div class="skill-icon">⚡</div>
         <h3>Automation & AI</h3>
         <div class="skill-chips">
           <span class="skill-chip">Google Apps Script</span>
@@ -996,6 +1074,7 @@
       </div>
 
       <div class="skill-category">
+        <div class="skill-icon">👨‍💼</div>
         <h3>Leadership</h3>
         <div class="skill-chips">
           <span class="skill-chip">Team mentoring</span>
@@ -1007,6 +1086,7 @@
       </div>
 
       <div class="skill-category">
+        <div class="skill-icon">🛠️</div>
         <h3>Tools & Platforms</h3>
         <div class="skill-chips">
           <span class="skill-chip">Excel (advanced)</span>
@@ -1021,113 +1101,108 @@
     </div>
   </section>
 
-  <!-- ============================================
-       EDUCATION & AWARDS
-       ============================================ -->
+  <!-- EDUCATION & AWARDS -->
   <section id="awards" role="region" aria-labelledby="awards-heading">
-    <h2 id="awards-heading">Education & Recognition</h2>
+    <h2 id="awards-heading">🏆 Recognition & Achievements</h2>
+    <p class="section-subtitle">Education, Promotions & Awards</p>
 
-    <h3 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🎓 Education</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🎓 Education</h3>
     <div class="awards-grid">
       <div class="award-card">
+        <div class="award-emoji">📚</div>
         <div class="award-year">2008 – 2010</div>
         <div class="award-title">B.Sc (Bachelor of Science)</div>
         <div class="award-description">Rajasthan University</div>
       </div>
     </div>
 
-    <h3 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--accent-primary);">🏆 Career Promotions</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">📈 Career Progression</h3>
     <div class="awards-grid">
       <div class="award-card promotion">
+        <div class="award-emoji">🚀</div>
         <div class="award-title">5+ Promotions in 4 Years</div>
-        <div class="award-description">Advanced from International Payroll Specialist → Local Market Specialist → Senior Local Market Specialist → Local Market Implementation Consultant (2020–2024)</div>
+        <div class="award-description">Advanced from International Specialist → Senior Specialist → Implementation Consultant (2020–2024)</div>
       </div>
     </div>
 
-    <h3 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--success);">🥇 Annual Performance Awards (Deel)</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🥇 Annual Awards (Deel)</h3>
     <div class="awards-grid">
       <div class="award-card">
+        <div class="award-emoji">🏅</div>
         <div class="award-year">2022</div>
         <div class="award-title">Global Annual Bolt Award</div>
         <div class="award-description">Successfully processed 122 payrolls in single year</div>
       </div>
-
       <div class="award-card">
+        <div class="award-emoji">⭐</div>
         <div class="award-year">2021</div>
         <div class="award-title">Annual Bolt Award</div>
         <div class="award-description">Best Performance of the Year</div>
       </div>
-
       <div class="award-card">
+        <div class="award-emoji">⭐</div>
         <div class="award-year">2020</div>
         <div class="award-title">Annual Bolt Award</div>
         <div class="award-description">Best Performance of the Year</div>
       </div>
-
       <div class="award-card">
+        <div class="award-emoji">⭐</div>
         <div class="award-year">2019</div>
         <div class="award-title">Annual Bolt Award</div>
         <div class="award-description">Best Performance of the Year</div>
       </div>
     </div>
 
-    <h3 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--success);">⭐ Quarterly Excellence Awards (2018)</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">✨ Quarterly Awards (2018)</h3>
     <div class="awards-grid">
       <div class="award-card">
+        <div class="award-emoji">🌟</div>
         <div class="award-year">Q1, Q2, Q3 2018</div>
         <div class="award-title">Spotlight Award</div>
-        <div class="award-description">Best Performer – Multiple quarters</div>
+        <div class="award-description">Best Performer – Multiple Quarters</div>
       </div>
     </div>
 
-    <h3 style="font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--success);">🎖️ Previous Recognition (AON Hewitt)</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🎖️ Previous Recognition (AON Hewitt)</h3>
     <div class="awards-grid">
       <div class="award-card">
+        <div class="award-emoji">💎</div>
         <div class="award-title">Gold Award for Client Value</div>
         <div class="award-description">Exceptional client impact and satisfaction</div>
       </div>
-
       <div class="award-card">
+        <div class="award-emoji">🌟</div>
         <div class="award-title">Benefits Champ Award</div>
         <div class="award-description">Excellence in benefits administration</div>
       </div>
-
       <div class="award-card">
-        <div class="award-title">On-the-Job Training (OJT) Leadership</div>
-        <div class="award-description">6-month OJT at Infosys, Bangalore – Led migration of Health & Welfare project from Infosys to AON Hewitt (seamless transition)</div>
+        <div class="award-emoji">🚀</div>
+        <div class="award-title">OJT Leadership</div>
+        <div class="award-description">Led migration project from Infosys to AON Hewitt (seamless transition)</div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       CONTACT
-       ============================================ -->
+  <!-- CONTACT -->
   <section id="contact" role="region" aria-labelledby="contact-heading">
     <div class="contact-section">
-      <h2 id="contact-heading">Let's Connect</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Ready to transform your payroll operations? Let's talk about how I can help drive your implementation success.</p>
-      
+      <h2 id="contact-heading">🚀 Let's Transform Your Payroll Operations</h2>
+      <p>Ready to drive implementation success? I'm here to help with compliance, automation, and strategic payroll solutions.</p>
       <div class="contact-links">
-        <a href="mailto:chetanpayroll@gmail.com" class="contact-link" title="Send email">✉️ chetanpayroll@gmail.com</a>
-        <span style="color: var(--text-muted);">|</span>
-        <a href="tel:+918611949558" class="contact-link" title="Call Chetan">📱 +91 86119495587</a>
-        <span style="color: var(--text-muted);">|</span>
-        <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link" title="Visit LinkedIn profile">🔗 LinkedIn</a>
+        <a href="mailto:chetanpayroll@gmail.com" class="contact-link">✉️ chetanpayroll@gmail.com</a>
+        <a href="tel:+918611949558" class="contact-link">📱 +91 8619495587</a>
+        <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 LinkedIn</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       FOOTER
-       ============================================ -->
+  <!-- FOOTER -->
   <footer role="contentinfo">
-    <p>&copy; 2024 Chetan Sharma. All rights reserved. | <span id="lastUpdated">Last updated: 2024</span></p>
-    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Payroll Implementation | Multi-country Compliance | AI-Powered Automation</p>
+    <p>&copy; 2024 Chetan Sharma. All rights reserved. | 💰 Global Payroll Implementation Manager</p>
+    <p style="font-size: 0.85rem; margin-top: 0.75rem;">⚡ Multi-country Compliance | 🤖 AI-Powered Automation | 🎯 Zero-Error Excellence</p>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem;" id="lastUpdated">Last updated: 2024</p>
   </footer>
 
-  <!-- ============================================
-       STRUCTURED DATA (JSON-LD)
-       ============================================ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1141,33 +1216,17 @@
     "sameAs": "https://www.linkedin.com/in/chetan-sharma-4389641411",
     "image": "https://www.gmppayroll.com/headshot.jpg",
     "description": "Global Payroll Implementation Consultant with 13+ years of experience in multi-country payroll transitions, compliance, and AI automation.",
-    "knowsAbout": [
-      "Payroll Implementation",
-      "Multi-country Compliance",
-      "Google Apps Script",
-      "Automation",
-      "Data Migration",
-      "Global Payroll Operations",
-      "AI Integration"
-    ]
+    "knowsAbout": ["Payroll Implementation", "Multi-country Compliance", "Google Apps Script", "Automation", "Data Migration", "Global Payroll Operations", "AI Integration"]
   }
   </script>
 
-  <!-- ============================================
-       JAVASCRIPT
-       ============================================ -->
   <script>
-    // ============================================
-    // THEME MANAGEMENT
-    // ============================================
     const themeToggle = document.getElementById('themeToggle');
     const htmlElement = document.documentElement;
 
-    // Initialize theme from localStorage or system preference
     function initTheme() {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
       if (savedTheme) {
         htmlElement.style.colorScheme = savedTheme;
         updateThemeButton(savedTheme);
@@ -1184,27 +1243,11 @@
     themeToggle.addEventListener('click', () => {
       const currentTheme = htmlElement.style.colorScheme || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
       htmlElement.style.colorScheme = newTheme;
       localStorage.setItem('theme', newTheme);
       updateThemeButton(newTheme);
     });
 
-    // ============================================
-    // MOBILE NAVIGATION
-    // ============================================
-    const navLinks = document.getElementById('navLinks');
-    const navItems = navLinks.querySelectorAll('a');
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-      });
-    });
-
-    // ============================================
-    // DOWNLOAD FUNCTIONS
-    // ============================================
     document.getElementById('downloadPDF').addEventListener('click', () => {
       window.print();
     });
@@ -1221,9 +1264,7 @@ URL:https://www.gmppayroll.com
 URL:https://www.linkedin.com/in/chetan-sharma-4389641411
 ADR;;Gurgaon;Haryana;;India
 ORG:Deel
-NOTE:Global Payroll Implementation Consultant specializing in multi-country payroll transitions and compliance.
 END:VCARD`;
-
       const element = document.createElement('a');
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(vcard));
       element.setAttribute('download', 'chetan-sharma.vcf');
@@ -1233,9 +1274,6 @@ END:VCARD`;
       document.body.removeChild(element);
     });
 
-    // ============================================
-    // SMOOTH SCROLL ENHANCEMENT
-    // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -1249,52 +1287,8 @@ END:VCARD`;
       });
     });
 
-    // ============================================
-    // INTERSECTION OBSERVER FOR ANIMATIONS
-    // ============================================
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animation = 'slideInUp 0.6s ease forwards';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe elements for lazy animation
-    document.querySelectorAll('.experience-item, .project-card, .skill-category, .award-card').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
-    });
-
-    // ============================================
-    // ACCESSIBILITY: SKIP TO CONTENT
-    // ============================================
-    const skipLink = document.createElement('a');
-    skipLink.href = '#experience';
-    skipLink.textContent = 'Skip to main content';
-    skipLink.className = 'sr-only';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-
-    // ============================================
-    // INITIALIZATION
-    // ============================================
     initTheme();
-
-    // Update last modified date
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
-
-    // ============================================
-    // PERFORMANCE: Preload critical resources
-    // ============================================
-    window.addEventListener('load', () => {
-      console.log('Portfolio site loaded successfully');
-    });
   </script>
 </body>
 </html>
