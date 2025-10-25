@@ -1,14 +1,24 @@
+# Global rules for all bots
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
+Disallow: /temp/
+Disallow: *.pdf$ # Don't crawl PDFs that might change
+Disallow: /cgi-bin/
 
+# Crawl delay to prevent server overload (not critical for small sites)
+Crawl-delay: 1
+
+# Point to sitemap
 Sitemap: https://www.gmppayroll.com/sitemap.xml
 
+# Specific rules for Google
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
+# Rules for Bing
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
