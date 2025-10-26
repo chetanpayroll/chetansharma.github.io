@@ -72,7 +72,6 @@
       line-height: 1.6;
       overflow-x: hidden;
       transition: all 0.3s ease;
-      perspective: 1200px;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -82,48 +81,21 @@
       }
     }
 
-    /* ANIMATED BACKGROUND */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(106, 27, 154, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-      animation: gradientShift 15s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% {
-        transform: translate(0, 0);
-      }
-      50% {
-        transform: translate(-50px, 50px);
-      }
-    }
-
     /* NAVIGATION */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(10px);
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      transform: translateZ(0);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     @media (prefers-color-scheme: dark) {
       nav {
-        background: rgba(15, 20, 25, 0.7);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(15, 20, 25, 0.97);
       }
     }
 
@@ -146,12 +118,6 @@
       text-decoration: none;
       font-family: 'Poppins', sans-serif;
       letter-spacing: -1px;
-      transition: all 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.05) rotateZ(-2deg);
-      filter: drop-shadow(0 8px 16px rgba(13, 71, 161, 0.3));
     }
 
     .nav-links {
@@ -166,7 +132,7 @@
       text-decoration: none;
       font-weight: 500;
       position: relative;
-      transition: all 0.3s ease;
+      transition: color 0.3s ease;
       font-size: 0.95rem;
     }
 
@@ -176,14 +142,9 @@
       bottom: -5px;
       left: 0;
       width: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      height: 2px;
+      background: var(--primary);
       transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      transform: translateY(-2px);
-      color: var(--primary);
     }
 
     .nav-links a:hover::after {
@@ -194,16 +155,14 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.5);
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
       cursor: pointer;
       font-size: 1.5rem;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
 
     .theme-toggle:hover {
@@ -211,7 +170,6 @@
       background: var(--primary-light);
       color: white;
       border-color: var(--primary);
-      box-shadow: 0 12px 24px rgba(13, 71, 161, 0.3);
     }
 
     @media (max-width: 768px) {
@@ -230,11 +188,6 @@
       padding: 6rem 2rem;
       position: relative;
       overflow: hidden;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      perspective: 1000px;
     }
 
     .hero::before {
@@ -244,10 +197,9 @@
       right: -10%;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(13, 71, 161, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(13, 71, 161, 0.1) 0%, transparent 70%);
       border-radius: 50%;
       animation: float 6s ease-in-out infinite;
-      filter: blur(40px);
     }
 
     .hero::after {
@@ -257,60 +209,166 @@
       left: -10%;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(106, 27, 154, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(106, 27, 154, 0.1) 0%, transparent 70%);
       border-radius: 50%;
       animation: float 8s ease-in-out infinite reverse;
-      filter: blur(40px);
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px) rotateZ(0deg); }
-      50% { transform: translateY(30px) rotateZ(2deg); }
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(30px); }
     }
 
     .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
       position: relative;
-      z-index: 2;
-      max-width: 800px;
+      z-index: 1;
       text-align: center;
-      animation: slideInUp 0.8s ease-out;
     }
 
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px) rotateX(10deg);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0);
-      }
+    .hero-headshot {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 2.5rem;
+      border: 5px solid var(--primary);
+      object-fit: cover;
+      box-shadow: 0 20px 40px rgba(13, 71, 161, 0.2);
+      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-headshot:hover {
+      transform: scale(1.08);
     }
 
     .hero h1 {
       font-size: clamp(2.5rem, 8vw, 4rem);
       font-weight: 800;
+      margin-bottom: 0.5rem;
       font-family: 'Poppins', sans-serif;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+      animation: slideInUp 0.8s ease 0.1s both;
+      letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -2px;
-      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      animation: slideInUp 0.8s ease 0.2s both;
     }
 
-    .hero p {
-      font-size: 1.2rem;
+    .emoji-row {
+      font-size: 2rem;
+      letter-spacing: 0.5rem;
+      margin: 2rem 0;
+      animation: slideInUp 0.8s ease 0.25s both;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
-      animation: fadeIn 0.8s ease-out 0.2s both;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+      animation: slideInUp 0.8s ease 0.3s both;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    @keyframes fadeIn {
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+      animation: slideInUp 0.8s ease 0.35s both;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 12px 30px rgba(13, 71, 161, 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: slideInUp 0.8s ease 0.4s both;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ANIMATIONS */
+    @keyframes slideInDown {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(-40px);
       }
       to {
         opacity: 1;
@@ -318,812 +376,760 @@
       }
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeIn 0.8s ease-out 0.4s both;
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .btn {
-      padding: 0.75rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      border: none;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(0);
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.5s ease;
-      z-index: -1;
-    }
-
-    .btn:hover::before {
-      left: 100%;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      box-shadow: 0 12px 24px rgba(13, 71, 161, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 18px 36px rgba(13, 71, 161, 0.4);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 16px 32px rgba(13, 71, 161, 0.3);
-    }
-
-    /* SECTION COMMON */
+    /* SECTIONS */
     section {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 6rem 2rem;
-      position: relative;
+      padding: 5rem 2rem;
+      scroll-margin-top: 120px;
     }
 
     section h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 0.5rem;
       font-family: 'Poppins', sans-serif;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    section h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: var(--text);
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .section-subtitle {
       font-size: 1.1rem;
       color: var(--text-muted);
       margin-bottom: 3rem;
-      animation: fadeIn 0.6s ease-out;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    /* OVERVIEW */
-    .overview-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .overview-card {
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(0);
-      animation: slideInUp 0.6s ease-out;
-    }
-
-    .overview-card::before {
+    .section-subtitle::before {
       content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(13, 71, 161, 0.1) 0%, transparent 70%);
-      transition: all 0.6s ease;
+      width: 4px;
+      height: 30px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 2px;
     }
 
-    .overview-card:hover {
-      transform: translateY(-8px) rotateX(5deg) rotateZ(-2deg) scale(1.02);
-      box-shadow: 0 20px 48px rgba(13, 71, 161, 0.2);
-      background: rgba(13, 71, 161, 0.05);
-      border-color: rgba(13, 71, 161, 0.3);
+    /* SUMMARY */
+    .summary-card {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2.5rem;
+      border-left: 6px solid var(--primary);
+      line-height: 1.9;
+      font-size: 1.05rem;
+      animation: slideInUp 0.6s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 
-    .overview-card:hover::before {
-      top: -20%;
-      right: -20%;
+    .summary-card p {
+      margin-bottom: 1.5rem;
     }
 
-    .overview-card > * {
-      position: relative;
-      z-index: 2;
+    .summary-card strong {
+      color: var(--primary);
+      font-weight: 700;
     }
 
-    .overview-card h3 {
+    /* EXPERIENCE */
+    .experience-item {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 2px solid var(--border);
+      animation: slideInUp 0.6s ease;
+      transition: all 0.3s ease;
+    }
+
+    .experience-item:hover {
+      padding-left: 1rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .experience-item:last-child {
+      border-bottom: none;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .experience-icon {
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
-    .overview-card .stat {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    .experience-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .experience-company {
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.3rem;
     }
 
-    /* EXPERTISE GRID */
-    .expertise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .expertise-card {
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 2.5rem;
+    .experience-period {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      white-space: nowrap;
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 1rem;
       border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      animation: slideInUp 0.6s ease-out;
+      font-weight: 600;
     }
 
-    .expertise-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.05) 0%, rgba(106, 27, 154, 0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 0;
-    }
-
-    .expertise-card:hover {
-      transform: translateY(-12px) rotateX(8deg) rotateZ(-3deg) scale(1.03);
-      box-shadow: 0 25px 60px rgba(13, 71, 161, 0.25);
-      background: rgba(13, 71, 161, 0.08);
-      border-color: rgba(13, 71, 161, 0.3);
-    }
-
-    .expertise-card:hover::before {
-      opacity: 1;
-    }
-
-    .expertise-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .expertise-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .expertise-card ul {
+    .experience-bullets {
       list-style: none;
       padding: 0;
     }
 
-    .expertise-card li {
-      padding: 0.4rem 0;
-      color: var(--text-muted);
+    .experience-bullets li {
+      margin-bottom: 0.9rem;
+      padding-left: 2rem;
       position: relative;
-      padding-left: 1.5rem;
+      color: var(--text-muted);
+      line-height: 1.8;
     }
 
-    .expertise-card li::before {
-      content: '→';
+    .experience-bullets li::before {
+      content: '✦';
       position: absolute;
       left: 0;
       color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid var(--border);
+      animation: scaleIn 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 50px rgba(13, 71, 161, 0.15);
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
       font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .project-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .project-outcomes {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project-outcomes li {
+      padding-left: 2rem;
+      position: relative;
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .project-outcomes li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-category {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 2.5rem;
+      border: 2px solid var(--border);
+      animation: slideInUp 0.6s ease;
       transition: all 0.3s ease;
     }
 
-    .expertise-card:hover li::before {
-      transform: translateX(4px);
-      color: var(--secondary);
+    .skill-category:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.1);
     }
 
-    /* AWARDS GRID */
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-category h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .skill-chip {
+      background: var(--bg);
+      color: var(--text);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .skill-chip:hover {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      border-color: transparent;
+      transform: scale(1.08);
+    }
+
+    /* AWARDS */
     .awards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      margin-bottom: 3rem;
     }
 
     .award-card {
-      background: rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: var(--bg-secondary);
+      border-radius: 12px;
       padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      animation: slideInUp 0.6s ease-out;
-    }
-
-    .award-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent 0%, rgba(255, 107, 107, 0.1) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .award-card:hover {
-      transform: translateY(-10px) rotateX(10deg) rotateY(-5deg) scale(1.05);
-      box-shadow: 0 20px 50px rgba(13, 71, 161, 0.2);
-      background: rgba(255, 107, 107, 0.08);
-      border-color: rgba(255, 107, 107, 0.3);
-    }
-
-    .award-card:hover::after {
-      opacity: 1;
-    }
-
-    .award-emoji {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
+      border-left: 5px solid var(--success);
+      animation: slideInUp 0.6s ease;
       transition: all 0.3s ease;
     }
 
-    .award-card:hover .award-emoji {
-      transform: scale(1.2) rotateY(20deg) rotateZ(-10deg);
+    .award-card:hover {
+      transform: translateX(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .award-card.promotion {
+      border-left-color: var(--primary);
+    }
+
+    .award-emoji {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
     }
 
     .award-year {
       font-size: 0.85rem;
-      color: var(--primary);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .award-title {
       font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
       color: var(--text);
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
     }
 
     .award-description {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    .award-card.promotion {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.1) 0%, rgba(106, 27, 154, 0.1) 100%);
-    }
-
-    /* SKILL CHIPS */
-    .skill-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .skill-chip {
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.15) 0%, rgba(106, 27, 154, 0.15) 100%);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(13, 71, 161, 0.3);
-      padding: 0.6rem 1.3rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--primary);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill-chip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
-    }
-
-    .skill-chip:hover {
-      transform: translateY(-3px) scale(1.08);
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.25) 0%, rgba(106, 27, 154, 0.25) 100%);
-      box-shadow: 0 8px 16px rgba(13, 71, 161, 0.2);
-      border-color: rgba(13, 71, 161, 0.5);
-    }
-
-    .skill-chip:hover::before {
-      transform: translateX(100%);
-    }
-
-    /* BLOG SECTION */
-    .blog-highlight {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      padding: 3rem;
-      border-radius: 24px;
-      margin: 2rem 0;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(13, 71, 161, 0.3);
-      position: relative;
-      overflow: hidden;
-      animation: slideInUp 0.6s ease-out;
-    }
-
-    .blog-highlight::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .blog-highlight h3 {
-      color: white;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .blog-highlight p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .blog-highlight a {
-      display: inline-block;
-      background: white;
-      color: var(--primary);
-      padding: 0.75rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .blog-highlight a:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-    }
-
-    /* CONTACT SECTION */
+    /* CONTACT */
     .contact-section {
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 3rem;
-      border-radius: 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 16px;
+      padding: 4rem 2rem;
       text-align: center;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-      animation: slideInUp 0.6s ease-out;
+      animation: slideInUp 0.6s ease;
+      color: white;
     }
 
     .contact-section h2 {
+      color: white;
       margin-bottom: 1rem;
     }
 
     .contact-section p {
       font-size: 1.1rem;
-      color: var(--text-muted);
       margin-bottom: 2rem;
+      opacity: 0.95;
     }
 
     .contact-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
       justify-content: center;
       flex-wrap: wrap;
     }
 
     .contact-link {
-      background: rgba(13, 71, 161, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 2px solid var(--primary);
-      padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      color: var(--primary);
+      color: white;
       text-decoration: none;
       font-weight: 600;
+      padding: 0.8rem 1.5rem;
+      border: 2px solid white;
+      border-radius: 25px;
       transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-link::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--primary);
-      z-index: -1;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .contact-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(13, 71, 161, 0.25);
-    }
-
-    .contact-link:hover::before {
-      transform: scaleX(1);
-    }
-
-    .contact-link:hover {
-      color: white;
+      background: white;
+      color: var(--primary);
     }
 
     /* FOOTER */
     footer {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      text-align: center;
-      padding: 3rem 2rem;
+      background: var(--bg-secondary);
       color: var(--text-muted);
-      font-size: 0.95rem;
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 2px solid var(--border);
+      font-size: 0.9rem;
     }
 
-    footer p {
-      margin: 0.5rem 0;
-      transition: all 0.3s ease;
+    /* UTILITIES */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-border: nowrap;
+      border-width: 0;
     }
 
-    footer p:hover {
-      transform: translateY(-2px);
-      color: var(--primary);
-    }
-
-    /* SCROLL REVEAL ANIMATION */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px) rotateX(10deg);
-      animation: revealScroll 0.8s ease-out forwards;
-    }
-
-    @keyframes revealScroll {
-      to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0);
+    /* PRINT */
+    @media print {
+      nav, .theme-toggle, .btn-secondary {
+        display: none;
+      }
+      body {
+        background: white;
+        color: black;
+      }
+      section {
+        page-break-inside: avoid;
+        padding: 2rem 0;
       }
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
       section {
-        padding: 4rem 1rem;
+        padding: 3rem 1rem;
       }
-
-      section h2 {
-        font-size: 1.8rem;
-      }
-
-      .hero {
-        padding: 4rem 1.5rem;
-        min-height: 500px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .hero-buttons {
+      .hero-cta {
         flex-direction: column;
       }
-
       .btn {
         width: 100%;
       }
-
-      .awards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .award-card.promotion {
-        grid-column: 1;
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E97FH17B0S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E97FH17B0S');
+</script>
+  
 </head>
 
 <body>
-
   <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#" class="logo">Chetan Sharma</a>
-      <ul class="nav-links">
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#expertise">Expertise</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <a href="#" class="logo">💰 GMP Payroll</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#experience">📊 Experience</a></li>
+        <li><a href="#projects">⚡ Projects</a></li>
+        <li><a href="#skills">🎯 Skills</a></li>
+        <li><a href="#awards">🏆 Awards</a></li>
+        <li><a href="#contact">📧 Contact</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" role="region" aria-labelledby="hero-heading">
+  <!-- HERO SECTION -->
+  <section class="hero" role="banner" aria-label="Hero section">
     <div class="hero-content">
-      <h1 id="hero-heading">Chetan Sharma</h1>
-      <p>Payroll Implementation Manager | 13+ Years Global Expertise</p>
-      <p style="font-size: 0.95rem; color: var(--text-muted);">Multi-country payroll transitions • Compliance architecture • AI-powered automation • Strategic implementations</p>
-      <div class="hero-buttons">
-        <button class="btn btn-primary" id="downloadPDF">📥 Download Profile</button>
-        <button class="btn btn-secondary" id="downloadVCard">📇 Add Contact</button>
+      <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot" width="160" height="160">
+      <h1>🌟 Chetan Sharma</h1>
+      <p class="hero-subtitle">💼 Payroll Implementation Manager</p>
+      <div class="emoji-row">🌍 🚀 💎 ⚡ 🎯 🏆</div>
+      <p class="hero-description">
+        Transforming multi-country payroll operations at enterprise scale. <strong>13+ years</strong> orchestrating complex transitions with <strong>99.8% accuracy</strong>. Specialist in compliance, automation, and AI-powered solutions. Promoted 5× in 4 years.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">13+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Countries Managed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">99.8%</div>
+          <div class="stat-label">Accuracy Record</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">122</div>
+          <div class="stat-label">Payrolls/Year</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <button class="btn btn-primary" id="downloadPDF">📥 Download Resume</button>
+        <button class="btn btn-primary" id="downloadVCard">📇 Save Contact</button>
+        <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary">✉️ Contact Me</a>
       </div>
     </div>
   </section>
 
-  <!-- PROFILE PICTURE SECTION -->
-  <section style="padding: 2rem 2rem; text-align: center; position: relative;">
-    <div style="
-      display: flex;
-      justify-content: center;
-      margin-bottom: 3rem;
-      animation: slideInUp 0.6s ease-out;
-    ">
-      <div style="
-        position: relative;
-        width: 220px;
-        height: 220px;
-        animation: float 3s ease-in-out infinite;
-      ">
-        <!-- Glowing ring effect -->
-        <div style="
-          position: absolute;
-          inset: -10px;
-          background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-          border-radius: 50%;
-          opacity: 0.3;
-          filter: blur(15px);
-          animation: pulse 3s ease-in-out infinite;
-        "></div>
-        
-        <!-- Blue border ring -->
-        <div style="
-          position: absolute;
-          inset: -8px;
-          border: 3px solid var(--primary);
-          border-radius: 50%;
-          opacity: 0.6;
-          animation: spin 20s linear infinite;
-        "></div>
-        
-        <!-- Profile image -->
-        <img 
-          src="headshot.png" 
-          alt="Chetan Sharma - Payroll Implementation Manager" 
-          style="
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 20px 50px rgba(13, 71, 161, 0.3);
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
-          "
-          onmouseover="this.style.transform='scale(1.05) rotateY(5deg)';"
-          onmouseout="this.style.transform='scale(1) rotateY(0deg)';"
-        />
-      </div>
+  <!-- EXECUTIVE SUMMARY -->
+  <section id="summary" role="region" aria-labelledby="summary-heading">
+    <h2 id="summary-heading">📌 Executive Summary</h2>
+    <p class="section-subtitle">Professional Profile & Key Achievements</p>
+    <div class="summary-card">
+      <p>🚀 <strong>Global Payroll Implementation Consultant</strong> transforming multi-country payroll operations at enterprise scale.</p>
+      <p>💼 <strong>13+ years</strong> orchestrating complex transitions across APAC, EMEA, and LATAM with <strong>99.8% payroll accuracy</strong>.</p>
+      <p>⚡ Pioneer in leveraging <strong>Google Apps Script + AI</strong> to build enterprise automation dashboards—eliminating manual reconciliation, driving measurable operational impact.</p>
+      <p>🏆 <strong>Promoted 5× in 4 years</strong> (2020–2024) with consistent excellence in payroll compliance and team leadership.</p>
+      <p>🎯 <strong>Technical depth meets client obsession:</strong> I deliver <strong>on-time, under-budget, zero-error</strong> implementations while empowering teams with intelligent automation.</p>
     </div>
   </section>
 
-  <!-- ANIMATIONS FOR PROFILE PICTURE -->
-  <style>
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.15); opacity: 0.5; }
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      360% { transform: rotate(360deg); }
-    }
-  </style>
+  <!-- EXPERIENCE -->
+  <section id="experience" role="region" aria-labelledby="experience-heading">
+    <h2 id="experience-heading">📊 Professional Experience</h2>
+    <p class="section-subtitle">13+ Years of Multi-Country Payroll Excellence</p>
 
-  <!-- OVERVIEW -->
-  <section id="overview" role="region" aria-labelledby="overview-heading">
-    <h2 id="overview-heading">🎯 Quick Overview</h2>
-    <p class="section-subtitle">Impact & expertise across payroll transformations</p>
-    
-    <div class="overview-container">
-      <div class="overview-card">
-        <h3>Current Position</h3>
-        <div class="stat">13+</div>
-        <p>Years Global Payroll Implementation Experience</p>
+    <div class="experience-item">
+      <div class="experience-icon">🌐</div>
+      <div class="experience-header">
+        <div>
+          <div class="experience-title">Global Payroll Implementation Consultant</div>
+          <div class="experience-company">Deel (formerly Safeguard Pay)</div>
+        </div>
+        <div class="experience-period">Oct 2018 – Present</div>
       </div>
-      <div class="overview-card">
-        <h3>Organisation</h3>
-        <div class="stat">Deel</div>
-        <p>Payroll Implementation Manager – Global HR & Compliance</p>
+      <ul class="experience-bullets">
+        <li>🌍 Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8% accuracy while reducing cutover cycle by 25%</li>
+        <li>💰 Managed 122 payrolls in single year; awarded 2022 Global Annual Bolt Award</li>
+        <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor selection</li>
+        <li>🔐 Coordinated international payroll vendor transitions; ensured 100% statutory compliance</li>
+        <li>🏙️ <strong>Country Expertise:</strong> Hong Kong (MPF/IR56B) | Singapore (CPF/SDL) | UAE (Gratuity) | Indonesia (BPJS)</li>
+        <li>👥 Acted as key client point of contact; managed weekly communications; driving 95%+ satisfaction</li>
+        <li>✅ Reconciled parallel + live payroll runs; identified & resolved 100+ critical data gaps</li>
+        <li>📚 Delivered comprehensive training on payroll platforms & global compliance practices (50+ users)</li>
+        <li>🔍 Ensured SOC 1 audit compliance; responded to 100% of auditor queries within SLA</li>
+        <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect reduction)</li>
+        <li>👨‍💼 Managed & mentored 8+ Implementation Consultants; 3 promoted within 18 months</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <div class="experience-icon">🏥</div>
+      <div class="experience-header">
+        <div>
+          <div class="experience-title">Benefits Administrator</div>
+          <div class="experience-company">Xerex Business Services</div>
+        </div>
+        <div class="experience-period">May 2014 – Jan 2017</div>
       </div>
-      <div class="overview-card">
-        <h3>Location</h3>
-        <div class="stat">🇮🇳</div>
-        <p>Gurgaon, Haryana, India</p>
+      <ul class="experience-bullets">
+        <li>💾 Performed complex benefit processes & calculations on legacy systems</li>
+        <li>📋 Prepared eligibility files for vendor submission; maintained 99%+ accuracy</li>
+        <li>⚖️ Administered COBRA & QMCSO compliance for terminated/retired employees</li>
+        <li>🏪 Managed H/W categories: DBP, HIPAA, LOA, enrollment, Medicare eligibility</li>
+        <li>👥 Processed data for 500+ employees with zero compliance violations</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <div class="experience-icon">🤝</div>
+      <div class="experience-header">
+        <div>
+          <div class="experience-title">HR & Benefits Coordinator</div>
+          <div class="experience-company">AON Hewitt, Gurgaon</div>
+        </div>
+        <div class="experience-period">April 2011 – May 2014</div>
       </div>
-      <div class="overview-card">
-        <h3>Focus Area</h3>
-        <div class="stat">🌍</div>
-        <p>Multi-Country Compliance & Strategic Automation</p>
-      </div>
+      <ul class="experience-bullets">
+        <li>🗂️ Maintained Vantive HR Portal for 15+ enterprise clients (500K+ employee records)</li>
+        <li>📝 Loaded data; added/updated/removed coverage with precision</li>
+        <li>💬 Coordinated with onshore teams via real-time updates</li>
+        <li>📖 Created processing guides per client requirements</li>
+        <li>👨‍🏫 Mentored new hires in HR/benefits processing</li>
+      </ul>
     </div>
   </section>
 
-  <!-- EXPERTISE -->
-  <section id="expertise" role="region" aria-labelledby="expertise-heading">
-    <h2 id="expertise-heading">💼 Core Expertise</h2>
-    <p class="section-subtitle">Specialized knowledge in payroll implementation and compliance</p>
+  <!-- PROJECTS -->
+  <section id="projects" role="region" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">⚡ Featured Projects</h2>
+    <p class="section-subtitle">Innovative Automation Solutions & Outcomes</p>
+    <div class="projects-grid">
 
-    <div class="expertise-grid">
-      <div class="expertise-card">
-        <h3>🚀 Payroll Implementations</h3>
-        <ul>
-          <li>Multi-country payroll system transitions</li>
-          <li>Vendor selection & RFP management</li>
-          <li>Data migration strategies</li>
-          <li>UAT design & execution</li>
-          <li>Cutover planning & go-live support</li>
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-title">ICP Service Comparison Dashboard (v3.0)</div>
+        <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons using Google Apps Script with advanced analytics & compliance tracking.</p>
+        <ul class="project-outcomes">
+          <li>✓ Eliminated 15+ manual hours/week of compilation</li>
+          <li>✓ Reduced planning cycle by 40% (10 days → 6 days)</li>
+          <li>✓ Prevented 12+ service-gap errors in first year</li>
+          <li>✓ Real-time KPIs for stakeholder reporting</li>
+          <li>✓ Used by 8+ team members daily</li>
         </ul>
       </div>
 
-      <div class="expertise-card">
-        <h3>📋 Compliance & Regulations</h3>
-        <ul>
-          <li>Multi-country employment laws</li>
-          <li>Tax & statutory compliance setup</li>
-          <li>Regulatory change management</li>
-          <li>Audit & control frameworks</li>
-          <li>Country-specific payroll rules</li>
+      <div class="project-card">
+        <div class="project-icon">🔄</div>
+        <div class="project-title">Two-Way Validation Automation</div>
+        <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data with 50+ error detection categories.</p>
+        <ul class="project-outcomes">
+          <li>✓ Saved 12+ reconciliation hours/week</li>
+          <li>✓ Eliminated 100% of GL-Payroll gaps</li>
+          <li>✓ Audit-ready logs for SOC 1 compliance</li>
+          <li>✓ Parallel runs with <1% variance</li>
+          <li>✓ 500+ VLOOKUP/INDEX-MATCH formulas optimized</li>
         </ul>
       </div>
 
-      <div class="expertise-card">
-        <h3>⚙️ Process Automation</h3>
-        <ul>
-          <li>Google Apps Script automation</li>
-          <li>Excel advanced functions & macros</li>
-          <li>Slack workflow integrations</li>
-          <li>Process orchestration & RPA concepts</li>
-          <li>Manual error elimination (95% reduction)</li>
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <div class="project-title">AI Integration Methodology</div>
+        <p class="project-description">Non-technical approach to building enterprise automation dashboards combining domain expertise with AI code generation.</p>
+        <ul class="project-outcomes">
+          <li>✓ Problem definition → AI co-design → validation</li>
+          <li>✓ Real data testing → edge case handling → refinement</li>
+          <li>✓ 30-minute team training (intuitive UI)</li>
+          <li>✓ Enterprise solutions in weeks, not months</li>
+          <li>✓ Continuous improvement based on feedback</li>
         </ul>
       </div>
 
-      <div class="expertise-card">
-        <h3>🤝 Vendor & System Integration</h3>
-        <ul>
-          <li>Payroll system integrations (ADP, Workday, SAP)</li>
-          <li>HRIS/HCM platform synchronization</li>
-          <li>Third-party vendor coordination</li>
-          <li>System testing & validation</li>
-          <li>API & data exchange management</li>
-        </ul>
-      </div>
-
-      <div class="expertise-card">
-        <h3>📊 Global Operations</h3>
-        <ul>
-          <li>40+ country payroll expertise</li>
-          <li>Multi-currency & tax jurisdiction handling</li>
-          <li>Remote & distributed team management</li>
-          <li>Cross-border compliance</li>
-          <li>Global HR technology strategy</li>
-        </ul>
-      </div>
-
-      <div class="expertise-card">
-        <h3>🎯 Project Management</h3>
-        <ul>
-          <li>Stakeholder & change management</li>
-          <li>Timeline & milestone tracking</li>
-          <li>Risk mitigation strategies</li>
-          <li>Documentation & runbooks</li>
-          <li>Post-implementation support</li>
-        </ul>
-      </div>
     </div>
+  </section>
 
-    <h3 style="margin-top: 3rem; font-size: 1.3rem;">🛠️ Tools & Platforms</h3>
-    <div class="skill-chips">
-      <span class="skill-chip">Excel (advanced)</span>
-      <span class="skill-chip">Google Sheets</span>
-      <span class="skill-chip">Google Apps Script</span>
-      <span class="skill-chip">monday.com</span>
-      <span class="skill-chip">Gainsight</span>
-      <span class="skill-chip">Slack</span>
+  <!-- SKILLS -->
+  <section id="skills" role="region" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">🎯 Skills & Expertise</h2>
+    <p class="section-subtitle">Specialized Knowledge & Technical Proficiencies</p>
+    <div class="skills-grid">
+
+      <div class="skill-category">
+        <div class="skill-icon">💼</div>
+        <h3>Payroll & Compliance</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Multi-country payroll</span>
+          <span class="skill-chip">Cutover planning</span>
+          <span class="skill-chip">SOC 1 audits</span>
+          <span class="skill-chip">RCA analysis</span>
+          <span class="skill-chip">Parallel runs</span>
+          <span class="skill-chip">Data validation</span>
+          <span class="skill-chip">UAT/SIT testing</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skill-icon">🏢</div>
+        <h3>Systems & Vendors</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Deel</span>
+          <span class="skill-chip">Vendor transitions</span>
+          <span class="skill-chip">Contract negotiation</span>
+          <span class="skill-chip">SLA management</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skill-icon">🌍</div>
+        <h3>Global Compliance</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Hong Kong (MPF/IR56B)</span>
+          <span class="skill-chip">Singapore (CPF/SDL)</span>
+          <span class="skill-chip">UAE (Gratuity)</span>
+          <span class="skill-chip">Indonesia (BPJS)</span>
+          <span class="skill-chip">Multi-jurisdiction laws</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skill-icon">⚡</div>
+        <h3>Automation & AI</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Google Apps Script</span>
+          <span class="skill-chip">AI-assisted automation</span>
+          <span class="skill-chip">Excel (advanced)</span>
+          <span class="skill-chip">Slack automations</span>
+          <span class="skill-chip">Workflow optimization</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skill-icon">👨‍💼</div>
+        <h3>Leadership</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Team mentoring</span>
+          <span class="skill-chip">Implementation consulting</span>
+          <span class="skill-chip">Risk management</span>
+          <span class="skill-chip">Cross-functional collab</span>
+          <span class="skill-chip">Auditor coordination</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skill-icon">🛠️</div>
+        <h3>Tools & Platforms</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Excel (advanced)</span>
+          <span class="skill-chip">Google Sheets</span>
+          <span class="skill-chip">Google Apps Script</span>
+          <span class="skill-chip">monday.com</span>
+          <span class="skill-chip">Gainsight</span>
+          <span class="skill-chip">Slack</span>
+        </div>
+      </div>
+
     </div>
-
   </section>
   
   <!-- FEATURED BLOG -->
-  <section id="blog" role="region" aria-labelledby="blog-heading">
-    <h2 id="blog-heading">📖 Featured Articles</h2>
-    <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
-    
-    <div class="blog-highlight">
-      <h3>🚀 New: Payroll Automation Using Google Sheets & Apps Script</h3>
-      <p>Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
-      <a href="blog.html">📖 Read Full Article →</a>
-    </div>
-  </section>
+<section id="blog" role="region" aria-labelledby="blog-heading">
+  <h2 id="blog-heading">📖 Featured Articles</h2>
+  <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
+  
+  <div style="background: linear-gradient(135deg, #0d47a1 0%, #6a1b9a 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+    <h3 style="color: white; margin-bottom: 1rem;">🚀 New: Payroll Automation Using Google Sheets & Apps Script</h3>
+    <p style="font-size: 1rem; margin-bottom: 1.5rem;">Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
+    <a href="/blog/payroll-automation-google-sheets-apps-script/" style="display: inline-block; background: white; color: #0d47a1; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer;">
+      📖 Read Full Article →
+    </a>
+  </div>
+</section>
 
   <!-- EDUCATION & AWARDS -->
   <section id="awards" role="region" aria-labelledby="awards-heading">
     <h2 id="awards-heading">🏆 Recognition & Achievements</h2>
     <p class="section-subtitle">Education, Promotions & Awards</p>
 
-    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">🎓 Education</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🎓 Education</h3>
     <div class="awards-grid">
       <div class="award-card">
         <div class="award-emoji">📚</div>
@@ -1133,7 +1139,7 @@
       </div>
     </div>
 
-    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">📈 Career Progression</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">📈 Career Progression</h3>
     <div class="awards-grid">
       <div class="award-card promotion">
         <div class="award-emoji">🚀</div>
@@ -1142,7 +1148,7 @@
       </div>
     </div>
 
-    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">🥇 Annual Awards (Deel)</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🥇 Annual Awards (Deel)</h3>
     <div class="awards-grid">
       <div class="award-card">
         <div class="award-emoji">🏅</div>
@@ -1170,7 +1176,7 @@
       </div>
     </div>
 
-    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">✨ Quarterly Awards (2018)</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">✨ Quarterly Awards (2018)</h3>
     <div class="awards-grid">
       <div class="award-card">
         <div class="award-emoji">🌟</div>
@@ -1180,7 +1186,7 @@
       </div>
     </div>
 
-    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">🎖️ Previous Recognition (AON Hewitt)</h3>
+    <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🎖️ Previous Recognition (AON Hewitt)</h3>
     <div class="awards-grid">
       <div class="award-card">
         <div class="award-emoji">💎</div>
@@ -1203,12 +1209,12 @@
   <!-- CONTACT -->
   <section id="contact" role="region" aria-labelledby="contact-heading">
     <div class="contact-section">
-      <h2 id="contact-heading">🚀 I'm Actively Looking for Payroll Implementation Roles</h2>
-      <p>I'm seeking full-time opportunities in payroll implementation, compliance, and automation. If your team is building world-class payroll operations, let's connect!</p>
+      <h2 id="contact-heading">🚀 Let's Transform Your Payroll Operations</h2>
+      <p>Ready to drive implementation success? I'm here to help with compliance, automation, and strategic payroll solutions.</p>
       <div class="contact-links">
-        <a href="mailto:chetanpayroll@gmail.com" class="contact-link">✉️ Email Me</a>
-        <a href="tel:+918611949558" class="contact-link">📱 Call Me</a>
-        <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 Connect on LinkedIn</a>
+        <a href="mailto:chetanpayroll@gmail.com" class="contact-link">✉️ chetanpayroll@gmail.com</a>
+        <a href="tel:+918611949558" class="contact-link">📱 +91 8619495587</a>
+        <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 LinkedIn</a>
       </div>
     </div>
   </section>
@@ -1266,12 +1272,7 @@
     });
 
     document.getElementById('downloadPDF').addEventListener('click', () => {
-      const link = document.createElement('a');
-      link.href = 'Chetan-Sharma-Resume.pdf';
-      link.download = 'Chetan-Sharma-Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      window.print();
     });
 
     document.getElementById('downloadVCard').addEventListener('click', () => {
@@ -1307,25 +1308,6 @@ END:VCARD`;
           }
         }
       });
-    });
-
-    // Scroll reveal animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('section > div, .expertise-card, .award-card, .overview-card').forEach(el => {
-      observer.observe(el);
     });
 
     initTheme();
