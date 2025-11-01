@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!-- Enhanced with: 3D Three.js background, parallax scroll effects, micro-interactions, floating TOC, scroll-triggered reveals, and full accessibility support -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Payroll Automation Using Google Sheets & Apps Script - Real code examples and production-tested framework by Chetan Sharma">
+  <meta name="description" content="Payroll Automation Using Google Sheets & Apps Script - Real code examples demonstrating 13+ years of payroll implementation expertise by Chetan Sharma, seeking full-time opportunities">
   <meta name="keywords" content="payroll automation, Google Apps Script, Google Sheets, multi-country payroll">
   <meta name="author" content="Chetan Sharma">
   <meta name="theme-color" content="#0d47a1">
@@ -13,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <title>Payroll Automation with Google Sheets & Apps Script | Chetan Sharma</title>
+  <title>Payroll Automation Framework - Portfolio | Chetan Sharma - Seeking Opportunities</title>
 
   <style>
     * {
@@ -57,10 +58,40 @@
       line-height: 1.8;
       overflow-x: hidden;
       transition: all 0.3s ease;
+      position: relative;
     }
 
-    body::before {
-      content: '';
+    /* Skip to content link for accessibility */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      z-index: 200;
+      border-radius: 0 0 4px 0;
+    }
+
+    .skip-to-content:focus {
+      top: 0;
+    }
+
+    /* 3D Background Canvas */
+    #three-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Fallback gradient for reduced motion or no JS */
+    .gradient-fallback {
       position: fixed;
       top: 0;
       left: 0;
@@ -78,7 +109,24 @@
       50% { transform: translate(-50px, 50px); }
     }
 
-    /* NAVIGATION */
+    /* Reduce motion support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      #three-background {
+        display: none !important;
+      }
+      
+      .gradient-fallback {
+        display: block !important;
+      }
+    }
+
+    /* NAVIGATION with enhanced glassmorphism */
     nav {
       position: sticky;
       top: 0;
@@ -89,6 +137,11 @@
       z-index: 100;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -133,6 +186,77 @@
       display: flex;
       align-items: center;
       gap: 0.3rem;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .article-meta span:hover {
+      opacity: 1;
+    }
+
+    /* Floating TOC */
+    .floating-toc {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      z-index: 90;
+      max-width: 200px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .floating-toc.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .floating-toc {
+        background: rgba(26, 32, 44, 0.9);
+      }
+    }
+
+    .floating-toc h4 {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .floating-toc ul {
+      list-style: none;
+    }
+
+    .floating-toc li {
+      margin-bottom: 0.4rem;
+    }
+
+    .floating-toc a {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+      padding: 0.2rem 0;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+    }
+
+    .floating-toc a:hover {
+      color: var(--primary);
+      border-left-color: var(--primary);
+    }
+
+    .floating-toc a.active {
+      color: var(--primary);
+      border-left-color: var(--primary);
+      font-weight: 600;
     }
 
     /* MAIN CONTENT */
@@ -140,23 +264,34 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 4rem 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     .article-header {
       margin-bottom: 3rem;
       animation: slideInUp 0.6s ease-out;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    /* 3D Hero Title with parallax container */
+    .hero-title-container {
+      perspective: 1000px;
+      margin-bottom: 1rem;
     }
 
     .article-header h1 {
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 800;
       font-family: 'Poppins', sans-serif;
-      margin-bottom: 1rem;
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.2;
+      transition: transform 0.3s ease;
+      will-change: transform;
     }
 
     .article-header p {
@@ -164,6 +299,19 @@
       color: var(--text-muted);
       margin-bottom: 1.5rem;
       font-style: italic;
+      opacity: 0;
+      animation: slideInUp 0.6s ease-out 0.2s forwards;
+    }
+
+    /* Enhanced 3D card effects */
+    .author-info, .toc, .highlight-box, .cta-section, .about-author, .checklist {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+    }
+
+    .author-info:hover, .toc:hover, .highlight-box:hover, .about-author:hover, .checklist:hover {
+      transform: translateY(-4px) rotateX(2deg);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     }
 
     .author-info {
@@ -173,6 +321,8 @@
       padding: 1.5rem;
       border-radius: 8px;
       margin-bottom: 2rem;
+      opacity: 0;
+      animation: slideInUp 0.6s ease-out 0.3s forwards;
     }
 
     .author-info strong {
@@ -187,6 +337,8 @@
       padding: 2rem;
       border-radius: 16px;
       margin-bottom: 3rem;
+      opacity: 0;
+      animation: slideInUp 0.6s ease-out 0.4s forwards;
     }
 
     .toc h3 {
@@ -219,6 +371,7 @@
       color: var(--text);
       text-decoration: none;
       transition: all 0.3s ease;
+      display: inline-block;
     }
 
     .toc a:hover {
@@ -226,9 +379,20 @@
       transform: translateX(4px);
     }
 
-    /* ARTICLE CONTENT */
+    /* ARTICLE CONTENT with scroll reveals */
     .article-content {
-      animation: slideInUp 0.6s ease-out 0.2s both;
+      animation: slideInUp 0.6s ease-out 0.5s both;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .article-content h2 {
@@ -239,6 +403,23 @@
       color: var(--text);
       border-bottom: 3px solid var(--primary);
       padding-bottom: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--secondary);
+      transition: width 0.6s ease;
+    }
+
+    .article-content h2.active::after {
+      width: 100%;
     }
 
     .article-content h3 {
@@ -263,8 +444,14 @@
     .article-content li {
       margin-bottom: 0.75rem;
       color: var(--text-muted);
+      transition: transform 0.2s ease;
     }
 
+    .article-content li:hover {
+      transform: translateX(3px);
+    }
+
+    /* Enhanced code blocks with glow effect */
     .code-block {
       background: rgba(13, 71, 161, 0.05);
       border-left: 4px solid var(--primary);
@@ -275,6 +462,31 @@
       font-family: 'Courier New', monospace;
       font-size: 0.9rem;
       line-height: 1.5;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(13, 71, 161, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 8px;
+    }
+
+    .code-block:hover::before {
+      opacity: 1;
+    }
+
+    .code-block:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13, 71, 161, 0.2);
     }
 
     .code-block code {
@@ -287,6 +499,25 @@
       padding: 1.5rem;
       border-radius: 8px;
       margin: 2rem 0;
+      position: relative;
+    }
+
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(106, 27, 154, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 8px;
+    }
+
+    .highlight-box:hover::before {
+      opacity: 1;
     }
 
     .highlight-box strong {
@@ -326,6 +557,7 @@
       font-weight: 700;
     }
 
+    /* Enhanced CTA with 3D effect */
     .cta-section {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
@@ -334,6 +566,25 @@
       text-align: center;
       margin: 4rem 0;
       box-shadow: 0 15px 40px rgba(13, 71, 161, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .cta-section:hover::before {
+      opacity: 1;
     }
 
     .cta-section h3 {
@@ -357,6 +608,26 @@
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(13, 71, 161, 0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    .cta-btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     .cta-btn:hover {
@@ -391,6 +662,7 @@
       font-weight: 600;
       margin: 0 0.25rem;
       transition: all 0.3s ease;
+      display: inline-block;
     }
 
     .about-author a:hover {
@@ -406,6 +678,12 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .floating-toc {
+        display: none;
       }
     }
 
@@ -432,12 +710,71 @@
         margin-top: 2rem;
       }
     }
+
+    /* Loading indicator */
+    .loading-indicator {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 200;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .loading-indicator.hidden {
+      opacity: 0;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(13, 71, 161, 0.1);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Skip to content for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+  <!-- 3D Background Canvas -->
+  <canvas id="three-background" role="presentation" aria-hidden="true"></canvas>
+  
+  <!-- Fallback gradient -->
+  <div class="gradient-fallback" aria-hidden="true"></div>
+
+  <!-- Loading indicator -->
+  <div class="loading-indicator" aria-live="polite" aria-label="Loading page content">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Floating TOC -->
+  <nav class="floating-toc" role="navigation" aria-label="Quick navigation">
+    <h4>Quick Jump</h4>
+    <ul>
+      <li><a href="#problem" data-section="problem">The Problem</a></li>
+      <li><a href="#why" data-section="why">Why Google Sheets?</a></li>
+      <li><a href="#framework" data-section="framework">Framework</a></li>
+      <li><a href="#step1" data-section="step1">Data Validation</a></li>
+      <li><a href="#step2" data-section="step2">Automation</a></li>
+      <li><a href="#codeexamples" data-section="codeexamples">Code Examples</a></li>
+      <li><a href="#templates" data-section="templates">Templates</a></li>
+      <li><a href="#mistakes" data-section="mistakes">Common Mistakes</a></li>
+      <li><a href="#nextsteps" data-section="nextsteps">Next Steps</a></li>
+    </ul>
+  </nav>
+
   <!-- NAVIGATION -->
-  <nav role="navigation">
+  <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="back-link">← Back to Profile</a>
       <div class="article-meta">
@@ -450,114 +787,117 @@
 
   <!-- MAIN CONTENT -->
   <div class="container">
-    <!-- HEADER -->
-    <div class="article-header">
-      <h1>Payroll Automation Using Google Sheets & Apps Script: A Complete Framework</h1>
-      <p>How I automated 122 payroll cycles annually with 99.8% accuracy — and how you can too. Real code, real results.</p>
-      
-      <div class="author-info">
-        <strong>✍️ By Chetan Sharma</strong> | Global Payroll Implementation Consultant with 13+ years automating multi-country payroll operations. I've processed 1,500+ payroll cycles across 25+ countries using this exact framework.
+    <main id="main-content">
+      <!-- HEADER -->
+      <div class="article-header">
+        <div class="hero-title-container">
+          <h1>Payroll Automation Using Google Sheets & Apps Script: A Complete Framework</h1>
+        </div>
+        <p>How I automated 122 payroll cycles annually with 99.8% accuracy. Real code examples demonstrating the automation expertise I bring to payroll implementation roles.</p>
+        
+        <div class="author-info">
+          <strong>✍️ By Chetan Sharma</strong> | Global Payroll Implementation Consultant with 13+ years automating multi-country payroll operations. I've processed 1,500+ payroll cycles across 25+ countries using this exact framework. <strong>Currently seeking full-time opportunities to bring this expertise to your organization.</strong>
+        </div>
       </div>
-    </div>
 
-    <!-- TABLE OF CONTENTS -->
-    <div class="toc">
-      <h3>📑 Quick Navigation</h3>
-      <ol>
-        <li><a href="#problem">The Problem: Manual Payroll = Errors</a></li>
-        <li><a href="#why">Why Google Sheets + Apps Script?</a></li>
-        <li><a href="#framework">The Automation Framework</a></li>
-        <li><a href="#step1">Step 1: Data Validation Layer</a></li>
-        <li><a href="#step2">Step 2: Build the Automation Engine</a></li>
-        <li><a href="#codeexamples">Real Code Examples You Can Use</a></li>
-        <li><a href="#templates">Downloadable Templates</a></li>
-        <li><a href="#mistakes">Common Mistakes to Avoid</a></li>
-        <li><a href="#nextsteps">Next Steps</a></li>
-      </ol>
-    </div>
+      <!-- TABLE OF CONTENTS -->
+      <div class="toc">
+        <h3>📑 Quick Navigation</h3>
+        <ol>
+          <li><a href="#problem">The Problem: Manual Payroll = Errors</a></li>
+          <li><a href="#why">Why Google Sheets + Apps Script?</a></li>
+          <li><a href="#framework">The Automation Framework</a></li>
+          <li><a href="#step1">Step 1: Data Validation Layer</a></li>
+          <li><a href="#step2">Step 2: Build the Automation Engine</a></li>
+          <li><a href="#codeexamples">Real Code Examples You Can Use</a></li>
+          <li><a href="#templates">Downloadable Templates</a></li>
+          <li><a href="#mistakes">Common Mistakes to Avoid</a></li>
+          <li><a href="#nextsteps">Next Steps</a></li>
+        </ol>
+      </div>
 
-    <!-- ARTICLE CONTENT -->
-    <div class="article-content">
-      
-      <h2 id="problem">The Problem: Manual Payroll = Errors</h2>
-      <p>Here's what I see in most organizations:</p>
-      
-      <h3>Manual payroll processing looks like this:</h3>
-      <ul>
-        <li>✋ Payroll specialist exports data from HRIS into Excel</li>
-        <li>✋ Copy-paste data across 5 different spreadsheets</li>
-        <li>✋ Manually calculate deductions, taxes, and variations</li>
-        <li>✋ Cross-check numbers 3-4 times (still find errors)</li>
-        <li>✋ Spend 40+ hours per payroll cycle</li>
-        <li>✋ 2-5% error rate (missed deductions, duplicate entries, wrong tax calculations)</li>
-      </ul>
-
-      <p>In a multi-country operation? That error rate multiplies by 25+.</p>
-
-      <p>I was processing payrolls the manual way too. Until I built an automation framework that cut my processing time by <strong>85%</strong> and reduced errors to <strong>0.2% (that's 99.8% accuracy)</strong>.</p>
-
-      <p>This article shows you exactly how.</p>
-
-      <!-- SECTION 2 -->
-      <h2 id="why">Why Google Sheets + Google Apps Script? (Not Just Excel)</h2>
-      
-      <h3>The Honest Truth</h3>
-      <p>You might be thinking: <em>"Why not just use Excel with VBA macros?"</em></p>
-
-      <p>Fair question. Here's why Google Sheets + Apps Script wins:</p>
-
-      <div class="highlight-box">
-        <strong>Google Sheets + Apps Script advantages:</strong>
-        <ul>
-          <li>✅ Setup Time: 2-4 hours (vs Excel: 2-3 days)</li>
-          <li>✅ Cloud Sync (Real-time): Native integration</li>
-          <li>✅ Email Alerts & Automations: Built-in, 5 lines of code</li>
-          <li>✅ Multi-user Access: Seamless collaboration (no file locking)</li>
-          <li>✅ API Integration: Simple fetch() function</li>
-          <li>✅ Mobile Access: Full access from anywhere</li>
-          <li>✅ Cost: Free (if you have Google Workspace)</li>
-          <li>✅ Learning Curve: JavaScript is modern & straightforward</li>
+      <!-- ARTICLE CONTENT -->
+      <article class="article-content">
+        
+        <h2 id="problem" class="reveal">The Problem: Manual Payroll = Errors</h2>
+        <p class="reveal">Here's what I see in most organizations:</p>
+        
+        <h3 class="reveal">Manual payroll processing looks like this:</h3>
+        <ul class="reveal">
+          <li>✋ Payroll specialist exports data from HRIS into Excel</li>
+          <li>✋ Copy-paste data across 5 different spreadsheets</li>
+          <li>✋ Manually calculate deductions, taxes, and variations</li>
+          <li>✋ Cross-check numbers 3-4 times (still find errors)</li>
+          <li>✋ Spend 40+ hours per payroll cycle</li>
+          <li>✋ 2-5% error rate (missed deductions, duplicate entries, wrong tax calculations)</li>
         </ul>
-      </div>
 
-      <div class="highlight-box">
-        <strong>💡 Pro Tip:</strong> If your organization already uses Google Workspace (like Gmail with your company domain), you already have everything you need. Zero additional cost.
-      </div>
+        <p class="reveal">In a multi-country operation? That error rate multiplies by 25+.</p>
 
-      <!-- SECTION 3 -->
-      <h2 id="framework">The Automation Framework (Overview)</h2>
-      
-      <p>Here's the 4-layer automation system I use for processing 122 payrolls annually:</p>
+        <p class="reveal">I was processing payrolls the manual way too. Until I built an automation framework that cut my processing time by <strong>85%</strong> and reduced errors to <strong>0.2% (that's 99.8% accuracy)</strong>.</p>
 
-      <div style="background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent); margin: 2rem 0;">
-        <p><strong>🔍 Layer 1: Data Validation</strong><br>Catch errors BEFORE they enter the system. Data validation rules, checksum verifications, outlier detection.</p>
-        <p><strong>⚙️ Layer 2: Automation Engine</strong><br>Google Apps Script runs calculations automatically. No manual copy-paste. No formula errors.</p>
-        <p><strong>📊 Layer 3: Quality Assurance</strong><br>Automated reconciliation checks. Variance analysis. Flag anything above tolerance threshold.</p>
-        <p><strong>📧 Layer 4: Alerts & Reporting</strong><br>Real-time notifications. Automated email reports. Audit trails for compliance.</p>
-      </div>
+        <p class="reveal">This article shows you exactly how.</p>
 
-      <p><strong>Result?</strong> Process 122 payrolls in 15-20 hours instead of 150+ hours.</p>
+        <!-- SECTION 2 -->
+        <h2 id="why" class="reveal">Why Google Sheets + Google Apps Script? (Not Just Excel)</h2>
+        
+        <h3 class="reveal">The Honest Truth</h3>
+        <p class="reveal">You might be thinking: <em>"Why not just use Excel with VBA macros?"</em></p>
 
-      <!-- SECTION 4 -->
-      <h2 id="step1">Step 1: Build a Data Validation Layer (The Foundation)</h2>
-      
-      <h3>Why This Matters</h3>
-      <p><strong>Garbage in = Garbage out.</strong> If your input data is dirty, your automation amplifies those errors across 25 countries.</p>
+        <p class="reveal">Fair question. Here's why Google Sheets + Apps Script wins:</p>
 
-      <p>The data validation layer catches problems at the source:</p>
-      <ul>
-        <li>✅ Missing employee IDs (catches duplicate entries later)</li>
-        <li>✅ Salary values outside normal range (e.g., typos like 500,000 instead of 50,000)</li>
-        <li>✅ Invalid date formats (critical for compliance dates)</li>
-        <li>✅ Negative numbers where there shouldn't be</li>
-        <li>✅ Blank required fields</li>
-      </ul>
+        <div class="highlight-box reveal">
+          <strong>Google Sheets + Apps Script advantages:</strong>
+          <ul>
+            <li>✅ Setup Time: 2-4 hours (vs Excel: 2-3 days)</li>
+            <li>✅ Cloud Sync (Real-time): Native integration</li>
+            <li>✅ Email Alerts & Automations: Built-in, 5 lines of code</li>
+            <li>✅ Multi-user Access: Seamless collaboration (no file locking)</li>
+            <li>✅ API Integration: Simple fetch() function</li>
+            <li>✅ Mobile Access: Full access from anywhere</li>
+            <li>✅ Cost: Free (if you have Google Workspace)</li>
+            <li>✅ Learning Curve: JavaScript is modern & straightforward</li>
+          </ul>
+        </div>
 
-      <h3>How to Set Up Data Validation in Google Sheets</h3>
-      <p><strong>Example: Validating Employee ID column</strong></p>
+        <div class="highlight-box reveal">
+          <strong>💡 Pro Tip:</strong> If your organization already uses Google Workspace (like Gmail with your company domain), you already have everything you need. Zero additional cost.
+        </div>
 
-      <div class="code-block">
-        <code>// In Google Sheets:
+        <!-- SECTION 3 -->
+        <h2 id="framework" class="reveal">The Automation Framework (Overview)</h2>
+        
+        <p class="reveal">Here's the 4-layer automation system I use for processing 122 payrolls annually:</p>
+
+        <div style="background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent); margin: 2rem 0;" class="reveal">
+          <p><strong>🔍 Layer 1: Data Validation</strong><br>Catch errors BEFORE they enter the system. Data validation rules, checksum verifications, outlier detection.</p>
+          <p><strong>⚙️ Layer 2: Automation Engine</strong><br>Google Apps Script runs calculations automatically. No manual copy-paste. No formula errors.</p>
+          <p><strong>📊 Layer 3: Quality Assurance</strong><br>Automated reconciliation checks. Variance analysis. Flag anything above tolerance threshold.</p>
+          <p><strong>📧 Layer 4: Alerts & Reporting</strong><br>Real-time notifications. Automated email reports. Audit trails for compliance.</p>
+        </div>
+
+        <p class="reveal"><strong>Result?</strong> Process 122 payrolls in 15-20 hours instead of 150+ hours.</p>
+
+        <!-- SECTION 4 -->
+        <h2 id="step1" class="reveal">Step 1: Build a Data Validation Layer (The Foundation)</h2>
+        
+        <h3 class="reveal">Why This Matters</h3>
+        <p class="reveal"><strong>Garbage in = Garbage out.</strong> If your input data is dirty, your automation amplifies those errors across 25 countries.</p>
+
+        <p class="reveal">The data validation layer catches problems at the source:</p>
+        <ul class="reveal">
+          <li>✅ Missing employee IDs (catches duplicate entries later)</li>
+          <li>✅ Salary values outside normal range (e.g., typos like 500,000 instead of 50,000)</li>
+          <li>✅ Invalid date formats (critical for compliance dates)</li>
+          <li>✅ Negative numbers where there shouldn't be</li>
+          <li>✅ Blank required fields</li>
+        </ul>
+
+        <h3 class="reveal">How to Set Up Data Validation in Google Sheets</h3>
+        <p class="reveal"><strong>Example: Validating Employee ID column</strong></p>
+
+        <div class="code-block reveal">
+          <code>// In Google Sheets:
 // 1. Select column A (Employee IDs)
 // 2. Go to Data → Data Validation
 // 3. Set rule: "Number" → "Greater than" → 0
@@ -568,13 +908,13 @@
 // ❌ Blank cells
 // ❌ Text in number field
 // ❌ Negative IDs</code>
-      </div>
+        </div>
 
-      <h3>Advanced: Create a Validation Dashboard</h3>
-      <p>I use a separate "Data Quality" sheet that runs automatic checks:</p>
+        <h3 class="reveal">Advanced: Create a Validation Dashboard</h3>
+        <p class="reveal">I use a separate "Data Quality" sheet that runs automatic checks:</p>
 
-      <div class="code-block">
-        <code>function validatePayrollData() {
+        <div class="code-block reveal">
+          <code>function validatePayrollData() {
   const sheet = SpreadsheetApp.getActive().getSheetByName("Raw Data");
   const range = sheet.getDataRange();
   const values = range.getValues();
@@ -618,42 +958,42 @@
     sendAlert(`✅ Payroll validation passed!`);
   }
 }</code>
-      </div>
+        </div>
 
-      <div class="highlight-box">
-        <strong>💡 Implementation Tip:</strong> Run this validation script 2-3 days BEFORE your payroll deadline. This gives your team time to fix errors before processing.
-      </div>
+        <div class="highlight-box reveal">
+          <strong>💡 Implementation Tip:</strong> Run this validation script 2-3 days BEFORE your payroll deadline. This gives your team time to fix errors before processing.
+        </div>
 
-      <div class="checklist">
-        <h4>✅ Data Validation Checklist</h4>
-        <ul>
-          <li>Set up Google Sheets data validation rules for all columns</li>
-          <li>Create a "Data Quality" sheet with automatic error detection</li>
-          <li>Test validation with intentionally bad data</li>
-          <li>Set alerts to notify payroll team of validation failures</li>
-          <li>Document all validation rules for your team</li>
+        <div class="checklist reveal">
+          <h4>✅ Data Validation Checklist</h4>
+          <ul>
+            <li>Set up Google Sheets data validation rules for all columns</li>
+            <li>Create a "Data Quality" sheet with automatic error detection</li>
+            <li>Test validation with intentionally bad data</li>
+            <li>Set alerts to notify payroll team of validation failures</li>
+            <li>Document all validation rules for your team</li>
+          </ul>
+        </div>
+
+        <!-- SECTION 5 -->
+        <h2 id="step2" class="reveal">Step 2: Build the Automation Engine (The Power)</h2>
+        
+        <h3 class="reveal">What the Automation Engine Does</h3>
+        <p class="reveal">Once data is clean, the automation engine calculates everything:</p>
+        <ul class="reveal">
+          <li>Gross-to-net calculations</li>
+          <li>Tax calculations (per country rules)</li>
+          <li>Deduction processing</li>
+          <li>Multi-currency conversions</li>
+          <li>Variance analysis (flag unusual amounts)</li>
+          <li>Compliance checks (minimum wage, working hours)</li>
         </ul>
-      </div>
 
-      <!-- SECTION 5 -->
-      <h2 id="step2">Step 2: Build the Automation Engine (The Power)</h2>
-      
-      <h3>What the Automation Engine Does</h3>
-      <p>Once data is clean, the automation engine calculates everything:</p>
-      <ul>
-        <li>Gross-to-net calculations</li>
-        <li>Tax calculations (per country rules)</li>
-        <li>Deduction processing</li>
-        <li>Multi-currency conversions</li>
-        <li>Variance analysis (flag unusual amounts)</li>
-        <li>Compliance checks (minimum wage, working hours)</li>
-      </ul>
+        <h3 class="reveal">Example: Automated Gross-to-Net Calculator</h3>
+        <p class="reveal">This is the core engine. Here's a simplified version:</p>
 
-      <h3>Example: Automated Gross-to-Net Calculator</h3>
-      <p>This is the core engine. Here's a simplified version:</p>
-
-      <div class="code-block">
-        <code>function calculateGrossToNet(employeeData) {
+        <div class="code-block reveal">
+          <code>function calculateGrossToNet(employeeData) {
   // employeeData = {
   //   empID: 12345,
   //   salary: 50000,
@@ -707,13 +1047,13 @@ const payroll = calculateGrossToNet(emp);
 Logger.log(payroll);
 // Output: { gross: 55000, tax: 8250, socialContribution: 6600,
 // deductions: 2000, totalDeductions: 16850, net: 38150 }</code>
-      </div>
+        </div>
 
-      <h3>Advanced: Trigger Automation on Schedule</h3>
-      <p>Don't process payroll manually. Let it run on a schedule:</p>
+        <h3 class="reveal">Advanced: Trigger Automation on Schedule</h3>
+        <p class="reveal">Don't process payroll manually. Let it run on a schedule:</p>
 
-      <div class="code-block">
-        <code>// In Apps Script Editor:
+        <div class="code-block reveal">
+          <code>// In Apps Script Editor:
 // 1. Click Triggers (clock icon)
 // 2. Create new trigger
 // 3. Choose: validatePayrollData
@@ -722,15 +1062,15 @@ Logger.log(payroll);
 
 // This runs automatically on payroll day!
 // Your team wakes up to processed payroll.</code>
-      </div>
+        </div>
 
-      <!-- SECTION 6 -->
-      <h2 id="codeexamples">Real Code Examples You Can Copy-Paste</h2>
+        <!-- SECTION 6 -->
+        <h2 id="codeexamples" class="reveal">Real Code Examples You Can Copy-Paste</h2>
 
-      <h3>Example 1: Automated Email Alert for Payroll Errors</h3>
+        <h3 class="reveal">Example 1: Automated Email Alert for Payroll Errors</h3>
 
-      <div class="code-block">
-        <code>function sendPayrollAlert(subject, message) {
+        <div class="code-block reveal">
+          <code>function sendPayrollAlert(subject, message) {
   const email = "chetansharma@gmppayroll.com";
   GmailApp.sendEmail(
     email,
@@ -753,12 +1093,12 @@ sendPayrollAlert(
   "⚠️ Payroll Validation Failed",
   "5 employees have missing tax IDs. Please update and reprocess."
 );</code>
-      </div>
+        </div>
 
-      <h3>Example 2: Automated Variance Detection (Flag Unusual Payments)</h3>
+        <h3 class="reveal">Example 2: Automated Variance Detection (Flag Unusual Payments)</h3>
 
-      <div class="code-block">
-        <code>function detectPayrollVariances() {
+        <div class="code-block reveal">
+          <code>function detectPayrollVariances() {
   const sheet = SpreadsheetApp.getActive().getSheetByName("Payroll");
   const values = sheet.getDataRange().getValues();
   let variances = [];
@@ -787,12 +1127,12 @@ sendPayrollAlert(
     sendPayrollAlert("⚠️ Pay Variance Alert", message);
   }
 }</code>
-      </div>
+        </div>
 
-      <h3>Example 3: Auto-Generate Payslips as PDFs</h3>
+        <h3 class="reveal">Example 3: Auto-Generate Payslips as PDFs</h3>
 
-      <div class="code-block">
-        <code>function generatePayslips() {
+        <div class="code-block reveal">
+          <code>function generatePayslips() {
   const sheet = SpreadsheetApp.getActive().getSheetByName("Payroll");
   const values = sheet.getDataRange().getValues();
 
@@ -822,46 +1162,46 @@ sendPayrollAlert(
 
   Logger.log(`✅ Payslips sent to ${values.length - 1} employees`);
 }</code>
-      </div>
+        </div>
 
-      <div class="highlight-box">
-        <strong>💡 Tip:</strong> These code examples are simplified. For production, add error handling, logging, and validation. Copy them into Google Apps Script (Tools → Script Editor) and customize for your needs.
-      </div>
+        <div class="highlight-box reveal">
+          <strong>💡 Tip:</strong> These code examples are simplified. For production, add error handling, logging, and validation. Copy them into Google Apps Script (Tools → Script Editor) and customize for your needs.
+        </div>
 
-      <!-- SECTION 7 -->
-      <h2 id="templates">Downloadable Templates & Checklists</h2>
+        <!-- SECTION 7 -->
+        <h2 id="templates" class="reveal">Implementation Resources & Framework Examples</h2>
 
-      <p>I've created ready-to-use templates that save 20+ hours of setup:</p>
+        <p class="reveal">Below are the types of templates and frameworks I've built and can implement in your organization:</p>
 
-      <div style="background: rgba(46, 125, 50, 0.08); border: 1px solid rgba(46, 125, 50, 0.3); padding: 2rem; border-radius: 12px; margin: 2rem 0;">
-        <h3 style="color: var(--success); margin-bottom: 1.5rem;">📊 Template 1: Payroll Data Input Sheet</h3>
-        <p>Pre-formatted with data validation rules, formulas, and error checking. Just plug in your employee data.</p>
-        <p><strong>Download:</strong> Payroll Input Template (Google Sheets)</p>
+        <div style="background: rgba(46, 125, 50, 0.08); border: 1px solid rgba(46, 125, 50, 0.3); padding: 2rem; border-radius: 12px; margin: 2rem 0;" class="reveal">
+          <h3 style="color: var(--success); margin-bottom: 1.5rem;">📊 Framework 1: Payroll Data Input Sheet</h3>
+          <p>Pre-formatted with data validation rules, formulas, and error checking. This type of framework saves 20+ hours of setup time.</p>
+          <p><strong>Implementation Example:</strong> Payroll Input Template (Google Sheets)</p>
 
-        <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem;">⚙️ Template 2: Google Apps Script Automation Kit</h3>
-        <p>Complete script with 50+ functions pre-built. Copy-paste into your Script Editor. Customize country tax rates.</p>
-        <p><strong>Download:</strong> GAS Automation Kit (Complete Code)</p>
+          <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem;">⚙️ Framework 2: Google Apps Script Automation Engine</h3>
+          <p>Complete automation script with 50+ functions. I can customize and implement similar systems with country-specific tax rules.</p>
+          <p><strong>Implementation Example:</strong> GAS Automation Engine (Complete Code)</p>
 
-        <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem;">✅ Template 3: Quality Assurance Checklist</h3>
-        <p>10-point pre-payroll validation checklist. Use this before processing every payroll cycle.</p>
-        <p><strong>Download:</strong> QA Checklist (PDF)</p>
+          <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem;">✅ Framework 3: Quality Assurance System</h3>
+          <p>10-point pre-payroll validation system that I implement for every payroll cycle to ensure accuracy.</p>
+          <p><strong>Implementation Example:</strong> QA Framework Documentation</p>
 
-        <p style="margin-top: 1.5rem; font-size: 0.9rem;"><strong>Note:</strong> All templates are free and can be customized for your organization. No signup required.</p>
-      </div>
+          <p style="margin-top: 1.5rem; font-size: 0.9rem;"><strong>Note:</strong> These examples demonstrate the frameworks I can implement in your organization. I'm seeking full-time roles where I can build and maintain these systems.</p>
+        </div>
 
-      <!-- SECTION 8 -->
-      <h2 id="mistakes">Common Mistakes to Avoid (Learn From My Experience)</h2>
+        <!-- SECTION 8 -->
+        <h2 id="mistakes" class="reveal">Common Mistakes to Avoid (Learn From My Experience)</h2>
 
-      <h3>❌ Mistake 1: Automating Before Validating</h3>
-      <p><strong>What happens:</strong> You automate the entire payroll process without data validation. A typo in one cell gets multiplied across 100 employees.</p>
-      <p><strong>Solution:</strong> Build validation FIRST. Automation SECOND.</p>
+        <h3 class="reveal">❌ Mistake 1: Automating Before Validating</h3>
+        <p class="reveal"><strong>What happens:</strong> You automate the entire payroll process without data validation. A typo in one cell gets multiplied across 100 employees.</p>
+        <p class="reveal"><strong>Solution:</strong> Build validation FIRST. Automation SECOND.</p>
 
-      <h3>❌ Mistake 2: Hardcoding Tax Rates</h3>
-      <p><strong>What happens:</strong> Tax rates change. You forget to update the code. Suddenly, 500 employees are taxed at last year's rate.</p>
-      <p><strong>Solution:</strong> Store tax rates in a separate "Config" sheet. Update the sheet once, code uses it automatically.</p>
+        <h3 class="reveal">❌ Mistake 2: Hardcoding Tax Rates</h3>
+        <p class="reveal"><strong>What happens:</strong> Tax rates change. You forget to update the code. Suddenly, 500 employees are taxed at last year's rate.</p>
+        <p class="reveal"><strong>Solution:</strong> Store tax rates in a separate "Config" sheet. Update the sheet once, code uses it automatically.</p>
 
-      <div class="code-block">
-        <code>// WRONG: Hardcoded tax rate
+        <div class="code-block reveal">
+          <code>// WRONG: Hardcoded tax rate
 const indiaTaxRate = 0.15;
 
 // RIGHT: Load from Config sheet
@@ -874,18 +1214,18 @@ function getTaxRate(country) {
     }
   }
 }</code>
-      </div>
+        </div>
 
-      <h3>❌ Mistake 3: Not Testing with Historical Data</h3>
-      <p><strong>What happens:</strong> You build automation, run it on 500 employees, find errors too late.</p>
-      <p><strong>Solution:</strong> Test with historical payroll data from 3-4 previous months. Verify calculations match manual payroll exactly.</p>
+        <h3 class="reveal">❌ Mistake 3: Not Testing with Historical Data</h3>
+        <p class="reveal"><strong>What happens:</strong> You build automation, run it on 500 employees, find errors too late.</p>
+        <p class="reveal"><strong>Solution:</strong> Test with historical payroll data from 3-4 previous months. Verify calculations match manual payroll exactly.</p>
 
-      <h3>❌ Mistake 4: Forgetting Audit Trails</h3>
-      <p><strong>What happens:</strong> A payment is wrong. You can't trace who changed it, when, and why. Compliance nightmare.</p>
-      <p><strong>Solution:</strong> Log every change. Track timestamp, user, old value, new value.</p>
+        <h3 class="reveal">❌ Mistake 4: Forgetting Audit Trails</h3>
+        <p class="reveal"><strong>What happens:</strong> A payment is wrong. You can't trace who changed it, when, and why. Compliance nightmare.</p>
+        <p class="reveal"><strong>Solution:</strong> Log every change. Track timestamp, user, old value, new value.</p>
 
-      <div class="code-block">
-        <code>function logPayrollChange(empID, field, oldValue, newValue) {
+        <div class="code-block reveal">
+          <code>function logPayrollChange(empID, field, oldValue, newValue) {
   const auditSheet = SpreadsheetApp.getActive().getSheetByName("Audit Log");
   auditSheet.appendRow([
     new Date(),
@@ -896,111 +1236,357 @@ function getTaxRate(country) {
     newValue
   ]);
 }</code>
-      </div>
+        </div>
 
-      <h3>❌ Mistake 5: Over-Automating Too Fast</h3>
-      <p><strong>What happens:</strong> You automate every calculation. But your team doesn't understand it. No one can troubleshoot when something breaks.</p>
-      <p><strong>Solution:</strong> Automate in phases. Start with one workflow. Master it. Then add more.</p>
+        <h3 class="reveal">❌ Mistake 5: Over-Automating Too Fast</h3>
+        <p class="reveal"><strong>What happens:</strong> You automate every calculation. But your team doesn't understand it. No one can troubleshoot when something breaks.</p>
+        <p class="reveal"><strong>Solution:</strong> Automate in phases. Start with one workflow. Master it. Then add more.</p>
 
-      <div class="highlight-box">
-        <strong>📌 Golden Rule:</strong> Don't automate what you don't fully understand. If you can't manually calculate payroll, don't automate it.
-      </div>
+        <div class="highlight-box reveal">
+          <strong>📌 Golden Rule:</strong> Don't automate what you don't fully understand. If you can't manually calculate payroll, don't automate it.
+        </div>
 
-      <!-- SECTION 9 -->
-      <h2 id="nextsteps">Next Steps: From Theory to Implementation</h2>
+        <!-- SECTION 9 -->
+        <h2 id="nextsteps" class="reveal">My Implementation Approach: 4-Week Rollout</h2>
 
-      <div style="background: rgba(13, 71, 161, 0.08); padding: 2rem; border-radius: 12px; margin: 2rem 0;">
-        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Week 1: Foundation</h3>
-        <ul>
-          <li>☐ Set up a Google Sheet with your employee data</li>
-          <li>☐ Add data validation rules for each column</li>
-          <li>☐ Create a "Data Quality" sheet with error detection script</li>
-          <li>☐ Test validation with 10 sample employees</li>
-        </ul>
+        <p class="reveal">When implementing this framework in an organization, I follow a structured 4-week approach:</p>
 
-        <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 2: Automation Engine</h3>
-        <ul>
-          <li>☐ Copy the gross-to-net calculation code from this article</li>
-          <li>☐ Customize tax rates for your countries</li>
-          <li>☐ Test calculations against manual payroll (must be 100% identical)</li>
-          <li>☐ Set up time-based trigger for automatic processing</li>
-        </ul>
+        <div style="background: rgba(13, 71, 161, 0.08); padding: 2rem; border-radius: 12px; margin: 2rem 0;" class="reveal">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Week 1: Foundation & Assessment</h3>
+          <ul>
+            <li>☐ Audit existing payroll data and identify data quality issues</li>
+            <li>☐ Set up Google Sheets infrastructure with validation rules</li>
+            <li>☐ Create "Data Quality" dashboard with automated error detection</li>
+            <li>☐ Run pilot test with 10 sample employee records</li>
+          </ul>
 
-        <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 3: Quality Assurance</h3>
-        <ul>
-          <li>☐ Build variance detection script</li>
-          <li>☐ Set up email alerts for payroll issues</li>
-          <li>☐ Create audit log sheet</li>
-          <li>☐ Test entire workflow with 100 employees</li>
-        </ul>
+          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 2: Automation Engine Development</h3>
+          <ul>
+            <li>☐ Build gross-to-net calculation engine</li>
+            <li>☐ Configure country-specific tax rules and compliance requirements</li>
+            <li>☐ Test calculations against historical payroll (achieve 100% accuracy)</li>
+            <li>☐ Set up automated triggers and scheduling</li>
+          </ul>
 
-        <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 4: Go Live</h3>
-        <ul>
-          <li>☐ Process payroll for full employee base (with team monitoring)</li>
-          <li>☐ Compare automated vs. manual payroll (reconcile 100%)</li>
-          <li>☐ Fix any discrepancies</li>
-          <li>☐ Train payroll team on new system</li>
-        </ul>
-      </div>
+          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 3: Quality Assurance & Testing</h3>
+          <ul>
+            <li>☐ Implement variance detection and alert systems</li>
+            <li>☐ Configure email notifications for payroll issues</li>
+            <li>☐ Build audit log and compliance tracking</li>
+            <li>☐ Run full workflow test with 100+ employees</li>
+          </ul>
 
-      <div class="highlight-box">
-        <strong>💪 Reality Check:</strong> Implementation takes 4 weeks. But you save 130+ hours annually. ROI: Massive.
-      </div>
+          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 4: Go-Live & Training</h3>
+          <ul>
+            <li>☐ Process first automated payroll cycle with team oversight</li>
+            <li>☐ Reconcile automated vs. manual results (100% accuracy target)</li>
+            <li>☐ Document any discrepancies and refine system</li>
+            <li>☐ Train payroll team on new automated workflow</li>
+          </ul>
+        </div>
 
-      <!-- SECTION 10 -->
-      <h2>Ready to Automate Your Payroll?</h2>
+        <div class="highlight-box reveal">
+          <strong>💪 Expected Results:</strong> 4-week implementation delivers 85% time savings and 99.8% accuracy. Total time investment: ~160 hours. Annual time saved: 130+ hours. ROI achieved in first quarter.
+        </div>
 
-      <p>You have two options:</p>
+        <!-- SECTION 10 -->
+        <h2 class="reveal">Want to Implement This in Your Organization?</h2>
 
-      <div style="background: rgba(255, 255, 255, 0.2); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
-        <p><strong>Option 1:</strong> Build this yourself using this guide (4 weeks, some learning curve)</p>
-        <p style="margin-top: 1rem;"><strong>Option 2:</strong> Let me help you implement it (I'm actively looking for payroll implementation roles where I can apply this expertise)</p>
-      </div>
+        <p class="reveal">This framework has helped me deliver massive results:</p>
 
-      <p>If you're managing multi-country payroll and struggling with manual processing, let's connect.</p>
+        <div style="background: rgba(255, 255, 255, 0.2); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;" class="reveal">
+          <p><strong>✅ 85% reduction in payroll processing time</strong></p>
+          <p style="margin-top: 0.5rem;"><strong>✅ 99.8% accuracy across 1,500+ payroll cycles</strong></p>
+          <p style="margin-top: 0.5rem;"><strong>✅ Successfully implemented across 25+ countries</strong></p>
+          <p style="margin-top: 1rem; font-style: italic;">I'm actively seeking full-time payroll implementation roles where I can bring this expertise to your organization.</p>
+        </div>
 
-      <!-- CTA -->
-      <div class="cta-section">
-        <h3>🚀 I'm Actively Looking for Payroll Implementation Roles</h3>
-        <p>I'm seeking full-time opportunities to help organizations like yours build world-class payroll operations. Let's connect!</p>
-        <a href="index.html#contact" class="cta-btn">View My Full Profile</a>
-      </div>
+        <p class="reveal">If your organization needs someone who can build and scale automated payroll operations, I'd love to discuss how I can contribute to your team.</p>
 
-      <!-- BOTTOM LINE -->
-      <h2>The Bottom Line</h2>
+        <!-- CTA -->
+        <div class="cta-section reveal">
+          <h3>💼 Seeking Full-Time Payroll Implementation Opportunities</h3>
+          <p>I'm looking to join an organization where I can apply this automation expertise to transform payroll operations. If you're hiring for payroll implementation, automation, or multi-country payroll roles, I'd love to connect.</p>
+          <a href="index.html#contact" class="cta-btn">View My Full Profile & Contact</a>
+        </div>
 
-      <p>Manual payroll is expensive. It wastes 100+ hours yearly. It introduces errors. It creates compliance risk.</p>
+        <!-- BOTTOM LINE -->
+        <h2 class="reveal">The Bottom Line</h2>
 
-      <p>Automation changes that. <strong>Google Sheets + Apps Script is powerful enough to process enterprise payroll at scale.</strong> And it's simple enough for any payroll team to understand and maintain.</p>
+        <p class="reveal">Manual payroll is expensive. It wastes 100+ hours yearly. It introduces errors. It creates compliance risk.</p>
 
-      <p>The framework I've shared here is real. I've used it to process 1,500+ payroll cycles with 99.8% accuracy. Now it's your turn.</p>
+        <p class="reveal">Automation changes that. <strong>Google Sheets + Apps Script is powerful enough to process enterprise payroll at scale.</strong> And it's simple enough for any payroll team to understand and maintain.</p>
 
-      <p><strong>Start with data validation. Build from there. Don't skip steps.</strong></p>
+        <p class="reveal">The framework I've shared here is real. I've used it to process 1,500+ payroll cycles with 99.8% accuracy. This article demonstrates the approach I bring to payroll implementation roles.</p>
 
-      <p>Questions? Have a complex payroll setup? Let's connect. That's exactly what I do.</p>
+        <p class="reveal"><strong>If your organization needs someone who can build scalable payroll automation systems, I'm actively seeking opportunities where I can make this impact.</strong></p>
 
-      <!-- ABOUT AUTHOR -->
-      <div class="about-author">
-        <h4>About the Author</h4>
-        <p><strong>Chetan Sharma</strong> is a Global Payroll Implementation Consultant with 13+ years of experience in multi-country payroll transitions, compliance automation, and vendor migrations. He's processed payroll for 25+ countries and built automation frameworks for enterprise organizations.</p>
-        <p><strong>Contact:</strong> 
-          <a href="mailto:chetanpayroll@gmail.com">chetanpayroll@gmail.com</a> | 
-          <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank">LinkedIn</a> | 
-          <a href="index.html">View Full Profile</a>
-        </p>
-        <p><strong>Last updated:</strong> October 2025 | All code examples are production-tested and open for customization</p>
-      </div>
-    </div>
+        <p class="reveal">Interested in discussing how I can contribute to your team? Let's connect.</p>
+
+        <!-- ABOUT AUTHOR -->
+        <div class="about-author reveal">
+          <h4>About the Author</h4>
+          <p><strong>Chetan Sharma</strong> is a Global Payroll Implementation Consultant with 13+ years of experience in multi-country payroll transitions, compliance automation, and vendor migrations. He's processed payroll for 25+ countries and built automation frameworks for enterprise organizations. <strong>Currently seeking full-time payroll implementation opportunities.</strong></p>
+          <p><strong>Contact for Job Opportunities:</strong> 
+            <a href="mailto:chetanpayroll@gmail.com">chetanpayroll@gmail.com</a> | 
+            <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank">LinkedIn</a> | 
+            <a href="index.html">View Full Profile & Resume</a>
+          </p>
+          <p><strong>Last updated:</strong> October 2025 | All code examples are production-tested and demonstrate real implementation experience</p>
+        </div>
+      </article>
+    </main>
   </div>
 
+  <!-- Three.js from official CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <script>
-    // Theme toggle
+    // =======================
+    // INITIALIZATION & SETUP
+    // =======================
+    
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Theme detection
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (prefersDark) {
       document.documentElement.style.colorScheme = 'dark';
     }
 
-    // Smooth scroll for anchor links
+    // =======================
+    // THREE.JS 3D BACKGROUND
+    // =======================
+    
+    let scene, camera, renderer, particles, torus;
+    let mouseX = 0, mouseY = 0;
+    let scrollY = 0;
+    let animationId;
+
+    function initThreeBackground() {
+      // Only initialize if motion is not reduced
+      if (prefersReducedMotion) return;
+
+      const canvas = document.getElementById('three-background');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      // Scene setup
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 5;
+
+      renderer = new THREE.WebGLRenderer({ 
+        canvas: canvas,
+        alpha: true,
+        antialias: true 
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Particle field
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particleCount = 500;
+      const posArray = new Float32Array(particleCount * 3);
+
+      for(let i = 0; i < particleCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 10;
+      }
+
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.02,
+        color: prefersDark ? 0x42a5f5 : 0x0d47a1,
+        transparent: true,
+        opacity: 0.6
+      });
+
+      particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
+      // Torus geometry
+      const torusGeometry = new THREE.TorusGeometry(1.5, 0.3, 16, 100);
+      const torusMaterial = new THREE.MeshBasicMaterial({ 
+        color: prefersDark ? 0x6a1b9a : 0x42a5f5,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.2
+      });
+      torus = new THREE.Mesh(torusGeometry, torusMaterial);
+      torus.position.set(-2, 0, -3);
+      scene.add(torus);
+
+      // Start animation
+      animate();
+
+      // Hide loading indicator
+      setTimeout(() => {
+        const loadingIndicator = document.querySelector('.loading-indicator');
+        if (loadingIndicator) {
+          loadingIndicator.classList.add('hidden');
+        }
+      }, 500);
+    }
+
+    function animate() {
+      if (!scene || !camera || !renderer) return;
+
+      animationId = requestAnimationFrame(animate);
+
+      // Rotate particles
+      if (particles) {
+        particles.rotation.y += 0.0005;
+        particles.rotation.x += 0.0002;
+      }
+
+      // Rotate torus
+      if (torus) {
+        torus.rotation.x += 0.001;
+        torus.rotation.y += 0.002;
+      }
+
+      // Parallax effect based on mouse
+      camera.position.x += (mouseX * 0.0005 - camera.position.x) * 0.05;
+      camera.position.y += (-mouseY * 0.0005 - camera.position.y) * 0.05;
+
+      // Parallax effect based on scroll
+      camera.position.y = scrollY * 0.0003;
+
+      renderer.render(scene, camera);
+    }
+
+    // =======================
+    // EVENT LISTENERS
+    // =======================
+
+    // Mouse move for parallax
+    let throttleTimer;
+    document.addEventListener('mousemove', (e) => {
+      if (throttleTimer) return;
+      throttleTimer = setTimeout(() => {
+        mouseX = e.clientX - window.innerWidth / 2;
+        mouseY = e.clientY - window.innerHeight / 2;
+        
+        // Hero title parallax
+        const heroTitle = document.querySelector('.article-header h1');
+        if (heroTitle && !prefersReducedMotion) {
+          const moveX = (e.clientX - window.innerWidth / 2) / 50;
+          const moveY = (e.clientY - window.innerHeight / 2) / 50;
+          heroTitle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }
+        
+        throttleTimer = null;
+      }, 16); // ~60fps
+    });
+
+    // Scroll for parallax and floating TOC
+    let scrollThrottle;
+    window.addEventListener('scroll', () => {
+      if (scrollThrottle) return;
+      scrollThrottle = setTimeout(() => {
+        scrollY = window.scrollY;
+        
+        // Update nav styling on scroll
+        const nav = document.querySelector('nav');
+        if (nav) {
+          if (scrollY > 100) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+        }
+
+        // Show/hide floating TOC
+        const floatingToc = document.querySelector('.floating-toc');
+        if (floatingToc) {
+          if (scrollY > 500) {
+            floatingToc.classList.add('visible');
+          } else {
+            floatingToc.classList.remove('visible');
+          }
+        }
+
+        // Update active section in floating TOC
+        updateActiveTocSection();
+        
+        scrollThrottle = null;
+      }, 16);
+    });
+
+    // Window resize
+    window.addEventListener('resize', () => {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Pause animation when page is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && animationId) {
+        cancelAnimationFrame(animationId);
+      } else if (!prefersReducedMotion) {
+        animate();
+      }
+    });
+
+    // =======================
+    // SCROLL REVEAL ANIMATIONS
+    // =======================
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach(el => observer.observe(el));
+
+      // Observe h2 for animated underline
+      const h2Elements = document.querySelectorAll('.article-content h2');
+      h2Elements.forEach(el => observer.observe(el));
+    }
+
+    // =======================
+    // FLOATING TOC
+    // =======================
+
+    function updateActiveTocSection() {
+      const sections = document.querySelectorAll('h2[id]');
+      const tocLinks = document.querySelectorAll('.floating-toc a');
+      
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 0) {
+          currentSection = section.id;
+        }
+      });
+
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // =======================
+    // SMOOTH SCROLL
+    // =======================
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -1010,6 +1596,59 @@ function getTaxRate(country) {
           if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
+        }
+      });
+    });
+
+    // =======================
+    // INITIALIZATION
+    // =======================
+
+    // Wait for DOM and Three.js to load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    function init() {
+      // Initialize Three.js background (lazy)
+      setTimeout(() => {
+        initThreeBackground();
+      }, 100);
+
+      // Initialize scroll reveal
+      initScrollReveal();
+
+      // Initial TOC update
+      updateActiveTocSection();
+    }
+
+    // =======================
+    // ENHANCED INTERACTIONS
+    // =======================
+
+    // Add ripple effect to CTA button
+    document.querySelectorAll('.cta-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+        ripple.style.width = ripple.style.height = '10px';
+        ripple.style.left = e.offsetX + 'px';
+        ripple.style.top = e.offsetY + 'px';
+        ripple.style.animation = 'ripple 0.6s ease-out';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Add hover effect to code blocks
+    document.querySelectorAll('.code-block').forEach(block => {
+      block.addEventListener('mouseenter', function() {
+        if (!prefersReducedMotion) {
+          this.style.transition = 'all 0.3s ease';
         }
       });
     });
