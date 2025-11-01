@@ -169,56 +169,8 @@
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 
-    /* ENHANCED: Floating Table of Contents */
-    .floating-toc {
-      position: fixed;
-      top: 50%;
-      right: 2rem;
-      transform: translateY(-50%);
-      background: var(--bg-secondary);
-      backdrop-filter: blur(10px);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      max-width: 200px;
-    }
-
-    .floating-toc.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .floating-toc-item {
-      display: block;
-      padding: 0.5rem 0.75rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      border-left: 3px solid transparent;
-      transition: all 0.3s ease;
-      margin-bottom: 0.25rem;
-    }
-
-    .floating-toc-item:hover {
-      color: var(--primary);
-      border-left-color: var(--primary);
-      padding-left: 1rem;
-    }
-
-    .floating-toc-item.active {
-      color: var(--primary);
-      font-weight: 600;
-      border-left-color: var(--primary);
-      background: rgba(13, 71, 161, 0.05);
-      border-radius: 4px;
-    }
-
     @media (max-width: 1024px) {
-      .floating-toc, .motion-toggle {
+      .motion-toggle {
         display: none;
       }
     }
@@ -973,7 +925,7 @@
 
     /* PRINT */
     @media print {
-      nav, .theme-toggle, .btn-secondary, #three-background, .floating-toc, .motion-toggle {
+      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle {
         display: none;
       }
       body {
@@ -1026,17 +978,6 @@
 
   <!-- ENHANCED: Reduced Motion Toggle -->
   <button class="motion-toggle" id="motionToggle" aria-label="Toggle animations" title="Toggle animations">🎬</button>
-
-  <!-- ENHANCED: Floating Table of Contents -->
-  <nav class="floating-toc" aria-label="Page sections" role="navigation">
-    <a href="#summary" class="floating-toc-item" data-section="summary">Summary</a>
-    <a href="#experience" class="floating-toc-item" data-section="experience">Experience</a>
-    <a href="#projects" class="floating-toc-item" data-section="projects">Projects</a>
-    <a href="#skills" class="floating-toc-item" data-section="skills">Skills</a>
-    <a href="#blog" class="floating-toc-item" data-section="blog">Blog</a>
-    <a href="#awards" class="floating-toc-item" data-section="awards">Awards</a>
-    <a href="#contact" class="floating-toc-item" data-section="contact">Contact</a>
-  </nav>
 
   <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
@@ -1714,45 +1655,6 @@
     });
 
     // ============================================================================
-    // FLOATING TABLE OF CONTENTS - Scroll spy
-    // ============================================================================
-    
-    const floatingToc = document.querySelector('.floating-toc');
-    const tocItems = document.querySelectorAll('.floating-toc-item');
-    const sections = document.querySelectorAll('section[id]');
-
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-      clearTimeout(scrollTimeout);
-      
-      // Show TOC after scrolling past hero
-      if (window.scrollY > 800) {
-        floatingToc.classList.add('visible');
-      } else {
-        floatingToc.classList.remove('visible');
-      }
-
-      // Update active section
-      scrollTimeout = setTimeout(() => {
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          if (window.scrollY >= sectionTop - 150) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        tocItems.forEach(item => {
-          item.classList.remove('active');
-          if (item.getAttribute('data-section') === current) {
-            item.classList.add('active');
-          }
-        });
-      }, 100);
-    });
-
-    // ============================================================================
     // THEME TOGGLE
     // ============================================================================
     
@@ -1839,3 +1741,5 @@ END:VCARD`;
   </script>
 </body>
 </html>
+
+
