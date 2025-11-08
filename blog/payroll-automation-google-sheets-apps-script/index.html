@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Enhanced with: 3D Three.js background, parallax scroll effects, micro-interactions, floating TOC, scroll-triggered reveals, and full accessibility support -->
+<!-- Enhanced blog article: 3D WebGL parallax, glassmorphism UI, scroll-triggered reveals, floating TOC, reading progress indicator, advanced micro-interactions, full accessibility -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,12 +9,12 @@
   <meta name="author" content="Chetan Sharma">
   <meta name="theme-color" content="#0d47a1">
   
-  <link rel="canonical" href="https://www.gmppayroll.com/blog">
+  <link rel="canonical" href="https://www.gmppayroll.com/blog/payroll-automation-google-sheets-apps-script">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <title>Payroll Automation Framework - Portfolio | Chetan Sharma - Seeking Opportunities</title>
+  <title>Payroll Automation Framework | Chetan Sharma - Payroll Implementation Consultant</title>
 
   <style>
     * {
@@ -35,6 +35,12 @@
       --text: #1a202c;
       --text-muted: #718096;
       --border: #e2e8f0;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -44,11 +50,18 @@
         --text: #f7fafc;
         --text-muted: #a0aec0;
         --border: #2d3748;
+        --glass-bg: rgba(26, 32, 44, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+        --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
       }
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 100px;
     }
 
     body {
@@ -61,7 +74,20 @@
       position: relative;
     }
 
-    /* Skip to content link for accessibility */
+    /* READING PROGRESS BAR */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      z-index: 10000;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(13, 71, 161, 0.5);
+    }
+
+    /* Skip to content for accessibility */
     .skip-to-content {
       position: absolute;
       top: -40px;
@@ -70,12 +96,16 @@
       color: white;
       padding: 8px 16px;
       text-decoration: none;
-      z-index: 200;
+      z-index: 10001;
       border-radius: 0 0 4px 0;
+      font-weight: 600;
+      transition: top 0.3s ease;
     }
 
     .skip-to-content:focus {
       top: 0;
+      outline: 3px solid white;
+      outline-offset: -3px;
     }
 
     /* 3D Background Canvas */
@@ -85,13 +115,19 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
-      opacity: 1;
-      transition: opacity 0.5s ease;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      pointer-events: none;
     }
 
-    /* Fallback gradient for reduced motion or no JS */
-    .gradient-fallback {
+    #three-background.loaded {
+      opacity: 1;
+    }
+
+    /* Fallback gradient for reduced motion or no WebGL */
+    body::before {
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
@@ -100,54 +136,55 @@
       background: radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.05) 0%, transparent 50%),
                   radial-gradient(circle at 80% 80%, rgba(106, 27, 154, 0.05) 0%, transparent 50%);
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
       animation: gradientShift 15s ease infinite;
     }
 
     @keyframes gradientShift {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-50px, 50px); }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* All content layered above background */
+    nav, .container, .floating-toc {
+      position: relative;
+      z-index: 1;
     }
 
     /* Reduce motion support */
     @media (prefers-reduced-motion: reduce) {
-      * {
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
       
       #three-background {
         display: none !important;
       }
-      
-      .gradient-fallback {
-        display: block !important;
+
+      .parallax-layer, .hero-title-container h1 {
+        transform: none !important;
       }
     }
 
-    /* NAVIGATION with enhanced glassmorphism */
+    /* NAVIGATION with glassmorphism */
     nav {
       position: sticky;
       top: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.7);
+      background: var(--glass-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md);
       transition: all 0.3s ease;
     }
 
     nav.scrolled {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: rgba(15, 20, 25, 0.7);
-      }
+      box-shadow: var(--shadow-xl);
     }
 
     .nav-container {
@@ -157,21 +194,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .back-link {
       text-decoration: none;
       color: var(--primary);
       font-weight: 600;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(13, 71, 161, 0.1);
     }
 
     .back-link:hover {
-      transform: translateX(-3px);
-      color: var(--secondary);
+      transform: translateX(-5px);
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-link:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 4px;
     }
 
     .article-meta {
@@ -188,10 +237,14 @@
       gap: 0.3rem;
       opacity: 0.8;
       transition: opacity 0.3s ease;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(13, 71, 161, 0.05);
     }
 
     .article-meta span:hover {
       opacity: 1;
+      background: rgba(13, 71, 161, 0.1);
     }
 
     /* Floating TOC */
@@ -200,16 +253,17 @@
       right: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.9);
+      background: var(--glass-bg);
       backdrop-filter: blur(20px);
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
       z-index: 90;
-      max-width: 200px;
+      max-width: 220px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      border: 2px solid var(--glass-border);
     }
 
     .floating-toc.visible {
@@ -217,16 +271,12 @@
       pointer-events: all;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .floating-toc {
-        background: rgba(26, 32, 44, 0.9);
-      }
-    }
-
     .floating-toc h4 {
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
       color: var(--primary);
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
     }
 
     .floating-toc ul {
@@ -234,23 +284,24 @@
     }
 
     .floating-toc li {
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
 
     .floating-toc a {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       text-decoration: none;
       transition: all 0.3s ease;
       display: block;
-      padding: 0.2rem 0;
+      padding: 0.4rem 0;
       border-left: 2px solid transparent;
-      padding-left: 0.5rem;
+      padding-left: 0.75rem;
     }
 
     .floating-toc a:hover {
       color: var(--primary);
       border-left-color: var(--primary);
+      transform: translateX(4px);
     }
 
     .floating-toc a.active {
@@ -264,21 +315,19 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 4rem 2rem;
-      position: relative;
-      z-index: 1;
     }
 
     .article-header {
       margin-bottom: 3rem;
-      animation: slideInUp 0.6s ease-out;
+      animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
       opacity: 0;
       animation-fill-mode: forwards;
     }
 
-    /* 3D Hero Title with parallax container */
+    /* 3D Hero Title with parallax */
     .hero-title-container {
       perspective: 1000px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .article-header h1 {
@@ -290,17 +339,19 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.2;
+      margin-bottom: 1.5rem;
       transition: transform 0.3s ease;
       will-change: transform;
     }
 
-    .article-header p {
-      font-size: 1.15rem;
+    .article-header > p {
+      font-size: 1.2rem;
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       font-style: italic;
       opacity: 0;
-      animation: slideInUp 0.6s ease-out 0.2s forwards;
+      animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+      line-height: 1.7;
     }
 
     /* Enhanced 3D card effects */
@@ -310,41 +361,46 @@
     }
 
     .author-info:hover, .toc:hover, .highlight-box:hover, .about-author:hover, .checklist:hover {
-      transform: translateY(-4px) rotateX(2deg);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px) rotateX(2deg);
+      box-shadow: var(--shadow-xl);
     }
 
     .author-info {
-      background: rgba(13, 71, 161, 0.1);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
       border-left: 4px solid var(--primary);
       padding: 1.5rem;
-      border-radius: 8px;
-      margin-bottom: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2.5rem;
       opacity: 0;
-      animation: slideInUp 0.6s ease-out 0.3s forwards;
+      animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+      box-shadow: var(--shadow-sm);
     }
 
     .author-info strong {
       color: var(--primary);
+      font-weight: 700;
     }
 
     .toc {
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 2px solid var(--glass-border);
       padding: 2rem;
-      border-radius: 16px;
+      border-radius: 20px;
       margin-bottom: 3rem;
       opacity: 0;
-      animation: slideInUp 0.6s ease-out 0.4s forwards;
+      animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
+      box-shadow: var(--shadow-md);
     }
 
     .toc h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
       color: var(--primary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
     }
 
     .toc ol {
@@ -354,17 +410,30 @@
 
     .toc li {
       counter-increment: section;
-      margin-bottom: 0.75rem;
-      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
       position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .toc li:hover {
+      transform: translateX(4px);
     }
 
     .toc li::before {
       content: counter(section);
       position: absolute;
       left: 0;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
-      color: var(--primary);
+      font-size: 0.8rem;
     }
 
     .toc a {
@@ -372,22 +441,23 @@
       text-decoration: none;
       transition: all 0.3s ease;
       display: inline-block;
+      font-weight: 500;
     }
 
     .toc a:hover {
       color: var(--primary);
-      transform: translateX(4px);
     }
 
     /* ARTICLE CONTENT with scroll reveals */
     .article-content {
-      animation: slideInUp 0.6s ease-out 0.5s both;
+      animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .reveal.active {
@@ -396,42 +466,43 @@
     }
 
     .article-content h2 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 700;
-      margin-top: 3rem;
+      margin-top: 3.5rem;
       margin-bottom: 1.5rem;
       color: var(--text);
-      border-bottom: 3px solid var(--primary);
-      padding-bottom: 0.5rem;
+      font-family: 'Poppins', sans-serif;
       position: relative;
-      overflow: hidden;
+      padding-bottom: 1rem;
     }
 
     .article-content h2::after {
       content: '';
       position: absolute;
-      bottom: -3px;
+      bottom: 0;
       left: 0;
       width: 0;
-      height: 3px;
-      background: var(--secondary);
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
       transition: width 0.6s ease;
+      border-radius: 2px;
     }
 
     .article-content h2.active::after {
-      width: 100%;
+      width: 120px;
     }
 
     .article-content h3 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       margin-bottom: 1rem;
       color: var(--primary);
+      font-family: 'Poppins', sans-serif;
     }
 
     .article-content p {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.3rem;
       color: var(--text);
       line-height: 1.9;
     }
@@ -442,28 +513,31 @@
     }
 
     .article-content li {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.8rem;
       color: var(--text-muted);
       transition: transform 0.2s ease;
+      line-height: 1.7;
     }
 
     .article-content li:hover {
-      transform: translateX(3px);
+      transform: translateX(5px);
     }
 
     /* Enhanced code blocks with glow effect */
     .code-block {
-      background: rgba(13, 71, 161, 0.05);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
       border-left: 4px solid var(--primary);
       padding: 1.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       margin: 2rem 0;
       overflow-x: auto;
       font-family: 'Courier New', monospace;
       font-size: 0.9rem;
-      line-height: 1.5;
+      line-height: 1.6;
       position: relative;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .code-block::before {
@@ -477,7 +551,7 @@
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
-      border-radius: 8px;
+      border-radius: 12px;
     }
 
     .code-block:hover::before {
@@ -485,8 +559,8 @@
     }
 
     .code-block:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(13, 71, 161, 0.2);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
     }
 
     .code-block code {
@@ -494,12 +568,14 @@
     }
 
     .highlight-box {
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.1) 0%, rgba(106, 27, 154, 0.1) 100%);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
       border-left: 4px solid var(--secondary);
       padding: 1.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       margin: 2rem 0;
       position: relative;
+      box-shadow: var(--shadow-sm);
     }
 
     .highlight-box::before {
@@ -513,7 +589,7 @@
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
-      border-radius: 8px;
+      border-radius: 12px;
     }
 
     .highlight-box:hover::before {
@@ -522,20 +598,24 @@
 
     .highlight-box strong {
       color: var(--secondary);
+      font-weight: 700;
     }
 
     .checklist {
-      background: rgba(46, 125, 50, 0.05);
-      border: 1px solid var(--success);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--success);
       padding: 1.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       margin: 2rem 0;
+      box-shadow: var(--shadow-sm);
     }
 
     .checklist h4 {
       color: var(--success);
       margin-bottom: 1rem;
       font-weight: 700;
+      font-family: 'Poppins', sans-serif;
     }
 
     .checklist ul {
@@ -544,9 +624,9 @@
     }
 
     .checklist li {
-      padding-left: 1.5rem;
+      padding-left: 2rem;
       position: relative;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
 
     .checklist li::before {
@@ -555,17 +635,25 @@
       left: 0;
       color: var(--success);
       font-weight: 700;
+      font-size: 1.2rem;
+      width: 24px;
+      height: 24px;
+      background: rgba(46, 125, 50, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Enhanced CTA with 3D effect */
     .cta-section {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
-      padding: 2.5rem;
-      border-radius: 16px;
+      padding: 3rem;
+      border-radius: 20px;
       text-align: center;
       margin: 4rem 0;
-      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.3);
+      box-shadow: var(--shadow-xl);
       position: relative;
       overflow: hidden;
     }
@@ -577,7 +665,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.5s ease;
       pointer-events: none;
@@ -590,26 +678,37 @@
     .cta-section h3 {
       color: white;
       margin-bottom: 1rem;
+      font-size: 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
     .cta-section p {
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
 
     .cta-btn {
       display: inline-block;
       background: white;
       color: var(--primary);
-      padding: 0.75rem 2rem;
+      padding: 1rem 2.5rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       border: none;
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      z-index: 1;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .cta-btn::before {
@@ -626,29 +725,37 @@
     }
 
     .cta-btn:hover::before {
-      width: 300px;
-      height: 300px;
+      width: 400px;
+      height: 400px;
     }
 
     .cta-btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-btn:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
     }
 
     .about-author {
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 2rem;
-      border-radius: 16px;
+      border: 2px solid var(--glass-border);
+      padding: 2.5rem;
+      border-radius: 20px;
       margin-top: 4rem;
+      box-shadow: var(--shadow-md);
     }
 
     .about-author h4 {
       color: var(--primary);
       margin-bottom: 1rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
     }
 
     .about-author p {
@@ -670,6 +777,12 @@
       transform: translateY(-2px);
     }
 
+    .about-author a:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 4px;
+    }
+
+    /* ANIMATIONS */
     @keyframes slideInUp {
       from {
         opacity: 0;
@@ -681,6 +794,18 @@
       }
     }
 
+    @keyframes ripple {
+      from {
+        transform: scale(0);
+        opacity: 1;
+      }
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 1200px) {
       .floating-toc {
         display: none;
@@ -692,8 +817,12 @@
         padding: 2rem 1rem;
       }
 
+      .nav-container {
+        padding: 1rem;
+      }
+
       .article-header h1 {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
       }
 
       .article-meta {
@@ -706,18 +835,31 @@
       }
 
       .article-content h2 {
-        font-size: 1.3rem;
-        margin-top: 2rem;
+        font-size: 1.5rem;
+        margin-top: 2.5rem;
+      }
+
+      .article-content h3 {
+        font-size: 1.2rem;
+      }
+
+      .code-block {
+        font-size: 0.8rem;
+        padding: 1rem;
+      }
+
+      .cta-section {
+        padding: 2rem;
       }
     }
 
-    /* Loading indicator */
+    /* Loading spinner */
     .loading-indicator {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 200;
+      z-index: 10000;
       opacity: 1;
       transition: opacity 0.5s ease;
       pointer-events: none;
@@ -743,14 +885,14 @@
 </head>
 
 <body>
+  <!-- READING PROGRESS BAR -->
+  <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
+
   <!-- Skip to content for accessibility -->
   <a href="#main-content" class="skip-to-content">Skip to content</a>
 
   <!-- 3D Background Canvas -->
   <canvas id="three-background" role="presentation" aria-hidden="true"></canvas>
-  
-  <!-- Fallback gradient -->
-  <div class="gradient-fallback" aria-hidden="true"></div>
 
   <!-- Loading indicator -->
   <div class="loading-indicator" aria-live="polite" aria-label="Loading page content">
@@ -776,7 +918,7 @@
   <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="index.html" class="back-link">← Back to Profile</a>
+      <a href="enhanced-portfolio.html" class="back-link">← Back to Profile</a>
       <div class="article-meta">
         <span>📅 October 2025</span>
         <span>⏱️ 12 min read</span>
@@ -869,11 +1011,11 @@
         
         <p class="reveal">Here's the 4-layer automation system I use for processing 122 payrolls annually:</p>
 
-        <div style="background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent); margin: 2rem 0;" class="reveal">
+        <div style="background: var(--glass-bg); backdrop-filter: blur(10px); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent); margin: 2rem 0; box-shadow: var(--shadow-sm);" class="reveal">
           <p><strong>🔍 Layer 1: Data Validation</strong><br>Catch errors BEFORE they enter the system. Data validation rules, checksum verifications, outlier detection.</p>
-          <p><strong>⚙️ Layer 2: Automation Engine</strong><br>Google Apps Script runs calculations automatically. No manual copy-paste. No formula errors.</p>
-          <p><strong>📊 Layer 3: Quality Assurance</strong><br>Automated reconciliation checks. Variance analysis. Flag anything above tolerance threshold.</p>
-          <p><strong>📧 Layer 4: Alerts & Reporting</strong><br>Real-time notifications. Automated email reports. Audit trails for compliance.</p>
+          <p style="margin-top: 1rem;"><strong>⚙️ Layer 2: Automation Engine</strong><br>Google Apps Script runs calculations automatically. No manual copy-paste. No formula errors.</p>
+          <p style="margin-top: 1rem;"><strong>📊 Layer 3: Quality Assurance</strong><br>Automated reconciliation checks. Variance analysis. Flag anything above tolerance threshold.</p>
+          <p style="margin-top: 1rem;"><strong>📧 Layer 4: Alerts & Reporting</strong><br>Real-time notifications. Automated email reports. Audit trails for compliance.</p>
         </div>
 
         <p class="reveal"><strong>Result?</strong> Process 122 payrolls in 15-20 hours instead of 150+ hours.</p>
@@ -1071,7 +1213,7 @@ Logger.log(payroll);
 
         <div class="code-block reveal">
           <code>function sendPayrollAlert(subject, message) {
-  const email = "chetansharma@gmppayroll.com";
+  const email = "chetanpayroll@gmail.com";
   GmailApp.sendEmail(
     email,
     subject,
@@ -1173,16 +1315,16 @@ sendPayrollAlert(
 
         <p class="reveal">Below are the types of templates and frameworks I've built and can implement in your organization:</p>
 
-        <div style="background: rgba(46, 125, 50, 0.08); border: 1px solid rgba(46, 125, 50, 0.3); padding: 2rem; border-radius: 12px; margin: 2rem 0;" class="reveal">
-          <h3 style="color: var(--success); margin-bottom: 1.5rem;">📊 Framework 1: Payroll Data Input Sheet</h3>
+        <div style="background: rgba(46, 125, 50, 0.08); border: 2px solid rgba(46, 125, 50, 0.3); padding: 2rem; border-radius: 12px; margin: 2rem 0; box-shadow: var(--shadow-sm);" class="reveal">
+          <h3 style="color: var(--success); margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">📊 Framework 1: Payroll Data Input Sheet</h3>
           <p>Pre-formatted with data validation rules, formulas, and error checking. This type of framework saves 20+ hours of setup time.</p>
           <p><strong>Implementation Example:</strong> Payroll Input Template (Google Sheets)</p>
 
-          <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem;">⚙️ Framework 2: Google Apps Script Automation Engine</h3>
+          <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem; font-family: 'Poppins', sans-serif;">⚙️ Framework 2: Google Apps Script Automation Engine</h3>
           <p>Complete automation script with 50+ functions. I can customize and implement similar systems with country-specific tax rules.</p>
           <p><strong>Implementation Example:</strong> GAS Automation Engine (Complete Code)</p>
 
-          <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem;">✅ Framework 3: Quality Assurance System</h3>
+          <h3 style="color: var(--success); margin-bottom: 1.5rem; margin-top: 1.5rem; font-family: 'Poppins', sans-serif;">✅ Framework 3: Quality Assurance System</h3>
           <p>10-point pre-payroll validation system that I implement for every payroll cycle to ensure accuracy.</p>
           <p><strong>Implementation Example:</strong> QA Framework Documentation</p>
 
@@ -1251,8 +1393,8 @@ function getTaxRate(country) {
 
         <p class="reveal">When implementing this framework in an organization, I follow a structured 4-week approach:</p>
 
-        <div style="background: rgba(13, 71, 161, 0.08); padding: 2rem; border-radius: 12px; margin: 2rem 0;" class="reveal">
-          <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Week 1: Foundation & Assessment</h3>
+        <div style="background: rgba(13, 71, 161, 0.08); padding: 2rem; border-radius: 12px; margin: 2rem 0; box-shadow: var(--shadow-sm);" class="reveal">
+          <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Week 1: Foundation & Assessment</h3>
           <ul>
             <li>☐ Audit existing payroll data and identify data quality issues</li>
             <li>☐ Set up Google Sheets infrastructure with validation rules</li>
@@ -1260,7 +1402,7 @@ function getTaxRate(country) {
             <li>☐ Run pilot test with 10 sample employee records</li>
           </ul>
 
-          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 2: Automation Engine Development</h3>
+          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Week 2: Automation Engine Development</h3>
           <ul>
             <li>☐ Build gross-to-net calculation engine</li>
             <li>☐ Configure country-specific tax rules and compliance requirements</li>
@@ -1268,7 +1410,7 @@ function getTaxRate(country) {
             <li>☐ Set up automated triggers and scheduling</li>
           </ul>
 
-          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 3: Quality Assurance & Testing</h3>
+          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Week 3: Quality Assurance & Testing</h3>
           <ul>
             <li>☐ Implement variance detection and alert systems</li>
             <li>☐ Configure email notifications for payroll issues</li>
@@ -1276,7 +1418,7 @@ function getTaxRate(country) {
             <li>☐ Run full workflow test with 100+ employees</li>
           </ul>
 
-          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem;">Week 4: Go-Live & Training</h3>
+          <h3 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Week 4: Go-Live & Training</h3>
           <ul>
             <li>☐ Process first automated payroll cycle with team oversight</li>
             <li>☐ Reconcile automated vs. manual results (100% accuracy target)</li>
@@ -1294,7 +1436,7 @@ function getTaxRate(country) {
 
         <p class="reveal">This framework has helped me deliver massive results:</p>
 
-        <div style="background: rgba(255, 255, 255, 0.2); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;" class="reveal">
+        <div style="background: var(--glass-bg); backdrop-filter: blur(10px); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; box-shadow: var(--shadow-sm);" class="reveal">
           <p><strong>✅ 85% reduction in payroll processing time</strong></p>
           <p style="margin-top: 0.5rem;"><strong>✅ 99.8% accuracy across 1,500+ payroll cycles</strong></p>
           <p style="margin-top: 0.5rem;"><strong>✅ Successfully implemented across 25+ countries</strong></p>
@@ -1307,7 +1449,7 @@ function getTaxRate(country) {
         <div class="cta-section reveal">
           <h3>💼 Seeking Full-Time Payroll Implementation Opportunities</h3>
           <p>I'm looking to join an organization where I can apply this automation expertise to transform payroll operations. If you're hiring for payroll implementation, automation, or multi-country payroll roles, I'd love to connect.</p>
-          <a href="index.html#contact" class="cta-btn">View My Full Profile & Contact</a>
+          <a href="enhanced-portfolio.html#contact" class="cta-btn">View My Full Profile & Contact</a>
         </div>
 
         <!-- BOTTOM LINE -->
@@ -1329,8 +1471,8 @@ function getTaxRate(country) {
           <p><strong>Chetan Sharma</strong> is a Global Payroll Implementation Consultant with 13+ years of experience in multi-country payroll transitions, compliance automation, and vendor migrations. He's processed payroll for 25+ countries and built automation frameworks for enterprise organizations. <strong>Currently seeking full-time payroll implementation opportunities.</strong></p>
           <p><strong>Contact for Job Opportunities:</strong> 
             <a href="mailto:chetanpayroll@gmail.com">chetanpayroll@gmail.com</a> | 
-            <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank">LinkedIn</a> | 
-            <a href="index.html">View Full Profile & Resume</a>
+            <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer">LinkedIn</a> | 
+            <a href="enhanced-portfolio.html">View Full Profile & Resume</a>
           </p>
           <p><strong>Last updated:</strong> October 2025 | All code examples are production-tested and demonstrate real implementation experience</p>
         </div>
@@ -1338,26 +1480,42 @@ function getTaxRate(country) {
     </main>
   </div>
 
-  <!-- Three.js from official CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <script>
-    // =======================
+    // ============================================================================
     // INITIALIZATION & SETUP
-    // =======================
+    // ============================================================================
     
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    // Theme detection
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
     if (prefersDark) {
       document.documentElement.style.colorScheme = 'dark';
     }
 
-    // =======================
+    // ============================================================================
+    // READING PROGRESS BAR
+    // ============================================================================
+    
+    const progressBar = document.getElementById('reading-progress');
+    
+    function updateReadingProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = window.pageYOffset;
+      const progress = (scrolled / documentHeight) * 100;
+      
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+      progressBar.setAttribute('aria-valuenow', Math.round(progress));
+    }
+
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+
+    // ============================================================================
     // THREE.JS 3D BACKGROUND
-    // =======================
+    // ============================================================================
     
     let scene, camera, renderer, particles, torus;
     let mouseX = 0, mouseY = 0;
@@ -1365,28 +1523,31 @@ function getTaxRate(country) {
     let animationId;
 
     function initThreeBackground() {
-      // Only initialize if motion is not reduced
-      if (prefersReducedMotion) return;
+      if (prefersReducedMotion || typeof THREE === 'undefined') return;
 
       const canvas = document.getElementById('three-background');
-      if (!canvas || typeof THREE === 'undefined') return;
+      if (!canvas) return;
 
-      // Scene setup
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.z = 5;
 
-      renderer = new THREE.WebGLRenderer({ 
-        canvas: canvas,
-        alpha: true,
-        antialias: true 
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      try {
+        renderer = new THREE.WebGLRenderer({ 
+          canvas: canvas,
+          alpha: true,
+          antialias: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      } catch (e) {
+        console.log('WebGL not supported, using CSS fallback');
+        return;
+      }
 
-      // Particle field
+      // Particle system
       const particlesGeometry = new THREE.BufferGeometry();
-      const particleCount = 500;
+      const particleCount = 400;
       const posArray = new Float32Array(particleCount * 3);
 
       for(let i = 0; i < particleCount * 3; i++) {
@@ -1396,32 +1557,32 @@ function getTaxRate(country) {
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
       const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.02,
+        size: 0.025,
         color: prefersDark ? 0x42a5f5 : 0x0d47a1,
         transparent: true,
-        opacity: 0.6
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending
       });
 
       particles = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particles);
 
-      // Torus geometry
+      // Torus
       const torusGeometry = new THREE.TorusGeometry(1.5, 0.3, 16, 100);
       const torusMaterial = new THREE.MeshBasicMaterial({ 
         color: prefersDark ? 0x6a1b9a : 0x42a5f5,
         wireframe: true,
         transparent: true,
-        opacity: 0.2
+        opacity: 0.15
       });
       torus = new THREE.Mesh(torusGeometry, torusMaterial);
       torus.position.set(-2, 0, -3);
       scene.add(torus);
 
-      // Start animation
       animate();
 
-      // Hide loading indicator
       setTimeout(() => {
+        canvas.classList.add('loaded');
         const loadingIndicator = document.querySelector('.loading-indicator');
         if (loadingIndicator) {
           loadingIndicator.classList.add('hidden');
@@ -1434,33 +1595,27 @@ function getTaxRate(country) {
 
       animationId = requestAnimationFrame(animate);
 
-      // Rotate particles
       if (particles) {
         particles.rotation.y += 0.0005;
         particles.rotation.x += 0.0002;
       }
 
-      // Rotate torus
       if (torus) {
         torus.rotation.x += 0.001;
         torus.rotation.y += 0.002;
       }
 
-      // Parallax effect based on mouse
       camera.position.x += (mouseX * 0.0005 - camera.position.x) * 0.05;
       camera.position.y += (-mouseY * 0.0005 - camera.position.y) * 0.05;
-
-      // Parallax effect based on scroll
       camera.position.y = scrollY * 0.0003;
 
       renderer.render(scene, camera);
     }
 
-    // =======================
+    // ============================================================================
     // EVENT LISTENERS
-    // =======================
+    // ============================================================================
 
-    // Mouse move for parallax
     let throttleTimer;
     document.addEventListener('mousemove', (e) => {
       if (throttleTimer) return;
@@ -1468,7 +1623,6 @@ function getTaxRate(country) {
         mouseX = e.clientX - window.innerWidth / 2;
         mouseY = e.clientY - window.innerHeight / 2;
         
-        // Hero title parallax
         const heroTitle = document.querySelector('.article-header h1');
         if (heroTitle && !prefersReducedMotion) {
           const moveX = (e.clientX - window.innerWidth / 2) / 50;
@@ -1477,17 +1631,15 @@ function getTaxRate(country) {
         }
         
         throttleTimer = null;
-      }, 16); // ~60fps
+      }, 16);
     });
 
-    // Scroll for parallax and floating TOC
     let scrollThrottle;
     window.addEventListener('scroll', () => {
       if (scrollThrottle) return;
       scrollThrottle = setTimeout(() => {
         scrollY = window.scrollY;
         
-        // Update nav styling on scroll
         const nav = document.querySelector('nav');
         if (nav) {
           if (scrollY > 100) {
@@ -1497,7 +1649,6 @@ function getTaxRate(country) {
           }
         }
 
-        // Show/hide floating TOC
         const floatingToc = document.querySelector('.floating-toc');
         if (floatingToc) {
           if (scrollY > 500) {
@@ -1507,14 +1658,12 @@ function getTaxRate(country) {
           }
         }
 
-        // Update active section in floating TOC
         updateActiveTocSection();
         
         scrollThrottle = null;
       }, 16);
-    });
+    }, { passive: true });
 
-    // Window resize
     window.addEventListener('resize', () => {
       if (!camera || !renderer) return;
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -1522,7 +1671,6 @@ function getTaxRate(country) {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Pause animation when page is hidden
     document.addEventListener('visibilitychange', () => {
       if (document.hidden && animationId) {
         cancelAnimationFrame(animationId);
@@ -1531,9 +1679,9 @@ function getTaxRate(country) {
       }
     });
 
-    // =======================
+    // ============================================================================
     // SCROLL REVEAL ANIMATIONS
-    // =======================
+    // ============================================================================
 
     const observerOptions = {
       threshold: 0.1,
@@ -1548,19 +1696,17 @@ function getTaxRate(country) {
       });
     }, observerOptions);
 
-    // Observe all reveal elements
     function initScrollReveal() {
       const revealElements = document.querySelectorAll('.reveal');
       revealElements.forEach(el => observer.observe(el));
 
-      // Observe h2 for animated underline
       const h2Elements = document.querySelectorAll('.article-content h2');
       h2Elements.forEach(el => observer.observe(el));
     }
 
-    // =======================
+    // ============================================================================
     // FLOATING TOC
-    // =======================
+    // ============================================================================
 
     function updateActiveTocSection() {
       const sections = document.querySelectorAll('h2[id]');
@@ -1583,9 +1729,9 @@ function getTaxRate(country) {
       });
     }
 
-    // =======================
+    // ============================================================================
     // SMOOTH SCROLL
-    // =======================
+    // ============================================================================
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -1600,35 +1746,30 @@ function getTaxRate(country) {
       });
     });
 
-    // =======================
+    // ============================================================================
     // INITIALIZATION
-    // =======================
+    // ============================================================================
 
-    // Wait for DOM and Three.js to load
+    function init() {
+      setTimeout(() => {
+        initThreeBackground();
+      }, 100);
+
+      initScrollReveal();
+      updateActiveTocSection();
+      updateReadingProgress();
+    }
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
       init();
     }
 
-    function init() {
-      // Initialize Three.js background (lazy)
-      setTimeout(() => {
-        initThreeBackground();
-      }, 100);
-
-      // Initialize scroll reveal
-      initScrollReveal();
-
-      // Initial TOC update
-      updateActiveTocSection();
-    }
-
-    // =======================
+    // ============================================================================
     // ENHANCED INTERACTIONS
-    // =======================
+    // ============================================================================
 
-    // Add ripple effect to CTA button
     document.querySelectorAll('.cta-btn').forEach(btn => {
       btn.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
@@ -1643,15 +1784,14 @@ function getTaxRate(country) {
         setTimeout(() => ripple.remove(), 600);
       });
     });
-
-    // Add hover effect to code blocks
-    document.querySelectorAll('.code-block').forEach(block => {
-      block.addEventListener('mouseenter', function() {
-        if (!prefersReducedMotion) {
-          this.style.transition = 'all 0.3s ease';
-        }
-      });
-    });
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
