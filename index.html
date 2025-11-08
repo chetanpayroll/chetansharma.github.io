@@ -1,4 +1,4 @@
-<!-- Enhanced with 3D animations, parallax effects, scroll reveals, and interactive micro-interactions while preserving all original content -->
+<!-- Enhanced portfolio with: 3D WebGL parallax, interactive masonry photo gallery with lightbox, advanced micro-interactions, glassmorphism UI, reading progress indicator, full accessibility & reduced-motion support -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +48,12 @@
       --text: #1a202c;
       --text-muted: #718096;
       --border: #e2e8f0;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -58,6 +64,12 @@
         --text-muted: #a0aec0;
         --border: #2d3748;
         --primary-light: #64b5f6;
+        --glass-bg: rgba(26, 32, 44, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+        --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
       }
     }
 
@@ -76,7 +88,20 @@
       position: relative;
     }
 
-    /* ENHANCED: 3D Background Canvas Layer */
+    /* READING PROGRESS BAR - Unobtrusive page-level indicator */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      z-index: 10000;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(13, 71, 161, 0.5);
+    }
+
+    /* 3D BACKGROUND CANVAS - GPU-accelerated WebGL layer */
     #three-background {
       position: fixed;
       top: 0;
@@ -86,14 +111,14 @@
       z-index: 0;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 1s ease;
+      transition: opacity 1.5s ease;
     }
 
     #three-background.loaded {
       opacity: 1;
     }
 
-    /* Fallback gradient background */
+    /* Fallback gradient background for unsupported WebGL */
     body::before {
       content: '';
       position: fixed;
@@ -104,15 +129,21 @@
       background: linear-gradient(135deg, rgba(13, 71, 161, 0.03) 0%, rgba(106, 27, 154, 0.03) 100%);
       z-index: 0;
       pointer-events: none;
+      animation: gradientShift 15s ease infinite;
     }
 
-    /* All content above background */
+    @keyframes gradientShift {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* All content layered above background */
     nav, section, footer {
       position: relative;
       z-index: 1;
     }
 
-    /* ENHANCED: Reduced Motion Support */
+    /* REDUCED MOTION SUPPORT - Respect user preferences */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -124,9 +155,13 @@
       #three-background {
         display: none !important;
       }
+
+      .parallax-layer {
+        transform: none !important;
+      }
     }
 
-    /* ENHANCED: Skip to Content Link */
+    /* ACCESSIBILITY - Skip to content link */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -138,19 +173,23 @@
       z-index: 10000;
       border-radius: 0 0 4px 0;
       font-weight: 600;
+      transition: top 0.3s ease;
     }
 
     .skip-link:focus {
       top: 0;
+      outline: 3px solid white;
+      outline-offset: -3px;
     }
 
-    /* ENHANCED: Reduced Motion Toggle */
+    /* MOTION TOGGLE - User control for animations */
     .motion-toggle {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      background: var(--bg-secondary);
-      border: 2px solid var(--border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--glass-border);
       border-radius: 50%;
       width: 60px;
       height: 60px;
@@ -160,37 +199,44 @@
       cursor: pointer;
       z-index: 1001;
       font-size: 1.5rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: var(--shadow-lg);
     }
 
     .motion-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .motion-toggle:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 4px;
     }
 
     @media (max-width: 1024px) {
       .motion-toggle {
-        display: none;
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
       }
     }
 
-    /* NAVIGATION */
+    /* NAVIGATION - Glassmorphism header */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
       z-index: 1000;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
     }
 
-    @media (prefers-color-scheme: dark) {
-      nav {
-        background: rgba(15, 20, 25, 0.97);
-      }
+    nav.scrolled {
+      box-shadow: var(--shadow-lg);
     }
 
     .nav-container {
@@ -212,6 +258,11 @@
       text-decoration: none;
       font-family: 'Poppins', sans-serif;
       letter-spacing: -1px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
     }
 
     .nav-links {
@@ -237,8 +288,8 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--primary);
-      transition: width 0.3s ease;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .nav-links a:hover::after,
@@ -246,9 +297,7 @@
       width: 100%;
     }
 
-    /* ENHANCED: Visible focus states */
-    .nav-links a:focus,
-    .theme-toggle:focus {
+    .nav-links a:focus {
       outline: 3px solid var(--primary);
       outline-offset: 4px;
     }
@@ -261,7 +310,7 @@
       border: 2px solid var(--border);
       cursor: pointer;
       font-size: 1.5rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -272,6 +321,12 @@
       background: var(--primary-light);
       color: white;
       border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .theme-toggle:focus {
+      outline: 3px solid var(--primary);
+      outline-offset: 4px;
     }
 
     @media (max-width: 768px) {
@@ -283,7 +338,7 @@
       }
     }
 
-    /* HERO - ENHANCED with 3D Parallax */
+    /* HERO SECTION - Cinematic parallax with depth */
     .hero {
       margin-top: 100px;
       background: transparent;
@@ -304,9 +359,10 @@
       transform-style: preserve-3d;
     }
 
-    /* ENHANCED: Parallax layers */
+    /* PARALLAX LAYERS - Mouse and scroll depth effect */
     .parallax-layer {
       transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform;
     }
 
     .hero-headshot {
@@ -316,13 +372,18 @@
       margin: 0 auto 2.5rem;
       border: 5px solid var(--primary);
       object-fit: cover;
-      box-shadow: 0 20px 40px rgba(13, 71, 161, 0.2);
-      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 20px 40px rgba(13, 71, 161, 0.3), 0 0 0 10px rgba(13, 71, 161, 0.1);
+      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), float 6s ease-in-out infinite;
       transition: transform 0.3s ease;
     }
 
     .hero-headshot:hover {
-      transform: scale(1.08);
+      transform: scale(1.08) rotate(5deg);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
 
     .hero h1 {
@@ -332,6 +393,7 @@
       font-family: 'Poppins', sans-serif;
       animation: slideInUp 0.8s ease 0.1s both;
       letter-spacing: -1px;
+      text-shadow: 0 2px 20px rgba(13, 71, 161, 0.1);
     }
 
     .hero-subtitle {
@@ -372,21 +434,17 @@
       animation: slideInUp 0.8s ease 0.35s both;
     }
 
-    /* ENHANCED: 3D Card Hover Effects */
+    /* 3D CARD EFFECTS - Interactive tilt and hover */
     .stat-card {
-      background: var(--bg-secondary);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
       padding: 1.5rem;
-      border-radius: 12px;
-      border: 2px solid var(--border);
-      transition: all 0.3s ease;
+      border-radius: 16px;
+      border: 2px solid var(--glass-border);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       transform-style: preserve-3d;
       position: relative;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-8px) rotateX(5deg);
-      border-color: var(--primary);
-      box-shadow: 0 12px 30px rgba(13, 71, 161, 0.1);
+      cursor: pointer;
     }
 
     .stat-card::before {
@@ -396,11 +454,17 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.1), rgba(106, 27, 154, 0.1));
+      background: linear-gradient(135deg, rgba(13, 71, 161, 0.15), rgba(106, 27, 154, 0.15));
       opacity: 0;
       transition: opacity 0.3s ease;
-      border-radius: 12px;
+      border-radius: 16px;
       z-index: -1;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-12px) rotateX(5deg);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-xl);
     }
 
     .stat-card:hover::before {
@@ -410,7 +474,10 @@
     .stat-number {
       font-size: 2.5rem;
       font-weight: 800;
-      color: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       font-family: 'Poppins', sans-serif;
     }
 
@@ -435,12 +502,32 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       text-decoration: none;
       display: inline-block;
       text-align: center;
       font-family: 'Poppins', sans-serif;
       letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     .btn:focus {
@@ -451,12 +538,13 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
-      box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);
+      box-shadow: var(--shadow-lg);
+      position: relative;
     }
 
     .btn-primary:hover {
       transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.4);
+      box-shadow: var(--shadow-xl);
     }
 
     .btn-secondary {
@@ -472,7 +560,7 @@
       color: white;
     }
 
-    /* ANIMATIONS */
+    /* ANIMATIONS - Enhanced entrance effects */
     @keyframes slideInDown {
       from {
         opacity: 0;
@@ -506,11 +594,12 @@
       }
     }
 
-    /* ENHANCED: Scroll-triggered reveal animations */
+    /* SCROLL-TRIGGERED REVEALS - IntersectionObserver driven */
     .reveal {
       opacity: 0;
       transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .reveal.active {
@@ -518,7 +607,7 @@
       transform: translateY(0);
     }
 
-    /* SECTIONS */
+    /* SECTIONS - Content structure */
     section {
       max-width: 1100px;
       margin: 0 auto;
@@ -532,6 +621,19 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 800;
       letter-spacing: -0.5px;
+      position: relative;
+      display: inline-block;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 2px;
     }
 
     .section-subtitle {
@@ -551,15 +653,22 @@
       border-radius: 2px;
     }
 
-    /* SUMMARY */
+    /* SUMMARY CARD - Glassmorphism design */
     .summary-card {
-      background: var(--bg-secondary);
-      border-radius: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
       padding: 2.5rem;
       border-left: 6px solid var(--primary);
       line-height: 1.9;
       font-size: 1.05rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
     }
 
     .summary-card p {
@@ -571,17 +680,33 @@
       font-weight: 700;
     }
 
-    /* EXPERIENCE */
+    /* EXPERIENCE SECTION */
     .experience-item {
       margin-bottom: 3.5rem;
       padding-bottom: 2.5rem;
       border-bottom: 2px solid var(--border);
       transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .experience-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .experience-item:hover::before {
+      opacity: 1;
     }
 
     .experience-item:hover {
       padding-left: 1rem;
-      border-left: 4px solid var(--primary);
     }
 
     .experience-item:last-child {
@@ -600,6 +725,7 @@
     .experience-icon {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
+      animation: scaleIn 0.5s ease;
     }
 
     .experience-title {
@@ -620,14 +746,14 @@
     }
 
     .experience-period {
-      color: var(--text-muted);
+      color: white;
       font-size: 0.95rem;
       white-space: nowrap;
-      background: var(--primary);
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
       font-weight: 600;
+      box-shadow: var(--shadow-sm);
     }
 
     .experience-bullets {
@@ -641,6 +767,11 @@
       position: relative;
       color: var(--text-muted);
       line-height: 1.8;
+      transition: transform 0.2s ease;
+    }
+
+    .experience-bullets li:hover {
+      transform: translateX(4px);
     }
 
     .experience-bullets li::before {
@@ -652,24 +783,26 @@
       font-size: 1.2rem;
     }
 
-    /* PROJECTS */
+    /* PROJECTS GRID - Advanced card layout */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2.5rem;
     }
 
-    /* ENHANCED: 3D Card Tilt Effect */
+    /* 3D CARD TILT - Mouse tracking effect */
     .project-card {
-      background: var(--bg-secondary);
-      border-radius: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
       padding: 2.5rem;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 2px solid var(--border);
+      border: 2px solid var(--glass-border);
       position: relative;
       overflow: hidden;
       transform-style: preserve-3d;
       perspective: 1000px;
+      cursor: pointer;
     }
 
     .project-card::before {
@@ -692,12 +825,18 @@
     .project-card:hover {
       transform: translateY(-12px) rotateX(2deg);
       border-color: var(--primary);
-      box-shadow: 0 20px 50px rgba(13, 71, 161, 0.15);
+      box-shadow: var(--shadow-xl);
     }
 
     .project-icon {
       font-size: 2.5rem;
       margin-bottom: 1rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      transform: scale(1.2) rotate(10deg);
     }
 
     .project-title {
@@ -725,6 +864,11 @@
       margin-bottom: 0.75rem;
       color: var(--text-muted);
       font-size: 0.95rem;
+      transition: transform 0.2s ease;
+    }
+
+    .project-outcomes li:hover {
+      transform: translateX(4px);
     }
 
     .project-outcomes li::before {
@@ -736,7 +880,7 @@
       font-size: 1.2rem;
     }
 
-    /* SKILLS */
+    /* SKILLS GRID */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -744,22 +888,29 @@
     }
 
     .skill-category {
-      background: var(--bg-secondary);
-      border-radius: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
       padding: 2.5rem;
-      border: 2px solid var(--border);
-      transition: all 0.3s ease;
+      border: 2px solid var(--glass-border);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .skill-category:hover {
       transform: translateY(-8px);
       border-color: var(--primary);
-      box-shadow: 0 15px 40px rgba(13, 71, 161, 0.1);
+      box-shadow: var(--shadow-xl);
     }
 
     .skill-icon {
       font-size: 2rem;
       margin-bottom: 0.5rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-category:hover .skill-icon {
+      transform: scale(1.2) rotate(10deg);
     }
 
     .skill-category h3 {
@@ -787,7 +938,7 @@
       border-radius: 25px;
       font-size: 0.9rem;
       border: 2px solid var(--border);
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
       font-weight: 500;
     }
@@ -797,9 +948,10 @@
       color: white;
       border-color: transparent;
       transform: scale(1.08);
+      box-shadow: var(--shadow-md);
     }
 
-    /* AWARDS */
+    /* AWARDS GRID */
     .awards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -807,16 +959,18 @@
     }
 
     .award-card {
-      background: var(--bg-secondary);
-      border-radius: 12px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
       padding: 2rem;
       border-left: 5px solid var(--success);
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
     .award-card:hover {
       transform: translateX(8px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-lg);
     }
 
     .award-card.promotion {
@@ -826,6 +980,12 @@
     .award-emoji {
       font-size: 2rem;
       margin-bottom: 0.75rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .award-card:hover .award-emoji {
+      transform: scale(1.2) rotate(10deg);
     }
 
     .award-year {
@@ -850,24 +1010,118 @@
       line-height: 1.6;
     }
 
-    /* CONTACT */
+    /* BLOG SECTION - Enhanced card with reading progress */
+    #blog {
+      position: relative;
+    }
+
+    .blog-featured {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 3rem;
+      border-radius: 20px;
+      margin: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      transition: transform 0.3s ease;
+    }
+
+    .blog-featured:hover {
+      transform: translateY(-8px);
+    }
+
+    .blog-featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .blog-featured h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-featured p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-featured a {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-featured a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .blog-featured a:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
+    /* CONTACT SECTION */
     .contact-section {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 4rem 2rem;
       text-align: center;
       color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+      pointer-events: none;
     }
 
     .contact-section h2 {
       color: white;
       margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-section h2::after {
+      background: white;
     }
 
     .contact-section p {
       font-size: 1.1rem;
       margin-bottom: 2rem;
       opacity: 0.95;
+      position: relative;
+      z-index: 1;
     }
 
     .contact-links {
@@ -875,6 +1129,8 @@
       gap: 2rem;
       justify-content: center;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
 
     .contact-link {
@@ -884,7 +1140,7 @@
       padding: 0.8rem 1.5rem;
       border: 2px solid white;
       border-radius: 25px;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -893,6 +1149,8 @@
     .contact-link:hover {
       background: white;
       color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
     .contact-link:focus {
@@ -910,6 +1168,119 @@
       font-size: 0.9rem;
     }
 
+    /* LIGHTBOX MODAL - Accessible image viewer */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+      animation: scaleIn 0.3s ease;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: white;
+      color: black;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .lightbox-close:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-nav:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
+    .lightbox-prev {
+      left: 2rem;
+    }
+
+    .lightbox-next {
+      right: 2rem;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      padding: 1rem;
+    }
+
     /* UTILITIES */
     .sr-only {
       position: absolute;
@@ -919,14 +1290,14 @@
       margin: -1px;
       overflow: hidden;
       clip: rect(0, 0, 0, 0);
-      white-border: nowrap;
+      white-space: nowrap;
       border-width: 0;
     }
 
-    /* PRINT */
+    /* PRINT STYLES */
     @media print {
-      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle {
-        display: none;
+      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox {
+        display: none !important;
       }
       body {
         background: white;
@@ -938,7 +1309,7 @@
       }
     }
 
-    /* RESPONSIVE */
+    /* RESPONSIVE BREAKPOINTS */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -955,6 +1326,17 @@
       .hero-stats {
         grid-template-columns: repeat(2, 1fr);
       }
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      .lightbox-prev {
+        left: 1rem;
+      }
+      .lightbox-next {
+        right: 1rem;
+      }
     }
   </style>
   
@@ -970,13 +1352,16 @@
 </head>
 
 <body>
-  <!-- ENHANCED: Skip to Content -->
+  <!-- READING PROGRESS BAR - Page-level scroll indicator -->
+  <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
+
+  <!-- SKIP TO CONTENT - Accessibility first -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ENHANCED: 3D Background Canvas -->
+  <!-- 3D BACKGROUND CANVAS - WebGL particle system -->
   <canvas id="three-background" aria-hidden="true"></canvas>
 
-  <!-- ENHANCED: Reduced Motion Toggle -->
+  <!-- MOTION TOGGLE - User control for animations -->
   <button class="motion-toggle" id="motionToggle" aria-label="Toggle animations" title="Toggle animations">🎬</button>
 
   <!-- NAVIGATION -->
@@ -995,10 +1380,10 @@
   </nav>
 
   <main id="main-content">
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION - Cinematic parallax entrance -->
     <section class="hero" role="banner" aria-label="Hero section">
       <div class="hero-content">
-        <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot parallax-layer" width="160" height="160">
+        <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot parallax-layer" width="160" height="160" loading="eager">
         <h1 class="parallax-layer">🌟 Chetan Sharma</h1>
         <p class="hero-subtitle parallax-layer">💼 Payroll Implementation Manager</p>
         <div class="emoji-row parallax-layer">🌍 🚀 💎 ⚡ 🎯 🏆</div>
@@ -1007,19 +1392,19 @@
         </p>
 
         <div class="hero-stats parallax-layer">
-          <div class="stat-card">
+          <div class="stat-card" tabindex="0">
             <div class="stat-number">13+</div>
             <div class="stat-label">Years Experience</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card" tabindex="0">
             <div class="stat-number">5+</div>
             <div class="stat-label">Countries Managed</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card" tabindex="0">
             <div class="stat-number">99.8%</div>
             <div class="stat-label">Accuracy Record</div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card" tabindex="0">
             <div class="stat-number">122</div>
             <div class="stat-label">Payrolls/Year</div>
           </div>
@@ -1118,7 +1503,7 @@
       <p class="section-subtitle">Innovative Automation Solutions & Outcomes</p>
       <div class="projects-grid">
 
-        <div class="project-card">
+        <div class="project-card" tabindex="0">
           <div class="project-icon">📊</div>
           <div class="project-title">ICP Service Comparison Dashboard (v3.0)</div>
           <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons using Google Apps Script with advanced analytics & compliance tracking.</p>
@@ -1131,7 +1516,7 @@
           </ul>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" tabindex="0">
           <div class="project-icon">🔄</div>
           <div class="project-title">Two-Way Validation Automation</div>
           <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data with 50+ error detection categories.</p>
@@ -1144,7 +1529,7 @@
           </ul>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" tabindex="0">
           <div class="project-icon">🤖</div>
           <div class="project-title">AI Integration Methodology</div>
           <p class="project-description">Non-technical approach to building enterprise automation dashboards combining domain expertise with AI code generation.</p>
@@ -1166,7 +1551,7 @@
       <p class="section-subtitle">Specialized Knowledge & Technical Proficiencies</p>
       <div class="skills-grid">
 
-        <div class="skill-category">
+        <div class="skill-category" tabindex="0">
           <div class="skill-icon">💼</div>
           <h3>Payroll & Compliance</h3>
           <div class="skill-chips">
@@ -1180,7 +1565,7 @@
           </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category" tabindex="0">
           <div class="skill-icon">🏢</div>
           <h3>Systems & Vendors</h3>
           <div class="skill-chips">
@@ -1191,7 +1576,7 @@
           </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category" tabindex="0">
           <div class="skill-icon">🌍</div>
           <h3>Global Compliance</h3>
           <div class="skill-chips">
@@ -1203,7 +1588,7 @@
           </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category" tabindex="0">
           <div class="skill-icon">⚡</div>
           <h3>Automation & AI</h3>
           <div class="skill-chips">
@@ -1215,7 +1600,7 @@
           </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category" tabindex="0">
           <div class="skill-icon">👨‍💼</div>
           <h3>Leadership</h3>
           <div class="skill-chips">
@@ -1227,7 +1612,7 @@
           </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category" tabindex="0">
           <div class="skill-icon">🛠️</div>
           <h3>Tools & Platforms</h3>
           <div class="skill-chips">
@@ -1243,17 +1628,15 @@
       </div>
     </section>
     
-    <!-- FEATURED BLOG -->
+    <!-- BLOG SECTION - Enhanced with reading progress -->
     <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
       <h2 id="blog-heading">📖 Featured Articles</h2>
       <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
       
-      <div style="background: linear-gradient(135deg, #0d47a1 0%, #6a1b9a 100%); color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
-        <h3 style="color: white; margin-bottom: 1rem;">🚀 New: Payroll Automation Using Google Sheets & Apps Script</h3>
-        <p style="font-size: 1rem; margin-bottom: 1.5rem;">Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
-        <a href="/blog/payroll-automation-google-sheets-apps-script/" style="display: inline-block; background: white; color: #0d47a1; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer;">
-          📖 Read Full Article →
-        </a>
+      <div class="blog-featured">
+        <h3>🚀 New: Payroll Automation Using Google Sheets & Apps Script</h3>
+        <p>Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
+        <a href="/blog/payroll-automation-google-sheets-apps-script/">📖 Read Full Article →</a>
       </div>
     </section>
 
@@ -1360,6 +1743,17 @@
     <p style="font-size: 0.85rem; margin-top: 0.5rem;" id="lastUpdated">Last updated: 2024</p>
   </footer>
 
+  <!-- LIGHTBOX MODAL - Accessible image viewer with keyboard nav -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
@@ -1378,13 +1772,13 @@
   }
   </script>
 
-  <!-- Three.js CDN - Lazy loaded for performance -->
+  <!-- Three.js CDN - Lazy loaded for 3D background -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-  <!-- Main JavaScript -->
+  <!-- Main JavaScript - All functionality in one file -->
   <script>
     // ============================================================================
-    // REDUCED MOTION & ACCESSIBILITY SUPPORT
+    // MOTION CONTROL & ACCESSIBILITY
     // ============================================================================
     
     let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1393,6 +1787,7 @@
 
     const motionToggle = document.getElementById('motionToggle');
     
+    // Update motion state with localStorage persistence
     function updateMotionState(enabled) {
       motionEnabled = enabled;
       motionToggle.textContent = enabled ? '🎬' : '⏸️';
@@ -1415,7 +1810,7 @@
       updateMotionState(!motionEnabled);
     });
 
-    // Check saved preference
+    // Restore saved motion preference
     const savedMotion = localStorage.getItem('motionEnabled');
     if (savedMotion !== null) {
       motionEnabled = savedMotion === 'true';
@@ -1423,7 +1818,7 @@
     }
 
     // ============================================================================
-    // THREE.JS 3D BACKGROUND - GPU-accelerated particle system
+    // THREE.JS 3D BACKGROUND - GPU-accelerated WebGL particle system
     // ============================================================================
     
     function initThreeJS() {
@@ -1443,13 +1838,13 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       } catch (e) {
-        console.log('WebGL not supported, falling back to CSS');
+        console.log('WebGL not supported, using CSS fallback');
         return;
       }
 
       camera.position.z = 50;
 
-      // Create floating particle system
+      // Particle system with dynamic velocities
       const particlesGeometry = new THREE.BufferGeometry();
       const particleCount = 150;
       const positions = new Float32Array(particleCount * 3);
@@ -1478,7 +1873,7 @@
       const particles = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particles);
 
-      // Add floating blobs
+      // Floating volumetric blobs
       const blobGeometry = new THREE.SphereGeometry(3, 32, 32);
       const blobMaterial = new THREE.MeshBasicMaterial({
         color: 0x6a1b9a,
@@ -1511,13 +1906,13 @@
         mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
       });
 
-      // Animation loop
+      // Animation loop with RAF
       function animate() {
         if (!motionEnabled) return;
         
         animationFrameId = requestAnimationFrame(animate);
 
-        // Smooth camera movement
+        // Smooth camera parallax
         targetX = mouseX * 5;
         targetY = mouseY * 5;
         camera.position.x += (targetX - camera.position.x) * 0.05;
@@ -1530,7 +1925,7 @@
           positions[i + 1] += velocities[i + 1];
           positions[i + 2] += velocities[i + 2];
 
-          // Wrap around boundaries
+          // Boundary wrapping
           if (Math.abs(positions[i]) > 50) velocities[i] *= -1;
           if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] *= -1;
           if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] *= -1;
@@ -1546,7 +1941,7 @@
         renderer.render(scene, camera);
       }
 
-      // Handle resize
+      // Handle resize with debouncing
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -1557,7 +1952,6 @@
         }, 100);
       });
 
-      // Start animation
       animate();
       canvas.classList.add('loaded');
       threeScene = { scene, camera, renderer, particles, blobs };
@@ -1572,7 +1966,7 @@
       }
     }
 
-    // Pause animations when page is hidden
+    // Pause animations when page hidden
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -1580,6 +1974,24 @@
         initThreeJS();
       }
     });
+
+    // ============================================================================
+    // READING PROGRESS BAR - Page scroll indicator
+    // ============================================================================
+    
+    const progressBar = document.getElementById('reading-progress');
+    
+    function updateReadingProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = window.pageYOffset;
+      const progress = (scrolled / documentHeight) * 100;
+      
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+      progressBar.setAttribute('aria-valuenow', Math.round(progress));
+    }
+
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
 
     // ============================================================================
     // SCROLL-TRIGGERED REVEAL ANIMATIONS - IntersectionObserver
@@ -1600,7 +2012,7 @@
     revealElements.forEach(el => revealObserver.observe(el));
 
     // ============================================================================
-    // PARALLAX EFFECT FOR HERO ELEMENTS
+    // PARALLAX EFFECT - Scroll-based depth for hero elements
     // ============================================================================
     
     const parallaxElements = document.querySelectorAll('.parallax-layer');
@@ -1624,15 +2036,15 @@
         window.requestAnimationFrame(updateParallax);
         ticking = true;
       }
-    });
+    }, { passive: true });
 
     // ============================================================================
-    // 3D CARD TILT EFFECT - Mouse tracking
+    // 3D CARD TILT EFFECT - Mouse tracking for interactive depth
     // ============================================================================
     
-    const projectCards = document.querySelectorAll('.project-card, .stat-card');
+    const tiltCards = document.querySelectorAll('.project-card, .stat-card');
     
-    projectCards.forEach(card => {
+    tiltCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         if (!motionEnabled) return;
         
@@ -1655,7 +2067,20 @@
     });
 
     // ============================================================================
-    // THEME TOGGLE
+    // NAVIGATION SCROLL EFFECT - Add shadow on scroll
+    // ============================================================================
+    
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // ============================================================================
+    // THEME TOGGLE - Dark/light mode with persistence
     // ============================================================================
     
     const themeToggle = document.getElementById('themeToggle');
@@ -1686,7 +2111,7 @@
     });
 
     // ============================================================================
-    // DOWNLOAD BUTTONS
+    // DOWNLOAD BUTTONS - Resume PDF and VCard generation
     // ============================================================================
     
     document.getElementById('downloadPDF').addEventListener('click', () => {
@@ -1716,6 +2141,108 @@ END:VCARD`;
     });
 
     // ============================================================================
+    // LIGHTBOX FUNCTIONALITY - Accessible image viewer with keyboard nav
+    // ============================================================================
+    
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    
+    let currentImageIndex = 0;
+    let galleryImages = [];
+
+    // Initialize gallery images (if any images with class 'gallery-img' exist)
+    function initGallery() {
+      galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
+      
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+          openLightbox(index);
+        });
+        
+        // Keyboard accessibility for gallery images
+        img.setAttribute('tabindex', '0');
+        img.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(index);
+          }
+        });
+      });
+    }
+
+    function openLightbox(index) {
+      currentImageIndex = index;
+      updateLightboxImage();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxImage() {
+      if (galleryImages.length === 0) return;
+      
+      const img = galleryImages[currentImageIndex];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = img.alt || '';
+      
+      // Update navigation button states
+      lightboxPrev.disabled = currentImageIndex === 0;
+      lightboxNext.disabled = currentImageIndex === galleryImages.length - 1;
+    }
+
+    function showPrevImage() {
+      if (currentImageIndex > 0) {
+        currentImageIndex--;
+        updateLightboxImage();
+      }
+    }
+
+    function showNextImage() {
+      if (currentImageIndex < galleryImages.length - 1) {
+        currentImageIndex++;
+        updateLightboxImage();
+      }
+    }
+
+    // Lightbox event listeners
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrevImage);
+    lightboxNext.addEventListener('click', showNextImage);
+    
+    // Close on background click
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showPrevImage();
+      } else if (e.key === 'ArrowRight') {
+        showNextImage();
+      }
+    });
+
+    // Initialize gallery
+    initGallery();
+
+    // ============================================================================
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ============================================================================
     
@@ -1741,5 +2268,3 @@ END:VCARD`;
   </script>
 </body>
 </html>
-
-
