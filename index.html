@@ -17,7 +17,7 @@
   <link rel="canonical" href="https://www.gmppayroll.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
 
   <title>Chetan Sharma | Payroll Implementation Consultant | Global Multi-Country Payroll Specialist</title>
 
@@ -36,9 +36,6 @@
       --secondary-light: #ab47bc;
       --accent: #ff6b6b;
       --accent-glow: #ff416c;
-      --neon-blue: #00f3ff;
-      --neon-purple: #bf00ff;
-      --neon-pink: #ff00ff;
       --success: #2e7d32;
       --warning: #f57f17;
       --bg: #ffffff;
@@ -78,7 +75,6 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 100px;
-      scroll-snap-type: y proximity;
     }
 
     body {
@@ -92,102 +88,56 @@
     }
 
     /* ============================================================================
-       CINEMATIC GRAIN TEXTURE - Film-quality overlay
-       ============================================================================ */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      z-index: 9999;
-      pointer-events: none;
-      animation: grain 8s steps(10) infinite;
-    }
-
-    @keyframes grain {
-      0%, 100% { transform: translate(0, 0); }
-      10% { transform: translate(-5%, -10%); }
-      20% { transform: translate(-15%, 5%); }
-      30% { transform: translate(7%, -25%); }
-      40% { transform: translate(-5%, 25%); }
-      50% { transform: translate(-15%, 10%); }
-      60% { transform: translate(15%, 0%); }
-      70% { transform: translate(0%, 15%); }
-      80% { transform: translate(3%, 35%); }
-      90% { transform: translate(-10%, 10%); }
-    }
-
-    /* ============================================================================
-       MAGNETIC CURSOR - Advanced attraction physics
+       CUSTOM CURSOR - Advanced cursor with trail effect
        ============================================================================ */
     #custom-cursor {
       position: fixed;
       width: 20px;
       height: 20px;
-      border: 2px solid var(--neon-blue);
+      border: 2px solid var(--primary);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10002;
-      transition: transform 0.15s ease, border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+      transition: transform 0.15s ease, border-color 0.3s ease;
       mix-blend-mode: difference;
-      box-shadow: 0 0 20px var(--neon-blue);
     }
 
     #cursor-dot {
       position: fixed;
       width: 6px;
       height: 6px;
-      background: var(--neon-blue);
+      background: var(--primary);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10003;
-      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-      box-shadow: 0 0 10px var(--neon-blue);
+      transition: transform 0.1s ease;
     }
 
     .cursor-hover #custom-cursor {
-      width: 60px;
-      height: 60px;
-      border-color: var(--neon-purple);
-      box-shadow: 0 0 30px var(--neon-purple);
-    }
-
-    .cursor-hover #cursor-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--neon-purple);
-      box-shadow: 0 0 20px var(--neon-purple);
+      transform: scale(2);
+      border-color: var(--accent-glow);
     }
 
     .cursor-click #custom-cursor {
       transform: scale(0.8);
     }
 
-    .cursor-magnetic {
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    /* Cursor particles with enhanced effects */
+    /* Cursor particles trail */
     .cursor-particle {
       position: fixed;
-      width: 6px;
-      height: 6px;
-      background: var(--neon-blue);
+      width: 4px;
+      height: 4px;
+      background: var(--primary);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10001;
       opacity: 0;
-      animation: particleFadeEnhanced 1s ease-out forwards;
-      box-shadow: 0 0 10px var(--neon-blue);
+      animation: particleFade 0.8s ease-out forwards;
     }
 
-    @keyframes particleFadeEnhanced {
+    @keyframes particleFade {
       0% {
-        opacity: 1;
+        opacity: 0.8;
         transform: scale(1) translate(0, 0);
       }
       100% {
@@ -196,41 +146,17 @@
       }
     }
 
-    /* Particle explosion effect */
-    .particle-explosion {
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      background: var(--neon-purple);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10001;
-      animation: explode 0.6s ease-out forwards;
-      box-shadow: 0 0 8px var(--neon-purple);
-    }
-
-    @keyframes explode {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--ex), var(--ey)) scale(0);
-      }
-    }
-
     @media (max-width: 1024px) {
       body {
         cursor: auto;
       }
-      #custom-cursor, #cursor-dot, .cursor-particle, .particle-explosion {
+      #custom-cursor, #cursor-dot, .cursor-particle {
         display: none;
       }
     }
 
     /* ============================================================================
-       ADVANCED PAGE LOADER - With percentage counter
+       READING PROGRESS & PAGE LOADER
        ============================================================================ */
     #reading-progress {
       position: fixed;
@@ -238,10 +164,10 @@
       left: 0;
       width: 0%;
       height: 4px;
-      background: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       z-index: 10000;
       transition: width 0.1s ease-out;
-      box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple);
+      box-shadow: 0 0 20px rgba(13, 71, 161, 0.6), 0 0 40px rgba(106, 27, 154, 0.4);
     }
 
     #page-loader {
@@ -250,14 +176,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       z-index: 100000;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       gap: 2rem;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     #page-loader.hidden {
@@ -266,8 +192,8 @@
     }
 
     .loader-animation {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       position: relative;
     }
 
@@ -280,30 +206,27 @@
     }
 
     .loader-ring:nth-child(1) {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       animation-delay: 0s;
-      border-width: 5px;
     }
 
     .loader-ring:nth-child(2) {
-      width: 75px;
-      height: 75px;
-      top: 12.5px;
-      left: 12.5px;
+      width: 60px;
+      height: 60px;
+      top: 10px;
+      left: 10px;
       animation-delay: 0.2s;
       border-top-color: rgba(255, 255, 255, 0.7);
-      border-width: 4px;
     }
 
     .loader-ring:nth-child(3) {
-      width: 50px;
-      height: 50px;
-      top: 25px;
-      left: 25px;
+      width: 40px;
+      height: 40px;
+      top: 20px;
+      left: 20px;
       animation-delay: 0.4s;
       border-top-color: rgba(255, 255, 255, 0.4);
-      border-width: 3px;
     }
 
     @keyframes spin {
@@ -313,20 +236,10 @@
 
     .loader-text {
       color: white;
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 3px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 2px;
       animation: pulse 1.5s ease-in-out infinite;
-      font-family: 'Orbitron', sans-serif;
-      text-transform: uppercase;
-    }
-
-    .loader-percentage {
-      color: white;
-      font-size: 3rem;
-      font-weight: 900;
-      font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 
     @keyframes pulse {
@@ -335,75 +248,7 @@
     }
 
     /* ============================================================================
-       MORPHING BLOB BACKGROUND - Organic liquid shapes
-       ============================================================================ */
-    #blob-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .morph-blob {
-      position: absolute;
-      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      opacity: 0.05;
-      filter: blur(60px);
-      animation: morphBlob 20s ease-in-out infinite;
-    }
-
-    .morph-blob:nth-child(1) {
-      width: 500px;
-      height: 500px;
-      top: -250px;
-      left: -250px;
-      animation-delay: 0s;
-    }
-
-    .morph-blob:nth-child(2) {
-      width: 600px;
-      height: 600px;
-      top: 50%;
-      right: -300px;
-      animation-delay: 5s;
-      background: linear-gradient(135deg, var(--secondary), var(--accent-glow));
-    }
-
-    .morph-blob:nth-child(3) {
-      width: 450px;
-      height: 450px;
-      bottom: -225px;
-      left: 50%;
-      animation-delay: 10s;
-      background: linear-gradient(135deg, var(--accent-glow), var(--primary));
-    }
-
-    @keyframes morphBlob {
-      0%, 100% {
-        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-        transform: translate(0, 0) scale(1) rotate(0deg);
-      }
-      25% {
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-        transform: translate(50px, 30px) scale(1.1) rotate(90deg);
-      }
-      50% {
-        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-        transform: translate(20px, -40px) scale(0.9) rotate(180deg);
-      }
-      75% {
-        border-radius: 70% 30% 50% 50% / 30% 50% 70% 50%;
-        transform: translate(-30px, 20px) scale(1.05) rotate(270deg);
-      }
-    }
-
-    /* ============================================================================
-       3D BACKGROUND CANVAS
+       ADVANCED 3D BACKGROUND - Neural network particles
        ============================================================================ */
     #three-background {
       position: fixed;
@@ -421,6 +266,62 @@
       opacity: 1;
     }
 
+    /* Animated gradient mesh background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(106, 27, 154, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 90%, rgba(255, 65, 108, 0.05) 0%, transparent 50%);
+      z-index: 0;
+      pointer-events: none;
+      animation: gradientFlow 20s ease infinite;
+    }
+
+    @keyframes gradientFlow {
+      0%, 100% {
+        opacity: 1;
+        filter: hue-rotate(0deg);
+      }
+      50% {
+        opacity: 0.8;
+        filter: hue-rotate(20deg);
+      }
+    }
+
+    /* Floating orbs */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(13, 71, 161, 0.05) 0%, transparent 30%),
+        radial-gradient(circle at 70% 70%, rgba(106, 27, 154, 0.05) 0%, transparent 30%);
+      z-index: 0;
+      pointer-events: none;
+      animation: orbFloat 30s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(5%, -5%) scale(1.1);
+      }
+      66% {
+        transform: translate(-5%, 5%) scale(0.9);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -429,7 +330,7 @@
         scroll-behavior: auto !important;
       }
       
-      #three-background, .morph-blob, body::before {
+      #three-background, body::before, body::after {
         display: none !important;
       }
     }
@@ -437,7 +338,6 @@
     nav, section, footer {
       position: relative;
       z-index: 1;
-      scroll-snap-align: start;
     }
 
     /* ============================================================================
@@ -469,7 +369,7 @@
       right: 2rem;
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
-      border: 2px solid var(--neon-blue);
+      border: 2px solid var(--glass-border);
       border-radius: 50%;
       width: 60px;
       height: 60px;
@@ -480,13 +380,13 @@
       z-index: 1001;
       font-size: 1.5rem;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 0 20px var(--neon-blue), var(--shadow-xl);
+      box-shadow: var(--shadow-xl), 0 0 20px rgba(13, 71, 161, 0.2);
     }
 
     .motion-toggle:hover {
       transform: scale(1.15) rotate(15deg);
-      box-shadow: 0 0 40px var(--neon-purple), var(--shadow-2xl);
-      border-color: var(--neon-purple);
+      box-shadow: var(--shadow-2xl), 0 0 30px rgba(13, 71, 161, 0.4);
+      border-color: var(--primary);
     }
 
     .motion-toggle:focus {
@@ -504,7 +404,7 @@
     }
 
     /* ============================================================================
-       NAVIGATION - Advanced glassmorphism with neon accents
+       NAVIGATION - Magnetic glassmorphism header
        ============================================================================ */
     nav {
       position: fixed;
@@ -513,14 +413,13 @@
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
       z-index: 1000;
-      border-bottom: 2px solid transparent;
-      border-image: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink)) 1;
-      box-shadow: var(--shadow-md), 0 0 20px rgba(0, 243, 255, 0.2);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md), 0 4px 20px rgba(13, 71, 161, 0.1);
       transition: all 0.3s ease;
     }
 
     nav.scrolled {
-      box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 243, 255, 0.3);
+      box-shadow: var(--shadow-xl), 0 8px 30px rgba(13, 71, 161, 0.15);
       backdrop-filter: blur(25px) saturate(200%);
     }
 
@@ -536,16 +435,15 @@
     .logo {
       font-size: 1.5rem;
       font-weight: 900;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Poppins', sans-serif;
       letter-spacing: -1px;
       transition: transform 0.3s ease, filter 0.3s ease;
       position: relative;
-      text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
     }
 
     .logo::after {
@@ -555,15 +453,14 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       transform: scaleX(0);
       transition: transform 0.3s ease;
-      box-shadow: 0 0 10px var(--neon-blue);
     }
 
     .logo:hover {
       transform: scale(1.05);
-      filter: brightness(1.3);
+      filter: brightness(1.2);
     }
 
     .logo:hover::after {
@@ -587,6 +484,7 @@
       padding: 0.5rem 1rem;
     }
 
+    /* Liquid underline effect */
     .nav-links a::before {
       content: '';
       position: absolute;
@@ -594,11 +492,10 @@
       left: 50%;
       width: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       border-radius: 2px;
       transform: translateX(-50%);
-      box-shadow: 0 0 10px var(--neon-blue);
     }
 
     .nav-links a:hover::before {
@@ -606,8 +503,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--neon-blue);
-      text-shadow: 0 0 10px var(--neon-blue);
+      color: var(--primary);
     }
 
     .nav-links a:focus {
@@ -621,7 +517,7 @@
       height: 50px;
       border-radius: 50%;
       background: var(--bg-secondary);
-      border: 2px solid var(--neon-blue);
+      border: 2px solid var(--border);
       cursor: pointer;
       font-size: 1.5rem;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -630,7 +526,6 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 15px var(--neon-blue);
     }
 
     .theme-toggle::before {
@@ -640,7 +535,7 @@
       left: 50%;
       width: 0;
       height: 0;
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-radius: 50%;
       transition: all 0.5s ease;
       transform: translate(-50%, -50%);
@@ -653,8 +548,8 @@
 
     .theme-toggle:hover {
       transform: rotate(180deg) scale(1.1);
-      border-color: var(--neon-purple);
-      box-shadow: 0 0 30px var(--neon-purple);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg), 0 0 20px rgba(13, 71, 161, 0.3);
     }
 
     .theme-toggle span {
@@ -682,7 +577,7 @@
     }
 
     /* ============================================================================
-       HERO SECTION - Cinematic with typewriter effect
+       HERO SECTION - 3D parallax with holographic effects
        ============================================================================ */
     .hero {
       margin-top: 100px;
@@ -709,7 +604,7 @@
       will-change: transform;
     }
 
-    /* Holographic headshot with neon border */
+    /* Holographic headshot with advanced effects */
     .hero-headshot {
       width: 160px;
       height: 160px;
@@ -717,15 +612,16 @@
       margin: 0 auto 2.5rem;
       border: 5px solid transparent;
       background: linear-gradient(var(--bg), var(--bg)) padding-box,
-                  linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink)) border-box;
+                  linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow)) border-box;
       object-fit: cover;
       box-shadow: 
-        0 20px 40px rgba(0, 243, 255, 0.3),
-        0 0 60px rgba(0, 243, 255, 0.4),
+        0 20px 40px rgba(13, 71, 161, 0.3),
+        0 0 0 10px rgba(13, 71, 161, 0.1),
+        0 0 60px rgba(13, 71, 161, 0.2),
         inset 0 0 20px rgba(255, 255, 255, 0.1);
       animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
                  float 6s ease-in-out infinite,
-                 neonPulse 3s ease-in-out infinite;
+                 holographicGlow 3s ease-in-out infinite;
       transition: transform 0.3s ease;
       position: relative;
     }
@@ -737,11 +633,11 @@
       left: -5px;
       right: -5px;
       bottom: -5px;
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow));
       border-radius: 50%;
       z-index: -1;
       filter: blur(20px);
-      opacity: 0.6;
+      opacity: 0.5;
       animation: rotateBorder 4s linear infinite;
     }
 
@@ -750,23 +646,21 @@
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes neonPulse {
+    @keyframes holographicGlow {
       0%, 100% {
-        box-shadow: 
-          0 20px 40px rgba(0, 243, 255, 0.3),
-          0 0 60px rgba(0, 243, 255, 0.4),
-          inset 0 0 20px rgba(255, 255, 255, 0.1);
+        filter: brightness(1) saturate(1);
       }
       50% {
-        box-shadow: 
-          0 20px 40px rgba(191, 0, 255, 0.4),
-          0 0 80px rgba(191, 0, 255, 0.5),
-          inset 0 0 30px rgba(255, 255, 255, 0.15);
+        filter: brightness(1.2) saturate(1.3);
       }
     }
 
     .hero-headshot:hover {
       transform: scale(1.1) rotateY(10deg) rotateX(5deg);
+      box-shadow: 
+        0 30px 60px rgba(13, 71, 161, 0.4),
+        0 0 0 15px rgba(13, 71, 161, 0.15),
+        0 0 80px rgba(13, 71, 161, 0.3);
     }
 
     @keyframes float {
@@ -774,37 +668,22 @@
       50% { transform: translateY(-15px) translateZ(10px); }
     }
 
-    /* Text scramble and typewriter effect */
+    /* Advanced text effects */
     .hero h1 {
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 900;
       margin-bottom: 0.5rem;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Poppins', sans-serif;
       animation: slideInUp 0.8s ease 0.1s both;
       letter-spacing: -2px;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      text-shadow: 
+        0 2px 20px rgba(13, 71, 161, 0.2),
+        0 4px 40px rgba(106, 27, 154, 0.15);
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 50%, var(--secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       position: relative;
-      text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
-    }
-
-    .hero h1::after {
-      content: '';
-      position: absolute;
-      right: -10px;
-      bottom: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--neon-blue);
-      animation: blink 1s step-end infinite;
-      box-shadow: 0 0 10px var(--neon-blue);
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
     }
 
     .hero-subtitle {
@@ -820,49 +699,34 @@
       letter-spacing: -0.5px;
     }
 
-    /* Wave text effect for emojis */
     .emoji-row {
       font-size: 2.2rem;
       letter-spacing: 0.8rem;
       margin: 2rem 0;
       animation: slideInUp 0.8s ease 0.25s both;
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
     }
 
     .emoji-row span {
       display: inline-block;
-      animation: wave 2s ease-in-out infinite;
+      animation: emojiFloat 3s ease-in-out infinite;
       transition: transform 0.3s ease;
-      cursor: pointer;
     }
 
     .emoji-row span:nth-child(1) { animation-delay: 0s; }
-    .emoji-row span:nth-child(2) { animation-delay: 0.1s; }
-    .emoji-row span:nth-child(3) { animation-delay: 0.2s; }
-    .emoji-row span:nth-child(4) { animation-delay: 0.3s; }
-    .emoji-row span:nth-child(5) { animation-delay: 0.4s; }
-    .emoji-row span:nth-child(6) { animation-delay: 0.5s; }
+    .emoji-row span:nth-child(2) { animation-delay: 0.2s; }
+    .emoji-row span:nth-child(3) { animation-delay: 0.4s; }
+    .emoji-row span:nth-child(4) { animation-delay: 0.6s; }
+    .emoji-row span:nth-child(5) { animation-delay: 0.8s; }
+    .emoji-row span:nth-child(6) { animation-delay: 1s; }
 
     .emoji-row span:hover {
-      transform: scale(1.5) rotate(15deg);
-      filter: drop-shadow(0 0 10px var(--neon-purple));
+      transform: scale(1.4) rotate(15deg);
     }
 
-    @keyframes wave {
-      0%, 100% { 
-        transform: translateY(0) rotate(0deg); 
-      }
-      25% { 
-        transform: translateY(-15px) rotate(10deg); 
-      }
-      50% {
-        transform: translateY(0) rotate(0deg);
-      }
-      75% { 
-        transform: translateY(-10px) rotate(-10deg); 
-      }
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(5deg); }
+      75% { transform: translateY(-5px) rotate(-5deg); }
     }
 
     .hero-description {
@@ -877,7 +741,7 @@
     }
 
     /* ============================================================================
-       3D FLIP STAT CARDS - Interactive card flipping
+       ADVANCED STAT CARDS - Holographic 3D effect
        ============================================================================ */
     .hero-stats {
       display: grid;
@@ -885,52 +749,23 @@
       gap: 1.5rem;
       margin: 2.5rem 0;
       animation: slideInUp 0.8s ease 0.35s both;
-      perspective: 1000px;
     }
 
     .stat-card {
-      position: relative;
-      height: 140px;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-      cursor: pointer;
-    }
-
-    .stat-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-
-    .stat-card:hover .stat-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .stat-card-front,
-    .stat-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
       border-radius: 20px;
-      border: 2px solid var(--neon-blue);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 
-        var(--shadow-xl),
-        0 0 20px rgba(0, 243, 255, 0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.05);
+      border: 2px solid var(--glass-border);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-style: preserve-3d;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
     }
 
-    .stat-card-front::before,
-    .stat-card-back::before {
+    /* Holographic shimmer effect */
+    .stat-card::before {
       content: '';
       position: absolute;
       top: -50%;
@@ -940,42 +775,64 @@
       background: linear-gradient(
         45deg,
         transparent 30%,
-        rgba(0, 243, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.1) 50%,
         transparent 70%
       );
       transform: rotate(45deg);
-      animation: shimmer 3s ease-in-out infinite;
+      transition: all 0.6s ease;
     }
 
-    @keyframes shimmer {
-      0%, 100% {
-        transform: translateX(-100%) translateY(-100%) rotate(45deg);
-      }
-      50% {
-        transform: translateX(100%) translateY(100%) rotate(45deg);
-      }
+    .stat-card:hover::before {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
     }
 
-    .stat-card-back {
-      transform: rotateY(180deg);
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-      border-color: var(--neon-purple);
+    /* Gradient overlay */
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(13, 71, 161, 0.1) 0%, 
+        rgba(106, 27, 154, 0.1) 50%,
+        rgba(255, 65, 108, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 20px;
+      z-index: -1;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-15px) rotateX(8deg) translateZ(20px);
+      border-color: var(--primary);
+      box-shadow: 
+        var(--shadow-2xl),
+        0 20px 60px rgba(13, 71, 161, 0.3),
+        0 0 40px rgba(106, 27, 154, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-card:hover::after {
+      opacity: 1;
     }
 
     .stat-number {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 900;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Poppins', sans-serif;
       position: relative;
       z-index: 1;
+      text-shadow: 0 4px 20px rgba(13, 71, 161, 0.3);
     }
 
     .stat-label {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       margin-top: 0.5rem;
       position: relative;
@@ -983,24 +840,8 @@
       font-weight: 600;
     }
 
-    .stat-card-back .stat-number,
-    .stat-card-back .stat-label {
-      color: white;
-      background: none;
-      -webkit-text-fill-color: white;
-    }
-
-    .stat-detail {
-      color: white;
-      font-size: 0.85rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      opacity: 0.9;
-    }
-
     /* ============================================================================
-       MAGNETIC BUTTONS - With particle effects
+       MAGNETIC BUTTONS - Liquid morphing effect
        ============================================================================ */
     .hero-cta {
       display: flex;
@@ -1028,6 +869,7 @@
       box-shadow: var(--shadow-lg);
     }
 
+    /* Liquid button effect */
     .btn::before {
       content: '';
       position: absolute;
@@ -1068,12 +910,12 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       color: white;
       box-shadow: 
         var(--shadow-xl),
-        0 0 30px rgba(0, 243, 255, 0.5),
-        0 0 60px rgba(191, 0, 255, 0.3);
+        0 10px 40px rgba(13, 71, 161, 0.4),
+        0 0 30px rgba(106, 27, 154, 0.3);
       position: relative;
       border: 2px solid transparent;
     }
@@ -1082,8 +924,8 @@
       transform: translateY(-6px) scale(1.05);
       box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(0, 243, 255, 0.6),
-        0 0 80px rgba(191, 0, 255, 0.4);
+        0 20px 60px rgba(13, 71, 161, 0.5),
+        0 0 50px rgba(106, 27, 154, 0.4);
     }
 
     .btn-primary:active {
@@ -1093,20 +935,19 @@
     .btn-secondary {
       background: var(--bg-secondary);
       color: var(--text);
-      border: 2px solid var(--neon-blue);
-      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+      border: 2px solid var(--border);
     }
 
     .btn-secondary:hover {
-      border-color: var(--neon-purple);
+      border-color: var(--primary);
       transform: translateY(-6px) scale(1.05);
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      box-shadow: 0 0 40px rgba(191, 0, 255, 0.4);
+      box-shadow: var(--shadow-xl), 0 10px 40px rgba(13, 71, 161, 0.3);
     }
 
     /* ============================================================================
-       ANIMATIONS
+       ANIMATIONS - Enhanced entrance effects
        ============================================================================ */
     @keyframes slideInDown {
       from {
@@ -1142,7 +983,7 @@
     }
 
     /* ============================================================================
-       SCROLL-TRIGGERED REVEALS
+       SCROLL-TRIGGERED REVEALS - Advanced stagger
        ============================================================================ */
     .reveal {
       opacity: 0;
@@ -1157,7 +998,7 @@
     }
 
     /* ============================================================================
-       SECTIONS
+       SECTIONS - Enhanced content structure
        ============================================================================ */
     section {
       max-width: 1100px;
@@ -1169,16 +1010,15 @@
     section h2 {
       font-size: clamp(2rem, 5vw, 3rem);
       margin-bottom: 0.5rem;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-weight: 900;
       letter-spacing: -1px;
       position: relative;
       display: inline-block;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
     }
 
     section h2::after {
@@ -1186,11 +1026,11 @@
       position: absolute;
       bottom: -10px;
       left: 0;
-      width: 100%;
+      width: 80px;
       height: 5px;
-      background: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       border-radius: 3px;
-      box-shadow: 0 0 15px var(--neon-blue);
+      box-shadow: 0 2px 10px rgba(13, 71, 161, 0.4);
     }
 
     .section-subtitle {
@@ -1207,9 +1047,9 @@
       content: '';
       width: 5px;
       height: 35px;
-      background: linear-gradient(180deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       border-radius: 3px;
-      box-shadow: 0 0 10px var(--neon-blue);
+      box-shadow: 0 2px 10px rgba(13, 71, 161, 0.4);
     }
 
     /* ============================================================================
@@ -1220,12 +1060,16 @@
       backdrop-filter: blur(20px) saturate(180%);
       border-radius: 30px;
       padding: 3rem;
-      border: 2px solid var(--neon-blue);
+      border-left: 8px solid transparent;
+      background: 
+        linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
+        linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow)) border-box;
+      border: 2px solid transparent;
       line-height: 2;
       font-size: 1.08rem;
       box-shadow: 
         var(--shadow-xl),
-        0 0 30px rgba(0, 243, 255, 0.3),
+        0 10px 40px rgba(13, 71, 161, 0.2),
         inset 0 0 20px rgba(255, 255, 255, 0.05);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
@@ -1242,19 +1086,27 @@
       background: linear-gradient(
         45deg,
         transparent 30%,
-        rgba(0, 243, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.05) 50%,
         transparent 70%
       );
       transform: rotate(45deg);
       animation: shimmer 3s ease-in-out infinite;
     }
 
+    @keyframes shimmer {
+      0%, 100% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+      50% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+
     .summary-card:hover {
       transform: translateY(-6px);
-      border-color: var(--neon-purple);
       box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(191, 0, 255, 0.4),
+        0 20px 60px rgba(13, 71, 161, 0.3),
         inset 0 0 30px rgba(255, 255, 255, 0.08);
     }
 
@@ -1265,18 +1117,16 @@
     }
 
     .summary-card strong {
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      color: var(--primary);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 800;
     }
 
-    /* Similar advanced styles continue for experience, projects, skills, awards, blog, contact sections...
-       (Keeping the same pattern with neon accents, advanced animations, and holographic effects) */
-
     /* ============================================================================
-       EXPERIENCE SECTION
+       EXPERIENCE SECTION - Timeline with advanced effects
        ============================================================================ */
     .experience-item {
       margin-bottom: 4rem;
@@ -1294,11 +1144,11 @@
       top: 0;
       bottom: 0;
       width: 5px;
-      background: linear-gradient(180deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       border-radius: 3px;
-      box-shadow: 0 0 20px var(--neon-blue);
+      box-shadow: 0 0 20px rgba(13, 71, 161, 0.5);
     }
 
     .experience-item:hover::before {
@@ -1326,7 +1176,7 @@
       font-size: 3rem;
       margin-bottom: 0.5rem;
       animation: scaleIn 0.5s ease;
-      filter: drop-shadow(0 0 10px var(--neon-blue));
+      filter: drop-shadow(0 4px 10px rgba(13, 71, 161, 0.3));
     }
 
     .experience-title {
@@ -1339,7 +1189,7 @@
 
     .experience-company {
       font-weight: 700;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -1351,13 +1201,13 @@
       color: white;
       font-size: 1rem;
       white-space: nowrap;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       padding: 0.8rem 1.5rem;
       border-radius: 30px;
       font-weight: 700;
       box-shadow: 
         var(--shadow-md),
-        0 0 20px rgba(0, 243, 255, 0.4);
+        0 4px 20px rgba(13, 71, 161, 0.3);
     }
 
     .experience-bullets {
@@ -1383,14 +1233,14 @@
       content: '◆';
       position: absolute;
       left: 0;
-      color: var(--neon-blue);
+      color: var(--primary);
       font-weight: bold;
       font-size: 1.4rem;
-      filter: drop-shadow(0 0 5px var(--neon-blue));
+      filter: drop-shadow(0 2px 4px rgba(13, 71, 161, 0.4));
     }
 
     /* ============================================================================
-       PROJECT CARDS - Ultra advanced
+       PROJECT CARDS - Advanced holographic 3D
        ============================================================================ */
     .projects-grid {
       display: grid;
@@ -1404,7 +1254,7 @@
       border-radius: 30px;
       padding: 3rem;
       transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 2px solid var(--neon-blue);
+      border: 2px solid var(--glass-border);
       position: relative;
       overflow: hidden;
       transform-style: preserve-3d;
@@ -1412,6 +1262,7 @@
       cursor: pointer;
     }
 
+    /* Animated gradient border */
     .project-card::before {
       content: '';
       position: absolute;
@@ -1419,17 +1270,17 @@
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       transform: scaleX(0);
       transition: transform 0.5s ease;
       transform-origin: left;
-      box-shadow: 0 0 15px var(--neon-blue);
     }
 
     .project-card:hover::before {
       transform: scaleX(1);
     }
 
+    /* Holographic overlay */
     .project-card::after {
       content: '';
       position: absolute;
@@ -1440,7 +1291,7 @@
       background: linear-gradient(
         45deg,
         transparent 30%,
-        rgba(0, 243, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.1) 50%,
         transparent 70%
       );
       transform: rotate(45deg);
@@ -1454,10 +1305,11 @@
 
     .project-card:hover {
       transform: translateY(-15px) rotateX(5deg) scale(1.02);
-      border-color: var(--neon-purple);
+      border-color: var(--primary);
       box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(191, 0, 255, 0.5),
+        0 20px 60px rgba(13, 71, 161, 0.4),
+        0 0 40px rgba(106, 27, 154, 0.3),
         inset 0 0 30px rgba(255, 255, 255, 0.05);
     }
 
@@ -1466,14 +1318,13 @@
       margin-bottom: 1rem;
       display: inline-block;
       transition: transform 0.4s ease;
-      filter: drop-shadow(0 0 15px var(--neon-blue));
+      filter: drop-shadow(0 4px 15px rgba(13, 71, 161, 0.4));
       position: relative;
       z-index: 1;
     }
 
     .project-card:hover .project-icon {
       transform: scale(1.3) rotate(15deg) translateZ(20px);
-      filter: drop-shadow(0 0 25px var(--neon-purple));
     }
 
     .project-title {
@@ -1523,12 +1374,12 @@
       color: var(--success);
       font-weight: bold;
       font-size: 1.4rem;
-      filter: drop-shadow(0 0 5px var(--success));
+      filter: drop-shadow(0 2px 4px rgba(46, 125, 50, 0.4));
     }
 
-    /* Skills, Awards, Blog, Contact sections follow similar pattern... */
-    /* For brevity, I'll include key sections with neon styling */
-
+    /* ============================================================================
+       SKILLS GRID - Interactive chips with glow
+       ============================================================================ */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1540,19 +1391,36 @@
       backdrop-filter: blur(20px) saturate(180%);
       border-radius: 30px;
       padding: 3rem;
-      border: 2px solid var(--neon-blue);
+      border: 2px solid var(--glass-border);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
     }
 
+    .skill-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(13, 71, 161, 0.05), rgba(106, 27, 154, 0.05));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 30px;
+    }
+
     .skill-category:hover {
       transform: translateY(-10px);
-      border-color: var(--neon-purple);
+      border-color: var(--primary);
       box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(191, 0, 255, 0.4),
+        0 15px 50px rgba(13, 71, 161, 0.3),
         inset 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-category:hover::before {
+      opacity: 1;
     }
 
     .skill-icon {
@@ -1560,14 +1428,13 @@
       margin-bottom: 0.5rem;
       display: inline-block;
       transition: transform 0.4s ease;
-      filter: drop-shadow(0 0 10px var(--neon-blue));
+      filter: drop-shadow(0 4px 10px rgba(13, 71, 161, 0.3));
       position: relative;
       z-index: 1;
     }
 
     .skill-category:hover .skill-icon {
       transform: scale(1.3) rotate(15deg);
-      filter: drop-shadow(0 0 20px var(--neon-purple));
     }
 
     .skill-category h3 {
@@ -1576,7 +1443,7 @@
       margin-bottom: 1.5rem;
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -1613,7 +1480,7 @@
       left: 50%;
       width: 0;
       height: 0;
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-radius: 50%;
       transform: translate(-50%, -50%);
       transition: width 0.4s ease, height 0.4s ease;
@@ -1630,7 +1497,8 @@
       transform: scale(1.1) translateY(-2px);
       box-shadow: 
         var(--shadow-lg),
-        0 0 30px rgba(191, 0, 255, 0.4);
+        0 8px 25px rgba(13, 71, 161, 0.4),
+        0 0 30px rgba(106, 27, 154, 0.3);
     }
 
     .skill-chip span {
@@ -1638,7 +1506,9 @@
       z-index: 1;
     }
 
-    /* Awards, Blog, Contact sections with similar neon enhancements */
+    /* ============================================================================
+       AWARDS GRID - Premium cards
+       ============================================================================ */
     .awards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1652,27 +1522,40 @@
       padding: 2.5rem;
       border-left: 6px solid var(--success);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: var(--shadow-md), 0 0 15px rgba(46, 125, 50, 0.2);
+      box-shadow: var(--shadow-md);
       position: relative;
       overflow: hidden;
+    }
+
+    .award-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(46, 125, 50, 0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
     .award-card:hover {
       transform: translateX(10px) scale(1.02);
       box-shadow: 
         var(--shadow-xl),
-        0 0 30px rgba(46, 125, 50, 0.3);
+        0 10px 40px rgba(46, 125, 50, 0.2);
+    }
+
+    .award-card:hover::before {
+      opacity: 1;
     }
 
     .award-card.promotion {
-      border-left-color: var(--neon-blue);
-      box-shadow: var(--shadow-md), 0 0 15px rgba(0, 243, 255, 0.2);
+      border-left-color: var(--primary);
     }
 
-    .award-card.promotion:hover {
-      box-shadow: 
-        var(--shadow-xl),
-        0 0 30px rgba(0, 243, 255, 0.4);
+    .award-card.promotion::before {
+      background: linear-gradient(135deg, rgba(13, 71, 161, 0.05), transparent);
     }
 
     .award-emoji {
@@ -1680,7 +1563,7 @@
       margin-bottom: 0.75rem;
       display: inline-block;
       transition: transform 0.4s ease;
-      filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.3));
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
       position: relative;
       z-index: 1;
     }
@@ -1718,8 +1601,11 @@
       z-index: 1;
     }
 
+    /* ============================================================================
+       BLOG SECTION - Premium featured card
+       ============================================================================ */
     .blog-featured {
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       color: white;
       padding: 4rem;
       border-radius: 30px;
@@ -1729,9 +1615,30 @@
       overflow: hidden;
       box-shadow: 
         var(--shadow-2xl),
-        0 0 60px rgba(0, 243, 255, 0.5),
-        0 0 100px rgba(191, 0, 255, 0.4);
+        0 20px 60px rgba(13, 71, 161, 0.5),
+        0 0 60px rgba(106, 27, 154, 0.4);
       transition: transform 0.4s ease;
+    }
+
+    .blog-featured::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+      animation: orbMove 15s ease-in-out infinite;
+    }
+
+    @keyframes orbMove {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(20%, 20%);
+      }
     }
 
     .blog-featured:hover {
@@ -1745,7 +1652,6 @@
       position: relative;
       z-index: 1;
       font-weight: 800;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 
     .blog-featured p {
@@ -1759,7 +1665,7 @@
     .blog-featured a {
       display: inline-block;
       background: white;
-      color: var(--neon-blue);
+      color: var(--primary);
       padding: 1rem 2.5rem;
       border-radius: 30px;
       text-decoration: none;
@@ -1776,8 +1682,16 @@
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
     }
 
+    .blog-featured a:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
+    /* ============================================================================
+       CONTACT SECTION - Premium gradient card
+       ============================================================================ */
     .contact-section {
-      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       border-radius: 30px;
       padding: 5rem 2rem;
       text-align: center;
@@ -1786,8 +1700,29 @@
       overflow: hidden;
       box-shadow: 
         var(--shadow-2xl),
-        0 0 60px rgba(0, 243, 255, 0.5),
-        0 0 100px rgba(191, 0, 255, 0.4);
+        0 20px 60px rgba(13, 71, 161, 0.5),
+        0 0 60px rgba(106, 27, 154, 0.4);
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+      animation: orbFloat2 20s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat2 {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate(-10%, 10%) rotate(180deg);
+      }
     }
 
     .contact-section h2 {
@@ -1795,12 +1730,10 @@
       margin-bottom: 1rem;
       position: relative;
       z-index: 1;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 
     .contact-section h2::after {
       background: white;
-      box-shadow: 0 0 20px white;
     }
 
     .contact-section p {
@@ -1833,7 +1766,6 @@
       gap: 0.5rem;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     }
 
     .contact-link::before {
@@ -1860,22 +1792,31 @@
     }
 
     .contact-link:hover {
-      color: var(--neon-blue);
+      color: var(--primary);
       transform: translateY(-6px) scale(1.05);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.5);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
     }
 
+    .contact-link:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
+    /* ============================================================================
+       FOOTER
+       ============================================================================ */
     footer {
       background: var(--bg-secondary);
       color: var(--text-muted);
       text-align: center;
       padding: 3rem;
-      border-top: 2px solid var(--neon-blue);
+      border-top: 2px solid var(--border);
       font-size: 0.95rem;
-      box-shadow: 0 -4px 20px rgba(0, 243, 255, 0.1);
     }
 
-    /* Lightbox, utilities, responsive... */
+    /* ============================================================================
+       LIGHTBOX - Advanced modal viewer
+       ============================================================================ */
     .lightbox {
       display: none;
       position: fixed;
@@ -1934,10 +1875,14 @@
     }
 
     .lightbox-close:hover {
-      background: var(--neon-blue);
+      background: var(--primary);
       color: white;
       transform: scale(1.15) rotate(90deg);
-      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    .lightbox-close:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
     }
 
     .lightbox-nav {
@@ -1965,6 +1910,11 @@
       transform: translateY(-50%) scale(1.15);
     }
 
+    .lightbox-nav:focus {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
     .lightbox-prev {
       left: 2rem;
     }
@@ -1985,6 +1935,9 @@
       font-weight: 500;
     }
 
+    /* ============================================================================
+       UTILITIES
+       ============================================================================ */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -1997,8 +1950,11 @@
       border-width: 0;
     }
 
+    /* ============================================================================
+       PRINT STYLES
+       ============================================================================ */
     @media print {
-      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox, #custom-cursor, #cursor-dot, .cursor-particle, #page-loader, .morph-blob, #blob-container {
+      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox, #custom-cursor, #cursor-dot, .cursor-particle, #page-loader {
         display: none !important;
       }
       body {
@@ -2006,15 +1962,15 @@
         color: black;
         cursor: auto;
       }
-      body::before {
-        display: none;
-      }
       section {
         page-break-inside: avoid;
         padding: 2rem 0;
       }
     }
 
+    /* ============================================================================
+       RESPONSIVE BREAKPOINTS
+       ============================================================================ */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -2031,12 +1987,20 @@
       .hero-stats {
         grid-template-columns: repeat(2, 1fr);
       }
+      .lightbox-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+      }
+      .lightbox-prev {
+        left: 1rem;
+      }
+      .lightbox-next {
+        right: 1rem;
+      }
       .emoji-row {
         font-size: 1.8rem;
         letter-spacing: 0.5rem;
-      }
-      .morph-blob {
-        display: none;
       }
     }
   </style>
@@ -2052,9 +2016,8 @@
 </head>
 
 <body>
-  <!-- PAGE LOADER WITH PERCENTAGE -->
+  <!-- PAGE LOADER -->
   <div id="page-loader">
-    <div class="loader-percentage" id="loaderPercentage">0%</div>
     <div class="loader-animation">
       <div class="loader-ring"></div>
       <div class="loader-ring"></div>
@@ -2065,13 +2028,6 @@
 
   <!-- READING PROGRESS BAR -->
   <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
-
-  <!-- MORPHING BLOB BACKGROUND -->
-  <div id="blob-container">
-    <div class="morph-blob"></div>
-    <div class="morph-blob"></div>
-    <div class="morph-blob"></div>
-  </div>
 
   <!-- CUSTOM CURSOR -->
   <div id="custom-cursor"></div>
@@ -2089,7 +2045,7 @@
   <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#" class="logo">💰 GMP PAYROLL</a>
+      <a href="#" class="logo">💰 GMP Payroll</a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#experience">📊 Experience</a></li>
         <li><a href="#projects">⚡ Projects</a></li>
@@ -2122,59 +2078,27 @@
 
         <div class="hero-stats parallax-layer">
           <div class="stat-card" tabindex="0">
-            <div class="stat-card-inner">
-              <div class="stat-card-front">
-                <div class="stat-number">13+</div>
-                <div class="stat-label">Years Experience</div>
-              </div>
-              <div class="stat-card-back">
-                <div class="stat-number">13+</div>
-                <div class="stat-detail">Over a decade of payroll excellence</div>
-              </div>
-            </div>
+            <div class="stat-number">13+</div>
+            <div class="stat-label">Years Experience</div>
           </div>
           <div class="stat-card" tabindex="0">
-            <div class="stat-card-inner">
-              <div class="stat-card-front">
-                <div class="stat-number">5+</div>
-                <div class="stat-label">Countries Managed</div>
-              </div>
-              <div class="stat-card-back">
-                <div class="stat-number">5+</div>
-                <div class="stat-detail">Multi-jurisdiction expertise</div>
-              </div>
-            </div>
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Countries Managed</div>
           </div>
           <div class="stat-card" tabindex="0">
-            <div class="stat-card-inner">
-              <div class="stat-card-front">
-                <div class="stat-number">99.8%</div>
-                <div class="stat-label">Accuracy Record</div>
-              </div>
-              <div class="stat-card-back">
-                <div class="stat-number">99.8%</div>
-                <div class="stat-detail">Industry-leading precision</div>
-              </div>
-            </div>
+            <div class="stat-number">99.8%</div>
+            <div class="stat-label">Accuracy Record</div>
           </div>
           <div class="stat-card" tabindex="0">
-            <div class="stat-card-inner">
-              <div class="stat-card-front">
-                <div class="stat-number">122</div>
-                <div class="stat-label">Payrolls/Year</div>
-              </div>
-              <div class="stat-card-back">
-                <div class="stat-number">122</div>
-                <div class="stat-detail">Record achievement in 2022</div>
-              </div>
-            </div>
+            <div class="stat-number">122</div>
+            <div class="stat-label">Payrolls/Year</div>
           </div>
         </div>
 
         <div class="hero-cta parallax-layer">
-          <button class="btn btn-primary magnetic-btn" id="downloadPDF">📥 Download Resume</button>
-          <button class="btn btn-primary magnetic-btn" id="downloadVCard">📇 Save Contact</button>
-          <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary magnetic-btn">✉️ Contact Me</a>
+          <button class="btn btn-primary" id="downloadPDF">📥 Download Resume</button>
+          <button class="btn btn-primary" id="downloadVCard">📇 Save Contact</button>
+          <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary">✉️ Contact Me</a>
         </div>
       </div>
     </section>
@@ -2192,7 +2116,7 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE (abbreviated for length) -->
+    <!-- EXPERIENCE -->
     <section id="experience" class="reveal" role="region" aria-labelledby="experience-heading">
       <h2 id="experience-heading">📊 Professional Experience</h2>
       <p class="section-subtitle">13+ Years of Multi-Country Payroll Excellence</p>
@@ -2207,11 +2131,53 @@
           <div class="experience-period">Oct 2018 – Present</div>
         </div>
         <ul class="experience-bullets">
-          <li>🌍 Led payroll transitions in 5+ countries maintaining 99.8% accuracy</li>
-          <li>💰 Managed 122 payrolls in single year</li>
-          <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM</li>
-          <li>🔐 Ensured 100% statutory compliance across jurisdictions</li>
-          <li>👨‍💼 Managed & mentored 8+ consultants</li>
+          <li>🌍 Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8% accuracy while reducing cutover cycle by 25%</li>
+          <li>💰 Managed 122 payrolls in single year; awarded 2022 Global Annual Bolt Award</li>
+          <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor selection</li>
+          <li>🔐 Coordinated international payroll vendor transitions; ensured 100% statutory compliance</li>
+          <li>🏙️ <strong>Country Expertise:</strong> Hong Kong (MPF/IR56B) | Singapore (CPF/SDL) | UAE (Gratuity) | Indonesia (BPJS)</li>
+          <li>👥 Acted as key client point of contact; managed weekly communications; driving 95%+ satisfaction</li>
+          <li>✅ Reconciled parallel + live payroll runs; identified & resolved 100+ critical data gaps</li>
+          <li>📚 Delivered comprehensive training on payroll platforms & global compliance practices (50+ users)</li>
+          <li>🔍 Ensured SOC 1 audit compliance; responded to 100% of auditor queries within SLA</li>
+          <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect reduction)</li>
+          <li>👨‍💼 Managed & mentored 8+ Implementation Consultants; 3 promoted within 18 months</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-icon">🏥</div>
+        <div class="experience-header">
+          <div>
+            <div class="experience-title">Benefits Administrator</div>
+            <div class="experience-company">Xerex Business Services</div>
+          </div>
+          <div class="experience-period">May 2014 – Jan 2017</div>
+        </div>
+        <ul class="experience-bullets">
+          <li>💾 Performed complex benefit processes & calculations on legacy systems</li>
+          <li>📋 Prepared eligibility files for vendor submission; maintained 99%+ accuracy</li>
+          <li>⚖️ Administered COBRA & QMCSO compliance for terminated/retired employees</li>
+          <li>🏪 Managed H/W categories: DBP, HIPAA, LOA, enrollment, Medicare eligibility</li>
+          <li>👥 Processed data for 500+ employees with zero compliance violations</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-icon">🤝</div>
+        <div class="experience-header">
+          <div>
+            <div class="experience-title">HR & Benefits Coordinator</div>
+            <div class="experience-company">AON Hewitt, Gurgaon</div>
+          </div>
+          <div class="experience-period">April 2011 – May 2014</div>
+        </div>
+        <ul class="experience-bullets">
+          <li>🗂️ Maintained HR Portal for 15+ enterprise clients (500K+ employee records)</li>
+          <li>📝 Loaded data; added/updated/removed coverage with precision</li>
+          <li>💬 Coordinated with onshore teams via real-time updates</li>
+          <li>📖 Created processing guides per client requirements</li>
+          <li>👨‍🏫 Mentored new hires in HR/benefits processing</li>
         </ul>
       </div>
     </section>
@@ -2225,33 +2191,39 @@
         <div class="project-card" tabindex="0">
           <div class="project-icon">📊</div>
           <div class="project-title">ICP Service Comparison Dashboard (v3.0)</div>
-          <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons.</p>
+          <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons with advanced analytics & compliance tracking.</p>
           <ul class="project-outcomes">
-            <li>✓ Eliminated 15+ manual hours/week</li>
-            <li>✓ Reduced planning cycle by 40%</li>
-            <li>✓ Prevented 12+ service-gap errors</li>
+            <li>✓ Eliminated 15+ manual hours/week of compilation</li>
+            <li>✓ Reduced planning cycle by 40% (10 days → 6 days)</li>
+            <li>✓ Prevented 12+ service-gap errors in first year</li>
+            <li>✓ Real-time KPIs for stakeholder reporting</li>
+            <li>✓ Used by 8+ team members daily</li>
           </ul>
         </div>
 
         <div class="project-card" tabindex="0">
           <div class="project-icon">🔄</div>
           <div class="project-title">Two-Way Validation Automation</div>
-          <p class="project-description">Intelligent payroll cross-check engine with 50+ error categories.</p>
+          <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data with 50+ error detection categories.</p>
           <ul class="project-outcomes">
             <li>✓ Saved 12+ reconciliation hours/week</li>
             <li>✓ Eliminated 100% of GL-Payroll gaps</li>
-            <li>✓ Audit-ready compliance logs</li>
+            <li>✓ Audit-ready logs for SOC 1 compliance</li>
+            <li>✓ Parallel runs with <1% variance</li>
+            <li>✓ 500+ advanced formulas optimized</li>
           </ul>
         </div>
 
         <div class="project-card" tabindex="0">
           <div class="project-icon">🤖</div>
           <div class="project-title">AI Integration Methodology</div>
-          <p class="project-description">Non-technical approach to enterprise automation.</p>
+          <p class="project-description">Non-technical approach to building enterprise automation dashboards combining domain expertise with AI code generation.</p>
           <ul class="project-outcomes">
-            <li>✓ 30-minute team training</li>
-            <li>✓ Enterprise solutions in weeks</li>
-            <li>✓ Continuous improvement framework</li>
+            <li>✓ Problem definition → AI co-design → validation</li>
+            <li>✓ Real data testing → edge case handling → refinement</li>
+            <li>✓ 30-minute team training (intuitive UI)</li>
+            <li>✓ Enterprise solutions in weeks, not months</li>
+            <li>✓ Continuous improvement based on feedback</li>
           </ul>
         </div>
 
@@ -2271,7 +2243,33 @@
             <span class="skill-chip"><span>Multi-country payroll</span></span>
             <span class="skill-chip"><span>Cutover planning</span></span>
             <span class="skill-chip"><span>SOC 1 audits</span></span>
+            <span class="skill-chip"><span>RCA analysis</span></span>
+            <span class="skill-chip"><span>Parallel runs</span></span>
             <span class="skill-chip"><span>Data validation</span></span>
+            <span class="skill-chip"><span>UAT/SIT testing</span></span>
+          </div>
+        </div>
+
+        <div class="skill-category" tabindex="0">
+          <div class="skill-icon">🏢</div>
+          <h3>Systems & Vendors</h3>
+          <div class="skill-chips">
+            <span class="skill-chip"><span>Deel</span></span>
+            <span class="skill-chip"><span>Vendor transitions</span></span>
+            <span class="skill-chip"><span>Contract negotiation</span></span>
+            <span class="skill-chip"><span>SLA management</span></span>
+          </div>
+        </div>
+
+        <div class="skill-category" tabindex="0">
+          <div class="skill-icon">🌍</div>
+          <h3>Global Compliance</h3>
+          <div class="skill-chips">
+            <span class="skill-chip"><span>Hong Kong (MPF/IR56B)</span></span>
+            <span class="skill-chip"><span>Singapore (CPF/SDL)</span></span>
+            <span class="skill-chip"><span>UAE (Gratuity)</span></span>
+            <span class="skill-chip"><span>Indonesia (BPJS)</span></span>
+            <span class="skill-chip"><span>Multi-jurisdiction laws</span></span>
           </div>
         </div>
 
@@ -2281,14 +2279,50 @@
           <div class="skill-chips">
             <span class="skill-chip"><span>Automation frameworks</span></span>
             <span class="skill-chip"><span>AI-assisted development</span></span>
+            <span class="skill-chip"><span>Advanced formulas</span></span>
             <span class="skill-chip"><span>Workflow optimization</span></span>
+          </div>
+        </div>
+
+        <div class="skill-category" tabindex="0">
+          <div class="skill-icon">👨‍💼</div>
+          <h3>Leadership</h3>
+          <div class="skill-chips">
+            <span class="skill-chip"><span>Team mentoring</span></span>
+            <span class="skill-chip"><span>Implementation consulting</span></span>
+            <span class="skill-chip"><span>Risk management</span></span>
+            <span class="skill-chip"><span>Cross-functional collab</span></span>
+            <span class="skill-chip"><span>Auditor coordination</span></span>
+          </div>
+        </div>
+
+        <div class="skill-category" tabindex="0">
+          <div class="skill-icon">🛠️</div>
+          <h3>Tools & Platforms</h3>
+          <div class="skill-chips">
+            <span class="skill-chip"><span>Advanced spreadsheets</span></span>
+            <span class="skill-chip"><span>Project management</span></span>
+            <span class="skill-chip"><span>Customer success platforms</span></span>
+            <span class="skill-chip"><span>Communication tools</span></span>
           </div>
         </div>
 
       </div>
     </section>
     
-    <!-- AWARDS -->
+    <!-- BLOG SECTION -->
+    <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
+      <h2 id="blog-heading">📖 Featured Articles</h2>
+      <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
+      
+      <div class="blog-featured">
+        <h3>🚀 New: Payroll Automation Framework</h3>
+        <p>Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
+        <a href="/blog/payroll-automation-google-sheets-apps-script/">📖 Read Full Article →</a>
+      </div>
+    </section>
+
+    <!-- EDUCATION & AWARDS -->
     <section id="awards" class="reveal" role="region" aria-labelledby="awards-heading">
       <h2 id="awards-heading">🏆 Recognition & Achievements</h2>
       <p class="section-subtitle">Education, Promotions & Awards</p>
@@ -2308,20 +2342,65 @@
         <div class="award-card promotion">
           <div class="award-emoji">🚀</div>
           <div class="award-title">5+ Promotions in 4 Years</div>
-          <div class="award-description">Advanced from Specialist → Senior → Consultant (2020–2024)</div>
+          <div class="award-description">Advanced from International Specialist → Senior Specialist → Implementation Consultant (2020–2024)</div>
         </div>
       </div>
-    </section>
 
-    <!-- BLOG -->
-    <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
-      <h2 id="blog-heading">📖 Featured Articles</h2>
-      <p class="section-subtitle">Latest insights on payroll automation</p>
-      
-      <div class="blog-featured">
-        <h3>🚀 New: Payroll Automation Framework</h3>
-        <p>Real code examples and templates to reduce manual errors by 95%.</p>
-        <a href="/blog/payroll-automation-google-sheets-apps-script/">📖 Read Full Article →</a>
+      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">🥇 Annual Awards</h3>
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-emoji">🏅</div>
+          <div class="award-year">2022</div>
+          <div class="award-title">Global Annual Bolt Award</div>
+          <div class="award-description">Successfully processed 122 payrolls in single year</div>
+        </div>
+        <div class="award-card">
+          <div class="award-emoji">⭐</div>
+          <div class="award-year">2021</div>
+          <div class="award-title">Annual Bolt Award</div>
+          <div class="award-description">Best Performance of the Year</div>
+        </div>
+        <div class="award-card">
+          <div class="award-emoji">⭐</div>
+          <div class="award-year">2020</div>
+          <div class="award-title">Annual Bolt Award</div>
+          <div class="award-description">Best Performance of the Year</div>
+        </div>
+        <div class="award-card">
+          <div class="award-emoji">⭐</div>
+          <div class="award-year">2019</div>
+          <div class="award-title">Annual Bolt Award</div>
+          <div class="award-description">Best Performance of the Year</div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">✨ Quarterly Awards (2018)</h3>
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-emoji">🌟</div>
+          <div class="award-year">Q1, Q2, Q3 2018</div>
+          <div class="award-title">Spotlight Award</div>
+          <div class="award-description">Best Performer – Multiple Quarters</div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">🎖️ Previous Recognition</h3>
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-emoji">💎</div>
+          <div class="award-title">Gold Award for Client Value</div>
+          <div class="award-description">Exceptional client impact and satisfaction</div>
+        </div>
+        <div class="award-card">
+          <div class="award-emoji">🌟</div>
+          <div class="award-title">Benefits Champ Award</div>
+          <div class="award-description">Excellence in benefits administration</div>
+        </div>
+        <div class="award-card">
+          <div class="award-emoji">🚀</div>
+          <div class="award-title">OJT Leadership</div>
+          <div class="award-description">Led migration project seamless transition</div>
+        </div>
       </div>
     </section>
 
@@ -2329,11 +2408,11 @@
     <section id="contact" class="reveal" role="region" aria-labelledby="contact-heading">
       <div class="contact-section">
         <h2 id="contact-heading">🚀 Let's Transform Your Payroll Operations</h2>
-        <p>Ready to drive implementation success? I'm here to help.</p>
+        <p>Ready to drive implementation success? I'm here to help with compliance, automation, and strategic payroll solutions.</p>
         <div class="contact-links">
-          <a href="mailto:chetanpayroll@gmail.com" class="contact-link magnetic-btn"><span>✉️ chetanpayroll@gmail.com</span></a>
-          <a href="tel:+918611949558" class="contact-link magnetic-btn"><span>📱 +91 8619495587</span></a>
-          <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link magnetic-btn"><span>🔗 LinkedIn</span></a>
+          <a href="mailto:chetanpayroll@gmail.com" class="contact-link"><span>✉️ chetanpayroll@gmail.com</span></a>
+          <a href="tel:+918611949558" class="contact-link"><span>📱 +91 8619495587</span></a>
+          <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link"><span>🔗 LinkedIn</span></a>
         </div>
       </div>
     </section>
@@ -2357,6 +2436,7 @@
     </div>
   </div>
 
+  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -2365,39 +2445,31 @@
     "jobTitle": "Payroll Implementation Manager",
     "url": "https://www.gmppayroll.com",
     "email": "chetanpayroll@gmail.com",
-    "telephone": "+918611949558"
+    "telephone": "+918611949558",
+    "location": "Gurgaon, India",
+    "sameAs": "https://www.linkedin.com/in/chetan-sharma-4389641411",
+    "image": "https://www.gmppayroll.com/headshot.png",
+    "description": "Global Payroll Implementation Consultant with 13+ years of experience in multi-country payroll transitions, compliance, and AI automation.",
+    "knowsAbout": ["Payroll Implementation", "Multi-country Compliance", "Automation", "Data Migration", "Global Payroll Operations", "AI Integration"]
   }
   </script>
 
+  <!-- Three.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
+  <!-- Main JavaScript -->
   <script>
     // ============================================================================
-    // PAGE LOADER WITH PERCENTAGE
+    // PAGE LOADER
     // ============================================================================
-    let loadProgress = 0;
-    const loaderPercentage = document.getElementById('loaderPercentage');
-    const pageLoader = document.getElementById('page-loader');
-
-    const loadInterval = setInterval(() => {
-      loadProgress += Math.random() * 30;
-      if (loadProgress >= 100) {
-        loadProgress = 100;
-        clearInterval(loadInterval);
-      }
-      loaderPercentage.textContent = Math.floor(loadProgress) + '%';
-    }, 100);
-
     window.addEventListener('load', () => {
-      loadProgress = 100;
-      loaderPercentage.textContent = '100%';
       setTimeout(() => {
-        pageLoader.classList.add('hidden');
-      }, 500);
+        document.getElementById('page-loader').classList.add('hidden');
+      }, 1500);
     });
 
     // ============================================================================
-    // MAGNETIC CURSOR WITH PARTICLE TRAILS
+    // CUSTOM CURSOR & CURSOR PARTICLES
     // ============================================================================
     const cursor = document.getElementById('custom-cursor');
     const cursorDot = document.getElementById('cursor-dot');
@@ -2409,26 +2481,8 @@
       mouseX = e.clientX;
       mouseY = e.clientY;
       
-      // Magnetic effect on interactive elements
-      const magneticElements = document.querySelectorAll('.magnetic-btn');
-      magneticElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const distance = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2));
-        
-        if (distance < 100) {
-          const strength = (100 - distance) / 100;
-          const moveX = (mouseX - centerX) * strength * 0.3;
-          const moveY = (mouseY - centerY) * strength * 0.3;
-          el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        } else {
-          el.style.transform = 'translate(0, 0)';
-        }
-      });
-      
-      // Create particle trail
-      if (Math.random() > 0.7) {
+      // Create cursor particle trail
+      if (Math.random() > 0.8) {
         createCursorParticle(mouseX, mouseY);
       }
     });
@@ -2453,8 +2507,8 @@
     }
     animateCursor();
 
-    // Hover effects
-    document.querySelectorAll('a, button, .stat-card, .project-card, .skill-chip, .magnetic-btn').forEach(el => {
+    // Add hover effects
+    document.querySelectorAll('a, button, .stat-card, .project-card, .skill-chip').forEach(el => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');
       });
@@ -2463,10 +2517,9 @@
       });
     });
 
-    // Click effects with particle explosion
-    document.addEventListener('mousedown', (e) => {
+    // Add click effect
+    document.addEventListener('mousedown', () => {
       document.body.classList.add('cursor-click');
-      createParticleExplosion(e.clientX, e.clientY);
     });
     document.addEventListener('mouseup', () => {
       document.body.classList.remove('cursor-click');
@@ -2481,42 +2534,36 @@
       particle.style.setProperty('--ty', (Math.random() - 0.5) * 50 + 'px');
       document.body.appendChild(particle);
       
-      setTimeout(() => particle.remove(), 1000);
-    }
-
-    function createParticleExplosion(x, y) {
-      for (let i = 0; i < 8; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle-explosion';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        const angle = (i / 8) * Math.PI * 2;
-        const distance = 50 + Math.random() * 30;
-        particle.style.setProperty('--ex', Math.cos(angle) * distance + 'px');
-        particle.style.setProperty('--ey', Math.sin(angle) * distance + 'px');
-        document.body.appendChild(particle);
-        
-        setTimeout(() => particle.remove(), 600);
-      }
+      setTimeout(() => {
+        particle.remove();
+      }, 800);
     }
 
     // ============================================================================
-    // MOTION CONTROL
+    // MOTION CONTROL & ACCESSIBILITY
     // ============================================================================
     let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let threeScene = null;
+    let animationFrameId = null;
+
     const motionToggle = document.getElementById('motionToggle');
     
     function updateMotionState(enabled) {
       motionEnabled = enabled;
       motionToggle.textContent = enabled ? '🎬' : '⏸️';
-      localStorage.setItem('motionEnabled', enabled ? 'true' : 'false');
+      motionToggle.setAttribute('aria-label', enabled ? 'Disable animations' : 'Enable animations');
       
+      const canvas = document.getElementById('three-background');
       if (enabled) {
         initThreeJS();
       } else {
-        const canvas = document.getElementById('three-background');
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
         canvas.style.opacity = '0';
       }
+      
+      localStorage.setItem('motionEnabled', enabled ? 'true' : 'false');
     }
 
     motionToggle.addEventListener('click', () => {
@@ -2530,7 +2577,7 @@
     }
 
     // ============================================================================
-    // ADVANCED THREE.JS WITH NEURAL NETWORK
+    // ADVANCED THREE.JS 3D BACKGROUND - Neural network particles
     // ============================================================================
     function initThreeJS() {
       if (!motionEnabled || !window.THREE) return;
@@ -2541,20 +2588,26 @@
       
       let renderer;
       try {
-        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer = new THREE.WebGLRenderer({ 
+          canvas: canvas, 
+          alpha: true, 
+          antialias: true 
+        });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       } catch (e) {
+        console.log('WebGL not supported');
         return;
       }
 
       camera.position.z = 60;
 
-      // Enhanced particle system
-      const particleCount = 250;
+      // Neural network particle system
+      const particleCount = 200;
       const particlesGeometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const velocities = new Float32Array(particleCount * 3);
+      const connections = [];
 
       for (let i = 0; i < particleCount * 3; i += 3) {
         positions[i] = (Math.random() - 0.5) * 120;
@@ -2569,28 +2622,58 @@
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       
       const particlesMaterial = new THREE.PointsMaterial({
-        color: 0x00f3ff,
-        size: 1,
+        color: 0x0d47a1,
+        size: 0.8,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.7,
         blending: THREE.AdditiveBlending
       });
 
       const particles = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particles);
 
-      // Connection lines
+      // Create connection lines
       const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0xbf00ff,
+        color: 0x6a1b9a,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.15,
         blending: THREE.AdditiveBlending
       });
 
-      const connections = [];
+      // Floating geometric shapes
+      const geometries = [
+        new THREE.OctahedronGeometry(4, 0),
+        new THREE.TetrahedronGeometry(5, 0),
+        new THREE.IcosahedronGeometry(3, 0)
+      ];
 
-      let mouseXParallax = 0, mouseYParallax = 0;
-      let targetXParallax = 0, targetYParallax = 0;
+      const shapeMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff416c,
+        transparent: true,
+        opacity: 0.08,
+        wireframe: true
+      });
+
+      const shapes = [];
+      for (let i = 0; i < 4; i++) {
+        const shape = new THREE.Mesh(
+          geometries[i % geometries.length],
+          shapeMaterial
+        );
+        shape.position.set(
+          (Math.random() - 0.5) * 60,
+          (Math.random() - 0.5) * 60,
+          (Math.random() - 0.5) * 40
+        );
+        shapes.push(shape);
+        scene.add(shape);
+      }
+
+      // Mouse parallax
+      let mouseXParallax = 0;
+      let mouseYParallax = 0;
+      let targetXParallax = 0;
+      let targetYParallax = 0;
 
       document.addEventListener('mousemove', (e) => {
         if (!motionEnabled) return;
@@ -2598,28 +2681,33 @@
         mouseYParallax = -(e.clientY / window.innerHeight) * 2 + 1;
       });
 
+      // Animation loop
       function animate() {
         if (!motionEnabled) return;
-        requestAnimationFrame(animate);
+        
+        animationFrameId = requestAnimationFrame(animate);
 
-        targetXParallax = mouseXParallax * 10;
-        targetYParallax = mouseYParallax * 10;
+        // Smooth camera parallax
+        targetXParallax = mouseXParallax * 8;
+        targetYParallax = mouseYParallax * 8;
         camera.position.x += (targetXParallax - camera.position.x) * 0.03;
         camera.position.y += (targetYParallax - camera.position.y) * 0.03;
 
+        // Animate particles
         const positions = particles.geometry.attributes.position.array;
         for (let i = 0; i < particleCount * 3; i += 3) {
           positions[i] += velocities[i];
           positions[i + 1] += velocities[i + 1];
           positions[i + 2] += velocities[i + 2];
 
+          // Boundary wrapping with smooth transition
           if (Math.abs(positions[i]) > 60) velocities[i] *= -1;
           if (Math.abs(positions[i + 1]) > 60) velocities[i + 1] *= -1;
           if (Math.abs(positions[i + 2]) > 60) velocities[i + 2] *= -1;
         }
         particles.geometry.attributes.position.needsUpdate = true;
 
-        // Neural network connections
+        // Draw connection lines between close particles
         const linePositions = [];
         for (let i = 0; i < particleCount; i++) {
           for (let j = i + 1; j < particleCount; j++) {
@@ -2628,7 +2716,7 @@
             const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
             const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
             
-            if (dist < 18) {
+            if (dist < 15) {
               linePositions.push(
                 positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
                 positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
@@ -2637,6 +2725,7 @@
           }
         }
 
+        // Update lines
         connections.forEach(line => scene.remove(line));
         connections.length = 0;
         
@@ -2648,19 +2737,36 @@
           connections.push(line);
         }
 
+        // Rotate shapes
+        shapes.forEach((shape, index) => {
+          shape.rotation.x += 0.002 * (index + 1);
+          shape.rotation.y += 0.003 * (index + 1);
+          shape.rotation.z += 0.001 * (index + 1);
+          
+          // Float up and down
+          shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
+        });
+
         renderer.render(scene, camera);
       }
 
+      // Handle resize
+      let resizeTimeout;
       window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        }, 100);
       });
 
       animate();
       canvas.classList.add('loaded');
+      threeScene = { scene, camera, renderer, particles, shapes };
     }
 
+    // Lazy load Three.js
     if (motionEnabled) {
       if (document.readyState === 'complete') {
         setTimeout(initThreeJS, 100);
@@ -2669,8 +2775,16 @@
       }
     }
 
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      } else if (motionEnabled) {
+        initThreeJS();
+      }
+    });
+
     // ============================================================================
-    // READING PROGRESS
+    // READING PROGRESS BAR
     // ============================================================================
     const progressBar = document.getElementById('reading-progress');
     
@@ -2687,7 +2801,7 @@
     window.addEventListener('scroll', updateReadingProgress, { passive: true });
 
     // ============================================================================
-    // SCROLL REVEALS & PARALLAX
+    // SCROLL-TRIGGERED REVEAL ANIMATIONS
     // ============================================================================
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
@@ -2696,10 +2810,16 @@
           entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
+    // ============================================================================
+    // PARALLAX EFFECT
+    // ============================================================================
     const parallaxElements = document.querySelectorAll('.parallax-layer');
     let ticking = false;
 
@@ -2716,15 +2836,17 @@
     }
 
     window.addEventListener('scroll', () => {
-      if (!motionEnabled || ticking) return;
-      window.requestAnimationFrame(updateParallax);
-      ticking = true;
+      if (!motionEnabled) return;
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
     }, { passive: true });
 
     // ============================================================================
-    // 3D TILT EFFECTS
+    // 3D CARD TILT EFFECT
     // ============================================================================
-    const tiltCards = document.querySelectorAll('.project-card, .skill-category');
+    const tiltCards = document.querySelectorAll('.project-card, .stat-card, .skill-category');
     
     tiltCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
@@ -2733,8 +2855,10 @@
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
+        
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
+        
         const rotateX = (y - centerY) / 15;
         const rotateY = (centerX - x) / 15;
         
@@ -2747,7 +2871,7 @@
     });
 
     // ============================================================================
-    // NAVIGATION SCROLL
+    // NAVIGATION SCROLL EFFECT
     // ============================================================================
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
@@ -2804,6 +2928,8 @@ TITLE:Payroll Implementation Manager
 EMAIL:chetanpayroll@gmail.com
 TEL:+918611949558
 URL:https://www.gmppayroll.com
+URL:https://www.linkedin.com/in/chetan-sharma-4389641411
+ADR;;Gurgaon;Haryana;;India
 END:VCARD`;
       const element = document.createElement('a');
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(vcard));
@@ -2815,7 +2941,101 @@ END:VCARD`;
     });
 
     // ============================================================================
-    // SMOOTH SCROLL
+    // LIGHTBOX FUNCTIONALITY
+    // ============================================================================
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    
+    let currentImageIndex = 0;
+    let galleryImages = [];
+
+    function initGallery() {
+      galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
+      
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+          openLightbox(index);
+        });
+        
+        img.setAttribute('tabindex', '0');
+        img.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(index);
+          }
+        });
+      });
+    }
+
+    function openLightbox(index) {
+      currentImageIndex = index;
+      updateLightboxImage();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxImage() {
+      if (galleryImages.length === 0) return;
+      
+      const img = galleryImages[currentImageIndex];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = img.alt || '';
+      
+      lightboxPrev.disabled = currentImageIndex === 0;
+      lightboxNext.disabled = currentImageIndex === galleryImages.length - 1;
+    }
+
+    function showPrevImage() {
+      if (currentImageIndex > 0) {
+        currentImageIndex--;
+        updateLightboxImage();
+      }
+    }
+
+    function showNextImage() {
+      if (currentImageIndex < galleryImages.length - 1) {
+        currentImageIndex++;
+        updateLightboxImage();
+      }
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrevImage);
+    lightboxNext.addEventListener('click', showNextImage);
+    
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showPrevImage();
+      } else if (e.key === 'ArrowRight') {
+        showNextImage();
+      }
+    });
+
+    initGallery();
+
+    // ============================================================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
     // ============================================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -2829,6 +3049,45 @@ END:VCARD`;
         }
       });
     });
+
+    // ============================================================================
+    // RIPPLE EFFECT ON CLICKS
+    // ============================================================================
+    document.querySelectorAll('.btn, .contact-link').forEach(el => {
+      el.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s ease-out';
+        ripple.style.pointerEvents = 'none';
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Add ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
 
     // ============================================================================
     // INITIALIZATION
