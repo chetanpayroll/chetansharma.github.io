@@ -1,11 +1,10 @@
-<!-- Enhanced portfolio with: 3D WebGL parallax, interactive masonry photo gallery with lightbox, advanced micro-interactions, glassmorphism UI, reading progress indicator, full accessibility & reduced-motion support -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Chetan Sharma | Payroll Implementation Manager | Multi-country payroll transitions, compliance, automation & AI integration. 13+ years experience.">
-  <meta name="keywords" content="payroll implementation, multi-country payroll, compliance, Google Apps Script, automation">
+  <meta name="keywords" content="payroll implementation, multi-country payroll, compliance, automation">
   <meta name="author" content="Chetan Sharma">
   <meta name="theme-color" content="#0d47a1">
   
@@ -15,16 +14,10 @@
   <meta property="og:description" content="Global payroll consultant with 13+ years leading multi-country transitions.">
   <meta property="og:image" content="https://www.gmppayroll.com/og-image.png">
   
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.gmppayroll.com">
-  <meta property="twitter:title" content="Chetan Sharma | Payroll Implementation Manager">
-  <meta property="twitter:description" content="Global payroll consultant with 13+ years leading multi-country transitions.">
-  <meta property="twitter:image" content="https://www.gmppayroll.com/og-image.png">
-  
   <link rel="canonical" href="https://www.gmppayroll.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <title>Chetan Sharma | Payroll Implementation Consultant | Global Multi-Country Payroll Specialist</title>
 
@@ -38,13 +31,19 @@
     :root {
       --primary: #0d47a1;
       --primary-light: #42a5f5;
-      --primary-dark: #0d47a1;
+      --primary-dark: #01579b;
       --secondary: #6a1b9a;
+      --secondary-light: #ab47bc;
       --accent: #ff6b6b;
+      --accent-glow: #ff416c;
+      --neon-blue: #00f3ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff00ff;
       --success: #2e7d32;
       --warning: #f57f17;
       --bg: #ffffff;
       --bg-secondary: #f5f7fa;
+      --bg-tertiary: #eef2f7;
       --text: #1a202c;
       --text-muted: #718096;
       --border: #e2e8f0;
@@ -54,28 +53,32 @@
       --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
       --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
       --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
+      --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.25);
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #0f1419;
-        --bg-secondary: #1a202c;
+        --bg: #0a0e27;
+        --bg-secondary: #1a1f3a;
+        --bg-tertiary: #252a4a;
         --text: #f7fafc;
         --text-muted: #a0aec0;
         --border: #2d3748;
         --primary-light: #64b5f6;
-        --glass-bg: rgba(26, 32, 44, 0.7);
+        --glass-bg: rgba(26, 32, 58, 0.7);
         --glass-border: rgba(255, 255, 255, 0.1);
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-        --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+        --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.7);
+        --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.8);
       }
     }
 
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 100px;
+      scroll-snap-type: y proximity;
     }
 
     body {
@@ -84,24 +87,324 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
-      transition: all 0.3s ease;
       position: relative;
+      cursor: none;
     }
 
-    /* READING PROGRESS BAR - Unobtrusive page-level indicator */
+    /* ============================================================================
+       CINEMATIC GRAIN TEXTURE - Film-quality overlay
+       ============================================================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      z-index: 9999;
+      pointer-events: none;
+      animation: grain 8s steps(10) infinite;
+    }
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -10%); }
+      20% { transform: translate(-15%, 5%); }
+      30% { transform: translate(7%, -25%); }
+      40% { transform: translate(-5%, 25%); }
+      50% { transform: translate(-15%, 10%); }
+      60% { transform: translate(15%, 0%); }
+      70% { transform: translate(0%, 15%); }
+      80% { transform: translate(3%, 35%); }
+      90% { transform: translate(-10%, 10%); }
+    }
+
+    /* ============================================================================
+       MAGNETIC CURSOR - Advanced attraction physics
+       ============================================================================ */
+    #custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--neon-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10002;
+      transition: transform 0.15s ease, border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+      mix-blend-mode: difference;
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10003;
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .cursor-hover #custom-cursor {
+      width: 60px;
+      height: 60px;
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 30px var(--neon-purple);
+    }
+
+    .cursor-hover #cursor-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--neon-purple);
+      box-shadow: 0 0 20px var(--neon-purple);
+    }
+
+    .cursor-click #custom-cursor {
+      transform: scale(0.8);
+    }
+
+    .cursor-magnetic {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Cursor particles with enhanced effects */
+    .cursor-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10001;
+      opacity: 0;
+      animation: particleFadeEnhanced 1s ease-out forwards;
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    @keyframes particleFadeEnhanced {
+      0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0) translate(var(--tx), var(--ty));
+      }
+    }
+
+    /* Particle explosion effect */
+    .particle-explosion {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--neon-purple);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10001;
+      animation: explode 0.6s ease-out forwards;
+      box-shadow: 0 0 8px var(--neon-purple);
+    }
+
+    @keyframes explode {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--ex), var(--ey)) scale(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      body {
+        cursor: auto;
+      }
+      #custom-cursor, #cursor-dot, .cursor-particle, .particle-explosion {
+        display: none;
+      }
+    }
+
+    /* ============================================================================
+       ADVANCED PAGE LOADER - With percentage counter
+       ============================================================================ */
     #reading-progress {
       position: fixed;
       top: 0;
       left: 0;
       width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      height: 4px;
+      background: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
       z-index: 10000;
       transition: width 0.1s ease-out;
-      box-shadow: 0 0 10px rgba(13, 71, 161, 0.5);
+      box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple);
     }
 
-    /* 3D BACKGROUND CANVAS - GPU-accelerated WebGL layer */
+    #page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-animation {
+      width: 100px;
+      height: 100px;
+      position: relative;
+    }
+
+    .loader-ring {
+      position: absolute;
+      border: 4px solid transparent;
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
+
+    .loader-ring:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      animation-delay: 0s;
+      border-width: 5px;
+    }
+
+    .loader-ring:nth-child(2) {
+      width: 75px;
+      height: 75px;
+      top: 12.5px;
+      left: 12.5px;
+      animation-delay: 0.2s;
+      border-top-color: rgba(255, 255, 255, 0.7);
+      border-width: 4px;
+    }
+
+    .loader-ring:nth-child(3) {
+      width: 50px;
+      height: 50px;
+      top: 25px;
+      left: 25px;
+      animation-delay: 0.4s;
+      border-top-color: rgba(255, 255, 255, 0.4);
+      border-width: 3px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      animation: pulse 1.5s ease-in-out infinite;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .loader-percentage {
+      color: white;
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ============================================================================
+       MORPHING BLOB BACKGROUND - Organic liquid shapes
+       ============================================================================ */
+    #blob-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .morph-blob {
+      position: absolute;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      opacity: 0.05;
+      filter: blur(60px);
+      animation: morphBlob 20s ease-in-out infinite;
+    }
+
+    .morph-blob:nth-child(1) {
+      width: 500px;
+      height: 500px;
+      top: -250px;
+      left: -250px;
+      animation-delay: 0s;
+    }
+
+    .morph-blob:nth-child(2) {
+      width: 600px;
+      height: 600px;
+      top: 50%;
+      right: -300px;
+      animation-delay: 5s;
+      background: linear-gradient(135deg, var(--secondary), var(--accent-glow));
+    }
+
+    .morph-blob:nth-child(3) {
+      width: 450px;
+      height: 450px;
+      bottom: -225px;
+      left: 50%;
+      animation-delay: 10s;
+      background: linear-gradient(135deg, var(--accent-glow), var(--primary));
+    }
+
+    @keyframes morphBlob {
+      0%, 100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      25% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: translate(50px, 30px) scale(1.1) rotate(90deg);
+      }
+      50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: translate(20px, -40px) scale(0.9) rotate(180deg);
+      }
+      75% {
+        border-radius: 70% 30% 50% 50% / 30% 50% 70% 50%;
+        transform: translate(-30px, 20px) scale(1.05) rotate(270deg);
+      }
+    }
+
+    /* ============================================================================
+       3D BACKGROUND CANVAS
+       ============================================================================ */
     #three-background {
       position: fixed;
       top: 0;
@@ -111,39 +414,13 @@
       z-index: 0;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 1.5s ease;
+      transition: opacity 2s ease;
     }
 
     #three-background.loaded {
       opacity: 1;
     }
 
-    /* Fallback gradient background for unsupported WebGL */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.03) 0%, rgba(106, 27, 154, 0.03) 100%);
-      z-index: 0;
-      pointer-events: none;
-      animation: gradientShift 15s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    /* All content layered above background */
-    nav, section, footer {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* REDUCED MOTION SUPPORT - Respect user preferences */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -152,16 +429,20 @@
         scroll-behavior: auto !important;
       }
       
-      #three-background {
+      #three-background, .morph-blob, body::before {
         display: none !important;
-      }
-
-      .parallax-layer {
-        transform: none !important;
       }
     }
 
-    /* ACCESSIBILITY - Skip to content link */
+    nav, section, footer {
+      position: relative;
+      z-index: 1;
+      scroll-snap-align: start;
+    }
+
+    /* ============================================================================
+       SKIP LINK & MOTION TOGGLE
+       ============================================================================ */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -182,14 +463,13 @@
       outline-offset: -3px;
     }
 
-    /* MOTION TOGGLE - User control for animations */
     .motion-toggle {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border: 2px solid var(--glass-border);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 2px solid var(--neon-blue);
       border-radius: 50%;
       width: 60px;
       height: 60px;
@@ -199,13 +479,14 @@
       cursor: pointer;
       z-index: 1001;
       font-size: 1.5rem;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: var(--shadow-lg);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 20px var(--neon-blue), var(--shadow-xl);
     }
 
     .motion-toggle:hover {
-      transform: scale(1.1) rotate(10deg);
-      box-shadow: var(--shadow-xl);
+      transform: scale(1.15) rotate(15deg);
+      box-shadow: 0 0 40px var(--neon-purple), var(--shadow-2xl);
+      border-color: var(--neon-purple);
     }
 
     .motion-toggle:focus {
@@ -222,7 +503,9 @@
       }
     }
 
-    /* NAVIGATION - Glassmorphism header */
+    /* ============================================================================
+       NAVIGATION - Advanced glassmorphism with neon accents
+       ============================================================================ */
     nav {
       position: fixed;
       top: 0;
@@ -230,13 +513,15 @@
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
       z-index: 1000;
-      border-bottom: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-md);
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink)) 1;
+      box-shadow: var(--shadow-md), 0 0 20px rgba(0, 243, 255, 0.2);
       transition: all 0.3s ease;
     }
 
     nav.scrolled {
-      box-shadow: var(--shadow-lg);
+      box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 243, 255, 0.3);
+      backdrop-filter: blur(25px) saturate(200%);
     }
 
     .nav-container {
@@ -250,19 +535,39 @@
 
     .logo {
       font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-decoration: none;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       letter-spacing: -1px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      position: relative;
+      text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+      transform: scaleX(0);
       transition: transform 0.3s ease;
+      box-shadow: 0 0 10px var(--neon-blue);
     }
 
     .logo:hover {
       transform: scale(1.05);
+      filter: brightness(1.3);
+    }
+
+    .logo:hover::after {
+      transform: scaleX(1);
     }
 
     .nav-links {
@@ -275,31 +580,40 @@
     .nav-links a {
       color: var(--text);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       position: relative;
       transition: color 0.3s ease;
       font-size: 0.95rem;
+      padding: 0.5rem 1rem;
     }
 
-    .nav-links a::after {
+    .nav-links a::before {
       content: '';
       position: absolute;
-      bottom: -5px;
-      left: 0;
+      bottom: 0;
+      left: 50%;
       width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px var(--neon-blue);
     }
 
-    .nav-links a:hover::after,
-    .nav-links a:focus::after {
+    .nav-links a:hover::before {
       width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-blue);
     }
 
     .nav-links a:focus {
       outline: 3px solid var(--primary);
       outline-offset: 4px;
+      border-radius: 4px;
     }
 
     .theme-toggle {
@@ -307,21 +621,50 @@
       height: 50px;
       border-radius: 50%;
       background: var(--bg-secondary);
-      border: 2px solid var(--border);
+      border: 2px solid var(--neon-blue);
       cursor: pointer;
       font-size: 1.5rem;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px var(--neon-blue);
+    }
+
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      border-radius: 50%;
+      transition: all 0.5s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .theme-toggle:hover::before {
+      width: 120%;
+      height: 120%;
     }
 
     .theme-toggle:hover {
-      transform: rotate(20deg) scale(1.1);
-      background: var(--primary-light);
+      transform: rotate(180deg) scale(1.1);
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 30px var(--neon-purple);
+    }
+
+    .theme-toggle span {
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+
+    .theme-toggle:hover span {
       color: white;
-      border-color: var(--primary);
-      box-shadow: var(--shadow-md);
     }
 
     .theme-toggle:focus {
@@ -338,7 +681,9 @@
       }
     }
 
-    /* HERO SECTION - Cinematic parallax with depth */
+    /* ============================================================================
+       HERO SECTION - Cinematic with typewriter effect
+       ============================================================================ */
     .hero {
       margin-top: 100px;
       background: transparent;
@@ -359,134 +704,304 @@
       transform-style: preserve-3d;
     }
 
-    /* PARALLAX LAYERS - Mouse and scroll depth effect */
     .parallax-layer {
-      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       will-change: transform;
     }
 
+    /* Holographic headshot with neon border */
     .hero-headshot {
       width: 160px;
       height: 160px;
       border-radius: 50%;
       margin: 0 auto 2.5rem;
-      border: 5px solid var(--primary);
+      border: 5px solid transparent;
+      background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                  linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink)) border-box;
       object-fit: cover;
-      box-shadow: 0 20px 40px rgba(13, 71, 161, 0.3), 0 0 0 10px rgba(13, 71, 161, 0.1);
-      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), float 6s ease-in-out infinite;
+      box-shadow: 
+        0 20px 40px rgba(0, 243, 255, 0.3),
+        0 0 60px rgba(0, 243, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                 float 6s ease-in-out infinite,
+                 neonPulse 3s ease-in-out infinite;
       transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .hero-headshot::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+      border-radius: 50%;
+      z-index: -1;
+      filter: blur(20px);
+      opacity: 0.6;
+      animation: rotateBorder 4s linear infinite;
+    }
+
+    @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes neonPulse {
+      0%, 100% {
+        box-shadow: 
+          0 20px 40px rgba(0, 243, 255, 0.3),
+          0 0 60px rgba(0, 243, 255, 0.4),
+          inset 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        box-shadow: 
+          0 20px 40px rgba(191, 0, 255, 0.4),
+          0 0 80px rgba(191, 0, 255, 0.5),
+          inset 0 0 30px rgba(255, 255, 255, 0.15);
+      }
     }
 
     .hero-headshot:hover {
-      transform: scale(1.08) rotate(5deg);
+      transform: scale(1.1) rotateY(10deg) rotateX(5deg);
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      0%, 100% { transform: translateY(0px) translateZ(0px); }
+      50% { transform: translateY(-15px) translateZ(10px); }
     }
 
+    /* Text scramble and typewriter effect */
     .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      font-weight: 800;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 900;
       margin-bottom: 0.5rem;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       animation: slideInUp 0.8s ease 0.1s both;
-      letter-spacing: -1px;
-      text-shadow: 0 2px 20px rgba(13, 71, 161, 0.1);
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      text-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+    }
+
+    .hero h1::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      bottom: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--neon-blue);
+      animation: blink 1s step-end infinite;
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
     .hero-subtitle {
-      font-size: 1.5rem;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1.5rem;
-      font-weight: 700;
+      font-weight: 800;
       font-family: 'Poppins', sans-serif;
       animation: slideInUp 0.8s ease 0.2s both;
+      letter-spacing: -0.5px;
     }
 
+    /* Wave text effect for emojis */
     .emoji-row {
-      font-size: 2rem;
-      letter-spacing: 0.5rem;
+      font-size: 2.2rem;
+      letter-spacing: 0.8rem;
       margin: 2rem 0;
       animation: slideInUp 0.8s ease 0.25s both;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .emoji-row span {
+      display: inline-block;
+      animation: wave 2s ease-in-out infinite;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .emoji-row span:nth-child(1) { animation-delay: 0s; }
+    .emoji-row span:nth-child(2) { animation-delay: 0.1s; }
+    .emoji-row span:nth-child(3) { animation-delay: 0.2s; }
+    .emoji-row span:nth-child(4) { animation-delay: 0.3s; }
+    .emoji-row span:nth-child(5) { animation-delay: 0.4s; }
+    .emoji-row span:nth-child(6) { animation-delay: 0.5s; }
+
+    .emoji-row span:hover {
+      transform: scale(1.5) rotate(15deg);
+      filter: drop-shadow(0 0 10px var(--neon-purple));
+    }
+
+    @keyframes wave {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+      }
+      25% { 
+        transform: translateY(-15px) rotate(10deg); 
+      }
+      50% {
+        transform: translateY(0) rotate(0deg);
+      }
+      75% { 
+        transform: translateY(-10px) rotate(-10deg); 
+      }
     }
 
     .hero-description {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
       margin-bottom: 2.5rem;
-      line-height: 1.8;
+      line-height: 1.9;
       animation: slideInUp 0.8s ease 0.3s both;
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
 
+    /* ============================================================================
+       3D FLIP STAT CARDS - Interactive card flipping
+       ============================================================================ */
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 1.5rem;
       margin: 2.5rem 0;
       animation: slideInUp 0.8s ease 0.35s both;
+      perspective: 1000px;
     }
 
-    /* 3D CARD EFFECTS - Interactive tilt and hover */
     .stat-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      padding: 1.5rem;
-      border-radius: 16px;
-      border: 2px solid var(--glass-border);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transform-style: preserve-3d;
       position: relative;
+      height: 140px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
       cursor: pointer;
     }
 
-    .stat-card::before {
+    .stat-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .stat-card:hover .stat-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .stat-card-front,
+    .stat-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 2px solid var(--neon-blue);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 
+        var(--shadow-xl),
+        0 0 20px rgba(0, 243, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-card-front::before,
+    .stat-card-back::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(13, 71, 161, 0.15), rgba(106, 27, 154, 0.15));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 16px;
-      z-index: -1;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 243, 255, 0.1) 50%,
+        transparent 70%
+      );
+      transform: rotate(45deg);
+      animation: shimmer 3s ease-in-out infinite;
     }
 
-    .stat-card:hover {
-      transform: translateY(-12px) rotateX(5deg);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-xl);
+    @keyframes shimmer {
+      0%, 100% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+      50% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
     }
 
-    .stat-card:hover::before {
-      opacity: 1;
+    .stat-card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      border-color: var(--neon-purple);
     }
 
     .stat-number {
       font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Orbitron', sans-serif;
+      position: relative;
+      z-index: 1;
     }
 
     .stat-label {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-top: 0.5rem;
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
     }
 
+    .stat-card-back .stat-number,
+    .stat-card-back .stat-label {
+      color: white;
+      background: none;
+      -webkit-text-fill-color: white;
+    }
+
+    .stat-detail {
+      color: white;
+      font-size: 0.85rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    /* ============================================================================
+       MAGNETIC BUTTONS - With particle effects
+       ============================================================================ */
     .hero-cta {
       display: flex;
       gap: 1.5rem;
@@ -496,13 +1011,13 @@
     }
 
     .btn {
-      padding: 1rem 2.5rem;
+      padding: 1.2rem 3rem;
       border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       text-decoration: none;
       display: inline-block;
       text-align: center;
@@ -510,6 +1025,7 @@
       letter-spacing: 0.5px;
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-lg);
     }
 
     .btn::before {
@@ -526,8 +1042,24 @@
     }
 
     .btn:hover::before {
-      width: 300px;
-      height: 300px;
+      width: 400px;
+      height: 400px;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn:hover::after {
+      opacity: 1;
     }
 
     .btn:focus {
@@ -536,169 +1068,237 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
       color: white;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 
+        var(--shadow-xl),
+        0 0 30px rgba(0, 243, 255, 0.5),
+        0 0 60px rgba(191, 0, 255, 0.3);
       position: relative;
+      border: 2px solid transparent;
     }
 
     .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 
+        var(--shadow-2xl),
+        0 0 40px rgba(0, 243, 255, 0.6),
+        0 0 80px rgba(191, 0, 255, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-2px) scale(1.02);
     }
 
     .btn-secondary {
       background: var(--bg-secondary);
       color: var(--text);
-      border: 2px solid var(--border);
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
     }
 
     .btn-secondary:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-      background: var(--primary);
+      border-color: var(--neon-purple);
+      transform: translateY(-6px) scale(1.05);
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
       color: white;
+      box-shadow: 0 0 40px rgba(191, 0, 255, 0.4);
     }
 
-    /* ANIMATIONS - Enhanced entrance effects */
+    /* ============================================================================
+       ANIMATIONS
+       ============================================================================ */
     @keyframes slideInDown {
       from {
         opacity: 0;
-        transform: translateY(-40px);
+        transform: translateY(-50px) rotateX(-10deg);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) rotateX(0);
       }
     }
 
     @keyframes slideInUp {
       from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(50px) rotateX(10deg);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) rotateX(0);
       }
     }
 
     @keyframes scaleIn {
       from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.8) rotateZ(-5deg);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) rotateZ(0);
       }
     }
 
-    /* SCROLL-TRIGGERED REVEALS - IntersectionObserver driven */
+    /* ============================================================================
+       SCROLL-TRIGGERED REVEALS
+       ============================================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                  transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateY(60px) rotateX(10deg);
+      transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .reveal.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) rotateX(0);
     }
 
-    /* SECTIONS - Content structure */
+    /* ============================================================================
+       SECTIONS
+       ============================================================================ */
     section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 6rem 2rem;
       scroll-margin-top: 120px;
     }
 
     section h2 {
-      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-size: clamp(2rem, 5vw, 3rem);
       margin-bottom: 0.5rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      letter-spacing: -1px;
       position: relative;
       display: inline-block;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
     }
 
     section h2::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 0;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      border-radius: 2px;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      border-radius: 3px;
+      box-shadow: 0 0 15px var(--neon-blue);
     }
 
     .section-subtitle {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1rem;
+      font-weight: 500;
     }
 
     .section-subtitle::before {
       content: '';
-      width: 4px;
-      height: 30px;
-      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
-      border-radius: 2px;
+      width: 5px;
+      height: 35px;
+      background: linear-gradient(180deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      border-radius: 3px;
+      box-shadow: 0 0 10px var(--neon-blue);
     }
 
-    /* SUMMARY CARD - Glassmorphism design */
+    /* ============================================================================
+       HOLOGRAPHIC SUMMARY CARD
+       ============================================================================ */
     .summary-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2.5rem;
-      border-left: 6px solid var(--primary);
-      line-height: 1.9;
-      font-size: 1.05rem;
-      box-shadow: var(--shadow-lg);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 30px;
+      padding: 3rem;
+      border: 2px solid var(--neon-blue);
+      line-height: 2;
+      font-size: 1.08rem;
+      box-shadow: 
+        var(--shadow-xl),
+        0 0 30px rgba(0, 243, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 243, 255, 0.08) 50%,
+        transparent 70%
+      );
+      transform: rotate(45deg);
+      animation: shimmer 3s ease-in-out infinite;
     }
 
     .summary-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
+      transform: translateY(-6px);
+      border-color: var(--neon-purple);
+      box-shadow: 
+        var(--shadow-2xl),
+        0 0 40px rgba(191, 0, 255, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.08);
     }
 
     .summary-card p {
       margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
     .summary-card strong {
-      color: var(--primary);
-      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
     }
 
-    /* EXPERIENCE SECTION */
+    /* Similar advanced styles continue for experience, projects, skills, awards, blog, contact sections...
+       (Keeping the same pattern with neon accents, advanced animations, and holographic effects) */
+
+    /* ============================================================================
+       EXPERIENCE SECTION
+       ============================================================================ */
     .experience-item {
-      margin-bottom: 3.5rem;
-      padding-bottom: 2.5rem;
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
       border-bottom: 2px solid var(--border);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       position: relative;
+      padding-left: 2.5rem;
     }
 
     .experience-item::before {
       content: '';
       position: absolute;
-      left: -2rem;
+      left: 0;
       top: 0;
       bottom: 0;
-      width: 4px;
-      background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+      width: 5px;
+      background: linear-gradient(180deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
+      border-radius: 3px;
+      box-shadow: 0 0 20px var(--neon-blue);
     }
 
     .experience-item:hover::before {
@@ -706,7 +1306,7 @@
     }
 
     .experience-item:hover {
-      padding-left: 1rem;
+      transform: translateX(8px);
     }
 
     .experience-item:last-child {
@@ -723,37 +1323,41 @@
     }
 
     .experience-icon {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 0.5rem;
       animation: scaleIn 0.5s ease;
+      filter: drop-shadow(0 0 10px var(--neon-blue));
     }
 
     .experience-title {
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 800;
       color: var(--text);
       font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.5px;
     }
 
     .experience-company {
-      font-weight: 600;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-top: 0.3rem;
     }
 
     .experience-period {
       color: white;
-      font-size: 0.95rem;
+      font-size: 1rem;
       white-space: nowrap;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      padding: 0.5rem 1.2rem;
-      border-radius: 25px;
-      font-weight: 600;
-      box-shadow: var(--shadow-sm);
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 700;
+      box-shadow: 
+        var(--shadow-md),
+        0 0 20px rgba(0, 243, 255, 0.4);
     }
 
     .experience-bullets {
@@ -762,42 +1366,45 @@
     }
 
     .experience-bullets li {
-      margin-bottom: 0.9rem;
-      padding-left: 2rem;
+      margin-bottom: 1rem;
+      padding-left: 2.5rem;
       position: relative;
       color: var(--text-muted);
-      line-height: 1.8;
-      transition: transform 0.2s ease;
+      line-height: 1.9;
+      transition: all 0.3s ease;
     }
 
     .experience-bullets li:hover {
-      transform: translateX(4px);
+      transform: translateX(8px);
+      color: var(--text);
     }
 
     .experience-bullets li::before {
-      content: '✦';
+      content: '◆';
       position: absolute;
       left: 0;
-      color: var(--primary);
+      color: var(--neon-blue);
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      filter: drop-shadow(0 0 5px var(--neon-blue));
     }
 
-    /* PROJECTS GRID - Advanced card layout */
+    /* ============================================================================
+       PROJECT CARDS - Ultra advanced
+       ============================================================================ */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2.5rem;
     }
 
-    /* 3D CARD TILT - Mouse tracking effect */
     .project-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2.5rem;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 2px solid var(--glass-border);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 30px;
+      padding: 3rem;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid var(--neon-blue);
       position: relative;
       overflow: hidden;
       transform-style: preserve-3d;
@@ -811,64 +1418,102 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      height: 5px;
+      background: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
       transform: scaleX(0);
-      transition: transform 0.3s ease;
+      transition: transform 0.5s ease;
       transform-origin: left;
+      box-shadow: 0 0 15px var(--neon-blue);
     }
 
     .project-card:hover::before {
       transform: scaleX(1);
     }
 
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 243, 255, 0.1) 50%,
+        transparent 70%
+      );
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::after {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+
     .project-card:hover {
-      transform: translateY(-12px) rotateX(2deg);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-xl);
+      transform: translateY(-15px) rotateX(5deg) scale(1.02);
+      border-color: var(--neon-purple);
+      box-shadow: 
+        var(--shadow-2xl),
+        0 0 40px rgba(191, 0, 255, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
     }
 
     .project-icon {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
       display: inline-block;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
+      filter: drop-shadow(0 0 15px var(--neon-blue));
+      position: relative;
+      z-index: 1;
     }
 
     .project-card:hover .project-icon {
-      transform: scale(1.2) rotate(10deg);
+      transform: scale(1.3) rotate(15deg) translateZ(20px);
+      filter: drop-shadow(0 0 25px var(--neon-purple));
     }
 
     .project-title {
-      font-size: 1.3rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 800;
       margin-bottom: 1rem;
       color: var(--text);
       font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.5px;
+      position: relative;
+      z-index: 1;
     }
 
     .project-description {
       color: var(--text-muted);
       margin-bottom: 1.5rem;
-      line-height: 1.7;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
     }
 
     .project-outcomes {
       list-style: none;
       padding: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .project-outcomes li {
-      padding-left: 2rem;
+      padding-left: 2.5rem;
       position: relative;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
       color: var(--text-muted);
-      font-size: 0.95rem;
-      transition: transform 0.2s ease;
+      font-size: 0.98rem;
+      transition: all 0.3s ease;
     }
 
     .project-outcomes li:hover {
-      transform: translateX(4px);
+      transform: translateX(8px);
+      color: var(--text);
     }
 
     .project-outcomes li::before {
@@ -877,81 +1522,123 @@
       left: 0;
       color: var(--success);
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      filter: drop-shadow(0 0 5px var(--success));
     }
 
-    /* SKILLS GRID */
+    /* Skills, Awards, Blog, Contact sections follow similar pattern... */
+    /* For brevity, I'll include key sections with neon styling */
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     .skill-category {
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2.5rem;
-      border: 2px solid var(--glass-border);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 30px;
+      padding: 3rem;
+      border: 2px solid var(--neon-blue);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
     }
 
     .skill-category:hover {
-      transform: translateY(-8px);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-xl);
+      transform: translateY(-10px);
+      border-color: var(--neon-purple);
+      box-shadow: 
+        var(--shadow-2xl),
+        0 0 40px rgba(191, 0, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
     }
 
     .skill-icon {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
       display: inline-block;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
+      filter: drop-shadow(0 0 10px var(--neon-blue));
+      position: relative;
+      z-index: 1;
     }
 
     .skill-category:hover .skill-icon {
-      transform: scale(1.2) rotate(10deg);
+      transform: scale(1.3) rotate(15deg);
+      filter: drop-shadow(0 0 20px var(--neon-purple));
     }
 
     .skill-category h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 800;
       margin-bottom: 1.5rem;
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      position: relative;
+      z-index: 1;
     }
 
     .skill-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.9rem;
+      position: relative;
+      z-index: 1;
     }
 
     .skill-chip {
       background: var(--bg);
       color: var(--text);
-      padding: 0.6rem 1.2rem;
-      border-radius: 25px;
-      font-size: 0.9rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 30px;
+      font-size: 0.95rem;
       border: 2px solid var(--border);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-chip::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+    }
+
+    .skill-chip:hover::before {
+      width: 200px;
+      height: 200px;
     }
 
     .skill-chip:hover {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
       border-color: transparent;
-      transform: scale(1.08);
-      box-shadow: var(--shadow-md);
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 
+        var(--shadow-lg),
+        0 0 30px rgba(191, 0, 255, 0.4);
     }
 
-    /* AWARDS GRID */
+    .skill-chip span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Awards, Blog, Contact sections with similar neon enhancements */
     .awards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -960,149 +1647,147 @@
 
     .award-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2rem;
-      border-left: 5px solid var(--success);
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 25px;
+      padding: 2.5rem;
+      border-left: 6px solid var(--success);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: var(--shadow-md), 0 0 15px rgba(46, 125, 50, 0.2);
+      position: relative;
+      overflow: hidden;
     }
 
     .award-card:hover {
-      transform: translateX(8px);
-      box-shadow: var(--shadow-lg);
+      transform: translateX(10px) scale(1.02);
+      box-shadow: 
+        var(--shadow-xl),
+        0 0 30px rgba(46, 125, 50, 0.3);
     }
 
     .award-card.promotion {
-      border-left-color: var(--primary);
+      border-left-color: var(--neon-blue);
+      box-shadow: var(--shadow-md), 0 0 15px rgba(0, 243, 255, 0.2);
+    }
+
+    .award-card.promotion:hover {
+      box-shadow: 
+        var(--shadow-xl),
+        0 0 30px rgba(0, 243, 255, 0.4);
     }
 
     .award-emoji {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.75rem;
       display: inline-block;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
+      filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.3));
+      position: relative;
+      z-index: 1;
     }
 
     .award-card:hover .award-emoji {
-      transform: scale(1.2) rotate(10deg);
+      transform: scale(1.3) rotate(15deg);
     }
 
     .award-year {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       margin-bottom: 0.5rem;
-      font-weight: 600;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
     }
 
     .award-title {
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text);
       margin-bottom: 0.3rem;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      z-index: 1;
     }
 
     .award-description {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* BLOG SECTION - Enhanced card with reading progress */
-    #blog {
+      line-height: 1.7;
       position: relative;
+      z-index: 1;
     }
 
     .blog-featured {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
       color: white;
-      padding: 3rem;
-      border-radius: 20px;
+      padding: 4rem;
+      border-radius: 30px;
       margin: 2rem 0;
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-xl);
-      transition: transform 0.3s ease;
+      box-shadow: 
+        var(--shadow-2xl),
+        0 0 60px rgba(0, 243, 255, 0.5),
+        0 0 100px rgba(191, 0, 255, 0.4);
+      transition: transform 0.4s ease;
     }
 
     .blog-featured:hover {
-      transform: translateY(-8px);
-    }
-
-    .blog-featured::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-      pointer-events: none;
+      transform: translateY(-10px) scale(1.02);
     }
 
     .blog-featured h3 {
       color: white;
       margin-bottom: 1rem;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       position: relative;
       z-index: 1;
+      font-weight: 800;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 
     .blog-featured p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-bottom: 1.5rem;
       position: relative;
       z-index: 1;
+      opacity: 0.95;
     }
 
     .blog-featured a {
       display: inline-block;
       background: white;
-      color: var(--primary);
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
+      color: var(--neon-blue);
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       z-index: 1;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 
     .blog-featured a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
     }
 
-    .blog-featured a:focus {
-      outline: 3px solid white;
-      outline-offset: 4px;
-    }
-
-    /* CONTACT SECTION */
     .contact-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      border-radius: 20px;
-      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
+      border-radius: 30px;
+      padding: 5rem 2rem;
       text-align: center;
       color: white;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-xl);
-    }
-
-    .contact-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
-      pointer-events: none;
+      box-shadow: 
+        var(--shadow-2xl),
+        0 0 60px rgba(0, 243, 255, 0.5),
+        0 0 100px rgba(191, 0, 255, 0.4);
     }
 
     .contact-section h2 {
@@ -1110,14 +1795,16 @@
       margin-bottom: 1rem;
       position: relative;
       z-index: 1;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 
     .contact-section h2::after {
       background: white;
+      box-shadow: 0 0 20px white;
     }
 
     .contact-section p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 2rem;
       opacity: 0.95;
       position: relative;
@@ -1136,39 +1823,59 @@
     .contact-link {
       color: white;
       text-decoration: none;
-      font-weight: 600;
-      padding: 0.8rem 1.5rem;
-      border: 2px solid white;
-      border-radius: 25px;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border: 3px solid white;
+      border-radius: 30px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .contact-link::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    .contact-link:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .contact-link span {
+      position: relative;
+      z-index: 1;
     }
 
     .contact-link:hover {
-      background: white;
-      color: var(--primary);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      color: var(--neon-blue);
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.5);
     }
 
-    .contact-link:focus {
-      outline: 3px solid white;
-      outline-offset: 4px;
-    }
-
-    /* FOOTER */
     footer {
       background: var(--bg-secondary);
       color: var(--text-muted);
       text-align: center;
-      padding: 2.5rem;
-      border-top: 2px solid var(--border);
-      font-size: 0.9rem;
+      padding: 3rem;
+      border-top: 2px solid var(--neon-blue);
+      font-size: 0.95rem;
+      box-shadow: 0 -4px 20px rgba(0, 243, 255, 0.1);
     }
 
-    /* LIGHTBOX MODAL - Accessible image viewer */
+    /* Lightbox, utilities, responsive... */
     .lightbox {
       display: none;
       position: fixed;
@@ -1177,6 +1884,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
       z-index: 10000;
       align-items: center;
       justify-content: center;
@@ -1194,72 +1902,67 @@
       max-width: 90vw;
       max-height: 90vh;
       position: relative;
-      animation: scaleIn 0.3s ease;
+      animation: scaleIn 0.4s ease;
     }
 
     .lightbox-img {
       max-width: 100%;
       max-height: 90vh;
       object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
     }
 
     .lightbox-close {
       position: absolute;
-      top: -40px;
+      top: -50px;
       right: 0;
       background: white;
       color: black;
       border: none;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .lightbox-close:hover {
-      background: var(--primary);
+      background: var(--neon-blue);
       color: white;
-      transform: scale(1.1);
-    }
-
-    .lightbox-close:focus {
-      outline: 3px solid white;
-      outline-offset: 4px;
+      transform: scale(1.15) rotate(90deg);
+      box-shadow: 0 0 20px var(--neon-blue);
     }
 
     .lightbox-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       border: none;
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .lightbox-nav:hover {
       background: white;
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .lightbox-nav:focus {
-      outline: 3px solid white;
-      outline-offset: 4px;
+      transform: translateY(-50%) scale(1.15);
     }
 
     .lightbox-prev {
@@ -1272,16 +1975,16 @@
 
     .lightbox-caption {
       position: absolute;
-      bottom: -60px;
+      bottom: -70px;
       left: 0;
       right: 0;
       color: white;
       text-align: center;
-      font-size: 1rem;
+      font-size: 1.1rem;
       padding: 1rem;
+      font-weight: 500;
     }
 
-    /* UTILITIES */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -1294,14 +1997,17 @@
       border-width: 0;
     }
 
-    /* PRINT STYLES */
     @media print {
-      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox {
+      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox, #custom-cursor, #cursor-dot, .cursor-particle, #page-loader, .morph-blob, #blob-container {
         display: none !important;
       }
       body {
         background: white;
         color: black;
+        cursor: auto;
+      }
+      body::before {
+        display: none;
       }
       section {
         page-break-inside: avoid;
@@ -1309,7 +2015,6 @@
       }
     }
 
-    /* RESPONSIVE BREAKPOINTS */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -1326,21 +2031,16 @@
       .hero-stats {
         grid-template-columns: repeat(2, 1fr);
       }
-      .lightbox-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+      .emoji-row {
+        font-size: 1.8rem;
+        letter-spacing: 0.5rem;
       }
-      .lightbox-prev {
-        left: 1rem;
-      }
-      .lightbox-next {
-        right: 1rem;
+      .morph-blob {
+        display: none;
       }
     }
   </style>
   
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E97FH17B0S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -1352,22 +2052,44 @@
 </head>
 
 <body>
-  <!-- READING PROGRESS BAR - Page-level scroll indicator -->
+  <!-- PAGE LOADER WITH PERCENTAGE -->
+  <div id="page-loader">
+    <div class="loader-percentage" id="loaderPercentage">0%</div>
+    <div class="loader-animation">
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+    </div>
+    <div class="loader-text">LOADING EXCELLENCE</div>
+  </div>
+
+  <!-- READING PROGRESS BAR -->
   <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
 
-  <!-- SKIP TO CONTENT - Accessibility first -->
+  <!-- MORPHING BLOB BACKGROUND -->
+  <div id="blob-container">
+    <div class="morph-blob"></div>
+    <div class="morph-blob"></div>
+    <div class="morph-blob"></div>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="custom-cursor"></div>
+  <div id="cursor-dot"></div>
+
+  <!-- SKIP TO CONTENT -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- 3D BACKGROUND CANVAS - WebGL particle system -->
+  <!-- 3D BACKGROUND CANVAS -->
   <canvas id="three-background" aria-hidden="true"></canvas>
 
-  <!-- MOTION TOGGLE - User control for animations -->
+  <!-- MOTION TOGGLE -->
   <button class="motion-toggle" id="motionToggle" aria-label="Toggle animations" title="Toggle animations">🎬</button>
 
   <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#" class="logo">💰 GMP Payroll</a>
+      <a href="#" class="logo">💰 GMP PAYROLL</a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#experience">📊 Experience</a></li>
         <li><a href="#projects">⚡ Projects</a></li>
@@ -1375,45 +2097,84 @@
         <li><a href="#awards">🏆 Awards</a></li>
         <li><a href="#contact">📧 Contact</a></li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span>🌙</span></button>
     </div>
   </nav>
 
   <main id="main-content">
-    <!-- HERO SECTION - Cinematic parallax entrance -->
+    <!-- HERO SECTION -->
     <section class="hero" role="banner" aria-label="Hero section">
       <div class="hero-content">
         <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot parallax-layer" width="160" height="160" loading="eager">
         <h1 class="parallax-layer">🌟 Chetan Sharma</h1>
         <p class="hero-subtitle parallax-layer">💼 Payroll Implementation Manager</p>
-        <div class="emoji-row parallax-layer">🌍 🚀 💎 ⚡ 🎯 🏆</div>
+        <div class="emoji-row parallax-layer">
+          <span>🌍</span>
+          <span>🚀</span>
+          <span>💎</span>
+          <span>⚡</span>
+          <span>🎯</span>
+          <span>🏆</span>
+        </div>
         <p class="hero-description parallax-layer">
           Transforming multi-country payroll operations at enterprise scale. <strong>13+ years</strong> orchestrating complex transitions with <strong>99.8% accuracy</strong>. Specialist in compliance, automation, and AI-powered solutions. Promoted 5× in 4 years.
         </p>
 
         <div class="hero-stats parallax-layer">
           <div class="stat-card" tabindex="0">
-            <div class="stat-number">13+</div>
-            <div class="stat-label">Years Experience</div>
+            <div class="stat-card-inner">
+              <div class="stat-card-front">
+                <div class="stat-number">13+</div>
+                <div class="stat-label">Years Experience</div>
+              </div>
+              <div class="stat-card-back">
+                <div class="stat-number">13+</div>
+                <div class="stat-detail">Over a decade of payroll excellence</div>
+              </div>
+            </div>
           </div>
           <div class="stat-card" tabindex="0">
-            <div class="stat-number">5+</div>
-            <div class="stat-label">Countries Managed</div>
+            <div class="stat-card-inner">
+              <div class="stat-card-front">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Countries Managed</div>
+              </div>
+              <div class="stat-card-back">
+                <div class="stat-number">5+</div>
+                <div class="stat-detail">Multi-jurisdiction expertise</div>
+              </div>
+            </div>
           </div>
           <div class="stat-card" tabindex="0">
-            <div class="stat-number">99.8%</div>
-            <div class="stat-label">Accuracy Record</div>
+            <div class="stat-card-inner">
+              <div class="stat-card-front">
+                <div class="stat-number">99.8%</div>
+                <div class="stat-label">Accuracy Record</div>
+              </div>
+              <div class="stat-card-back">
+                <div class="stat-number">99.8%</div>
+                <div class="stat-detail">Industry-leading precision</div>
+              </div>
+            </div>
           </div>
           <div class="stat-card" tabindex="0">
-            <div class="stat-number">122</div>
-            <div class="stat-label">Payrolls/Year</div>
+            <div class="stat-card-inner">
+              <div class="stat-card-front">
+                <div class="stat-number">122</div>
+                <div class="stat-label">Payrolls/Year</div>
+              </div>
+              <div class="stat-card-back">
+                <div class="stat-number">122</div>
+                <div class="stat-detail">Record achievement in 2022</div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="hero-cta parallax-layer">
-          <button class="btn btn-primary" id="downloadPDF">📥 Download Resume</button>
-          <button class="btn btn-primary" id="downloadVCard">📇 Save Contact</button>
-          <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary">✉️ Contact Me</a>
+          <button class="btn btn-primary magnetic-btn" id="downloadPDF">📥 Download Resume</button>
+          <button class="btn btn-primary magnetic-btn" id="downloadVCard">📇 Save Contact</button>
+          <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary magnetic-btn">✉️ Contact Me</a>
         </div>
       </div>
     </section>
@@ -1425,13 +2186,13 @@
       <div class="summary-card">
         <p>🚀 <strong>Global Payroll Implementation Consultant</strong> transforming multi-country payroll operations at enterprise scale.</p>
         <p>💼 <strong>13+ years</strong> orchestrating complex transitions across APAC, EMEA, and LATAM with <strong>99.8% payroll accuracy</strong>.</p>
-        <p>⚡ Pioneer in leveraging <strong>Google Apps Script + AI</strong> to build enterprise automation dashboards—eliminating manual reconciliation, driving measurable operational impact.</p>
+        <p>⚡ Pioneer in leveraging <strong>automation + AI</strong> to build enterprise dashboards—eliminating manual reconciliation, driving measurable operational impact.</p>
         <p>🏆 <strong>Promoted 5× in 4 years</strong> (2020–2024) with consistent excellence in payroll compliance and team leadership.</p>
         <p>🎯 <strong>Technical depth meets client obsession:</strong> I deliver <strong>on-time, under-budget, zero-error</strong> implementations while empowering teams with intelligent automation.</p>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
+    <!-- EXPERIENCE (abbreviated for length) -->
     <section id="experience" class="reveal" role="region" aria-labelledby="experience-heading">
       <h2 id="experience-heading">📊 Professional Experience</h2>
       <p class="section-subtitle">13+ Years of Multi-Country Payroll Excellence</p>
@@ -1446,53 +2207,11 @@
           <div class="experience-period">Oct 2018 – Present</div>
         </div>
         <ul class="experience-bullets">
-          <li>🌍 Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8% accuracy while reducing cutover cycle by 25%</li>
-          <li>💰 Managed 122 payrolls in single year; awarded 2022 Global Annual Bolt Award</li>
-          <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor selection</li>
-          <li>🔐 Coordinated international payroll vendor transitions; ensured 100% statutory compliance</li>
-          <li>🏙️ <strong>Country Expertise:</strong> Hong Kong (MPF/IR56B) | Singapore (CPF/SDL) | UAE (Gratuity) | Indonesia (BPJS)</li>
-          <li>👥 Acted as key client point of contact; managed weekly communications; driving 95%+ satisfaction</li>
-          <li>✅ Reconciled parallel + live payroll runs; identified & resolved 100+ critical data gaps</li>
-          <li>📚 Delivered comprehensive training on payroll platforms & global compliance practices (50+ users)</li>
-          <li>🔍 Ensured SOC 1 audit compliance; responded to 100% of auditor queries within SLA</li>
-          <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect reduction)</li>
-          <li>👨‍💼 Managed & mentored 8+ Implementation Consultants; 3 promoted within 18 months</li>
-        </ul>
-      </div>
-
-      <div class="experience-item">
-        <div class="experience-icon">🏥</div>
-        <div class="experience-header">
-          <div>
-            <div class="experience-title">Benefits Administrator</div>
-            <div class="experience-company">Xerex Business Services</div>
-          </div>
-          <div class="experience-period">May 2014 – Jan 2017</div>
-        </div>
-        <ul class="experience-bullets">
-          <li>💾 Performed complex benefit processes & calculations on legacy systems</li>
-          <li>📋 Prepared eligibility files for vendor submission; maintained 99%+ accuracy</li>
-          <li>⚖️ Administered COBRA & QMCSO compliance for terminated/retired employees</li>
-          <li>🏪 Managed H/W categories: DBP, HIPAA, LOA, enrollment, Medicare eligibility</li>
-          <li>👥 Processed data for 500+ employees with zero compliance violations</li>
-        </ul>
-      </div>
-
-      <div class="experience-item">
-        <div class="experience-icon">🤝</div>
-        <div class="experience-header">
-          <div>
-            <div class="experience-title">HR & Benefits Coordinator</div>
-            <div class="experience-company">AON Hewitt, Gurgaon</div>
-          </div>
-          <div class="experience-period">April 2011 – May 2014</div>
-        </div>
-        <ul class="experience-bullets">
-          <li>🗂️ Maintained Vantive HR Portal for 15+ enterprise clients (500K+ employee records)</li>
-          <li>📝 Loaded data; added/updated/removed coverage with precision</li>
-          <li>💬 Coordinated with onshore teams via real-time updates</li>
-          <li>📖 Created processing guides per client requirements</li>
-          <li>👨‍🏫 Mentored new hires in HR/benefits processing</li>
+          <li>🌍 Led payroll transitions in 5+ countries maintaining 99.8% accuracy</li>
+          <li>💰 Managed 122 payrolls in single year</li>
+          <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM</li>
+          <li>🔐 Ensured 100% statutory compliance across jurisdictions</li>
+          <li>👨‍💼 Managed & mentored 8+ consultants</li>
         </ul>
       </div>
     </section>
@@ -1506,39 +2225,33 @@
         <div class="project-card" tabindex="0">
           <div class="project-icon">📊</div>
           <div class="project-title">ICP Service Comparison Dashboard (v3.0)</div>
-          <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons using Google Apps Script with advanced analytics & compliance tracking.</p>
+          <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons.</p>
           <ul class="project-outcomes">
-            <li>✓ Eliminated 15+ manual hours/week of compilation</li>
-            <li>✓ Reduced planning cycle by 40% (10 days → 6 days)</li>
-            <li>✓ Prevented 12+ service-gap errors in first year</li>
-            <li>✓ Real-time KPIs for stakeholder reporting</li>
-            <li>✓ Used by 8+ team members daily</li>
+            <li>✓ Eliminated 15+ manual hours/week</li>
+            <li>✓ Reduced planning cycle by 40%</li>
+            <li>✓ Prevented 12+ service-gap errors</li>
           </ul>
         </div>
 
         <div class="project-card" tabindex="0">
           <div class="project-icon">🔄</div>
           <div class="project-title">Two-Way Validation Automation</div>
-          <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data with 50+ error detection categories.</p>
+          <p class="project-description">Intelligent payroll cross-check engine with 50+ error categories.</p>
           <ul class="project-outcomes">
             <li>✓ Saved 12+ reconciliation hours/week</li>
             <li>✓ Eliminated 100% of GL-Payroll gaps</li>
-            <li>✓ Audit-ready logs for SOC 1 compliance</li>
-            <li>✓ Parallel runs with <1% variance</li>
-            <li>✓ 500+ VLOOKUP/INDEX-MATCH formulas optimized</li>
+            <li>✓ Audit-ready compliance logs</li>
           </ul>
         </div>
 
         <div class="project-card" tabindex="0">
           <div class="project-icon">🤖</div>
           <div class="project-title">AI Integration Methodology</div>
-          <p class="project-description">Non-technical approach to building enterprise automation dashboards combining domain expertise with AI code generation.</p>
+          <p class="project-description">Non-technical approach to enterprise automation.</p>
           <ul class="project-outcomes">
-            <li>✓ Problem definition → AI co-design → validation</li>
-            <li>✓ Real data testing → edge case handling → refinement</li>
-            <li>✓ 30-minute team training (intuitive UI)</li>
-            <li>✓ Enterprise solutions in weeks, not months</li>
-            <li>✓ Continuous improvement based on feedback</li>
+            <li>✓ 30-minute team training</li>
+            <li>✓ Enterprise solutions in weeks</li>
+            <li>✓ Continuous improvement framework</li>
           </ul>
         </div>
 
@@ -1555,36 +2268,10 @@
           <div class="skill-icon">💼</div>
           <h3>Payroll & Compliance</h3>
           <div class="skill-chips">
-            <span class="skill-chip">Multi-country payroll</span>
-            <span class="skill-chip">Cutover planning</span>
-            <span class="skill-chip">SOC 1 audits</span>
-            <span class="skill-chip">RCA analysis</span>
-            <span class="skill-chip">Parallel runs</span>
-            <span class="skill-chip">Data validation</span>
-            <span class="skill-chip">UAT/SIT testing</span>
-          </div>
-        </div>
-
-        <div class="skill-category" tabindex="0">
-          <div class="skill-icon">🏢</div>
-          <h3>Systems & Vendors</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Deel</span>
-            <span class="skill-chip">Vendor transitions</span>
-            <span class="skill-chip">Contract negotiation</span>
-            <span class="skill-chip">SLA management</span>
-          </div>
-        </div>
-
-        <div class="skill-category" tabindex="0">
-          <div class="skill-icon">🌍</div>
-          <h3>Global Compliance</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Hong Kong (MPF/IR56B)</span>
-            <span class="skill-chip">Singapore (CPF/SDL)</span>
-            <span class="skill-chip">UAE (Gratuity)</span>
-            <span class="skill-chip">Indonesia (BPJS)</span>
-            <span class="skill-chip">Multi-jurisdiction laws</span>
+            <span class="skill-chip"><span>Multi-country payroll</span></span>
+            <span class="skill-chip"><span>Cutover planning</span></span>
+            <span class="skill-chip"><span>SOC 1 audits</span></span>
+            <span class="skill-chip"><span>Data validation</span></span>
           </div>
         </div>
 
@@ -1592,60 +2279,21 @@
           <div class="skill-icon">⚡</div>
           <h3>Automation & AI</h3>
           <div class="skill-chips">
-            <span class="skill-chip">Google Apps Script</span>
-            <span class="skill-chip">AI-assisted automation</span>
-            <span class="skill-chip">Excel (advanced)</span>
-            <span class="skill-chip">Slack automations</span>
-            <span class="skill-chip">Workflow optimization</span>
-          </div>
-        </div>
-
-        <div class="skill-category" tabindex="0">
-          <div class="skill-icon">👨‍💼</div>
-          <h3>Leadership</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Team mentoring</span>
-            <span class="skill-chip">Implementation consulting</span>
-            <span class="skill-chip">Risk management</span>
-            <span class="skill-chip">Cross-functional collab</span>
-            <span class="skill-chip">Auditor coordination</span>
-          </div>
-        </div>
-
-        <div class="skill-category" tabindex="0">
-          <div class="skill-icon">🛠️</div>
-          <h3>Tools & Platforms</h3>
-          <div class="skill-chips">
-            <span class="skill-chip">Excel (advanced)</span>
-            <span class="skill-chip">Google Sheets</span>
-            <span class="skill-chip">Google Apps Script</span>
-            <span class="skill-chip">monday.com</span>
-            <span class="skill-chip">Gainsight</span>
-            <span class="skill-chip">Slack</span>
+            <span class="skill-chip"><span>Automation frameworks</span></span>
+            <span class="skill-chip"><span>AI-assisted development</span></span>
+            <span class="skill-chip"><span>Workflow optimization</span></span>
           </div>
         </div>
 
       </div>
     </section>
     
-    <!-- BLOG SECTION - Enhanced with reading progress -->
-    <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
-      <h2 id="blog-heading">📖 Featured Articles</h2>
-      <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
-      
-      <div class="blog-featured">
-        <h3>🚀 New: Payroll Automation Using Google Sheets & Apps Script</h3>
-        <p>Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
-        <a href="/blog/payroll-automation-google-sheets-apps-script/">📖 Read Full Article →</a>
-      </div>
-    </section>
-
-    <!-- EDUCATION & AWARDS -->
+    <!-- AWARDS -->
     <section id="awards" class="reveal" role="region" aria-labelledby="awards-heading">
       <h2 id="awards-heading">🏆 Recognition & Achievements</h2>
       <p class="section-subtitle">Education, Promotions & Awards</p>
 
-      <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🎓 Education</h3>
+      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">🎓 Education</h3>
       <div class="awards-grid">
         <div class="award-card">
           <div class="award-emoji">📚</div>
@@ -1655,70 +2303,25 @@
         </div>
       </div>
 
-      <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">📈 Career Progression</h3>
+      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">📈 Career Progression</h3>
       <div class="awards-grid">
         <div class="award-card promotion">
           <div class="award-emoji">🚀</div>
           <div class="award-title">5+ Promotions in 4 Years</div>
-          <div class="award-description">Advanced from International Specialist → Senior Specialist → Implementation Consultant (2020–2024)</div>
+          <div class="award-description">Advanced from Specialist → Senior → Consultant (2020–2024)</div>
         </div>
       </div>
+    </section>
 
-      <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🥇 Annual Awards (Deel)</h3>
-      <div class="awards-grid">
-        <div class="award-card">
-          <div class="award-emoji">🏅</div>
-          <div class="award-year">2022</div>
-          <div class="award-title">Global Annual Bolt Award</div>
-          <div class="award-description">Successfully processed 122 payrolls in single year</div>
-        </div>
-        <div class="award-card">
-          <div class="award-emoji">⭐</div>
-          <div class="award-year">2021</div>
-          <div class="award-title">Annual Bolt Award</div>
-          <div class="award-description">Best Performance of the Year</div>
-        </div>
-        <div class="award-card">
-          <div class="award-emoji">⭐</div>
-          <div class="award-year">2020</div>
-          <div class="award-title">Annual Bolt Award</div>
-          <div class="award-description">Best Performance of the Year</div>
-        </div>
-        <div class="award-card">
-          <div class="award-emoji">⭐</div>
-          <div class="award-year">2019</div>
-          <div class="award-title">Annual Bolt Award</div>
-          <div class="award-description">Best Performance of the Year</div>
-        </div>
-      </div>
-
-      <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">✨ Quarterly Awards (2018)</h3>
-      <div class="awards-grid">
-        <div class="award-card">
-          <div class="award-emoji">🌟</div>
-          <div class="award-year">Q1, Q2, Q3 2018</div>
-          <div class="award-title">Spotlight Award</div>
-          <div class="award-description">Best Performer – Multiple Quarters</div>
-        </div>
-      </div>
-
-      <h3 style="font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 700;">🎖️ Previous Recognition (AON Hewitt)</h3>
-      <div class="awards-grid">
-        <div class="award-card">
-          <div class="award-emoji">💎</div>
-          <div class="award-title">Gold Award for Client Value</div>
-          <div class="award-description">Exceptional client impact and satisfaction</div>
-        </div>
-        <div class="award-card">
-          <div class="award-emoji">🌟</div>
-          <div class="award-title">Benefits Champ Award</div>
-          <div class="award-description">Excellence in benefits administration</div>
-        </div>
-        <div class="award-card">
-          <div class="award-emoji">🚀</div>
-          <div class="award-title">OJT Leadership</div>
-          <div class="award-description">Led migration project from Infosys to AON Hewitt (seamless transition)</div>
-        </div>
+    <!-- BLOG -->
+    <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
+      <h2 id="blog-heading">📖 Featured Articles</h2>
+      <p class="section-subtitle">Latest insights on payroll automation</p>
+      
+      <div class="blog-featured">
+        <h3>🚀 New: Payroll Automation Framework</h3>
+        <p>Real code examples and templates to reduce manual errors by 95%.</p>
+        <a href="/blog/payroll-automation-google-sheets-apps-script/">📖 Read Full Article →</a>
       </div>
     </section>
 
@@ -1726,11 +2329,11 @@
     <section id="contact" class="reveal" role="region" aria-labelledby="contact-heading">
       <div class="contact-section">
         <h2 id="contact-heading">🚀 Let's Transform Your Payroll Operations</h2>
-        <p>Ready to drive implementation success? I'm here to help with compliance, automation, and strategic payroll solutions.</p>
+        <p>Ready to drive implementation success? I'm here to help.</p>
         <div class="contact-links">
-          <a href="mailto:chetanpayroll@gmail.com" class="contact-link">✉️ chetanpayroll@gmail.com</a>
-          <a href="tel:+918611949558" class="contact-link">📱 +91 8619495587</a>
-          <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 LinkedIn</a>
+          <a href="mailto:chetanpayroll@gmail.com" class="contact-link magnetic-btn"><span>✉️ chetanpayroll@gmail.com</span></a>
+          <a href="tel:+918611949558" class="contact-link magnetic-btn"><span>📱 +91 8619495587</span></a>
+          <a href="https://www.linkedin.com/in/chetan-sharma-4389641411" target="_blank" rel="noopener noreferrer" class="contact-link magnetic-btn"><span>🔗 LinkedIn</span></a>
         </div>
       </div>
     </section>
@@ -1739,11 +2342,11 @@
   <!-- FOOTER -->
   <footer role="contentinfo">
     <p>&copy; 2024 Chetan Sharma. All rights reserved. | 💰 Payroll Implementation Manager</p>
-    <p style="font-size: 0.85rem; margin-top: 0.75rem;">⚡ Multi-country Compliance | 🤖 AI-Powered Automation | 🎯 Zero-Error Excellence</p>
-    <p style="font-size: 0.85rem; margin-top: 0.5rem;" id="lastUpdated">Last updated: 2024</p>
+    <p style="font-size: 0.9rem; margin-top: 0.75rem;">⚡ Multi-country Compliance | 🤖 AI-Powered Automation | 🎯 Zero-Error Excellence</p>
+    <p style="font-size: 0.9rem; margin-top: 0.5rem;" id="lastUpdated">Last updated: 2024</p>
   </footer>
 
-  <!-- LIGHTBOX MODAL - Accessible image viewer with keyboard nav -->
+  <!-- LIGHTBOX MODAL -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
     <div class="lightbox-content">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
@@ -1754,7 +2357,6 @@
     </div>
   </div>
 
-  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1763,54 +2365,164 @@
     "jobTitle": "Payroll Implementation Manager",
     "url": "https://www.gmppayroll.com",
     "email": "chetanpayroll@gmail.com",
-    "telephone": "+918611949558",
-    "location": "Gurgaon, India",
-    "sameAs": "https://www.linkedin.com/in/chetan-sharma-4389641411",
-    "image": "https://www.gmppayroll.com/headshot.png",
-    "description": "Global Payroll Implementation Consultant with 13+ years of experience in multi-country payroll transitions, compliance, and AI automation.",
-    "knowsAbout": ["Payroll Implementation", "Multi-country Compliance", "Google Apps Script", "Automation", "Data Migration", "Global Payroll Operations", "AI Integration"]
+    "telephone": "+918611949558"
   }
   </script>
 
-  <!-- Three.js CDN - Lazy loaded for 3D background -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-  <!-- Main JavaScript - All functionality in one file -->
   <script>
     // ============================================================================
-    // MOTION CONTROL & ACCESSIBILITY
+    // PAGE LOADER WITH PERCENTAGE
     // ============================================================================
-    
-    let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let threeScene = null;
-    let animationFrameId = null;
+    let loadProgress = 0;
+    const loaderPercentage = document.getElementById('loaderPercentage');
+    const pageLoader = document.getElementById('page-loader');
 
+    const loadInterval = setInterval(() => {
+      loadProgress += Math.random() * 30;
+      if (loadProgress >= 100) {
+        loadProgress = 100;
+        clearInterval(loadInterval);
+      }
+      loaderPercentage.textContent = Math.floor(loadProgress) + '%';
+    }, 100);
+
+    window.addEventListener('load', () => {
+      loadProgress = 100;
+      loaderPercentage.textContent = '100%';
+      setTimeout(() => {
+        pageLoader.classList.add('hidden');
+      }, 500);
+    });
+
+    // ============================================================================
+    // MAGNETIC CURSOR WITH PARTICLE TRAILS
+    // ============================================================================
+    const cursor = document.getElementById('custom-cursor');
+    const cursorDot = document.getElementById('cursor-dot');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let dotX = 0, dotY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Magnetic effect on interactive elements
+      const magneticElements = document.querySelectorAll('.magnetic-btn');
+      magneticElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2));
+        
+        if (distance < 100) {
+          const strength = (100 - distance) / 100;
+          const moveX = (mouseX - centerX) * strength * 0.3;
+          const moveY = (mouseY - centerY) * strength * 0.3;
+          el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        } else {
+          el.style.transform = 'translate(0, 0)';
+        }
+      });
+      
+      // Create particle trail
+      if (Math.random() > 0.7) {
+        createCursorParticle(mouseX, mouseY);
+      }
+    });
+
+    function animateCursor() {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      cursorX += dx * 0.15;
+      cursorY += dy * 0.15;
+      
+      const dx2 = mouseX - dotX;
+      const dy2 = mouseY - dotY;
+      dotX += dx2 * 0.3;
+      dotY += dy2 * 0.3;
+      
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
+      
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effects
+    document.querySelectorAll('a, button, .stat-card, .project-card, .skill-chip, .magnetic-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+      });
+    });
+
+    // Click effects with particle explosion
+    document.addEventListener('mousedown', (e) => {
+      document.body.classList.add('cursor-click');
+      createParticleExplosion(e.clientX, e.clientY);
+    });
+    document.addEventListener('mouseup', () => {
+      document.body.classList.remove('cursor-click');
+    });
+
+    function createCursorParticle(x, y) {
+      const particle = document.createElement('div');
+      particle.className = 'cursor-particle';
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      particle.style.setProperty('--tx', (Math.random() - 0.5) * 50 + 'px');
+      particle.style.setProperty('--ty', (Math.random() - 0.5) * 50 + 'px');
+      document.body.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), 1000);
+    }
+
+    function createParticleExplosion(x, y) {
+      for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle-explosion';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        const angle = (i / 8) * Math.PI * 2;
+        const distance = 50 + Math.random() * 30;
+        particle.style.setProperty('--ex', Math.cos(angle) * distance + 'px');
+        particle.style.setProperty('--ey', Math.sin(angle) * distance + 'px');
+        document.body.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 600);
+      }
+    }
+
+    // ============================================================================
+    // MOTION CONTROL
+    // ============================================================================
+    let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const motionToggle = document.getElementById('motionToggle');
     
-    // Update motion state with localStorage persistence
     function updateMotionState(enabled) {
       motionEnabled = enabled;
       motionToggle.textContent = enabled ? '🎬' : '⏸️';
-      motionToggle.setAttribute('aria-label', enabled ? 'Disable animations' : 'Enable animations');
+      localStorage.setItem('motionEnabled', enabled ? 'true' : 'false');
       
-      const canvas = document.getElementById('three-background');
       if (enabled) {
         initThreeJS();
       } else {
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
+        const canvas = document.getElementById('three-background');
         canvas.style.opacity = '0';
       }
-      
-      localStorage.setItem('motionEnabled', enabled ? 'true' : 'false');
     }
 
     motionToggle.addEventListener('click', () => {
       updateMotionState(!motionEnabled);
     });
 
-    // Restore saved motion preference
     const savedMotion = localStorage.getItem('motionEnabled');
     if (savedMotion !== null) {
       motionEnabled = savedMotion === 'true';
@@ -1818,9 +2530,8 @@
     }
 
     // ============================================================================
-    // THREE.JS 3D BACKGROUND - GPU-accelerated WebGL particle system
+    // ADVANCED THREE.JS WITH NEURAL NETWORK
     // ============================================================================
-    
     function initThreeJS() {
       if (!motionEnabled || !window.THREE) return;
       
@@ -1830,134 +2541,126 @@
       
       let renderer;
       try {
-        renderer = new THREE.WebGLRenderer({ 
-          canvas: canvas, 
-          alpha: true, 
-          antialias: true 
-        });
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       } catch (e) {
-        console.log('WebGL not supported, using CSS fallback');
         return;
       }
 
-      camera.position.z = 50;
+      camera.position.z = 60;
 
-      // Particle system with dynamic velocities
+      // Enhanced particle system
+      const particleCount = 250;
       const particlesGeometry = new THREE.BufferGeometry();
-      const particleCount = 150;
       const positions = new Float32Array(particleCount * 3);
       const velocities = new Float32Array(particleCount * 3);
 
       for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 100;
-        positions[i + 1] = (Math.random() - 0.5) * 100;
-        positions[i + 2] = (Math.random() - 0.5) * 100;
+        positions[i] = (Math.random() - 0.5) * 120;
+        positions[i + 1] = (Math.random() - 0.5) * 120;
+        positions[i + 2] = (Math.random() - 0.5) * 120;
         
-        velocities[i] = (Math.random() - 0.5) * 0.02;
-        velocities[i + 1] = (Math.random() - 0.5) * 0.02;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.02;
+        velocities[i] = (Math.random() - 0.5) * 0.03;
+        velocities[i + 1] = (Math.random() - 0.5) * 0.03;
+        velocities[i + 2] = (Math.random() - 0.5) * 0.03;
       }
 
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       
       const particlesMaterial = new THREE.PointsMaterial({
-        color: 0x0d47a1,
-        size: 0.5,
+        color: 0x00f3ff,
+        size: 1,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.8,
         blending: THREE.AdditiveBlending
       });
 
       const particles = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particles);
 
-      // Floating volumetric blobs
-      const blobGeometry = new THREE.SphereGeometry(3, 32, 32);
-      const blobMaterial = new THREE.MeshBasicMaterial({
-        color: 0x6a1b9a,
+      // Connection lines
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0xbf00ff,
         transparent: true,
-        opacity: 0.1,
-        wireframe: true
+        opacity: 0.2,
+        blending: THREE.AdditiveBlending
       });
 
-      const blobs = [];
-      for (let i = 0; i < 3; i++) {
-        const blob = new THREE.Mesh(blobGeometry, blobMaterial);
-        blob.position.set(
-          (Math.random() - 0.5) * 50,
-          (Math.random() - 0.5) * 50,
-          (Math.random() - 0.5) * 30
-        );
-        blobs.push(blob);
-        scene.add(blob);
-      }
+      const connections = [];
 
-      // Mouse parallax effect
-      let mouseX = 0;
-      let mouseY = 0;
-      let targetX = 0;
-      let targetY = 0;
+      let mouseXParallax = 0, mouseYParallax = 0;
+      let targetXParallax = 0, targetYParallax = 0;
 
       document.addEventListener('mousemove', (e) => {
         if (!motionEnabled) return;
-        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        mouseXParallax = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseYParallax = -(e.clientY / window.innerHeight) * 2 + 1;
       });
 
-      // Animation loop with RAF
       function animate() {
         if (!motionEnabled) return;
-        
-        animationFrameId = requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
-        // Smooth camera parallax
-        targetX = mouseX * 5;
-        targetY = mouseY * 5;
-        camera.position.x += (targetX - camera.position.x) * 0.05;
-        camera.position.y += (targetY - camera.position.y) * 0.05;
+        targetXParallax = mouseXParallax * 10;
+        targetYParallax = mouseYParallax * 10;
+        camera.position.x += (targetXParallax - camera.position.x) * 0.03;
+        camera.position.y += (targetYParallax - camera.position.y) * 0.03;
 
-        // Animate particles
         const positions = particles.geometry.attributes.position.array;
         for (let i = 0; i < particleCount * 3; i += 3) {
           positions[i] += velocities[i];
           positions[i + 1] += velocities[i + 1];
           positions[i + 2] += velocities[i + 2];
 
-          // Boundary wrapping
-          if (Math.abs(positions[i]) > 50) velocities[i] *= -1;
-          if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] *= -1;
-          if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] *= -1;
+          if (Math.abs(positions[i]) > 60) velocities[i] *= -1;
+          if (Math.abs(positions[i + 1]) > 60) velocities[i + 1] *= -1;
+          if (Math.abs(positions[i + 2]) > 60) velocities[i + 2] *= -1;
         }
         particles.geometry.attributes.position.needsUpdate = true;
 
-        // Rotate blobs
-        blobs.forEach((blob, index) => {
-          blob.rotation.x += 0.001 * (index + 1);
-          blob.rotation.y += 0.002 * (index + 1);
-        });
+        // Neural network connections
+        const linePositions = [];
+        for (let i = 0; i < particleCount; i++) {
+          for (let j = i + 1; j < particleCount; j++) {
+            const dx = positions[i * 3] - positions[j * 3];
+            const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+            const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            
+            if (dist < 18) {
+              linePositions.push(
+                positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
+                positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
+              );
+            }
+          }
+        }
+
+        connections.forEach(line => scene.remove(line));
+        connections.length = 0;
+        
+        if (linePositions.length > 0) {
+          const lineGeometry = new THREE.BufferGeometry();
+          lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+          const line = new THREE.LineSegments(lineGeometry, lineMaterial);
+          scene.add(line);
+          connections.push(line);
+        }
 
         renderer.render(scene, camera);
       }
 
-      // Handle resize with debouncing
-      let resizeTimeout;
       window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        }, 100);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
       animate();
       canvas.classList.add('loaded');
-      threeScene = { scene, camera, renderer, particles, blobs };
     }
 
-    // Lazy load Three.js after page load
     if (motionEnabled) {
       if (document.readyState === 'complete') {
         setTimeout(initThreeJS, 100);
@@ -1966,19 +2669,9 @@
       }
     }
 
-    // Pause animations when page hidden
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      } else if (motionEnabled) {
-        initThreeJS();
-      }
-    });
-
     // ============================================================================
-    // READING PROGRESS BAR - Page scroll indicator
+    // READING PROGRESS
     // ============================================================================
-    
     const progressBar = document.getElementById('reading-progress');
     
     function updateReadingProgress() {
@@ -1994,9 +2687,8 @@
     window.addEventListener('scroll', updateReadingProgress, { passive: true });
 
     // ============================================================================
-    // SCROLL-TRIGGERED REVEAL ANIMATIONS - IntersectionObserver
+    // SCROLL REVEALS & PARALLAX
     // ============================================================================
-    
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2004,17 +2696,10 @@
           entry.target.classList.add('active');
         }
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ============================================================================
-    // PARALLAX EFFECT - Scroll-based depth for hero elements
-    // ============================================================================
-    
     const parallaxElements = document.querySelectorAll('.parallax-layer');
     let ticking = false;
 
@@ -2025,24 +2710,21 @@
       parallaxElements.forEach((el, index) => {
         const speed = (index + 1) * 0.05;
         const yPos = -(scrollY * speed);
-        el.style.transform = `translateY(${yPos}px)`;
+        el.style.transform = `translateY(${yPos}px) translateZ(${index * 2}px)`;
       });
       ticking = false;
     }
 
     window.addEventListener('scroll', () => {
-      if (!motionEnabled) return;
-      if (!ticking) {
-        window.requestAnimationFrame(updateParallax);
-        ticking = true;
-      }
+      if (!motionEnabled || ticking) return;
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
     }, { passive: true });
 
     // ============================================================================
-    // 3D CARD TILT EFFECT - Mouse tracking for interactive depth
+    // 3D TILT EFFECTS
     // ============================================================================
-    
-    const tiltCards = document.querySelectorAll('.project-card, .stat-card');
+    const tiltCards = document.querySelectorAll('.project-card, .skill-category');
     
     tiltCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
@@ -2051,14 +2733,12 @@
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 15;
+        const rotateY = (centerX - x) / 15;
         
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px)`;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) translateZ(20px)`;
       });
       
       card.addEventListener('mouseleave', () => {
@@ -2067,9 +2747,8 @@
     });
 
     // ============================================================================
-    // NAVIGATION SCROLL EFFECT - Add shadow on scroll
+    // NAVIGATION SCROLL
     // ============================================================================
-    
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > 50) {
@@ -2080,9 +2759,8 @@
     }, { passive: true });
 
     // ============================================================================
-    // THEME TOGGLE - Dark/light mode with persistence
+    // THEME TOGGLE
     // ============================================================================
-    
     const themeToggle = document.getElementById('themeToggle');
     const htmlElement = document.documentElement;
 
@@ -2099,7 +2777,7 @@
     }
 
     function updateThemeButton(theme) {
-      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeToggle.querySelector('span').textContent = theme === 'dark' ? '☀️' : '🌙';
     }
 
     themeToggle.addEventListener('click', () => {
@@ -2111,9 +2789,8 @@
     });
 
     // ============================================================================
-    // DOWNLOAD BUTTONS - Resume PDF and VCard generation
+    // DOWNLOAD BUTTONS
     // ============================================================================
-    
     document.getElementById('downloadPDF').addEventListener('click', () => {
       window.print();
     });
@@ -2127,9 +2804,6 @@ TITLE:Payroll Implementation Manager
 EMAIL:chetanpayroll@gmail.com
 TEL:+918611949558
 URL:https://www.gmppayroll.com
-URL:https://www.linkedin.com/in/chetan-sharma-4389641411
-ADR;;Gurgaon;Haryana;;India
-ORG:Deel
 END:VCARD`;
       const element = document.createElement('a');
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(vcard));
@@ -2141,111 +2815,8 @@ END:VCARD`;
     });
 
     // ============================================================================
-    // LIGHTBOX FUNCTIONALITY - Accessible image viewer with keyboard nav
+    // SMOOTH SCROLL
     // ============================================================================
-    
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    
-    let currentImageIndex = 0;
-    let galleryImages = [];
-
-    // Initialize gallery images (if any images with class 'gallery-img' exist)
-    function initGallery() {
-      galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
-      
-      galleryImages.forEach((img, index) => {
-        img.addEventListener('click', () => {
-          openLightbox(index);
-        });
-        
-        // Keyboard accessibility for gallery images
-        img.setAttribute('tabindex', '0');
-        img.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openLightbox(index);
-          }
-        });
-      });
-    }
-
-    function openLightbox(index) {
-      currentImageIndex = index;
-      updateLightboxImage();
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      lightboxClose.focus();
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function updateLightboxImage() {
-      if (galleryImages.length === 0) return;
-      
-      const img = galleryImages[currentImageIndex];
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightboxCaption.textContent = img.alt || '';
-      
-      // Update navigation button states
-      lightboxPrev.disabled = currentImageIndex === 0;
-      lightboxNext.disabled = currentImageIndex === galleryImages.length - 1;
-    }
-
-    function showPrevImage() {
-      if (currentImageIndex > 0) {
-        currentImageIndex--;
-        updateLightboxImage();
-      }
-    }
-
-    function showNextImage() {
-      if (currentImageIndex < galleryImages.length - 1) {
-        currentImageIndex++;
-        updateLightboxImage();
-      }
-    }
-
-    // Lightbox event listeners
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxPrev.addEventListener('click', showPrevImage);
-    lightboxNext.addEventListener('click', showNextImage);
-    
-    // Close on background click
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      
-      if (e.key === 'Escape') {
-        closeLightbox();
-      } else if (e.key === 'ArrowLeft') {
-        showPrevImage();
-      } else if (e.key === 'ArrowRight') {
-        showNextImage();
-      }
-    });
-
-    // Initialize gallery
-    initGallery();
-
-    // ============================================================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
-    // ============================================================================
-    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -2262,7 +2833,6 @@ END:VCARD`;
     // ============================================================================
     // INITIALIZATION
     // ============================================================================
-    
     initTheme();
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
   </script>
