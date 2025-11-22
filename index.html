@@ -488,6 +488,31 @@
   <!-- Three.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" async></script>
 
+  <!-- Immediate Loader Hide Script -->
+  <script>
+    // Execute immediately - before page finishes loading
+    (function() {
+      function hideLoader() {
+        var loader = document.getElementById('page-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+          loader.style.display = 'none';
+        }
+      }
+
+      // Hide immediately if DOM is ready
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        hideLoader();
+      }
+
+      // Also hide on DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', hideLoader);
+
+      // Final failsafe
+      setTimeout(hideLoader, 500);
+    })();
+  </script>
+
   <!-- Main JavaScript -->
   <script src="/script.js" defer></script>
 </body>
