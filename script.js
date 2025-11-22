@@ -1,11 +1,43 @@
     // ============================================================================
-    // PAGE LOADER
+    // PAGE LOADER - with failsafe
     // ============================================================================
+    // Immediate failsafe - hide loader after 3 seconds no matter what
+    setTimeout(() => {
+      const loader = document.getElementById('page-loader');
+      if (loader) {
+        loader.classList.add('hidden');
+      }
+    }, 3000);
+
+    // Normal loader hiding on page load
     window.addEventListener('load', () => {
       setTimeout(() => {
-        document.getElementById('page-loader').classList.add('hidden');
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+        }
       }, 1500);
     });
+
+    // Additional failsafe for DOMContentLoaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          const loader = document.getElementById('page-loader');
+          if (loader) {
+            loader.classList.add('hidden');
+          }
+        }, 2000);
+      });
+    } else {
+      // Document already loaded
+      setTimeout(() => {
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+        }
+      }, 1000);
+    }
 
     // ============================================================================
     // CUSTOM CURSOR & CURSOR PARTICLES
@@ -119,7 +151,13 @@
     // ADVANCED THREE.JS 3D BACKGROUND - Neural network particles
     // ============================================================================
     function initThreeJS() {
-      if (!motionEnabled || !window.THREE) return;
+      // Only load Three.js on desktop and when motion is enabled
+      const shouldLoad = window.innerWidth > 1024 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!motionEnabled || !window.THREE || !shouldLoad) {
+        const canvas = document.getElementById('three-background');
+        if (canvas) canvas.style.display = 'none';
+        return;
+      }
       
       const canvas = document.getElementById('three-background');
       const scene = new THREE.Scene();
@@ -675,18 +713,3 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Conditional Three.js loading - only on desktop
-function shouldLoadThreeJS() {
-  return window.innerWidth > 1024 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-// Modify the initThreeJS function call to be conditional
-const originalInitThreeJS = initThreeJS;
-initThreeJS = function() {
-  if (shouldLoadThreeJS()) {
-    return originalInitThreeJS();
-  } else {
-    const canvas = document.getElementById('three-background');
-    if (canvas) canvas.style.display = 'none';
-  }
-};
