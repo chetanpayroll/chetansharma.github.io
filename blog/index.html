@@ -38,6 +38,22 @@
     <div class="loader-text">LOADING EXCELLENCE</div>
   </div>
 
+  <script>
+    (function() {
+      function hideLoader() {
+        var loader = document.getElementById("page-loader");
+        if (loader && loader.style.display !== "none") {
+          loader.style.opacity = "0";
+          loader.style.visibility = "hidden";
+          setTimeout(function() { loader.style.display = "none"; }, 500);
+        }
+      }
+      setTimeout(hideLoader, 2000);
+      window.addEventListener("load", function() { setTimeout(hideLoader, 500); });
+    })();
+  </script>
+  </div>
+
   <!-- READING PROGRESS BAR -->
   <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
 
