@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Chetan Sharma - Payroll Implementation Blog</title>
+    <link>https://www.gmppayroll.com/blog/</link>
+    <description>Expert insights on payroll automation, compliance, and multi-country implementations</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Nov 2025 00:00:00 GMT</lastBuildDate>
+
+    <item>
+      <title>Payroll Automation Using Google Sheets & Apps Script: A Complete Framework</title>
+      <link>https://www.gmppayroll.com/blog/payroll-automation-google-sheets-apps-script/</link>
+      <description>How I automated 122 payroll cycles annually with 99.8% accuracy. Real code examples demonstrating the automation expertise I bring to payroll implementation roles.</description>
+      <pubDate>Tue, 01 Oct 2024 00:00:00 GMT</pubDate>
+      <guid>https://www.gmppayroll.com/blog/payroll-automation-google-sheets-apps-script/</guid>
+    </item>
+  </channel>
+</rss>
