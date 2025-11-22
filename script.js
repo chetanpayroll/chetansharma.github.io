@@ -1,43 +1,35 @@
     // ============================================================================
-    // PAGE LOADER - with failsafe
+    // PAGE LOADER - Immediate hide with multiple failsafes
     // ============================================================================
-    // Immediate failsafe - hide loader after 3 seconds no matter what
-    setTimeout(() => {
-      const loader = document.getElementById('page-loader');
-      if (loader) {
-        loader.classList.add('hidden');
+    (function() {
+      function hideLoader() {
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+          // Force display none after transition
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 500);
+        }
       }
-    }, 3000);
 
-    // Normal loader hiding on page load
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loader = document.getElementById('page-loader');
-        if (loader) {
-          loader.classList.add('hidden');
-        }
-      }, 1500);
-    });
+      // Immediate hide - don't wait for anything
+      hideLoader();
 
-    // Additional failsafe for DOMContentLoaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-          const loader = document.getElementById('page-loader');
-          if (loader) {
-            loader.classList.add('hidden');
-          }
-        }, 2000);
-      });
-    } else {
-      // Document already loaded
-      setTimeout(() => {
-        const loader = document.getElementById('page-loader');
-        if (loader) {
-          loader.classList.add('hidden');
-        }
-      }, 1000);
-    }
+      // Backup: hide after short delay
+      setTimeout(hideLoader, 100);
+
+      // Backup: hide on DOMContentLoaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', hideLoader);
+      }
+
+      // Backup: hide on window load
+      window.addEventListener('load', hideLoader);
+
+      // Final failsafe: force hide after 2 seconds
+      setTimeout(hideLoader, 2000);
+    })();
 
     // ============================================================================
     // CUSTOM CURSOR & CURSOR PARTICLES
