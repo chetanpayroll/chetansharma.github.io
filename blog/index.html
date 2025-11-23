@@ -372,23 +372,52 @@
     /* Responsive */
     @media (max-width: 768px) {
       .nav-container {
-        flex-direction: column;
-        gap: 1rem;
         padding: 1rem;
       }
 
       .article-meta {
-        flex-direction: column;
-        gap: 0.5rem;
+        display: none !important;
+      }
+
+      .mobile-meta {
+        display: block !important;
+      }
+
+      .back-link {
+        font-size: 0.95rem;
       }
 
       .container {
         padding: 5rem 1rem 2rem;
       }
 
+      .article-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .article-header > p {
+        font-size: 1rem;
+      }
+
       .code-block {
         font-size: 0.85rem;
         padding: 1rem;
+      }
+
+      .toc {
+        padding: 1.5rem;
+      }
+
+      .article-content {
+        font-size: 1rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.6rem;
+      }
+
+      .article-content h3 {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -415,6 +444,16 @@
       <!-- HEADER -->
       <div class="article-header">
         <h1>Payroll Automation Using Google Sheets & Apps Script: A Complete Framework</h1>
+        
+        <!-- Mobile metadata - shows only on mobile -->
+        <div class="mobile-meta" style="display: none; margin: 1.5rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.9rem; color: var(--text-muted); justify-content: center;">
+            <span>📅 October 2024</span>
+            <span>⏱️ 12 min read</span>
+            <span>🎯 Intermediate to Advanced</span>
+          </div>
+        </div>
+        
         <p>How I automated 122 payroll cycles annually with 99.8% accuracy. Real code examples demonstrating the automation expertise I bring to payroll implementation roles.</p>
         
         <div class="author-info">
