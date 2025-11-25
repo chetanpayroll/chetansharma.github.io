@@ -87,9 +87,6 @@
       cursor: none;
     }
 
-    /* ============================================================================
-       CUSTOM CURSOR - Advanced cursor with trail effect
-       ============================================================================ */
     #custom-cursor {
       position: fixed;
       width: 20px;
@@ -122,7 +119,6 @@
       transform: scale(0.8);
     }
 
-    /* Cursor particles trail */
     .cursor-particle {
       position: fixed;
       width: 4px;
@@ -155,9 +151,6 @@
       }
     }
 
-    /* ============================================================================
-       READING PROGRESS & PAGE LOADER
-       ============================================================================ */
     #reading-progress {
       position: fixed;
       top: 0;
@@ -247,9 +240,6 @@
       50% { opacity: 0.5; }
     }
 
-    /* ============================================================================
-       ADVANCED 3D BACKGROUND - Neural network particles
-       ============================================================================ */
     #three-background {
       position: fixed;
       top: 0;
@@ -266,7 +256,6 @@
       opacity: 1;
     }
 
-    /* Animated gradient mesh background */
     body::before {
       content: '';
       position: fixed;
@@ -294,7 +283,6 @@
       }
     }
 
-    /* Floating orbs */
     body::after {
       content: '';
       position: fixed;
@@ -340,9 +328,6 @@
       z-index: 1;
     }
 
-    /* ============================================================================
-       SKIP LINK & MOTION TOGGLE
-       ============================================================================ */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -403,9 +388,6 @@
       }
     }
 
-    /* ============================================================================
-       NAVIGATION - Magnetic glassmorphism header
-       ============================================================================ */
     nav {
       position: fixed;
       top: 0;
@@ -484,7 +466,6 @@
       padding: 0.5rem 1rem;
     }
 
-    /* Liquid underline effect */
     .nav-links a::before {
       content: '';
       position: absolute;
@@ -576,9 +557,6 @@
       }
     }
 
-    /* ============================================================================
-       HERO SECTION - 3D parallax with holographic effects
-       ============================================================================ */
     .hero {
       margin-top: 100px;
       background: transparent;
@@ -604,7 +582,6 @@
       will-change: transform;
     }
 
-    /* Holographic headshot with advanced effects */
     .hero-headshot {
       width: 160px;
       height: 160px;
@@ -668,7 +645,6 @@
       50% { transform: translateY(-15px) translateZ(10px); }
     }
 
-    /* Advanced text effects */
     .hero h1 {
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 900;
@@ -740,9 +716,6 @@
       margin-right: auto;
     }
 
-    /* ============================================================================
-       ADVANCED STAT CARDS - Holographic 3D effect
-       ============================================================================ */
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -764,7 +737,6 @@
       overflow: hidden;
     }
 
-    /* Holographic shimmer effect */
     .stat-card::before {
       content: '';
       position: absolute;
@@ -786,7 +758,6 @@
       transform: translateX(100%) translateY(100%) rotate(45deg);
     }
 
-    /* Gradient overlay */
     .stat-card::after {
       content: '';
       position: absolute;
@@ -840,9 +811,6 @@
       font-weight: 600;
     }
 
-    /* ============================================================================
-       MAGNETIC BUTTONS - Liquid morphing effect
-       ============================================================================ */
     .hero-cta {
       display: flex;
       gap: 1.5rem;
@@ -869,7 +837,6 @@
       box-shadow: var(--shadow-lg);
     }
 
-    /* Liquid button effect */
     .btn::before {
       content: '';
       position: absolute;
@@ -946,9 +913,6 @@
       box-shadow: var(--shadow-xl), 0 10px 40px rgba(13, 71, 161, 0.3);
     }
 
-    /* ============================================================================
-       ANIMATIONS - Enhanced entrance effects
-       ============================================================================ */
     @keyframes slideInDown {
       from {
         opacity: 0;
@@ -982,9 +946,6 @@
       }
     }
 
-    /* ============================================================================
-       SCROLL-TRIGGERED REVEALS - Advanced stagger
-       ============================================================================ */
     .reveal {
       opacity: 0;
       transform: translateY(60px) rotateX(10deg);
@@ -997,9 +958,6 @@
       transform: translateY(0) rotateX(0);
     }
 
-    /* ============================================================================
-       SECTIONS - Enhanced content structure
-       ============================================================================ */
     section {
       max-width: 1100px;
       margin: 0 auto;
@@ -1052,9 +1010,6 @@
       box-shadow: 0 2px 10px rgba(13, 71, 161, 0.4);
     }
 
-    /* ============================================================================
-       HOLOGRAPHIC SUMMARY CARD
-       ============================================================================ */
     .summary-card {
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(180%);
@@ -1125,9 +1080,6 @@
       background-clip: text;
     }
 
-    /* ============================================================================
-       EXPERIENCE SECTION - Timeline with advanced effects
-       ============================================================================ */
     .experience-item {
       margin-bottom: 4rem;
       padding-bottom: 3rem;
@@ -1239,9 +1191,6 @@
       filter: drop-shadow(0 2px 4px rgba(13, 71, 161, 0.4));
     }
 
-    /* ============================================================================
-       PROJECT CARDS - Advanced holographic 3D
-       ============================================================================ */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1262,7 +1211,6 @@
       cursor: pointer;
     }
 
-    /* Animated gradient border */
     .project-card::before {
       content: '';
       position: absolute;
@@ -1280,7 +1228,6 @@
       transform: scaleX(1);
     }
 
-    /* Holographic overlay */
     .project-card::after {
       content: '';
       position: absolute;
@@ -1377,9 +1324,6 @@
       filter: drop-shadow(0 2px 4px rgba(46, 125, 50, 0.4));
     }
 
-    /* ============================================================================
-       SKILLS GRID - Interactive chips with glow
-       ============================================================================ */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1506,9 +1450,6 @@
       z-index: 1;
     }
 
-    /* ============================================================================
-       AWARDS GRID - Premium cards
-       ============================================================================ */
     .awards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1601,9 +1542,6 @@
       z-index: 1;
     }
 
-    /* ============================================================================
-       BLOG SECTION - Premium featured card
-       ============================================================================ */
     .blog-featured {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       color: white;
@@ -1687,9 +1625,6 @@
       outline-offset: 4px;
     }
 
-    /* ============================================================================
-       CONTACT SECTION - Premium gradient card
-       ============================================================================ */
     .contact-section {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       border-radius: 30px;
@@ -1802,9 +1737,6 @@
       outline-offset: 4px;
     }
 
-    /* ============================================================================
-       FOOTER
-       ============================================================================ */
     footer {
       background: var(--bg-secondary);
       color: var(--text-muted);
@@ -1814,9 +1746,6 @@
       font-size: 0.95rem;
     }
 
-    /* ============================================================================
-       LIGHTBOX - Advanced modal viewer
-       ============================================================================ */
     .lightbox {
       display: none;
       position: fixed;
@@ -1935,9 +1864,6 @@
       font-weight: 500;
     }
 
-    /* ============================================================================
-       UTILITIES
-       ============================================================================ */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -1950,9 +1876,6 @@
       border-width: 0;
     }
 
-    /* ============================================================================
-       PRINT STYLES
-       ============================================================================ */
     @media print {
       nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox, #custom-cursor, #cursor-dot, .cursor-particle, #page-loader {
         display: none !important;
@@ -1968,9 +1891,6 @@
       }
     }
 
-    /* ============================================================================
-       RESPONSIVE BREAKPOINTS
-       ============================================================================ */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -2016,7 +1936,6 @@
 </head>
 
 <body>
-  <!-- PAGE LOADER -->
   <div id="page-loader">
     <div class="loader-animation">
       <div class="loader-ring"></div>
@@ -2026,23 +1945,17 @@
     <div class="loader-text">LOADING EXCELLENCE</div>
   </div>
 
-  <!-- READING PROGRESS BAR -->
   <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
 
-  <!-- CUSTOM CURSOR -->
   <div id="custom-cursor"></div>
   <div id="cursor-dot"></div>
 
-  <!-- SKIP TO CONTENT -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- 3D BACKGROUND CANVAS -->
   <canvas id="three-background" aria-hidden="true"></canvas>
 
-  <!-- MOTION TOGGLE -->
   <button class="motion-toggle" id="motionToggle" aria-label="Toggle animations" title="Toggle animations">🎬</button>
 
-  <!-- NAVIGATION -->
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
       <a href="#" class="logo">💰 GMP Payroll</a>
@@ -2058,7 +1971,6 @@
   </nav>
 
   <main id="main-content">
-    <!-- HERO SECTION -->
     <section class="hero" role="banner" aria-label="Hero section">
       <div class="hero-content">
         <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot parallax-layer" width="160" height="160" loading="eager">
@@ -2103,7 +2015,6 @@
       </div>
     </section>
 
-    <!-- EXECUTIVE SUMMARY -->
     <section id="summary" class="reveal" role="region" aria-labelledby="summary-heading">
       <h2 id="summary-heading">📌 Executive Summary</h2>
       <p class="section-subtitle">Professional Profile & Key Achievements</p>
@@ -2116,7 +2027,6 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
     <section id="experience" class="reveal" role="region" aria-labelledby="experience-heading">
       <h2 id="experience-heading">📊 Professional Experience</h2>
       <p class="section-subtitle">13+ Years of Multi-Country Payroll Excellence</p>
@@ -2142,6 +2052,13 @@
           <li>🔍 Ensured SOC 1 audit compliance; responded to 100% of auditor queries within SLA</li>
           <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect reduction)</li>
           <li>👨‍💼 Managed & mentored 8+ Implementation Consultants; 3 promoted within 18 months</li>
+          <li>⚡ Built enterprise automation dashboards eliminating 15+ manual hours/week using AI-powered solutions</li>
+          <li>🎯 Led "Project Unity" migration initiative for 2,000+ employees across 18+ countries with zero payroll disruption</li>
+          <li>🖥️ Configured end-to-end payroll modules in HRM systems including employee master data, salary structures, tax calculations, and statutory deductions</li>
+          <li>⚙️ Set up complete payroll processing workflows from scratch: time attendance integration, leave management linkage, bonus computations, and final settlement calculations</li>
+          <li>🔧 Designed & implemented custom payroll formulas for earnings, deductions, reimbursements, and compliance-specific components across multiple countries</li>
+          <li>📊 Built comprehensive payroll reporting architecture including payslip generation, tax reports, provident fund statements, and management dashboards</li>
+          <li>🔗 Established seamless integrations between payroll modules and GL/finance systems, banking platforms, and government portals for automated filings</li>
         </ul>
       </div>
 
@@ -2182,7 +2099,6 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects" class="reveal" role="region" aria-labelledby="projects-heading">
       <h2 id="projects-heading">⚡ Featured Projects</h2>
       <p class="section-subtitle">Innovative Automation Solutions & Outcomes</p>
@@ -2230,7 +2146,6 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills" class="reveal" role="region" aria-labelledby="skills-heading">
       <h2 id="skills-heading">🎯 Skills & Expertise</h2>
       <p class="section-subtitle">Specialized Knowledge & Technical Proficiencies</p>
@@ -2310,7 +2225,6 @@
       </div>
     </section>
     
-    <!-- BLOG SECTION -->
     <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
       <h2 id="blog-heading">📖 Featured Articles</h2>
       <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
@@ -2322,7 +2236,6 @@
       </div>
     </section>
 
-    <!-- EDUCATION & AWARDS -->
     <section id="awards" class="reveal" role="region" aria-labelledby="awards-heading">
       <h2 id="awards-heading">🏆 Recognition & Achievements</h2>
       <p class="section-subtitle">Education, Promotions & Awards</p>
@@ -2404,7 +2317,6 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="reveal" role="region" aria-labelledby="contact-heading">
       <div class="contact-section">
         <h2 id="contact-heading">🚀 Let's Transform Your Payroll Operations</h2>
@@ -2412,20 +2324,18 @@
         <div class="contact-links">
           <a href="mailto:chetanpayroll@gmail.com" class="contact-link"><span>✉️ chetanpayroll@gmail.com</span></a>
           <a href="tel:+918611949558" class="contact-link"><span>📱 +91 8619495587</span></a>
-          <a href="https://www.linkedin.com/in/chetansharma-gp" target="_blank" rel="noopener noreferrer" class="contact-link"><span>🔗 LinkedIn</span></a>
-        </div>
-      </div>
-    </section>
-  </main>
+          <a href="https://www.linkedin.com/in/chetansharma-gp" target="_blank" rel="noopener noreferrer"
 
-  <!-- FOOTER -->
+class="contact-link"><span>🔗 LinkedIn</span></a>
+</div>
+</div>
+</section>
+  </main>
   <footer role="contentinfo">
     <p>&copy; 2024 Chetan Sharma. All rights reserved. | 💰 Payroll Implementation Manager</p>
     <p style="font-size: 0.9rem; margin-top: 0.75rem;">⚡ Multi-country Compliance | 🤖 AI-Powered Automation | 🎯 Zero-Error Excellence</p>
     <p style="font-size: 0.9rem; margin-top: 0.5rem;" id="lastUpdated">Last updated: 2024</p>
   </footer>
-
-  <!-- LIGHTBOX MODAL -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
     <div class="lightbox-content">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
@@ -2435,8 +2345,6 @@
       <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
   </div>
-
-  <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -2453,24 +2361,14 @@
     "knowsAbout": ["Payroll Implementation", "Multi-country Compliance", "Automation", "Data Migration", "Global Payroll Operations", "AI Integration"]
   }
   </script>
-
-  <!-- Three.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-
-  <!-- Main JavaScript -->
   <script>
-    // ============================================================================
-    // PAGE LOADER
-    // ============================================================================
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('page-loader').classList.add('hidden');
       }, 1500);
     });
 
-    // ============================================================================
-    // CUSTOM CURSOR & CURSOR PARTICLES
-    // ============================================================================
     const cursor = document.getElementById('custom-cursor');
     const cursorDot = document.getElementById('cursor-dot');
     let mouseX = 0, mouseY = 0;
@@ -2481,7 +2379,6 @@
       mouseX = e.clientX;
       mouseY = e.clientY;
       
-      // Create cursor particle trail
       if (Math.random() > 0.8) {
         createCursorParticle(mouseX, mouseY);
       }
@@ -2507,7 +2404,6 @@
     }
     animateCursor();
 
-    // Add hover effects
     document.querySelectorAll('a, button, .stat-card, .project-card, .skill-chip').forEach(el => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');
@@ -2517,7 +2413,6 @@
       });
     });
 
-    // Add click effect
     document.addEventListener('mousedown', () => {
       document.body.classList.add('cursor-click');
     });
@@ -2539,9 +2434,6 @@
       }, 800);
     }
 
-    // ============================================================================
-    // MOTION CONTROL & ACCESSIBILITY
-    // ============================================================================
     let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let threeScene = null;
     let animationFrameId = null;
@@ -2576,9 +2468,6 @@
       motionToggle.textContent = motionEnabled ? '🎬' : '⏸️';
     }
 
-    // ============================================================================
-    // ADVANCED THREE.JS 3D BACKGROUND - Neural network particles
-    // ============================================================================
     function initThreeJS() {
       if (!motionEnabled || !window.THREE) return;
       
@@ -2602,7 +2491,6 @@
 
       camera.position.z = 60;
 
-      // Neural network particle system
       const particleCount = 200;
       const particlesGeometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
@@ -2632,7 +2520,6 @@
       const particles = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particles);
 
-      // Create connection lines
       const lineMaterial = new THREE.LineBasicMaterial({
         color: 0x6a1b9a,
         transparent: true,
@@ -2640,7 +2527,6 @@
         blending: THREE.AdditiveBlending
       });
 
-      // Floating geometric shapes
       const geometries = [
         new THREE.OctahedronGeometry(4, 0),
         new THREE.TetrahedronGeometry(5, 0),
@@ -2669,7 +2555,6 @@
         scene.add(shape);
       }
 
-      // Mouse parallax
       let mouseXParallax = 0;
       let mouseYParallax = 0;
       let targetXParallax = 0;
@@ -2681,33 +2566,28 @@
         mouseYParallax = -(e.clientY / window.innerHeight) * 2 + 1;
       });
 
-      // Animation loop
       function animate() {
         if (!motionEnabled) return;
         
         animationFrameId = requestAnimationFrame(animate);
 
-        // Smooth camera parallax
         targetXParallax = mouseXParallax * 8;
         targetYParallax = mouseYParallax * 8;
         camera.position.x += (targetXParallax - camera.position.x) * 0.03;
         camera.position.y += (targetYParallax - camera.position.y) * 0.03;
 
-        // Animate particles
         const positions = particles.geometry.attributes.position.array;
         for (let i = 0; i < particleCount * 3; i += 3) {
           positions[i] += velocities[i];
           positions[i + 1] += velocities[i + 1];
           positions[i + 2] += velocities[i + 2];
 
-          // Boundary wrapping with smooth transition
           if (Math.abs(positions[i]) > 60) velocities[i] *= -1;
           if (Math.abs(positions[i + 1]) > 60) velocities[i + 1] *= -1;
           if (Math.abs(positions[i + 2]) > 60) velocities[i + 2] *= -1;
         }
         particles.geometry.attributes.position.needsUpdate = true;
 
-        // Draw connection lines between close particles
         const linePositions = [];
         for (let i = 0; i < particleCount; i++) {
           for (let j = i + 1; j < particleCount; j++) {
@@ -2725,7 +2605,6 @@
           }
         }
 
-        // Update lines
         connections.forEach(line => scene.remove(line));
         connections.length = 0;
         
@@ -2737,20 +2616,17 @@
           connections.push(line);
         }
 
-        // Rotate shapes
         shapes.forEach((shape, index) => {
           shape.rotation.x += 0.002 * (index + 1);
           shape.rotation.y += 0.003 * (index + 1);
           shape.rotation.z += 0.001 * (index + 1);
           
-          // Float up and down
           shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
         });
 
         renderer.render(scene, camera);
       }
 
-      // Handle resize
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -2766,7 +2642,6 @@
       threeScene = { scene, camera, renderer, particles, shapes };
     }
 
-    // Lazy load Three.js
     if (motionEnabled) {
       if (document.readyState === 'complete') {
         setTimeout(initThreeJS, 100);
@@ -2783,9 +2658,6 @@
       }
     });
 
-    // ============================================================================
-    // READING PROGRESS BAR
-    // ============================================================================
     const progressBar = document.getElementById('reading-progress');
     
     function updateReadingProgress() {
@@ -2800,9 +2672,6 @@
 
     window.addEventListener('scroll', updateReadingProgress, { passive: true });
 
-    // ============================================================================
-    // SCROLL-TRIGGERED REVEAL ANIMATIONS
-    // ============================================================================
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2817,9 +2686,6 @@
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ============================================================================
-    // PARALLAX EFFECT
-    // ============================================================================
     const parallaxElements = document.querySelectorAll('.parallax-layer');
     let ticking = false;
 
@@ -2843,9 +2709,6 @@
       }
     }, { passive: true });
 
-    // ============================================================================
-    // 3D CARD TILT EFFECT
-    // ============================================================================
     const tiltCards = document.querySelectorAll('.project-card, .stat-card, .skill-category');
     
     tiltCards.forEach(card => {
@@ -2870,9 +2733,6 @@
       });
     });
 
-    // ============================================================================
-    // NAVIGATION SCROLL EFFECT
-    // ============================================================================
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > 50) {
@@ -2882,9 +2742,6 @@
       }
     }, { passive: true });
 
-    // ============================================================================
-    // THEME TOGGLE
-    // ============================================================================
     const themeToggle = document.getElementById('themeToggle');
     const htmlElement = document.documentElement;
 
@@ -2912,9 +2769,6 @@
       updateThemeButton(newTheme);
     });
 
-    // ============================================================================
-    // DOWNLOAD BUTTONS
-    // ============================================================================
     document.getElementById('downloadPDF').addEventListener('click', () => {
       window.print();
     });
@@ -2940,9 +2794,6 @@ END:VCARD`;
       document.body.removeChild(element);
     });
 
-    // ============================================================================
-    // LIGHTBOX FUNCTIONALITY
-    // ============================================================================
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxCaption = document.getElementById('lightboxCaption');
@@ -3034,9 +2885,6 @@ END:VCARD`;
 
     initGallery();
 
-    // ============================================================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
-    // ============================================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -3050,9 +2898,6 @@ END:VCARD`;
       });
     });
 
-    // ============================================================================
-    // RIPPLE EFFECT ON CLICKS
-    // ============================================================================
     document.querySelectorAll('.btn, .contact-link').forEach(el => {
       el.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
@@ -3077,7 +2922,6 @@ END:VCARD`;
       });
     });
 
-    // Add ripple animation
     const style = document.createElement('style');
     style.textContent = `
       @keyframes ripple {
@@ -3089,9 +2933,6 @@ END:VCARD`;
     `;
     document.head.appendChild(style);
 
-    // ============================================================================
-    // INITIALIZATION
-    // ============================================================================
     initTheme();
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
   </script>
