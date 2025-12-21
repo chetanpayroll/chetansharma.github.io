@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chetan Sharma | Payroll Implementation Manager | Multi-country payroll transitions, compliance, automation & AI integration. 13+ years experience.">
+  <meta name="description"
+    content="Chetan Sharma | Payroll Implementation Manager | Multi-country payroll transitions, compliance, automation & AI integration. 13+ years experience.">
   <meta name="keywords" content="payroll implementation, multi-country payroll, compliance, automation">
   <meta name="author" content="Chetan Sharma">
   <meta name="theme-color" content="#0d47a1">
-  
+
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.gmppayroll.com">
   <meta property="og:title" content="Chetan Sharma | Payroll Implementation Manager">
   <meta property="og:description" content="Global payroll consultant with 13+ years leading multi-country transitions.">
   <meta property="og:image" content="https://www.gmppayroll.com/og-image.png">
-  
+
   <link rel="canonical" href="https://www.gmppayroll.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
 
   <title>Chetan Sharma | Payroll Implementation Consultant | Global Multi-Country Payroll Specialist</title>
 
@@ -136,6 +140,7 @@
         opacity: 0.8;
         transform: scale(1) translate(0, 0);
       }
+
       100% {
         opacity: 0;
         transform: scale(0) translate(var(--tx), var(--ty));
@@ -146,7 +151,10 @@
       body {
         cursor: auto;
       }
-      #custom-cursor, #cursor-dot, .cursor-particle {
+
+      #custom-cursor,
+      #cursor-dot,
+      .cursor-particle {
         display: none;
       }
     }
@@ -223,8 +231,13 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .loader-text {
@@ -236,8 +249,15 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
     }
 
     #three-background {
@@ -263,7 +283,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: 
+      background:
         radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(106, 27, 154, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 40% 90%, rgba(255, 65, 108, 0.05) 0%, transparent 50%);
@@ -273,10 +293,13 @@
     }
 
     @keyframes gradientFlow {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: 1;
         filter: hue-rotate(0deg);
       }
+
       50% {
         opacity: 0.8;
         filter: hue-rotate(20deg);
@@ -290,7 +313,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: 
+      background:
         radial-gradient(circle at 30% 30%, rgba(13, 71, 161, 0.05) 0%, transparent 30%),
         radial-gradient(circle at 70% 70%, rgba(106, 27, 154, 0.05) 0%, transparent 30%);
       z-index: 0;
@@ -299,31 +322,42 @@
     }
 
     @keyframes orbFloat {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate(0, 0) scale(1);
       }
+
       33% {
         transform: translate(5%, -5%) scale(1.1);
       }
+
       66% {
         transform: translate(-5%, 5%) scale(0.9);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
-      
-      #three-background, body::before, body::after {
+
+      #three-background,
+      body::before,
+      body::after {
         display: none !important;
       }
     }
 
-    nav, section, footer {
+    nav,
+    section,
+    footer {
       position: relative;
       z-index: 1;
     }
@@ -415,38 +449,20 @@
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      display: block;
       text-decoration: none;
-      font-family: 'Poppins', sans-serif;
-      letter-spacing: -1px;
       transition: transform 0.3s ease, filter 0.3s ease;
-      position: relative;
     }
 
-    .logo::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
+    .logo img {
+      height: 50px;
+      width: auto;
+      display: block;
     }
 
     .logo:hover {
       transform: scale(1.05);
       filter: brightness(1.2);
-    }
-
-    .logo:hover::after {
-      transform: scaleX(1);
     }
 
     .nav-links {
@@ -552,13 +568,14 @@
       .nav-links {
         display: none;
       }
+
       .nav-container {
         padding: 1rem;
       }
     }
 
     .hero {
-      margin-top: 100px;
+      margin-top: 0;
       background: transparent;
       padding: 6rem 2rem;
       position: relative;
@@ -589,16 +606,16 @@
       margin: 0 auto 2.5rem;
       border: 5px solid transparent;
       background: linear-gradient(var(--bg), var(--bg)) padding-box,
-                  linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow)) border-box;
+        linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow)) border-box;
       object-fit: cover;
-      box-shadow: 
+      box-shadow:
         0 20px 40px rgba(13, 71, 161, 0.3),
         0 0 0 10px rgba(13, 71, 161, 0.1),
         0 0 60px rgba(13, 71, 161, 0.2),
         inset 0 0 20px rgba(255, 255, 255, 0.1);
-      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                 float 6s ease-in-out infinite,
-                 holographicGlow 3s ease-in-out infinite;
+      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+        float 6s ease-in-out infinite,
+        holographicGlow 3s ease-in-out infinite;
       transition: transform 0.3s ease;
       position: relative;
     }
@@ -619,14 +636,22 @@
     }
 
     @keyframes rotateBorder {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes holographicGlow {
-      0%, 100% {
+
+      0%,
+      100% {
         filter: brightness(1) saturate(1);
       }
+
       50% {
         filter: brightness(1.2) saturate(1.3);
       }
@@ -634,15 +659,22 @@
 
     .hero-headshot:hover {
       transform: scale(1.1) rotateY(10deg) rotateX(5deg);
-      box-shadow: 
+      box-shadow:
         0 30px 60px rgba(13, 71, 161, 0.4),
         0 0 0 15px rgba(13, 71, 161, 0.15),
         0 0 80px rgba(13, 71, 161, 0.3);
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px) translateZ(0px); }
-      50% { transform: translateY(-15px) translateZ(10px); }
+
+      0%,
+      100% {
+        transform: translateY(0px) translateZ(0px);
+      }
+
+      50% {
+        transform: translateY(-15px) translateZ(10px);
+      }
     }
 
     .hero h1 {
@@ -652,7 +684,7 @@
       font-family: 'Poppins', sans-serif;
       animation: slideInUp 0.8s ease 0.1s both;
       letter-spacing: -2px;
-      text-shadow: 
+      text-shadow:
         0 2px 20px rgba(13, 71, 161, 0.2),
         0 4px 40px rgba(106, 27, 154, 0.15);
       background: linear-gradient(135deg, var(--text) 0%, var(--primary) 50%, var(--secondary) 100%);
@@ -688,21 +720,48 @@
       transition: transform 0.3s ease;
     }
 
-    .emoji-row span:nth-child(1) { animation-delay: 0s; }
-    .emoji-row span:nth-child(2) { animation-delay: 0.2s; }
-    .emoji-row span:nth-child(3) { animation-delay: 0.4s; }
-    .emoji-row span:nth-child(4) { animation-delay: 0.6s; }
-    .emoji-row span:nth-child(5) { animation-delay: 0.8s; }
-    .emoji-row span:nth-child(6) { animation-delay: 1s; }
+    .emoji-row span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .emoji-row span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .emoji-row span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .emoji-row span:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    .emoji-row span:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+
+    .emoji-row span:nth-child(6) {
+      animation-delay: 1s;
+    }
 
     .emoji-row span:hover {
       transform: scale(1.4) rotate(15deg);
     }
 
     @keyframes emojiFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      25% { transform: translateY(-10px) rotate(5deg); }
-      75% { transform: translateY(-5px) rotate(-5deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+
+      75% {
+        transform: translateY(-5px) rotate(-5deg);
+      }
     }
 
     .hero-description {
@@ -744,12 +803,10 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 70%
-      );
+      background: linear-gradient(45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%);
       transform: rotate(45deg);
       transition: all 0.6s ease;
     }
@@ -765,10 +822,10 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, 
-        rgba(13, 71, 161, 0.1) 0%, 
-        rgba(106, 27, 154, 0.1) 50%,
-        rgba(255, 65, 108, 0.1) 100%);
+      background: linear-gradient(135deg,
+          rgba(13, 71, 161, 0.1) 0%,
+          rgba(106, 27, 154, 0.1) 50%,
+          rgba(255, 65, 108, 0.1) 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       border-radius: 20px;
@@ -778,7 +835,7 @@
     .stat-card:hover {
       transform: translateY(-15px) rotateX(8deg) translateZ(20px);
       border-color: var(--primary);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 20px 60px rgba(13, 71, 161, 0.3),
         0 0 40px rgba(106, 27, 154, 0.2),
@@ -879,7 +936,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-glow) 100%);
       color: white;
-      box-shadow: 
+      box-shadow:
         var(--shadow-xl),
         0 10px 40px rgba(13, 71, 161, 0.4),
         0 0 30px rgba(106, 27, 154, 0.3);
@@ -889,7 +946,7 @@
 
     .btn-primary:hover {
       transform: translateY(-6px) scale(1.05);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 20px 60px rgba(13, 71, 161, 0.5),
         0 0 50px rgba(106, 27, 154, 0.4);
@@ -918,6 +975,7 @@
         opacity: 0;
         transform: translateY(-50px) rotateX(-10deg);
       }
+
       to {
         opacity: 1;
         transform: translateY(0) rotateX(0);
@@ -929,6 +987,7 @@
         opacity: 0;
         transform: translateY(50px) rotateX(10deg);
       }
+
       to {
         opacity: 1;
         transform: translateY(0) rotateX(0);
@@ -940,6 +999,7 @@
         opacity: 0;
         transform: scale(0.8) rotateZ(-5deg);
       }
+
       to {
         opacity: 1;
         transform: scale(1) rotateZ(0);
@@ -949,8 +1009,8 @@
     .reveal {
       opacity: 0;
       transform: translateY(60px) rotateX(10deg);
-      transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                  transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .reveal.active {
@@ -1016,13 +1076,13 @@
       border-radius: 30px;
       padding: 3rem;
       border-left: 8px solid transparent;
-      background: 
+      background:
         linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
         linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow)) border-box;
       border: 2px solid transparent;
       line-height: 2;
       font-size: 1.08rem;
-      box-shadow: 
+      box-shadow:
         var(--shadow-xl),
         0 10px 40px rgba(13, 71, 161, 0.2),
         inset 0 0 20px rgba(255, 255, 255, 0.05);
@@ -1038,20 +1098,21 @@
       right: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.05) 50%,
-        transparent 70%
-      );
+      background: linear-gradient(45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.05) 50%,
+          transparent 70%);
       transform: rotate(45deg);
       animation: shimmer 3s ease-in-out infinite;
     }
 
     @keyframes shimmer {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateX(-100%) translateY(-100%) rotate(45deg);
       }
+
       50% {
         transform: translateX(100%) translateY(100%) rotate(45deg);
       }
@@ -1059,7 +1120,7 @@
 
     .summary-card:hover {
       transform: translateY(-6px);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 20px 60px rgba(13, 71, 161, 0.3),
         inset 0 0 30px rgba(255, 255, 255, 0.08);
@@ -1157,7 +1218,7 @@
       padding: 0.8rem 1.5rem;
       border-radius: 30px;
       font-weight: 700;
-      box-shadow: 
+      box-shadow:
         var(--shadow-md),
         0 4px 20px rgba(13, 71, 161, 0.3);
     }
@@ -1235,12 +1296,10 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 70%
-      );
+      background: linear-gradient(45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%);
       transform: rotate(45deg);
       transition: all 0.6s ease;
       pointer-events: none;
@@ -1253,7 +1312,7 @@
     .project-card:hover {
       transform: translateY(-15px) rotateX(5deg) scale(1.02);
       border-color: var(--primary);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 20px 60px rgba(13, 71, 161, 0.4),
         0 0 40px rgba(106, 27, 154, 0.3),
@@ -1357,7 +1416,7 @@
     .skill-category:hover {
       transform: translateY(-10px);
       border-color: var(--primary);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 15px 50px rgba(13, 71, 161, 0.3),
         inset 0 0 20px rgba(255, 255, 255, 0.05);
@@ -1439,7 +1498,7 @@
       color: white;
       border-color: transparent;
       transform: scale(1.1) translateY(-2px);
-      box-shadow: 
+      box-shadow:
         var(--shadow-lg),
         0 8px 25px rgba(13, 71, 161, 0.4),
         0 0 30px rgba(106, 27, 154, 0.3);
@@ -1482,7 +1541,7 @@
 
     .award-card:hover {
       transform: translateX(10px) scale(1.02);
-      box-shadow: 
+      box-shadow:
         var(--shadow-xl),
         0 10px 40px rgba(46, 125, 50, 0.2);
     }
@@ -1551,7 +1610,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 20px 60px rgba(13, 71, 161, 0.5),
         0 0 60px rgba(106, 27, 154, 0.4);
@@ -1571,9 +1630,12 @@
     }
 
     @keyframes orbMove {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate(0, 0);
       }
+
       50% {
         transform: translate(20%, 20%);
       }
@@ -1633,7 +1695,7 @@
       color: white;
       position: relative;
       overflow: hidden;
-      box-shadow: 
+      box-shadow:
         var(--shadow-2xl),
         0 20px 60px rgba(13, 71, 161, 0.5),
         0 0 60px rgba(106, 27, 154, 0.4);
@@ -1652,9 +1714,12 @@
     }
 
     @keyframes orbFloat2 {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate(0, 0) rotate(0deg);
       }
+
       50% {
         transform: translate(-10%, 10%) rotate(180deg);
       }
@@ -1876,15 +1941,66 @@
       border-width: 0;
     }
 
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      padding: 12px 0;
+      white-space: nowrap;
+      position: relative;
+      margin-top: 80px;
+      border-bottom: 1px solid var(--border);
+      z-index: 900;
+      cursor: default;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scrolling-ticker 60s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      padding: 0 3rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes scrolling-ticker {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
     @media print {
-      nav, .theme-toggle, .btn-secondary, #three-background, .motion-toggle, #reading-progress, .lightbox, #custom-cursor, #cursor-dot, .cursor-particle, #page-loader {
+
+      nav,
+      .theme-toggle,
+      .btn-secondary,
+      #three-background,
+      .motion-toggle,
+      #reading-progress,
+      .lightbox,
+      #custom-cursor,
+      #cursor-dot,
+      .cursor-particle,
+      #page-loader {
         display: none !important;
       }
+
       body {
         background: white;
         color: black;
         cursor: auto;
       }
+
       section {
         page-break-inside: avoid;
         padding: 2rem 0;
@@ -1895,44 +2011,52 @@
       .nav-links {
         display: none;
       }
+
       section {
         padding: 3rem 1rem;
       }
+
       .hero-cta {
         flex-direction: column;
       }
+
       .btn {
         width: 100%;
       }
+
       .hero-stats {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .lightbox-nav {
         width: 45px;
         height: 45px;
         font-size: 1.5rem;
       }
+
       .lightbox-prev {
         left: 1rem;
       }
+
       .lightbox-next {
         right: 1rem;
       }
+
       .emoji-row {
         font-size: 1.8rem;
         letter-spacing: 0.5rem;
       }
     }
   </style>
-  
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E97FH17B0S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-E97FH17B0S');
   </script>
-  
+
 </head>
 
 <body>
@@ -1945,7 +2069,8 @@
     <div class="loader-text">LOADING EXCELLENCE</div>
   </div>
 
-  <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>
+  <div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100">
+  </div>
 
   <div id="custom-cursor"></div>
   <div id="cursor-dot"></div>
@@ -1958,7 +2083,9 @@
 
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#" class="logo">💰 GMP Payroll</a>
+      <a href="#" class="logo">
+        <img src="logo.png" alt="GMP Payroll">
+      </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#experience">📊 Experience</a></li>
         <li><a href="#projects">⚡ Projects</a></li>
@@ -1971,9 +2098,48 @@
   </nav>
 
   <main id="main-content">
+
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+      </div>
+    </div>
+
     <section class="hero" role="banner" aria-label="Hero section">
       <div class="hero-content">
-        <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot parallax-layer" width="160" height="160" loading="eager">
+        <img src="headshot.png" alt="Chetan Sharma" class="hero-headshot parallax-layer" width="160" height="160"
+          loading="eager">
         <h1 class="parallax-layer">🌟 Chetan Sharma</h1>
         <p class="hero-subtitle parallax-layer">💼 Payroll Implementation Manager</p>
         <div class="emoji-row parallax-layer">
@@ -1985,7 +2151,9 @@
           <span>🏆</span>
         </div>
         <p class="hero-description parallax-layer">
-          Transforming multi-country payroll operations at enterprise scale. <strong>13+ years</strong> orchestrating complex transitions with <strong>99.8% accuracy</strong>. Specialist in compliance, automation, and AI-powered solutions. Promoted 5× in 4 years.
+          Transforming multi-country payroll operations at enterprise scale. <strong>13+ years</strong> orchestrating
+          complex transitions with <strong>99.8% accuracy</strong>. Specialist in compliance, automation, and AI-powered
+          solutions. Promoted 5× in 4 years.
         </p>
 
         <div class="hero-stats parallax-layer">
@@ -2019,11 +2187,17 @@
       <h2 id="summary-heading">📌 Executive Summary</h2>
       <p class="section-subtitle">Professional Profile & Key Achievements</p>
       <div class="summary-card">
-        <p>🚀 <strong>Payroll Implementation Manager</strong> transforming multi-country payroll operations at enterprise scale.</p>
-        <p>💼 <strong>13+ years</strong> orchestrating complex transitions across APAC, EMEA, and LATAM with <strong>99.8% payroll accuracy</strong>.</p>
-        <p>⚡ Pioneer in leveraging <strong>automation + AI</strong> to build enterprise dashboards—eliminating manual reconciliation, driving measurable operational impact.</p>
-        <p>🏆 <strong>Promoted 5× in 4 years</strong> (2020–2024) with consistent excellence in payroll compliance and team leadership.</p>
-        <p>🎯 <strong>Technical depth meets client obsession:</strong> I deliver <strong>on-time, under-budget, zero-error</strong> implementations while empowering teams with intelligent automation.</p>
+        <p>🚀 <strong>Payroll Implementation Manager</strong> transforming multi-country payroll operations at
+          enterprise scale.</p>
+        <p>💼 <strong>13+ years</strong> orchestrating complex transitions across APAC, EMEA, and LATAM with
+          <strong>99.8% payroll accuracy</strong>.
+        </p>
+        <p>⚡ Pioneer in leveraging <strong>automation + AI</strong> to build enterprise dashboards—eliminating manual
+          reconciliation, driving measurable operational impact.</p>
+        <p>🏆 <strong>Promoted 5× in 4 years</strong> (2020–2024) with consistent excellence in payroll compliance and
+          team leadership.</p>
+        <p>🎯 <strong>Technical depth meets client obsession:</strong> I deliver <strong>on-time, under-budget,
+            zero-error</strong> implementations while empowering teams with intelligent automation.</p>
       </div>
     </section>
 
@@ -2041,24 +2215,34 @@
           <div class="experience-period">Oct 2018 – Present</div>
         </div>
         <ul class="experience-bullets">
-          <li>🌍 Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8% accuracy while reducing cutover cycle by 25%</li>
+          <li>🌍 Led payroll transitions in 5+ countries (Hong Kong, Singapore, Indonesia, UAE), maintaining 99.8%
+            accuracy while reducing cutover cycle by 25%</li>
           <li>💰 Managed 122 payrolls in single year; awarded 2022 Global Annual Bolt Award</li>
-          <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor selection</li>
+          <li>🎯 Orchestrated end-to-end processing for APAC, EMEA, LATAM regions; spearheaded strategic vendor
+            selection</li>
           <li>🔐 Coordinated international payroll vendor transitions; ensured 100% statutory compliance</li>
-          <li>🏙️ <strong>Country Expertise:</strong> Hong Kong (MPF/IR56B) | Singapore (CPF/SDL) | UAE (Gratuity) | Indonesia (BPJS)</li>
+          <li>🏙️ <strong>Country Expertise:</strong> Hong Kong (MPF/IR56B) | Singapore (CPF/SDL) | UAE (Gratuity) |
+            Indonesia (BPJS)</li>
           <li>👥 Acted as key client point of contact; managed weekly communications; driving 95%+ satisfaction</li>
           <li>✅ Reconciled parallel + live payroll runs; identified & resolved 100+ critical data gaps</li>
           <li>📚 Delivered comprehensive training on payroll platforms & global compliance practices (50+ users)</li>
           <li>🔍 Ensured SOC 1 audit compliance; responded to 100% of auditor queries within SLA</li>
-          <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect reduction)</li>
+          <li>🔄 Maintained RCA tracker; recorded payroll errors; implemented corrective/preventive plans (35% defect
+            reduction)</li>
           <li>👨‍💼 Managed & mentored 8+ Implementation Consultants; 3 promoted within 18 months</li>
           <li>⚡ Built enterprise automation dashboards eliminating 15+ manual hours/week using AI-powered solutions</li>
-          <li>🎯 Led "Project Unity" migration initiative for 2,000+ employees across 18+ countries with zero payroll disruption</li>
-          <li>🖥️ Configured end-to-end payroll modules in HRM systems including employee master data, salary structures, tax calculations, and statutory deductions</li>
-          <li>⚙️ Set up complete payroll processing workflows from scratch: time attendance integration, leave management linkage, bonus computations, and final settlement calculations</li>
-          <li>🔧 Designed & implemented custom payroll formulas for earnings, deductions, reimbursements, and compliance-specific components across multiple countries</li>
-          <li>📊 Built comprehensive payroll reporting architecture including payslip generation, tax reports, provident fund statements, and management dashboards</li>
-          <li>🔗 Established seamless integrations between payroll modules and GL/finance systems, banking platforms, and government portals for automated filings</li>
+          <li>🎯 Led "Project Unity" migration initiative for 2,000+ employees across 18+ countries with zero payroll
+            disruption</li>
+          <li>🖥️ Configured end-to-end payroll modules in HRM systems including employee master data, salary
+            structures, tax calculations, and statutory deductions</li>
+          <li>⚙️ Set up complete payroll processing workflows from scratch: time attendance integration, leave
+            management linkage, bonus computations, and final settlement calculations</li>
+          <li>🔧 Designed & implemented custom payroll formulas for earnings, deductions, reimbursements, and
+            compliance-specific components across multiple countries</li>
+          <li>📊 Built comprehensive payroll reporting architecture including payslip generation, tax reports, provident
+            fund statements, and management dashboards</li>
+          <li>🔗 Established seamless integrations between payroll modules and GL/finance systems, banking platforms,
+            and government portals for automated filings</li>
         </ul>
       </div>
 
@@ -2107,7 +2291,8 @@
         <div class="project-card" tabindex="0">
           <div class="project-icon">📊</div>
           <div class="project-title">ICP Service Comparison Dashboard (v3.0)</div>
-          <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons with advanced analytics & compliance tracking.</p>
+          <p class="project-description">Enterprise dashboard automating 50+ service provider comparisons with advanced
+            analytics & compliance tracking.</p>
           <ul class="project-outcomes">
             <li>✓ Eliminated 15+ manual hours/week of compilation</li>
             <li>✓ Reduced planning cycle by 40% (10 days → 6 days)</li>
@@ -2120,7 +2305,8 @@
         <div class="project-card" tabindex="0">
           <div class="project-icon">🔄</div>
           <div class="project-title">Two-Way Validation Automation</div>
-          <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data with 50+ error detection categories.</p>
+          <p class="project-description">Intelligent payroll cross-check engine comparing legacy vs. new system data
+            with 50+ error detection categories.</p>
           <ul class="project-outcomes">
             <li>✓ Saved 12+ reconciliation hours/week</li>
             <li>✓ Eliminated 100% of GL-Payroll gaps</li>
@@ -2133,7 +2319,8 @@
         <div class="project-card" tabindex="0">
           <div class="project-icon">🤖</div>
           <div class="project-title">AI Integration Methodology</div>
-          <p class="project-description">Non-technical approach to building enterprise automation dashboards combining domain expertise with AI code generation.</p>
+          <p class="project-description">Non-technical approach to building enterprise automation dashboards combining
+            domain expertise with AI code generation.</p>
           <ul class="project-outcomes">
             <li>✓ Problem definition → AI co-design → validation</li>
             <li>✓ Real data testing → edge case handling → refinement</li>
@@ -2224,14 +2411,15 @@
 
       </div>
     </section>
-    
+
     <section id="blog" class="reveal" role="region" aria-labelledby="blog-heading">
       <h2 id="blog-heading">📖 Featured Articles</h2>
       <p class="section-subtitle">Latest insights on payroll automation, compliance, and implementation</p>
-      
+
       <div class="blog-featured">
         <h3>🚀 New: Payroll Automation Framework</h3>
-        <p>Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I automated multi-country payroll processing.</p>
+        <p>Real code examples, automation frameworks, and templates to reduce manual errors by 95%. Learn how I
+          automated multi-country payroll processing.</p>
         <a href="/blog/payroll-automation-google-sheets-apps-script/">📖 Read Full Article →</a>
       </div>
     </section>
@@ -2240,7 +2428,9 @@
       <h2 id="awards-heading">🏆 Recognition & Achievements</h2>
       <p class="section-subtitle">Education, Promotions & Awards</p>
 
-      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">🎓 Education</h3>
+      <h3
+        style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">
+        🎓 Education</h3>
       <div class="awards-grid">
         <div class="award-card">
           <div class="award-emoji">📚</div>
@@ -2250,16 +2440,21 @@
         </div>
       </div>
 
-      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">📈 Career Progression</h3>
+      <h3
+        style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">
+        📈 Career Progression</h3>
       <div class="awards-grid">
         <div class="award-card promotion">
           <div class="award-emoji">🚀</div>
           <div class="award-title">5+ Promotions in 4 Years</div>
-          <div class="award-description">Advanced from International Specialist → Senior Specialist → Implementation Consultant (2020–2024)</div>
+          <div class="award-description">Advanced from International Specialist → Senior Specialist → Implementation
+            Consultant (2020–2024)</div>
         </div>
       </div>
 
-      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">🥇 Annual Awards</h3>
+      <h3
+        style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">
+        🥇 Annual Awards</h3>
       <div class="awards-grid">
         <div class="award-card">
           <div class="award-emoji">🏅</div>
@@ -2287,7 +2482,9 @@
         </div>
       </div>
 
-      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">✨ Quarterly Awards (2018)</h3>
+      <h3
+        style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">
+        ✨ Quarterly Awards (2018)</h3>
       <div class="awards-grid">
         <div class="award-card">
           <div class="award-emoji">🌟</div>
@@ -2297,7 +2494,9 @@
         </div>
       </div>
 
-      <h3 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">🎖️ Previous Recognition</h3>
+      <h3
+        style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--text); font-family: 'Poppins', sans-serif; font-weight: 800;">
+        🎖️ Previous Recognition</h3>
       <div class="awards-grid">
         <div class="award-card">
           <div class="award-emoji">💎</div>
@@ -2320,20 +2519,21 @@
     <section id="contact" class="reveal" role="region" aria-labelledby="contact-heading">
       <div class="contact-section">
         <h2 id="contact-heading">🚀 Let's Transform Your Payroll Operations</h2>
-        <p>Ready to drive implementation success? I'm here to help with compliance, automation, and strategic payroll solutions.</p>
+        <p>Ready to drive implementation success? I'm here to help with compliance, automation, and strategic payroll
+          solutions.</p>
         <div class="contact-links">
           <a href="mailto:chetanpayroll@gmail.com" class="contact-link"><span>✉️ chetanpayroll@gmail.com</span></a>
           <a href="tel:+918611949558" class="contact-link"><span>📱 +91 8619495587</span></a>
           <a href="https://www.linkedin.com/in/chetan-champ" target="_blank" rel="noopener noreferrer"
-
-class="contact-link"><span>🔗 LinkedIn</span></a>
-</div>
-</div>
-</section>
+            class="contact-link"><span>🔗 LinkedIn</span></a>
+        </div>
+      </div>
+    </section>
   </main>
   <footer role="contentinfo">
     <p>&copy; 2024 Chetan Sharma. All rights reserved. | 💰 Payroll Implementation Manager</p>
-    <p style="font-size: 0.9rem; margin-top: 0.75rem;">⚡ Multi-country Compliance | 🤖 AI-Powered Automation | 🎯 Zero-Error Excellence</p>
+    <p style="font-size: 0.9rem; margin-top: 0.75rem;">⚡ Multi-country Compliance | 🤖 AI-Powered Automation | 🎯
+      Zero-Error Excellence</p>
     <p style="font-size: 0.9rem; margin-top: 0.5rem;" id="lastUpdated">Last updated: 2024</p>
   </footer>
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
@@ -2378,7 +2578,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      
+
       if (Math.random() > 0.8) {
         createCursorParticle(mouseX, mouseY);
       }
@@ -2389,17 +2589,17 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
       const dy = mouseY - cursorY;
       cursorX += dx * 0.15;
       cursorY += dy * 0.15;
-      
+
       const dx2 = mouseX - dotX;
       const dy2 = mouseY - dotY;
       dotX += dx2 * 0.3;
       dotY += dy2 * 0.3;
-      
+
       cursor.style.left = cursorX + 'px';
       cursor.style.top = cursorY + 'px';
       cursorDot.style.left = dotX + 'px';
       cursorDot.style.top = dotY + 'px';
-      
+
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
@@ -2428,7 +2628,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
       particle.style.setProperty('--tx', (Math.random() - 0.5) * 50 + 'px');
       particle.style.setProperty('--ty', (Math.random() - 0.5) * 50 + 'px');
       document.body.appendChild(particle);
-      
+
       setTimeout(() => {
         particle.remove();
       }, 800);
@@ -2439,12 +2639,12 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
     let animationFrameId = null;
 
     const motionToggle = document.getElementById('motionToggle');
-    
+
     function updateMotionState(enabled) {
       motionEnabled = enabled;
       motionToggle.textContent = enabled ? '🎬' : '⏸️';
       motionToggle.setAttribute('aria-label', enabled ? 'Disable animations' : 'Enable animations');
-      
+
       const canvas = document.getElementById('three-background');
       if (enabled) {
         initThreeJS();
@@ -2454,7 +2654,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
         }
         canvas.style.opacity = '0';
       }
-      
+
       localStorage.setItem('motionEnabled', enabled ? 'true' : 'false');
     }
 
@@ -2470,17 +2670,17 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
 
     function initThreeJS() {
       if (!motionEnabled || !window.THREE) return;
-      
+
       const canvas = document.getElementById('three-background');
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      
+
       let renderer;
       try {
-        renderer = new THREE.WebGLRenderer({ 
-          canvas: canvas, 
-          alpha: true, 
-          antialias: true 
+        renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          alpha: true,
+          antialias: true
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -2501,14 +2701,14 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
         positions[i] = (Math.random() - 0.5) * 120;
         positions[i + 1] = (Math.random() - 0.5) * 120;
         positions[i + 2] = (Math.random() - 0.5) * 120;
-        
+
         velocities[i] = (Math.random() - 0.5) * 0.03;
         velocities[i + 1] = (Math.random() - 0.5) * 0.03;
         velocities[i + 2] = (Math.random() - 0.5) * 0.03;
       }
 
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      
+
       const particlesMaterial = new THREE.PointsMaterial({
         color: 0x0d47a1,
         size: 0.8,
@@ -2568,7 +2768,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
 
       function animate() {
         if (!motionEnabled) return;
-        
+
         animationFrameId = requestAnimationFrame(animate);
 
         targetXParallax = mouseXParallax * 8;
@@ -2595,7 +2795,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
             const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
             const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
             const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            
+
             if (dist < 15) {
               linePositions.push(
                 positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
@@ -2607,7 +2807,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
 
         connections.forEach(line => scene.remove(line));
         connections.length = 0;
-        
+
         if (linePositions.length > 0) {
           const lineGeometry = new THREE.BufferGeometry();
           lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
@@ -2620,7 +2820,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
           shape.rotation.x += 0.002 * (index + 1);
           shape.rotation.y += 0.003 * (index + 1);
           shape.rotation.z += 0.001 * (index + 1);
-          
+
           shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
         });
 
@@ -2659,13 +2859,13 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
     });
 
     const progressBar = document.getElementById('reading-progress');
-    
+
     function updateReadingProgress() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight - windowHeight;
       const scrolled = window.pageYOffset;
       const progress = (scrolled / documentHeight) * 100;
-      
+
       progressBar.style.width = `${Math.min(progress, 100)}%`;
       progressBar.setAttribute('aria-valuenow', Math.round(progress));
     }
@@ -2691,7 +2891,7 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
 
     function updateParallax() {
       if (!motionEnabled) return;
-      
+
       const scrollY = window.pageYOffset;
       parallaxElements.forEach((el, index) => {
         const speed = (index + 1) * 0.05;
@@ -2710,24 +2910,24 @@ class="contact-link"><span>🔗 LinkedIn</span></a>
     }, { passive: true });
 
     const tiltCards = document.querySelectorAll('.project-card, .stat-card, .skill-category');
-    
+
     tiltCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         if (!motionEnabled) return;
-        
+
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
+
         const rotateX = (y - centerY) / 15;
         const rotateY = (centerX - x) / 15;
-        
+
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) translateZ(20px)`;
       });
-      
+
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
       });
@@ -2800,18 +3000,18 @@ END:VCARD`;
     const lightboxClose = document.getElementById('lightboxClose');
     const lightboxPrev = document.getElementById('lightboxPrev');
     const lightboxNext = document.getElementById('lightboxNext');
-    
+
     let currentImageIndex = 0;
     let galleryImages = [];
 
     function initGallery() {
       galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
-      
+
       galleryImages.forEach((img, index) => {
         img.addEventListener('click', () => {
           openLightbox(index);
         });
-        
+
         img.setAttribute('tabindex', '0');
         img.addEventListener('keypress', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -2837,12 +3037,12 @@ END:VCARD`;
 
     function updateLightboxImage() {
       if (galleryImages.length === 0) return;
-      
+
       const img = galleryImages[currentImageIndex];
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
       lightboxCaption.textContent = img.alt || '';
-      
+
       lightboxPrev.disabled = currentImageIndex === 0;
       lightboxNext.disabled = currentImageIndex === galleryImages.length - 1;
     }
@@ -2864,7 +3064,7 @@ END:VCARD`;
     lightboxClose.addEventListener('click', closeLightbox);
     lightboxPrev.addEventListener('click', showPrevImage);
     lightboxNext.addEventListener('click', showNextImage);
-    
+
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) {
         closeLightbox();
@@ -2873,7 +3073,7 @@ END:VCARD`;
 
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
-      
+
       if (e.key === 'Escape') {
         closeLightbox();
       } else if (e.key === 'ArrowLeft') {
@@ -2886,7 +3086,7 @@ END:VCARD`;
     initGallery();
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         if (href !== '#') {
           e.preventDefault();
@@ -2899,13 +3099,13 @@ END:VCARD`;
     });
 
     document.querySelectorAll('.btn, .contact-link').forEach(el => {
-      el.addEventListener('click', function(e) {
+      el.addEventListener('click', function (e) {
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
-        
+
         ripple.style.width = ripple.style.height = size + 'px';
         ripple.style.left = x + 'px';
         ripple.style.top = y + 'px';
@@ -2915,9 +3115,9 @@ END:VCARD`;
         ripple.style.transform = 'scale(0)';
         ripple.style.animation = 'ripple 0.6s ease-out';
         ripple.style.pointerEvents = 'none';
-        
+
         this.appendChild(ripple);
-        
+
         setTimeout(() => ripple.remove(), 600);
       });
     });
@@ -2937,4 +3137,5 @@ END:VCARD`;
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
   </script>
 </body>
+
 </html>
