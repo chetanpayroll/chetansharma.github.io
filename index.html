@@ -1944,6 +1944,32 @@
       border-width: 0;
     }
 
+    .nav-container {
+      width: 100%;
+      padding: 0.8rem 1.5rem;
+      /* Reduced padding to move logo left, but kept some for aesthetics */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: block;
+      text-decoration: none;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      margin-left: -10px;
+      /* Pull logo slightly more to the left if needed */
+    }
+
+    .logo img {
+      height: 85px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ... logic skip ... */
     .ticker-wrap {
       width: 100%;
       overflow: hidden;
@@ -1951,7 +1977,8 @@
       padding: 12px 0;
       white-space: nowrap;
       position: relative;
-      margin-top: 80px;
+      margin-top: 130px;
+      /* Increased from 80px to clear the 118px height nav bar */
       border-bottom: 1px solid var(--border);
       z-index: 900;
       cursor: default;
