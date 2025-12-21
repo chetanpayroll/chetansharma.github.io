@@ -455,15 +455,19 @@
     }
 
     .logo img {
-      height: 50px;
+      height: 85px;
       width: auto;
       display: block;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .logo:hover {
-      transform: scale(1.05);
-      filter: brightness(1.2);
+    .logo:hover img {
+      transform: scale(1.1);
+      filter: drop-shadow(0 8px 12px rgba(13, 71, 161, 0.3));
     }
+
+
 
     .nav-links {
       display: flex;
@@ -1965,8 +1969,27 @@
       padding: 0 3rem;
       font-size: 1.2rem;
       font-weight: 600;
-      color: var(--text-muted);
       font-family: 'Poppins', sans-serif;
+    }
+
+    .ticker-item:nth-child(8n+1) {
+      color: #0d47a1;
+    }
+
+    .ticker-item:nth-child(8n+3) {
+      color: #d81b60;
+    }
+
+    .ticker-item:nth-child(8n+5) {
+      color: #e65100;
+    }
+
+    .ticker-item:nth-child(8n+7) {
+      color: #2e7d32;
+    }
+
+    .ticker-item:nth-child(even) {
+      color: #ccc;
     }
 
     @keyframes scrolling-ticker {
@@ -2075,7 +2098,7 @@
   <div id="custom-cursor"></div>
   <div id="cursor-dot"></div>
 
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+
 
   <canvas id="three-background" aria-hidden="true"></canvas>
 
@@ -2101,38 +2124,38 @@
 
     <div class="ticker-wrap">
       <div class="ticker-track">
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Deel</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Implementation</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Vendor Transition</span> <span class="ticker-item">|</span>
-        <span class="ticker-item">Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🌍 Deel</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🚀 Implementation</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🔄 Vendor Transition</span> <span class="ticker-item">|</span>
+        <span class="ticker-item">🤖 Automation</span> <span class="ticker-item">|</span>
       </div>
     </div>
 
