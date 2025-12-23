@@ -554,52 +554,63 @@
     let cursorX = 0, cursorY = 0;
     let dotX = 0, dotY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+    // Performance & Accessibility Gate
+    const isMobile = window.innerWidth <= 1024 || window.matchMedia('(hover: none)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (Math.random() > 0.8) {
-        createCursorParticle(mouseX, mouseY);
+    // Only attach heavy listeners if performance allows
+    if (!isMobile && !prefersReducedMotion) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Significantly reduce particle frequency for performance
+        if (Math.random() > 0.95) {
+          createCursorParticle(mouseX, mouseY);
+        }
+      });
+
+      function animateCursor() {
+        const dx = mouseX - cursorX;
+        const dy = mouseY - cursorY;
+        cursorX += dx * 0.15;
+        cursorY += dy * 0.15;
+
+        const dx2 = mouseX - dotX;
+        const dy2 = mouseY - dotY;
+        dotX += dx2 * 0.3;
+        dotY += dy2 * 0.3;
+
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+
+        requestAnimationFrame(animateCursor);
       }
-    });
+      animateCursor();
 
-    function animateCursor() {
-      const dx = mouseX - cursorX;
-      const dy = mouseY - cursorY;
-      cursorX += dx * 0.15;
-      cursorY += dy * 0.15;
+      document.querySelectorAll('a, button, .stat-card, .project-card, .skill-chip').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          document.body.classList.add('cursor-hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          document.body.classList.remove('cursor-hover');
+        });
+      });
 
-      const dx2 = mouseX - dotX;
-      const dy2 = mouseY - dotY;
-      dotX += dx2 * 0.3;
-      dotY += dy2 * 0.3;
-
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      cursorDot.style.left = dotX + 'px';
-      cursorDot.style.top = dotY + 'px';
-
-      requestAnimationFrame(animateCursor);
+      document.addEventListener('mousedown', () => {
+        document.body.classList.add('cursor-click');
+      });
+      document.addEventListener('mouseup', () => {
+        document.body.classList.remove('cursor-click');
+      });
     }
-    animateCursor();
-
-    document.querySelectorAll('a, button, .stat-card, .project-card, .skill-chip').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        document.body.classList.add('cursor-hover');
-      });
-      el.addEventListener('mouseleave', () => {
-        document.body.classList.remove('cursor-hover');
-      });
-    });
-
-    document.addEventListener('mousedown', () => {
-      document.body.classList.add('cursor-click');
-    });
-    document.addEventListener('mouseup', () => {
-      document.body.classList.remove('cursor-click');
-    });
 
     function createCursorParticle(x, y) {
+      // Limit total particles to prevent DOM thrashing
+      if (document.getElementsByClassName('cursor-particle').length > 15) return;
+
       const particle = document.createElement('div');
       particle.className = 'cursor-particle';
       particle.style.left = x + 'px';
@@ -1116,7 +1127,7 @@ END:VCARD`;
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
   </script>
   <script src="chat-widget.js"></script>
-<script src='interactions.js'></script>
+  <script src='interactions.js'></script>
 </body>
 
 </html>

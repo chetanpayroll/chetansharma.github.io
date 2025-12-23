@@ -55,12 +55,15 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
-      cursor: none;
+      cursor: auto;
+      /* Reverting custom cursor default for accessibility/familiarity */
     }
 
     #custom-cursor {
@@ -120,6 +123,8 @@
     }
 
     @media (max-width: 1024px) {
+
+      /* Mobile Luxury: Disable custom cursor for performance & familiarity */
       body {
         cursor: auto;
       }
@@ -127,7 +132,20 @@
       #custom-cursor,
       #cursor-dot,
       .cursor-particle {
-        display: none;
+        display: none !important;
+      }
+
+      /* Mobile Spacing & Touch Targets */
+      .nav-container {
+        padding: 1rem;
+      }
+
+      .hero {
+        padding: 4rem 1.5rem;
+      }
+
+      .stat-card {
+        padding: 1.5rem;
       }
     }
 
@@ -238,10 +256,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: -1;
+      /* Ensure background stays behind content */
       pointer-events: none;
+      /* Guarantee no interaction interference */
       opacity: 0;
       transition: opacity 2s ease;
+      will-change: opacity;
+      /* Performance hint */
     }
 
     #three-background.loaded {
@@ -259,9 +281,12 @@
         radial-gradient(circle at 20% 50%, rgba(13, 71, 161, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(106, 27, 154, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 40% 90%, rgba(255, 65, 108, 0.05) 0%, transparent 50%);
-      z-index: 0;
+      z-index: -2;
+      /* Layering stability */
       pointer-events: none;
-      animation: gradientFlow 20s ease infinite;
+      animation: gradientFlow 30s ease infinite;
+      /* Slower for calm */
+      will-change: transform, opacity;
     }
 
     @keyframes gradientFlow {
@@ -309,6 +334,7 @@
       }
     }
 
+    /* Accessibility: Robust Reduced Motion Support */
     @media (prefers-reduced-motion: reduce) {
 
       *,
@@ -318,12 +344,25 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+        background-attachment: initial !important;
       }
 
       #three-background,
+      .cursor-particle,
+      #custom-cursor,
+      #cursor-dot {
+        display: none !important;
+      }
+
       body::before,
       body::after {
-        display: none !important;
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
       }
     }
 
@@ -346,6 +385,8 @@
       border-radius: 0 0 4px 0;
       font-weight: 600;
       transition: top 0.3s ease;
+      /* Accessibility Focus Visibility */
+      outline: 2px solid transparent;
     }
 
     .skip-link:focus {
@@ -359,6 +400,7 @@
       bottom: 2rem;
       right: 2rem;
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       border: 2px solid var(--glass-border);
       border-radius: 50%;
@@ -399,6 +441,7 @@
       top: 0;
       width: 100%;
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       z-index: 1000;
       border-bottom: 1px solid var(--glass-border);
@@ -408,6 +451,7 @@
 
     nav.scrolled {
       box-shadow: var(--shadow-xl), 0 8px 30px rgba(13, 71, 161, 0.15);
+      -webkit-backdrop-filter: blur(25px) saturate(200%);
       backdrop-filter: blur(25px) saturate(200%);
     }
 
@@ -482,6 +526,8 @@
       outline: 3px solid var(--primary);
       outline-offset: 4px;
       border-radius: 4px;
+      background: rgba(var(--primary), 0.05);
+      /* Visual feedback for focus */
     }
 
     .theme-toggle {
@@ -583,14 +629,14 @@
       background: linear-gradient(var(--bg), var(--bg)) padding-box,
         linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-glow)) border-box;
       object-fit: cover;
+      object-fit: cover;
       box-shadow:
-        0 20px 40px rgba(13, 71, 161, 0.3),
-        0 0 0 10px rgba(13, 71, 161, 0.1),
-        0 0 60px rgba(13, 71, 161, 0.2),
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
-      animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-        float 6s ease-in-out infinite,
-        holographicGlow 3s ease-in-out infinite;
+        0 20px 40px rgba(13, 71, 161, 0.2),
+        /* Softer shadow */
+        0 0 0 10px rgba(13, 71, 161, 0.05);
+      /* Reduced opacity ring */
+      /* Animation simplified for stability */
+      animation: slideInDown 1s cubic-bezier(0.2, 0.8, 0.2, 1);
       transition: transform 0.3s ease;
       position: relative;
     }
@@ -633,11 +679,11 @@
     }
 
     .hero-headshot:hover {
-      transform: scale(1.1) rotateY(10deg) rotateX(5deg);
+      transform: scale(1.05);
+      /* Reduced scale for calm */
       box-shadow:
-        0 30px 60px rgba(13, 71, 161, 0.4),
-        0 0 0 15px rgba(13, 71, 161, 0.15),
-        0 0 80px rgba(13, 71, 161, 0.3);
+        0 25px 50px rgba(13, 71, 161, 0.25),
+        0 0 0 12px rgba(13, 71, 161, 0.08);
     }
 
     @keyframes float {
@@ -760,6 +806,7 @@
 
     .stat-card {
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       padding: 2rem 1.5rem;
       border-radius: 20px;
@@ -849,6 +896,8 @@
       justify-content: center;
       flex-wrap: wrap;
       animation: slideInUp 0.8s ease 0.4s both;
+      /* Mobile Touch Target Optimization */
+      padding: 1rem 0;
     }
 
     .btn {
@@ -884,7 +933,15 @@
 
     .btn:hover::before {
       width: 400px;
+      /* Kept for desktop */
       height: 400px;
+    }
+
+    @media (hover: none) {
+      .btn:hover::before {
+        display: none;
+        /* Disable hover effects on touch devices */
+      }
     }
 
     .btn::after {
@@ -906,6 +963,7 @@
     .btn:focus {
       outline: 3px solid var(--primary);
       outline-offset: 4px;
+      box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.2);
     }
 
     .btn-primary {
@@ -991,6 +1049,8 @@
     .reveal.active {
       opacity: 1;
       transform: translateY(0) rotateX(0);
+      will-change: auto;
+      /* Release GPU resources */
     }
 
     section {
@@ -1047,6 +1107,7 @@
 
     .summary-card {
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       border-radius: 30px;
       padding: 3rem;
@@ -1235,6 +1296,7 @@
 
     .project-card {
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       border-radius: 30px;
       padding: 3rem;
@@ -1366,6 +1428,7 @@
 
     .skill-category {
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       border-radius: 30px;
       padding: 3rem;
@@ -1492,6 +1555,7 @@
 
     .award-card {
       background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       backdrop-filter: blur(20px) saturate(180%);
       border-radius: 25px;
       padding: 2.5rem;
@@ -1794,6 +1858,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.95);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       z-index: 10000;
       align-items: center;
@@ -1859,6 +1924,7 @@
       top: 50%;
       transform: translateY(-50%);
       background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       border: none;
       width: 55px;
@@ -2068,137 +2134,163 @@
         letter-spacing: 0.5rem;
       }
     }
-/* ==========================================================================
+
+    /* ==========================================================================
    PHASE 3: ENTERPRISE REDESIGN (APPENDED)
    ========================================================================== */
 
-/* 1. REFINED COLOR PALETTE (Fortune 100 Style) */
-:root {
-    --primary: #0f172a; /* Slate 900 */
-    --primary-light: #38bdf8; /* Sky 400 */
-    --primary-dark: #020617; /* Slate 950 */
-    --secondary: #4f46e5; /* Indigo 600 */
-    --accent: #f43f5e; /* Rose 500 */
-    --accent-glow: #fb7185; /* Rose 400 */
-    --bg: #ffffff; 
-    --bg-secondary: #f8fafc;
-    --text: #334155; 
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    /* Mesh Gradients */
-    --mesh-1: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%); 
-    --mesh-2: radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%);
-}
-
-@media (prefers-color-scheme: dark) {
+    /* 1. REFINED COLOR PALETTE (Fortune 100 Style) */
     :root {
-        --bg: #020617; 
+      --primary: #0f172a;
+      /* Slate 900 */
+      --primary-light: #38bdf8;
+      /* Sky 400 */
+      --primary-dark: #020617;
+      /* Slate 950 */
+      --secondary: #4f46e5;
+      /* Indigo 600 */
+      --accent: #f43f5e;
+      /* Rose 500 */
+      --accent-glow: #fb7185;
+      /* Rose 400 */
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text: #334155;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      /* Mesh Gradients */
+      --mesh-1: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%);
+      --mesh-2: radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
         --bg-secondary: #0f172a;
         --text: #f8fafc;
         --glass-bg: rgba(2, 6, 23, 0.7);
         --glass-border: rgba(255, 255, 255, 0.08);
+      }
     }
-}
 
-/* 2. GLASSMORPHISM & DEPTH */
-.hero, .summary-card, .stat-card, .project-card, .skill-category, .award-card, nav {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+    /* 2. GLASSMORPHISM & DEPTH */
+    .hero,
+    .summary-card,
+    .stat-card,
+    .project-card,
+    .skill-category,
+    .award-card,
+    nav {
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
-nav {
-    border-bottom: 1px solid var(--glass-border);
-}
+    nav {
+      border-bottom: 1px solid var(--glass-border);
+    }
 
-/* 3. VERTICAL TIMELINE FOR EXPERIENCE (Visual enhancement of existing list) */
-#experience {
-    position: relative;
-}
-.experience-item {
-    border-bottom: none !important;
-    border-left: 2px solid var(--border);
-    padding-left: 3rem !important;
-    margin-left: 1rem;
-    position: relative;
-    padding-bottom: 4rem !important;
-}
-.experience-item::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    background: var(--primary);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--bg);
-    transition: all 0.3s ease;
-}
-.experience-item:hover::before {
-    background: var(--accent);
-    transform: scale(1.5);
-    box-shadow: 0 0 0 6px var(--bg-secondary);
-}
-/* Connect the last line */
-.experience-item:last-child {
-    border-left-color: transparent;
-}
-.experience-item:last-child::before {
-    background: var(--success);
-}
+    /* 3. VERTICAL TIMELINE FOR EXPERIENCE (Visual enhancement of existing list) */
+    #experience {
+      position: relative;
+    }
 
-/* 4. ANIMATED SKILL CHIPS (More dynamic) */
-.skill-chip {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid var(--border);
-    background: transparent;
-}
-.skill-chip:hover {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    border-color: transparent;
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
+    .experience-item {
+      border-bottom: none !important;
+      border-left: 2px solid var(--border);
+      padding-left: 3rem !important;
+      margin-left: 1rem;
+      position: relative;
+      padding-bottom: 4rem !important;
+    }
 
-/* 5. HERO PARALLAX REFINEMENTS */
-.hero {
-    perspective: 1000px;
-    transform-style: preserve-3d;
-}
-.hero-content {
-    transform-style: preserve-3d;
-}
-/* Headshot z-depth */
-.hero-headshot {
-    transform: translateZ(20px);
-}
-/* Stats z-depth */
-.hero-stats {
-    transform: translateZ(30px);
-}
+    .experience-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--bg);
+      transition: all 0.3s ease;
+    }
 
-/* 6. MAGNETIC BUTTONS (Class to be added via JS or targeted) */
-.btn-primary {
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-primary:active {
-    transform: scale(0.95);
-}
+    .experience-item:hover::before {
+      background: var(--accent);
+      transform: scale(1.5);
+      box-shadow: 0 0 0 6px var(--bg-secondary);
+    }
 
-/* 7. SCROLLBAR */
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--text-muted);
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
+    /* Connect the last line */
+    .experience-item:last-child {
+      border-left-color: transparent;
+    }
+
+    .experience-item:last-child::before {
+      background: var(--success);
+    }
+
+    /* 4. ANIMATED SKILL CHIPS (More dynamic) */
+    .skill-chip {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid var(--border);
+      background: transparent;
+    }
+
+    .skill-chip:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-color: transparent;
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 5. HERO PARALLAX REFINEMENTS */
+    .hero {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+
+    .hero-content {
+      transform-style: preserve-3d;
+    }
+
+    /* Headshot z-depth */
+    .hero-headshot {
+      transform: translateZ(20px);
+    }
+
+    /* Stats z-depth */
+    .hero-stats {
+      transform: translateZ(30px);
+    }
+
+    /* 6. MAGNETIC BUTTONS (Class to be added via JS or targeted) */
+    .btn-primary {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.95);
+    }
+
+    /* 7. SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--text-muted);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }

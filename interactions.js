@@ -1,30 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. MAGNETIC BUTTONS & CARDS
-    const magneticElements = document.querySelectorAll('.btn, .nav-links a, .stat-card, .skill-chip');
-    magneticElements.forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            // Subtle magnetic pull
-            el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-        });
+    // PHASE-6: PERFORMANCE HARDENING & ACCESSIBILITY GUARDRAILS
 
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = 'translate(0, 0)';
-            // Re-apply hover scale if needed via CSS, here we just reset translation
-            // CSS hover states will handle scale
-            setTimeout(() => {
-                 el.style.transform = '';
-            }, 200);
-        });
-    });
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 2. TIME-BASED THEMING (Subtle tint overlay)
+    // Check for mobile/touch devices to conserve battery/performance
+    const isMobile = window.innerWidth <= 1024 || window.matchMedia('(hover: none)').matches;
+
+    // 1. MAGNETIC BUTTONS & CARDS (Desktop Only + Motion Safe)
+    if (!prefersReducedMotion && !isMobile) {
+        const magneticElements = document.querySelectorAll('.btn, .nav-links a, .stat-card, .skill-chip');
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                // Subtle magnetic pull (Performance optimized: using transform directly)
+                requestAnimationFrame(() => {
+                    el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+                });
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0, 0)';
+                setTimeout(() => {
+                    el.style.transform = '';
+                }, 200);
+            });
+        });
+    }
+
+    // 2. TIME-BASED THEMING (Static overlay for performance)
     const hour = new Date().getHours();
-    const root = document.documentElement;
-    
+
     // Create an ambient overlay
     const ambient = document.createElement('div');
     ambient.style.position = 'fixed';
@@ -32,11 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ambient.style.left = '0';
     ambient.style.width = '100%';
     ambient.style.height = '100%';
-    ambient.style.pointerEvents = 'none';
-    ambient.style.zIndex = '9999';
+    ambient.style.pointerEvents = 'none'; // CRITICAL: Governance Rule - No blocking
+    ambient.style.zIndex = '-1'; // CRITICAL: Governance Rule - Behind content
     ambient.style.mixBlendMode = 'overlay';
-    ambient.style.opacity = '0.1';
-    
+    ambient.style.opacity = '0.05'; // Reduced for subtle luxury
+
     if (hour >= 5 && hour < 12) {
         // Morning: Cool Blue Tint
         ambient.style.background = 'linear-gradient(to bottom, #dbeafe, transparent)';
@@ -49,30 +58,32 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         // Night: Deep Blue Tint
         ambient.style.background = 'linear-gradient(to bottom, #1e1b4b, transparent)';
-        ambient.style.opacity = '0.2';
+        ambient.style.opacity = '0.15';
     }
-    
+
     document.body.appendChild(ambient);
-    
-    // 3. ENHANCED PARALLAX (Multi-speed)
-    // Existing script handles basic parallax. We add more depth.
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        
-        // Target background shapes if possible (if we had them in HTML)
-        // Adjust hero content
-        const heroContent = document.querySelector('.hero-content');
-        if(heroContent) {
-           heroContent.style.transform = `translateY(${scrolled * 0.1}px)`; 
+
+    // 3. ENHANCED PARALLAX (Performance Gated)
+    if (!prefersReducedMotion && !isMobile) {
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateParallax(lastScrollY);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true }); // Passive listener for scroll performance
+
+        function updateParallax(scrollY) {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0)`; // Force GPU
+            }
         }
-        
-        const heroBg = document.querySelector('.hero::before'); // Pseudo-elements can't be styled via JS directly easily
-        
-        // Parallax for sections
-        const sections = document.querySelectorAll('section');
-        sections.forEach((sec, index) => {
-            const speed = 0.05 * (index % 2 === 0 ? 1 : -1);
-            // Too invasive to move sections, stick to internal elements
-        });
-    });
+    }
 });
