@@ -239,6 +239,33 @@
         .message p:last-child {
             margin-bottom: 0;
         }
+
+        /* Premium Link Button Style */
+        .chat-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0d47a1 0%, #002171 100%);
+            color: white !important;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 8px;
+            box-shadow: 0 4px 6px rgba(13, 71, 161, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chat-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(13, 71, 161, 0.3);
+            text-decoration: none;
+        }
+
+        .chat-link-btn::before {
+            content: "📄"; 
+            font-size: 1.1em;
+        }
     `;
 
     // Inject styles
@@ -318,6 +345,12 @@
 
         // Bold: **text** -> <strong>text</strong>
         safeContent = safeContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Links: [text](url) -> <a href="url" class="chat-link-btn" ...>text</a>
+        safeContent = safeContent.replace(
+            /\[(.*?)\]\((.*?)\)/g,
+            '<br><a href="$2" class="chat-link-btn" target="_blank" rel="noopener noreferrer">$1</a><br>'
+        );
 
         // Lists: lines starting with * or - 
         const lines = safeContent.split('\n');
