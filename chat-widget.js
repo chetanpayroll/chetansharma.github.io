@@ -346,10 +346,15 @@
         // Bold: **text** -> <strong>text</strong>
         safeContent = safeContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-        // Links: [text](url) -> <a href="url" class="chat-link-btn" ...>text</a>
+        // Links: [text](url) -> Button or Video
         safeContent = safeContent.replace(
             /\[(.*?)\]\((.*?)\)/g,
-            '<br><a href="$2" class="chat-link-btn" target="_blank" rel="noopener noreferrer">$1</a><br>'
+            (match, text, url) => {
+                if (url.match(/\.mp4$/i)) {
+                    return `<br><div class="video-container" style="margin-top:10px; border-radius:12px; overflow:hidden; box-shadow:0 8px 16px rgba(0,0,0,0.2);"><video controls width="100%" style="display:block;"><source src="${url}" type="video/mp4">Your browser does not support the video tag.</video></div><br>`;
+                }
+                return `<br><a href="${url}" class="chat-link-btn" target="_blank" rel="noopener noreferrer">${text}</a><br>`;
+            }
         );
 
         // Lists: lines starting with * or - 
