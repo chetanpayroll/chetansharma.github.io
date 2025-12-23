@@ -204,6 +204,41 @@
                 font-size: 16px; /* Prevent zoom on iOS */
             }
         }
+
+        /* Markdown Styles for AI Responses */
+        .message strong {
+            font-weight: 800;
+            color: #0d47a1;
+        }
+        
+        .message ul {
+            margin: 10px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .message li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .message li::before {
+            content: "🔹";
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+            top: 2px;
+        }
+        
+        .message p {
+            margin-bottom: 10px;
+        }
+        
+        .message p:last-child {
+            margin-bottom: 0;
+        }
     `;
 
     // Inject styles
@@ -274,10 +309,56 @@
         content: "Hello! I'm the GMP Payroll AI Specialist. How can I help you with global payroll or compliance today?"
     };
 
+    function formatMessage(content) {
+        // Escape HTML first to prevent XSS (basic)
+        let safeContent = content
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+        // Bold: **text** -> <strong>text</strong>
+        safeContent = safeContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Lists: lines starting with * or - 
+        const lines = safeContent.split('\n');
+        let html = '';
+        let inList = false;
+
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i].trim();
+
+            if (line.startsWith('* ') || line.startsWith('- ')) {
+                if (!inList) {
+                    html += '<ul>';
+                    inList = true;
+                }
+                html += `<li>${line.substring(2)}</li>`;
+            } else {
+                if (inList) {
+                    html += '</ul>';
+                    inList = false;
+                }
+                if (line.length > 0) {
+                    html += `<p>${line}</p>`;
+                }
+            }
+        }
+
+        if (inList) html += '</ul>';
+
+        return html || safeContent;
+    }
+
     function appendMessage(role, content) {
         const div = document.createElement('div');
         div.className = `message ${role}`;
-        div.textContent = content;
+
+        if (role === 'assistant') {
+            div.innerHTML = formatMessage(content);
+        } else {
+            div.textContent = content;
+        }
+
         messagesArea.appendChild(div);
         messagesArea.scrollTop = messagesArea.scrollHeight;
     }
