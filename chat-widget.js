@@ -398,7 +398,12 @@
         }
 
         messagesArea.appendChild(div);
-        messagesArea.scrollTop = messagesArea.scrollHeight;
+
+        if (role === 'assistant') {
+            div.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
     }
 
     function appendTypingIndicator() {
@@ -459,7 +464,7 @@
 
             if (response.status === 429) {
                 isError429 = true;
-                appendMessage('assistant', "Our **Chetan Assistant** is currently resting due to high demand. 🌟🧘‍♂️\n\n**✨ Connect with Chetan Directly:** 👇\n\n🌈 **Email:**\n[chetanpayroll@gmail.com](mailto:chetanpayroll@gmail.com)\n\n💎 **Phone:**\n[+91 8619495587](tel:+918619495587)\n\n🚀 A human expert will be in touch shortly! 🔥");
+                appendMessage('assistant', "Our **Chetan Assistant** is currently resting due to high demand. 🌟🧘‍♂️\n\n**✨ Connect with Chetan Directly:** 👇\n\n🌈 **Email:**\n[chetanpayroll@gmail.com](mailto:chetanpayroll@gmail.com)\n\n💎 **Phone:**\n[+91 8619495587](tel:+918619495587)\n\nHold tight! **Chetan Sharma himself** will personally connect with you to deliver world-class expertise! 🎩✨");
                 // Note: simple email capture implementation logic would go here
             } else {
                 const data = await response.json();
