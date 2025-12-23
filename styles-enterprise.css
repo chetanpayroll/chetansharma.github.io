@@ -141,7 +141,8 @@
       }
 
       .hero {
-        padding: 4rem 1.5rem;
+        padding: 4rem 1.5rem 10rem 1.5rem;
+        /* Increased bottom padding for parallax safety */
       }
 
       .stat-card {
@@ -598,7 +599,8 @@
     .hero {
       margin-top: 0;
       background: transparent;
-      padding: 6rem 2rem;
+      padding: 6rem 2rem 12rem 2rem;
+      /* Massive bottom padding to prevent parallax overlap/clipping */
       position: relative;
       overflow: hidden;
       min-height: 100vh;
