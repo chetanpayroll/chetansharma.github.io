@@ -2038,6 +2038,15 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    .ticker-logo {
+      height: 1.5em;
+      width: auto;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      object-fit: contain;
+      transform: translateY(-2px);
+    }
+
     .ticker-item:nth-child(8n+1) {
       color: #0d47a1;
     }
