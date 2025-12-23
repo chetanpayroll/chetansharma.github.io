@@ -170,8 +170,7 @@
         </div>
 
         <div class="hero-cta parallax-layer">
-          <a href="Chetan_Sharma_Global_Payroll_Implementation_Manager.pdf"
-            download="Chetan_Sharma_Global_Payroll_Implementation_Manager.pdf" class="btn btn-primary"
+          <a href="Chetan_Sharma_Global_Payroll_Implementation_Manager.pdf" target="_blank" class="btn btn-primary"
             id="downloadPDF">📥 Download Resume</a>
           <button class="btn btn-primary" id="downloadVCard">📇 Save Contact</button>
           <a href="mailto:chetanpayroll@gmail.com" class="btn btn-secondary">✉️ Contact Me</a>
@@ -750,9 +749,10 @@
 
 
 
-    document.getElementById('downloadPDF').addEventListener('click', () => {
-      window.print();
-    });
+    // Resume download is handled via href and download attribute directly
+    /* document.getElementById('downloadPDF').addEventListener('click', () => {
+       // Removed print action to allow direct PDF download/open
+    }); */
 
     document.getElementById('downloadVCard').addEventListener('click', () => {
       const vcard = `BEGIN:VCARD
