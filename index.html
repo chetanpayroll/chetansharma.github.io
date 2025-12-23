@@ -557,22 +557,19 @@
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-
-      if (Math.random() > 0.8) {
-        createCursorParticle(mouseX, mouseY);
-      }
     });
 
     function animateCursor() {
+      // Smooth dampening for "luxury" feel
       const dx = mouseX - cursorX;
       const dy = mouseY - cursorY;
-      cursorX += dx * 0.15;
-      cursorY += dy * 0.15;
+      cursorX += dx * 0.08;
+      cursorY += dy * 0.08;
 
       const dx2 = mouseX - dotX;
       const dy2 = mouseY - dotY;
-      dotX += dx2 * 0.3;
-      dotY += dy2 * 0.3;
+      dotX += dx2 * 0.2;
+      dotY += dy2 * 0.2;
 
       cursor.style.left = cursorX + 'px';
       cursor.style.top = cursorY + 'px';
@@ -598,20 +595,6 @@
     document.addEventListener('mouseup', () => {
       document.body.classList.remove('cursor-click');
     });
-
-    function createCursorParticle(x, y) {
-      const particle = document.createElement('div');
-      particle.className = 'cursor-particle';
-      particle.style.left = x + 'px';
-      particle.style.top = y + 'px';
-      particle.style.setProperty('--tx', (Math.random() - 0.5) * 50 + 'px');
-      particle.style.setProperty('--ty', (Math.random() - 0.5) * 50 + 'px');
-      document.body.appendChild(particle);
-
-      setTimeout(() => {
-        particle.remove();
-      }, 800);
-    }
 
     let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let threeScene = null;
@@ -670,7 +653,7 @@
 
       camera.position.z = 60;
 
-      const particleCount = 200;
+      const particleCount = 60; // Significantly reduced for minimalism
       const particlesGeometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const velocities = new Float32Array(particleCount * 3);
@@ -681,18 +664,19 @@
         positions[i + 1] = (Math.random() - 0.5) * 120;
         positions[i + 2] = (Math.random() - 0.5) * 120;
 
-        velocities[i] = (Math.random() - 0.5) * 0.03;
-        velocities[i + 1] = (Math.random() - 0.5) * 0.03;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.03;
+        // Ultra-slow motion
+        velocities[i] = (Math.random() - 0.5) * 0.005;
+        velocities[i + 1] = (Math.random() - 0.5) * 0.005;
+        velocities[i + 2] = (Math.random() - 0.5) * 0.005;
       }
 
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
       const particlesMaterial = new THREE.PointsMaterial({
-        color: 0x0d47a1,
-        size: 0.8,
+        color: 0x0f4c81,
+        size: 0.5,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.3, // Very subtle
         blending: THREE.AdditiveBlending
       });
 
@@ -700,9 +684,9 @@
       scene.add(particles);
 
       const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0x6a1b9a,
+        color: 0x5b4b8a,
         transparent: true,
-        opacity: 0.15,
+        opacity: 0.05, // Barely visible lines
         blending: THREE.AdditiveBlending
       });
 
@@ -713,9 +697,9 @@
       ];
 
       const shapeMaterial = new THREE.MeshBasicMaterial({
-        color: 0xff416c,
+        color: 0xff7e67,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.03, // Ghostly
         wireframe: true
       });
 
@@ -750,10 +734,10 @@
 
         animationFrameId = requestAnimationFrame(animate);
 
-        targetXParallax = mouseXParallax * 8;
-        targetYParallax = mouseYParallax * 8;
-        camera.position.x += (targetXParallax - camera.position.x) * 0.03;
-        camera.position.y += (targetYParallax - camera.position.y) * 0.03;
+        targetXParallax = mouseXParallax * 4; // Reduced range
+        targetYParallax = mouseYParallax * 4;
+        camera.position.x += (targetXParallax - camera.position.x) * 0.01; // Slower follow
+        camera.position.y += (targetYParallax - camera.position.y) * 0.01;
 
         const positions = particles.geometry.attributes.position.array;
         for (let i = 0; i < particleCount * 3; i += 3) {
@@ -796,11 +780,11 @@
         }
 
         shapes.forEach((shape, index) => {
-          shape.rotation.x += 0.002 * (index + 1);
-          shape.rotation.y += 0.003 * (index + 1);
-          shape.rotation.z += 0.001 * (index + 1);
+          shape.rotation.x += 0.0005 * (index + 1);
+          shape.rotation.y += 0.001 * (index + 1);
+          shape.rotation.z += 0.0005 * (index + 1);
 
-          shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
+          shape.position.y += Math.sin(Date.now() * 0.0005 + index) * 0.01;
         });
 
         renderer.render(scene, camera);
@@ -1116,7 +1100,7 @@ END:VCARD`;
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
   </script>
   <script src="chat-widget.js"></script>
-<script src='interactions.js'></script>
+  <script src='interactions.js'></script>
 </body>
 
 </html>
