@@ -285,7 +285,7 @@
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div style="width: 8px; height: 8px; background-color: #4ADE80; border-radius: 50%;"></div>
                     <div>
-                        <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: white;">GMP AI Specialist</h3>
+                        <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: white;">Chetan Assistant</h3>
                         <p style="margin: 0; font-size: 12px; opacity: 0.8;">Online | Powered by Gemini 3 Flash</p>
                     </div>
                 </div>
@@ -333,7 +333,7 @@
     // Initial Message
     const initialMessage = {
         role: "assistant",
-        content: "Hello! I'm the GMP Payroll AI Specialist. How can I help you with global payroll or compliance today?"
+        content: "Hello! I'm the Chetan Assistant. How can I help you with global payroll or compliance today?"
     };
 
     function formatMessage(content) {
