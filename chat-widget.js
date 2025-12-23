@@ -333,7 +333,7 @@
     // Initial Message
     const initialMessage = {
         role: "assistant",
-        content: "Hello! I'm the Chetan Assistant. How can I help you with global payroll or compliance today?"
+        content: "Hello! I'm Chetan's AI Assistant. How can I help you learn more about Chetan's profile?"
     };
 
     function formatMessage(content) {
