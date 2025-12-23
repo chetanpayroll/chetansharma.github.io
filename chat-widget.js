@@ -459,7 +459,7 @@
 
             if (response.status === 429) {
                 isError429 = true;
-                appendMessage('assistant', "Our AI assistant is currently resting. Please leave your email here, and a human expert will get back to you shortly.");
+                appendMessage('assistant', "Our AI assistant is currently resting due to high demand. 🌟\n\n**Connect with Chetan directly:** 👇\n\n📧 **Email:**\n[chetanpayroll@gmail.com](mailto:chetanpayroll@gmail.com)\n\n📱 **Phone:**\n[+91 8619495587](tel:+918619495587)\n\nA human expert will be in touch shortly! 🚀");
                 // Note: simple email capture implementation logic would go here
             } else {
                 const data = await response.json();
