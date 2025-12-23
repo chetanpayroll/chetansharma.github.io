@@ -440,30 +440,27 @@
       text-decoration: none;
       font-weight: 600;
       position: relative;
-      transition: color 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 0.9rem;
-      padding: 0.4rem 0.6rem;
+      padding: 0.6rem 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid transparent;
+      border-radius: 50px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     }
 
-    .nav-links a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      border-radius: 2px;
-      transform: translateX(-50%);
-    }
 
-    .nav-links a:hover::before {
-      width: 100%;
-    }
 
     .nav-links a:hover {
+      background: var(--bg-secondary);
       color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(13, 71, 161, 0.15);
+      border-color: rgba(13, 71, 161, 0.2);
     }
 
     .nav-links a:focus {
