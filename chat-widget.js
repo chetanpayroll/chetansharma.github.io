@@ -154,6 +154,7 @@
             font-size: 14px;
             outline: none;
             color: #0F172A;
+            background-color: #ffffff;
         }
 
         .send-btn {
@@ -189,6 +190,19 @@
         @keyframes bounce { 
             0%, 80%, 100% { transform: scale(0); } 
             40% { transform: scale(1); } 
+        }
+
+        @media (max-width: 480px) {
+            #gmp-chat-window {
+                right: 16px;
+                left: 16px;
+                bottom: 16px;
+                width: auto;
+                max-width: none;
+            }
+            .chat-input {
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
         }
     `;
 
