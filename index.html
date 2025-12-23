@@ -21,9 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap"
     rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
 
   <title>Chetan Sharma | Payroll Implementation Consultant | Global Multi-Country Payroll Specialist</title>
 
@@ -58,12 +56,12 @@
         <img src="logo.png" alt="GMP Payroll">
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#experience"><i class="ri-bar-chart-box-line"></i> Experience</a></li>
-        <li><a href="#projects"><i class="ri-flashlight-line"></i> Projects</a></li>
-        <li><a href="#skills"><i class="ri-focus-2-line"></i> Skills</a></li>
-        <li><a href="#awards"><i class="ri-trophy-line"></i> Awards</a></li>
-        <li><a href="#blog"><i class="ri-book-open-line"></i> Articles</a></li>
-        <li><a href="#contact"><i class="ri-mail-send-line"></i> Contact</a></li>
+        <li><a href="#experience">📊 Experience</a></li>
+        <li><a href="#projects">⚡ Projects</a></li>
+        <li><a href="#skills">🎯 Skills</a></li>
+        <li><a href="#awards">🏆 Awards</a></li>
+        <li><a href="#blog">📖 Articles</a></li>
+        <li><a href="#contact">📧 Contact</a></li>
       </ul>
       <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="hamburger-line"></span>
@@ -741,9 +739,6 @@
     });
 
     const nav = document.querySelector('nav');
-    const sectionLinks = document.querySelectorAll('.nav-links a');
-    const sections = document.querySelectorAll('section[id]');
-
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > 50) {
         nav.classList.add('scrolled');
@@ -751,30 +746,6 @@
         nav.classList.remove('scrolled');
       }
     }, { passive: true });
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-100px 0px -40% 0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          sectionLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
 
 
 
