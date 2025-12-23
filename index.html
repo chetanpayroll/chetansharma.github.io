@@ -63,7 +63,6 @@
         <li><a href="#blog">📖 Articles</a></li>
         <li><a href="#contact">📧 Contact</a></li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span>🌙</span></button>
       <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -749,32 +748,7 @@
       }
     }, { passive: true });
 
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
 
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (savedTheme) {
-        htmlElement.style.colorScheme = savedTheme;
-        updateThemeButton(savedTheme);
-      } else if (prefersDark) {
-        htmlElement.style.colorScheme = 'dark';
-        updateThemeButton('dark');
-      }
-    }
-
-    function updateThemeButton(theme) {
-      themeToggle.querySelector('span').textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = htmlElement.style.colorScheme || 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      htmlElement.style.colorScheme = newTheme;
-      localStorage.setItem('theme', newTheme);
-      updateThemeButton(newTheme);
-    });
 
     document.getElementById('downloadPDF').addEventListener('click', () => {
       window.print();
@@ -940,7 +914,7 @@ END:VCARD`;
     `;
     document.head.appendChild(style);
 
-    initTheme();
+
     document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
   </script>
   <script src="chat-widget.js"></script>
