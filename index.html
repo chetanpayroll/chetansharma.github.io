@@ -48,9 +48,7 @@
 
 
 
-  <canvas id="three-background" aria-hidden="true"></canvas>
 
-  <button class="motion-toggle" id="motionToggle" aria-label="Toggle animations" title="Toggle animations">🎬</button>
 
   <nav role="navigation" aria-label="Main navigation">
     <div class="nav-container">
@@ -62,9 +60,15 @@
         <li><a href="#projects">⚡ Projects</a></li>
         <li><a href="#skills">🎯 Skills</a></li>
         <li><a href="#awards">🏆 Awards</a></li>
+        <li><a href="#blog">📖 Articles</a></li>
         <li><a href="#contact">📧 Contact</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span>🌙</span></button>
+      <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </div>
   </nav>
 
@@ -554,7 +558,7 @@
     "knowsAbout": ["Payroll Implementation", "Multi-country Compliance", "Automation", "Data Migration", "Global Payroll Operations", "AI Integration"]
   }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
   <script>
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -639,228 +643,27 @@
     }
 
     let motionEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let threeScene = null;
-    let animationFrameId = null;
 
-    const motionToggle = document.getElementById('motionToggle');
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburgerMenu');
+    const navLinks = document.getElementById('navLinks');
 
-    function updateMotionState(enabled) {
-      motionEnabled = enabled;
-      motionToggle.textContent = enabled ? '🎬' : '⏸️';
-      motionToggle.setAttribute('aria-label', enabled ? 'Disable animations' : 'Enable animations');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', !isExpanded);
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+      });
 
-      const canvas = document.getElementById('three-background');
-      if (enabled) {
-        initThreeJS();
-      } else {
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-        canvas.style.opacity = '0';
-      }
-
-      localStorage.setItem('motionEnabled', enabled ? 'true' : 'false');
-    }
-
-    motionToggle.addEventListener('click', () => {
-      updateMotionState(!motionEnabled);
-    });
-
-    const savedMotion = localStorage.getItem('motionEnabled');
-    if (savedMotion !== null) {
-      motionEnabled = savedMotion === 'true';
-      motionToggle.textContent = motionEnabled ? '🎬' : '⏸️';
-    }
-
-    function initThreeJS() {
-      if (!motionEnabled || !window.THREE) return;
-
-      const canvas = document.getElementById('three-background');
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-      let renderer;
-      try {
-        renderer = new THREE.WebGLRenderer({
-          canvas: canvas,
-          alpha: true,
-          antialias: true
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.setAttribute('aria-expanded', 'false');
+          navLinks.classList.remove('active');
+          hamburger.classList.remove('active');
         });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      } catch (e) {
-        console.log('WebGL not supported');
-        return;
-      }
-
-      camera.position.z = 60;
-
-      const particleCount = 200;
-      const particlesGeometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const velocities = new Float32Array(particleCount * 3);
-      const connections = [];
-
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 120;
-        positions[i + 1] = (Math.random() - 0.5) * 120;
-        positions[i + 2] = (Math.random() - 0.5) * 120;
-
-        velocities[i] = (Math.random() - 0.5) * 0.03;
-        velocities[i + 1] = (Math.random() - 0.5) * 0.03;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.03;
-      }
-
-      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-      const particlesMaterial = new THREE.PointsMaterial({
-        color: 0x0d47a1,
-        size: 0.8,
-        transparent: true,
-        opacity: 0.7,
-        blending: THREE.AdditiveBlending
       });
-
-      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-      scene.add(particles);
-
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0x6a1b9a,
-        transparent: true,
-        opacity: 0.15,
-        blending: THREE.AdditiveBlending
-      });
-
-      const geometries = [
-        new THREE.OctahedronGeometry(4, 0),
-        new THREE.TetrahedronGeometry(5, 0),
-        new THREE.IcosahedronGeometry(3, 0)
-      ];
-
-      const shapeMaterial = new THREE.MeshBasicMaterial({
-        color: 0xff416c,
-        transparent: true,
-        opacity: 0.08,
-        wireframe: true
-      });
-
-      const shapes = [];
-      for (let i = 0; i < 4; i++) {
-        const shape = new THREE.Mesh(
-          geometries[i % geometries.length],
-          shapeMaterial
-        );
-        shape.position.set(
-          (Math.random() - 0.5) * 60,
-          (Math.random() - 0.5) * 60,
-          (Math.random() - 0.5) * 40
-        );
-        shapes.push(shape);
-        scene.add(shape);
-      }
-
-      let mouseXParallax = 0;
-      let mouseYParallax = 0;
-      let targetXParallax = 0;
-      let targetYParallax = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        if (!motionEnabled) return;
-        mouseXParallax = (e.clientX / window.innerWidth) * 2 - 1;
-        mouseYParallax = -(e.clientY / window.innerHeight) * 2 + 1;
-      });
-
-      function animate() {
-        if (!motionEnabled) return;
-
-        animationFrameId = requestAnimationFrame(animate);
-
-        targetXParallax = mouseXParallax * 8;
-        targetYParallax = mouseYParallax * 8;
-        camera.position.x += (targetXParallax - camera.position.x) * 0.03;
-        camera.position.y += (targetYParallax - camera.position.y) * 0.03;
-
-        const positions = particles.geometry.attributes.position.array;
-        for (let i = 0; i < particleCount * 3; i += 3) {
-          positions[i] += velocities[i];
-          positions[i + 1] += velocities[i + 1];
-          positions[i + 2] += velocities[i + 2];
-
-          if (Math.abs(positions[i]) > 60) velocities[i] *= -1;
-          if (Math.abs(positions[i + 1]) > 60) velocities[i + 1] *= -1;
-          if (Math.abs(positions[i + 2]) > 60) velocities[i + 2] *= -1;
-        }
-        particles.geometry.attributes.position.needsUpdate = true;
-
-        const linePositions = [];
-        for (let i = 0; i < particleCount; i++) {
-          for (let j = i + 1; j < particleCount; j++) {
-            const dx = positions[i * 3] - positions[j * 3];
-            const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
-            const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-            if (dist < 15) {
-              linePositions.push(
-                positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
-                positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
-              );
-            }
-          }
-        }
-
-        connections.forEach(line => scene.remove(line));
-        connections.length = 0;
-
-        if (linePositions.length > 0) {
-          const lineGeometry = new THREE.BufferGeometry();
-          lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-          const line = new THREE.LineSegments(lineGeometry, lineMaterial);
-          scene.add(line);
-          connections.push(line);
-        }
-
-        shapes.forEach((shape, index) => {
-          shape.rotation.x += 0.002 * (index + 1);
-          shape.rotation.y += 0.003 * (index + 1);
-          shape.rotation.z += 0.001 * (index + 1);
-
-          shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
-        });
-
-        renderer.render(scene, camera);
-      }
-
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        }, 100);
-      });
-
-      animate();
-      canvas.classList.add('loaded');
-      threeScene = { scene, camera, renderer, particles, shapes };
     }
-
-    if (motionEnabled) {
-      if (document.readyState === 'complete') {
-        setTimeout(initThreeJS, 100);
-      } else {
-        window.addEventListener('load', () => setTimeout(initThreeJS, 100));
-      }
-    }
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      } else if (motionEnabled) {
-        initThreeJS();
-      }
-    });
 
     const progressBar = document.getElementById('reading-progress');
 
