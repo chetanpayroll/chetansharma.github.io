@@ -1,6 +1,6 @@
 # Chetan Sharma - Portfolio Website
 
-Professional portfolio showcasing 13+ years of payroll implementation expertise.
+Professional portfolio showcasing 13+ years of payroll implementation expertise. Currently Global Payroll Transformation Manager at Vertiv.
 
 ## Quick Start
 1. Open `index.html` in browser
@@ -16,4 +16,4 @@ Professional portfolio showcasing 13+ years of payroll implementation expertise.
 This repository serves as version control and backup for gmppayroll.com
 
 ## Updates
-Last updated: 2025-11-22
+Last updated: 2026-06-27

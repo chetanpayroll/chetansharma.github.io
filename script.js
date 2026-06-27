@@ -493,9 +493,9 @@
 VERSION:3.0
 FN:Chetan Sharma
 N:Sharma;Chetan;;;
-TITLE:Payroll Implementation Manager
+TITLE:Global Payroll Transformation Manager
 EMAIL:chetanpayroll@gmail.com
-TEL:+918611949558
+TEL:+918619495587
 URL:https://www.gmppayroll.com
 URL:https://www.linkedin.com/in/chetansharma-gp
 ADR;;Gurgaon;Haryana;;India
